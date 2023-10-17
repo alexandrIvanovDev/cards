@@ -4,7 +4,7 @@ import * as RadixTabs from '@radix-ui/react-tabs'
 
 import s from './tabs.module.scss'
 
-type TabType = {
+export type TabType = {
   value: string
   text: string
   disabled?: boolean
