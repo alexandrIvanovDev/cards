@@ -1,0 +1,61 @@
+@mixin font($font-size, $font-weight, $line-height) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
+
+.large {
+  @include font(var(--fs-xxl), var(--fw-bold), var(--line-height-l));
+}
+
+.h1 {
+  @include font(var(--fs-xl), var(--fw-bold), var(--line-height-l));
+}
+
+.h2 {
+  @include font(var(--fs-l), var(--fw-bold), var(--line-height-m));
+}
+
+.h3 {
+  @include font(var(--fs-m), var(--fw-bold), var(--line-height-m));
+}
+
+.body1 {
+  @include font(var(--fs-m), var(--fw-regular), var(--line-height-m));
+}
+
+.body2 {
+  @include font(var(--fs-s), var(--fw-regular), var(--line-height-m));
+}
+
+.subtitle1 {
+  @include font(var(--fs-m), var(--fw-bold), var(--line-height-m));
+}
+
+.subtitle2 {
+  @include font(var(--fs-s), var(--fw-bold), var(--line-height-m));
+}
+
+.caption {
+  @include font(var(--fs-xs), var(--fw-regular), var(--line-height-s));
+}
+
+.overline {
+  @include font(var(--fs-xs), var(--fw-bold), var(--line-height-s));
+}
+
+.link1 {
+  @include font(var(--fs-s), var(--fw-regular), var(--line-height-m));
+
+  cursor: pointer;
+  color: var(--info-color-500);
+  text-decoration: underline;
+}
+
+.link2 {
+  @include font(var(--fs-xs), var(--fw-regular), var(--line-height-s));
+
+  cursor: pointer;
+  color: var(--info-color-500);
+  text-decoration: underline;
+}
