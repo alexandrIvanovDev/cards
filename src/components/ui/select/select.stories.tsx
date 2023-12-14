@@ -23,6 +23,7 @@ const options = [
 export const Primary: Story = {
   args: {
     options,
+    label: 'Select',
     placeholder: 'Select language',
   },
 }
@@ -30,6 +31,7 @@ export const Primary: Story = {
 export const Disabled: Story = {
   args: {
     options,
+    label: 'Select',
     placeholder: 'Select language',
     disabled: true,
   },

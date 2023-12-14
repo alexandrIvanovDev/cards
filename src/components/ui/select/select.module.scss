@@ -1,11 +1,12 @@
-.label {
+.root {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
-  width: 200px;
-
   color: var(--dark-color-100);
+}
+
+.disabledLabel {
+  color: var(--dark-color-300);
 }
 
 .trigger {
@@ -64,7 +65,7 @@
 .content {
   cursor: pointer;
 
-  width: 200px;
+  width: 100%;
 
   background: transparent;
   border: 1px solid var(--dark-color-100);

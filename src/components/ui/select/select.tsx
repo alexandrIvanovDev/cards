@@ -3,8 +3,11 @@ import { FC } from 'react'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as Label from '@radix-ui/react-label'
 import * as RadixSelect from '@radix-ui/react-select'
+import { clsx } from 'clsx'
 
 import s from './select.module.scss'
+
+import { Typography } from '@/components/ui/typography'
 
 type Option = {
   value: string
@@ -23,26 +26,32 @@ type Props = {
 export const Select: FC<Props> = props => {
   const { options, onChange, disabled, value, label, placeholder } = props
 
+  const classes = {
+    label: clsx(s.label, disabled && s.disabledLabel),
+  }
+
   return (
-    <Label.Root className={s.label}>
-      <span>{label}</span>
+    <Label.Root className={s.root}>
+      <Typography variant="body2" as="label" className={classes.label}>
+        {label}
+      </Typography>
       <RadixSelect.Root onValueChange={onChange} value={value} disabled={disabled}>
-        <RadixSelect.Trigger className={s.trigger}>
-          <RadixSelect.Value placeholder={placeholder} />
-          <RadixSelect.Icon className={s.iconWrapper}>
-            <ChevronDownIcon className={s.icon} />
-          </RadixSelect.Icon>
+        <RadixSelect.Trigger className={s.trigger} asChild>
+          <div>
+            <RadixSelect.Value placeholder={placeholder} />
+            <RadixSelect.Icon className={s.iconWrapper}>
+              <ChevronDownIcon className={s.icon} />
+            </RadixSelect.Icon>
+          </div>
         </RadixSelect.Trigger>
         <RadixSelect.Portal>
           <RadixSelect.Content className={s.content} position="popper" sideOffset={-1}>
             <RadixSelect.Viewport>
-              <RadixSelect.Group>
-                {options.map(o => (
-                  <RadixSelect.Item value={o.value} key={o.value} className={s.item}>
-                    <RadixSelect.ItemText>{o.label}</RadixSelect.ItemText>
-                  </RadixSelect.Item>
-                ))}
-              </RadixSelect.Group>
+              {options.map(o => (
+                <RadixSelect.Item value={o.value} key={o.value} className={s.item}>
+                  <RadixSelect.ItemText>{o.label}</RadixSelect.ItemText>
+                </RadixSelect.Item>
+              ))}
             </RadixSelect.Viewport>
           </RadixSelect.Content>
         </RadixSelect.Portal>
