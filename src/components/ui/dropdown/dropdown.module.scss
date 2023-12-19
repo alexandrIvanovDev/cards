@@ -12,14 +12,18 @@
 .content {
   cursor: pointer;
 
-  padding: 10px;
-
   color: var(--light-color-100);
 
   background: var(--dark-color-700);
   border: 1px solid var(--dark-color-500);
   border-radius: 5px;
   outline: none;
+
+  .arrow {
+    width: 16px;
+    height: 8px;
+    fill: var(--dark-color-500);
+  }
 }
 
 .item {
@@ -28,19 +32,25 @@
   align-items: center;
   justify-content: flex-start;
 
-  padding-bottom: 10px;
+  padding: 12px;
 
   fill: var(--light-color-100);
 
   transition: all 0.3s;
 }
 
-.item:last-child {
-  padding-bottom: 0;
-}
-
 .item[data-highlighted] {
   color: var(--dark-color-100);
   outline: none;
   fill: var(--dark-color-100);
+}
+
+.item:last-child {
+  padding: 11px;
+}
+
+.separator {
+  height: 1px;
+  margin: 0 12px;
+  background-color: var(--dark-color-500);
 }

@@ -9,9 +9,10 @@ import { MoreIcon } from '@/assets/icons/More.tsx'
 type Props = {
   children: ReactNode
   trigger?: ReactNode
+  align?: 'end' | 'center' | 'start'
 }
 
-export const Dropdown: FC<Props> = ({ children, trigger }) => {
+export const Dropdown: FC<Props> = ({ children, trigger, align = 'end' }) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild className={s.trigger}>
@@ -23,8 +24,9 @@ export const Dropdown: FC<Props> = ({ children, trigger }) => {
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content sideOffset={5} className={s.content} align="end">
+        <DropdownMenu.Content sideOffset={-5} className={s.content} align={align}>
           {children}
+          <DropdownMenu.Arrow className={s.arrow} />
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
@@ -34,14 +36,18 @@ export const Dropdown: FC<Props> = ({ children, trigger }) => {
 type ItemPropsWithIcon = {
   icon: ReactNode
   text: string
+  onClick?: () => void
 }
 
-export const DropDownItemWithIcon: FC<ItemPropsWithIcon> = ({ icon, text }) => {
+export const DropDownItemWithIcon: FC<ItemPropsWithIcon> = ({ icon, text, onClick }) => {
   return (
-    <DropdownMenu.Item className={s.item}>
-      <div>{icon}</div>
-      <span>{text}</span>
-    </DropdownMenu.Item>
+    <>
+      <DropdownMenu.Item className={s.item} onClick={onClick}>
+        {icon}
+        <span>{text}</span>
+      </DropdownMenu.Item>
+      <DropdownMenu.Separator className={s.separator} />
+    </>
   )
 }
 
