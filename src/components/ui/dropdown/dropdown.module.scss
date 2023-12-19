@@ -54,3 +54,12 @@
   margin: 0 12px;
   background-color: var(--dark-color-500);
 }
+
+.profileItem {
+  cursor: initial;
+
+  &[data-highlighted] {
+    color: var(--light-color-100);
+    fill: var(--light-color-100);
+  }
+}

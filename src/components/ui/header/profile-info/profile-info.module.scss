@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+
+  .information {
+    display: flex;
+    flex-direction: column;
+
+    .email {
+      color: var(--dark-color-100);
+    }
+  }
+}

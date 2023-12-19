@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react'
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { clsx } from 'clsx'
 
 import s from './dropdown.module.scss'
 
@@ -14,7 +15,7 @@ type Props = {
 
 export const Dropdown: FC<Props> = ({ children, trigger, align = 'end' }) => {
   return (
-    <DropdownMenu.Root>
+    <DropdownMenu.Root defaultOpen>
       <DropdownMenu.Trigger asChild className={s.trigger}>
         {trigger ?? (
           <button>
@@ -56,5 +57,14 @@ type ItemProps = {
 }
 
 export const DropDownItem: FC<ItemProps> = ({ children }) => {
-  return <DropdownMenu.Item className={s.item}>{children}</DropdownMenu.Item>
+  const classes = clsx(s.item, s.profileItem)
+
+  return (
+    <>
+      <DropdownMenu.Item className={classes} onSelect={e => e.preventDefault()}>
+        {children}
+      </DropdownMenu.Item>
+      <DropdownMenu.Separator className={s.separator} />
+    </>
+  )
 }

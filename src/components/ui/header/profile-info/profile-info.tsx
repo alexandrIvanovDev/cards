@@ -1,7 +1,8 @@
 import { FC } from 'react'
 
+import s from './profile-info.module.scss'
+
 import { Avatar } from '@/components/ui/avatar'
-import { Typography } from '@/components/ui/typography'
 
 type Props = {
   name: string
@@ -11,11 +12,11 @@ type Props = {
 
 export const ProfileInfo: FC<Props> = ({ name, email, avatar }) => {
   return (
-    <div>
+    <div className={s.wrapper}>
       <Avatar userName={name} img={avatar} />
-      <div>
-        <Typography>{name}</Typography>
-        <Typography>{email}</Typography>
+      <div className={s.information}>
+        <span>{name}</span>
+        <span className={s.email}>{email}</span>
       </div>
     </div>
   )
