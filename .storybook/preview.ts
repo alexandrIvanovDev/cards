@@ -5,6 +5,7 @@ import '../src/styles/index.scss'
 
 const preview: Preview = {
   parameters: {
+    layout: 'fullscreen',
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
