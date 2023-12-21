@@ -37,26 +37,27 @@
   fill: var(--light-color-100);
 
   transition: all 0.3s;
-}
 
-.item[data-highlighted] {
-  color: var(--dark-color-100);
-  outline: none;
-  fill: var(--dark-color-100);
-}
-
-.item:last-child {
-  padding: 11px;
+  &[data-highlighted] {
+    color: var(--dark-color-100);
+    outline: none;
+    fill: var(--dark-color-100);
+  }
 }
 
 .separator {
   height: 1px;
   margin: 0 12px;
   background-color: var(--dark-color-500);
+
+  &:last-child {
+    display: none;
+  }
 }
 
 .profileItem {
   cursor: initial;
+  padding-right: 30px;
 
   &[data-highlighted] {
     color: var(--light-color-100);

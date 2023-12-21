@@ -11,11 +11,12 @@ type Props = {
   children: ReactNode
   trigger?: ReactNode
   align?: 'end' | 'center' | 'start'
+  className?: string
 }
 
-export const Dropdown: FC<Props> = ({ children, trigger, align = 'end' }) => {
+export const Dropdown: FC<Props> = ({ children, trigger, align = 'end', className }) => {
   return (
-    <DropdownMenu.Root defaultOpen>
+    <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild className={s.trigger}>
         {trigger ?? (
           <button>
@@ -25,7 +26,7 @@ export const Dropdown: FC<Props> = ({ children, trigger, align = 'end' }) => {
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content sideOffset={-5} className={s.content} align={align}>
+        <DropdownMenu.Content className={`${s.content} ${className}`} align={align}>
           {children}
           <DropdownMenu.Arrow className={s.arrow} />
         </DropdownMenu.Content>
@@ -37,13 +38,13 @@ export const Dropdown: FC<Props> = ({ children, trigger, align = 'end' }) => {
 type ItemPropsWithIcon = {
   icon: ReactNode
   text: string
-  onClick?: () => void
+  onSelect?: () => void
 }
 
-export const DropDownItemWithIcon: FC<ItemPropsWithIcon> = ({ icon, text, onClick }) => {
+export const DropDownItemWithIcon: FC<ItemPropsWithIcon> = ({ icon, text, onSelect }) => {
   return (
     <>
-      <DropdownMenu.Item className={s.item} onClick={onClick}>
+      <DropdownMenu.Item className={s.item} onSelect={onSelect}>
         {icon}
         <span>{text}</span>
       </DropdownMenu.Item>
@@ -57,11 +58,11 @@ type ItemProps = {
 }
 
 export const DropDownItem: FC<ItemProps> = ({ children }) => {
-  const classes = clsx(s.item, s.profileItem)
+  const itemClass = clsx(s.item, s.profileItem)
 
   return (
     <>
-      <DropdownMenu.Item className={classes} onSelect={e => e.preventDefault()}>
+      <DropdownMenu.Item className={itemClass} onSelect={e => e.preventDefault()}>
         {children}
       </DropdownMenu.Item>
       <DropdownMenu.Separator className={s.separator} />
