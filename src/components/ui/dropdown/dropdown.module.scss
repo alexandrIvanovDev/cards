@@ -39,9 +39,9 @@
   transition: all 0.3s;
 
   &[data-highlighted] {
-    color: var(--dark-color-100);
+    color: var(--primary-color-500);
     outline: none;
-    fill: var(--dark-color-100);
+    fill: var(--primary-color-500);
   }
 }
 

@@ -3,8 +3,13 @@
 .wrapper {
   @include flex(row);
 
+  position: fixed;
+  top: 0;
+  left: 0;
+
   width: 100vw;
   height: var(--header-height);
+
   background: var(--dark-color-700);
   border-bottom: 1px solid var(--dark-color-500);
 
