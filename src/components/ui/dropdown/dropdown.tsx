@@ -6,6 +6,7 @@ import { clsx } from 'clsx'
 import s from './dropdown.module.scss'
 
 import { MoreIcon } from '@/assets/icons/More.tsx'
+import { Typography } from '@/components/ui/typography'
 
 type Props = {
   children: ReactNode
@@ -46,7 +47,7 @@ export const DropDownItemWithIcon: FC<ItemPropsWithIcon> = ({ icon, text, onSele
     <>
       <DropdownMenu.Item className={s.item} onSelect={onSelect}>
         {icon}
-        <span>{text}</span>
+        <Typography>{text}</Typography>
       </DropdownMenu.Item>
       <DropdownMenu.Separator className={s.separator} />
     </>
