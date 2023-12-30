@@ -1,0 +1,91 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  .label {
+    color: var(--dark-color-100);
+  }
+
+  .inputWrapper {
+    position: relative;
+
+    .icon {
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      fill: var(--dark-color-100);
+    }
+
+    .activeIcon {
+      fill: var(--light-color-100);
+    }
+
+    .showPasswordIcon {
+      cursor: pointer;
+
+      position: absolute;
+      top: 6px;
+      right: 5px;
+
+      background: transparent;
+      border: none;
+      outline: none;
+
+      fill: var(--light-color-100);
+    }
+  }
+
+  .input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.5rem 1.75rem 0.5rem 0.75rem;
+
+    color: var(--light-color-100);
+
+    background: transparent;
+    border: 1px solid var(--dark-color-300);
+    border-radius: 2px;
+    outline: none;
+
+    transition:
+      color,
+      background-color 0.3s;
+
+    &:focus {
+      border-color: var(--info-color-700);
+      outline: 1px solid var(--info-color-700);
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--dark-color-700);
+      border-color: var(--dark-color-100);
+    }
+
+    &.active:not(:focus) {
+      color: var(--light-color-100);
+      border-color: var(--light-color-100);
+    }
+
+    &.withIcon {
+      padding-left: 40px;
+    }
+
+    &[type='search']::-webkit-search-decoration,
+    &[type='search']::-webkit-search-cancel-button,
+    &[type='search']::-webkit-search-results-button,
+    &[type='search']::-webkit-search-results-decoration {
+      appearance: none;
+    }
+  }
+}
+
+.disabled {
+  color: var(--dark-color-300);
+  border-color: var(--dark-color-300);
+
+  // border-color: var(--dark-color-300);
+}
