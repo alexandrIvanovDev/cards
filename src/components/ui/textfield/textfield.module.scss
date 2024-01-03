@@ -4,36 +4,56 @@
   align-items: flex-start;
   justify-content: center;
 
+  width: 100%;
+
   .label {
     color: var(--dark-color-100);
   }
 
   .inputWrapper {
     position: relative;
+    color: var(--dark-color-100);
+    fill: var(--dark-color-100);
 
-    .icon {
+    .searchIcon {
       position: absolute;
       top: 6px;
       left: 10px;
       fill: var(--dark-color-100);
     }
 
-    .activeIcon {
-      fill: var(--light-color-100);
-    }
-
-    .showPasswordIcon {
+    .showPasswordButton {
       cursor: pointer;
 
       position: absolute;
       top: 6px;
-      right: 5px;
+      right: 6px;
 
       background: transparent;
       border: none;
       outline: none;
+    }
 
+    .closeIcon {
+      cursor: pointer;
+      position: absolute;
+      top: 6px;
+      right: 5px;
+    }
+
+    &:focus-within .searchIcon,
+    &:focus-within .closeIcon {
+      color: var(--light-color-100);
       fill: var(--light-color-100);
+    }
+
+    .disabledIcon {
+      cursor: initial;
+      fill: var(--dark-color-300);
+    }
+
+    .errorMessage {
+      color: var(--danger-color-300);
     }
   }
 
@@ -42,36 +62,42 @@
     align-items: center;
     justify-content: center;
 
-    padding: 0.5rem 1.75rem 0.5rem 0.75rem;
-
-    color: var(--light-color-100);
+    padding: 0.5rem 0.75rem;
 
     background: transparent;
     border: 1px solid var(--dark-color-300);
     border-radius: 2px;
     outline: none;
 
-    transition:
-      color,
-      background-color 0.3s;
+    transition: all 0.3s ease-in-out;
 
     &:focus {
-      border-color: var(--info-color-700);
-      outline: 1px solid var(--info-color-700);
-    }
-
-    &:hover:not(:disabled) {
-      background: var(--dark-color-700);
-      border-color: var(--dark-color-100);
-    }
-
-    &.active:not(:focus) {
       color: var(--light-color-100);
       border-color: var(--light-color-100);
     }
 
-    &.withIcon {
+    &:active:not(:disabled, .error) {
+      color: var(--light-color-100);
+      border-color: var(--light-color-100);
+    }
+
+    &:hover:not(:disabled, :focus, .error) {
+      background: var(--dark-color-700);
+      border-color: var(--dark-color-100);
+    }
+
+    &.withSearchIcon {
+      padding-right: 25px;
       padding-left: 40px;
+    }
+
+    &.password {
+      padding-right: 40px;
+    }
+
+    &.error {
+      color: var(--danger-color-300);
+      border-color: var(--danger-color-300);
     }
 
     &[type='search']::-webkit-search-decoration,
@@ -86,6 +112,4 @@
 .disabled {
   color: var(--dark-color-300);
   border-color: var(--dark-color-300);
-
-  // border-color: var(--dark-color-300);
 }
