@@ -38,7 +38,7 @@
     outline: 2px solid var(--info-color-700);
   }
 
-  &:disabled {
+  &[data-disabled] {
     cursor: initial;
     color: var(--dark-color-300);
     background: transparent;
@@ -65,9 +65,9 @@
 .content {
   cursor: pointer;
 
-  width: 100%;
+  width: var(--radix-select-trigger-width);
 
-  background: transparent;
+  background: var(--dark-color-900);
   border: 1px solid var(--dark-color-100);
   border-radius: 0 0 2px 2px;
 
