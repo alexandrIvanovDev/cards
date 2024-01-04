@@ -8,12 +8,6 @@ const meta = {
   title: 'Components/TextField',
   component: TextField,
   tags: ['autodocs'],
-  argTypes: {
-    // variant: {
-    //   options: ['primary', 'secondary', 'tertiary', 'link'],
-    //   control: { type: 'radio' },
-    // },
-  },
 } satisfies Meta<typeof TextField>
 
 export default meta

@@ -12,6 +12,7 @@
 
   .inputWrapper {
     position: relative;
+    width: 100%;
     color: var(--dark-color-100);
     fill: var(--dark-color-100);
 
@@ -62,6 +63,7 @@
     align-items: center;
     justify-content: center;
 
+    width: 100%;
     padding: 0.5rem 0.75rem;
 
     background: transparent;
