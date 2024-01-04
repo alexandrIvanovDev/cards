@@ -1,0 +1,42 @@
+@import '@/styles/mixins';
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 30%);
+}
+
+.content {
+  @include flex(column, center, space-between, 1rem);
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 30vw;
+  padding: 1.5rem;
+
+  .titleWrapper {
+    @include flex(row, space-between, center);
+
+    .title {
+      color: var(--light-color-100);
+    }
+
+    .close {
+
+      @include flex(row, center, center);
+
+      cursor: pointer;
+
+      padding: 0;
+
+      background: transparent;
+      border: none;
+      outline: none;
+
+      fill: var(--light-color-100);
+    }
+  }
+}
