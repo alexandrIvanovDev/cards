@@ -1,3 +1,5 @@
+@import '@/styles/mixins';
+
 .trigger {
   cursor: pointer;
   background: transparent;
@@ -27,15 +29,10 @@
 }
 
 .item {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: flex-start;
+  @include flex(row, flex-start, center, 1rem);
 
   padding: 12px;
-
   fill: var(--light-color-100);
-
   transition: all 0.3s;
 
   &[data-highlighted] {

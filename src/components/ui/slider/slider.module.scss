@@ -1,14 +1,12 @@
+@import '@/styles/mixins';
+
 .wrapper {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+  @include flex(row, flex-start, center, 1rem);
 
   .count {
-    user-select: none;
+    @include flex(row, center, center);
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    user-select: none;
 
     width: 36px;
     height: 36px;
@@ -20,13 +18,12 @@
   }
 
   .root {
+    @include flex(row, flex-start, center);
+
     touch-action: none;
     user-select: none;
 
     position: relative;
-
-    display: flex;
-    align-items: center;
 
     width: 200px;
     height: 20px;
