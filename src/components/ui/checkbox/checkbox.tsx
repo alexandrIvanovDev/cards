@@ -1,46 +1,45 @@
 import { FC } from 'react'
 
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
-import * as Label from '@radix-ui/react-label'
 import { clsx } from 'clsx'
 
 import s from './checkbox.module.scss'
 
 import { CheckIcon } from '@/assets/icons/Check.tsx'
+import { Typography } from '@/components/ui/typography'
 
 type Props = {
   checked: boolean
   onChange: (value: boolean) => void
-  id?: string
+  label?: string
   disabled?: boolean
+  className?: string
 }
 
-export const Checkbox: FC<Props> = props => {
-  const { checked, onChange, disabled, id } = props
-
+export const Checkbox: FC<Props> = ({ checked, onChange, disabled, label, className }) => {
   const classes = {
-    label: clsx(s.label, disabled && s.disabled),
+    label: clsx(s.label, disabled && s.disabled, className),
+    wrapper: clsx(s.checkboxWrapper, disabled && s.disabled),
     indicator: clsx(s.indicator, disabled && s.indicatorDisabled),
   }
 
   return (
-    <div className={s.wrapper}>
-      <RadixCheckbox.Root
-        id={id}
-        checked={checked}
-        onCheckedChange={onChange}
-        className={s.root}
-        disabled={disabled}
-      >
-        {checked && (
-          <RadixCheckbox.Indicator className={classes.indicator} forceMount>
-            <CheckIcon className={s.icon} />
-          </RadixCheckbox.Indicator>
-        )}
-      </RadixCheckbox.Root>
-      <Label.Root htmlFor={id} className={classes.label}>
-        Check
-      </Label.Root>
-    </div>
+    <Typography as="label" className={classes.label}>
+      <div className={classes.wrapper}>
+        <RadixCheckbox.Root
+          checked={checked}
+          onCheckedChange={onChange}
+          className={s.checkbox}
+          disabled={disabled}
+        >
+          {checked && (
+            <RadixCheckbox.Indicator className={classes.indicator} forceMount>
+              <CheckIcon className={s.icon} />
+            </RadixCheckbox.Indicator>
+          )}
+        </RadixCheckbox.Root>
+      </div>
+      {label}
+    </Typography>
   )
 }
