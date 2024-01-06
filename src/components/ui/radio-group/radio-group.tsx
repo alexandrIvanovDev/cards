@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { ElementRef, FC, forwardRef } from 'react'
 
 import * as Radio from '@radix-ui/react-radio-group'
 import { clsx } from 'clsx'
@@ -11,19 +11,33 @@ export type RadioType = {
   disabled?: boolean
 }
 
-type Props = {
+export type RadioGroupProps = {
   radioButtons: Array<RadioType>
+  value?: string
+  onValueChange?: (value: string) => void
   defaultValue?: string
   disabled?: boolean
+  className?: string
 }
 
-export const RadioGroup: FC<Props> = ({ radioButtons, defaultValue, disabled }) => {
+export const RadioGroup: FC<RadioGroupProps> = forwardRef<
+  ElementRef<typeof Radio.Root>,
+  RadioGroupProps
+>(({ radioButtons, defaultValue, disabled, className, onValueChange, value }, ref) => {
   const classes = {
+    root: clsx(s.root, className),
     label: clsx(s.label, disabled && s.disabled),
   }
 
   return (
-    <Radio.Root className={s.root} defaultValue={defaultValue} disabled={disabled}>
+    <Radio.Root
+      className={classes.root}
+      defaultValue={defaultValue}
+      disabled={disabled}
+      value={value}
+      onValueChange={onValueChange}
+      ref={ref}
+    >
       {radioButtons.map(r => (
         <div className={s.itemWrapper} key={r.value}>
           <Radio.Item className={s.item} value={r.value} id={r.value} disabled={r.disabled}>
@@ -36,4 +50,4 @@ export const RadioGroup: FC<Props> = ({ radioButtons, defaultValue, disabled }) 
       ))}
     </Radio.Root>
   )
-}
+})

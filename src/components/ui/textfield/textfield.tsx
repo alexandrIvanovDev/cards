@@ -10,14 +10,14 @@ import { EyeOff } from '@/assets/icons/EyeOff.tsx'
 import { Search } from '@/assets/icons/Search.tsx'
 import { Typography } from '@/components/ui/typography'
 
-type Props = {
+export type TextFieldProps = {
   type?: 'text' | 'password' | 'search'
   label?: string
   error?: string | null
   clearValue?: () => void
 } & ComponentPropsWithoutRef<'input'>
 
-export const TextField = forwardRef<HTMLInputElement, Props>(
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ({ type = 'text', id, label, disabled, error, value, clearValue, ...rest }, ref) => {
     const [showPassword, setShowPassword] = useState(false)
 
