@@ -16,7 +16,7 @@ type Props = {
 
 export const Header: FC<Props> = ({ data }) => {
   return (
-    <div className={s.wrapper}>
+    <header className={s.wrapper}>
       <div className={s.container}>
         <Logo />
         {data ? (
@@ -44,6 +44,6 @@ export const Header: FC<Props> = ({ data }) => {
           </Button>
         )}
       </div>
-    </div>
+    </header>
   )
 }
