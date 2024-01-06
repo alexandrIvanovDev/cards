@@ -1,0 +1,11 @@
+@import '@/styles/mixins';
+
+.form {
+  @include flex(column, center, normal, 1rem);
+
+  width: 100%;
+
+  .btn {
+    margin-top: 50px;
+  }
+}

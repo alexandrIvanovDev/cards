@@ -10,7 +10,7 @@ export const SignInPage = () => {
 
   return (
     <Card className={s.wrapper}>
-      <Typography as="h1" variant="large">
+      <Typography as="h2" variant="large">
         Sign In
       </Typography>
       <SignInForm onSubmit={onSubmit} />
