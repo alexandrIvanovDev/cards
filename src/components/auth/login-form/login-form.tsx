@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox.tsx'
+import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox'
 import { Button } from '@/components/ui/button'
 import { TextField } from '@/components/ui/textfield'
 
