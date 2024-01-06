@@ -53,6 +53,9 @@
     }
 
     .errorMessage {
+      position: absolute;
+      bottom: -18px;
+      left: 0;
       color: var(--danger-color-300);
     }
   }
@@ -97,6 +100,10 @@
     &.error {
       color: var(--danger-color-300);
       border-color: var(--danger-color-300);
+
+      &:focus {
+        outline: 1px solid var(--info-color-500);
+      }
     }
 
     &[type='search']::-webkit-search-decoration,

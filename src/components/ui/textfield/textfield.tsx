@@ -60,6 +60,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>(
           )}
           {type === 'password' && (
             <button
+              type="button"
               className={classes.showPasswordButton}
               onClick={togglePassword}
               disabled={disabled}
