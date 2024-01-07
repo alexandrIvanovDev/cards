@@ -3,8 +3,8 @@ import { FC } from 'react'
 import { DevTool } from '@hookform/devtools'
 
 import s from './sign-in.module.scss'
+import { SignInFormType, useSignIn } from './use-sign-in.tsx'
 
-import { SignInFormType, useSignIn } from '@/components/auth/sign-in/use-sign-in.tsx'
 import { ControlledCheckbox, ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'

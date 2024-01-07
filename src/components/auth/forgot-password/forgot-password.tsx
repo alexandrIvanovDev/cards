@@ -3,11 +3,8 @@ import { FC } from 'react'
 import { DevTool } from '@hookform/devtools'
 
 import s from './forgot-password.module.scss'
+import { ForgotPasswordFormType, useForgotPassword } from './use-forgot-password.tsx'
 
-import {
-  ForgotPasswordFormType,
-  useForgotPassword,
-} from '@/components/auth/forgot-password/use-forgot-password.tsx'
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'

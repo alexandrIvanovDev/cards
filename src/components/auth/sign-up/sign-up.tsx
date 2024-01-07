@@ -3,8 +3,8 @@ import { FC } from 'react'
 import { DevTool } from '@hookform/devtools'
 
 import s from './sign-up.module.scss'
+import { SignUpFormType, useSignUp } from './use-sign-up.tsx'
 
-import { SignUpFormType, useSignUp } from '@/components/auth/sign-up/use-sign-up.tsx'
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
 
