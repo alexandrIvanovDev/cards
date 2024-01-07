@@ -97,6 +97,10 @@
       padding-right: 40px;
     }
 
+    &.active {
+      color: var(--light-color-100);
+    }
+
     &.error {
       color: var(--danger-color-300);
       border-color: var(--danger-color-300);

@@ -15,10 +15,11 @@ export type TextFieldProps = {
   label?: string
   error?: string | null
   clearValue?: () => void
+  className: string
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ type = 'text', id, label, disabled, error, value, clearValue, ...rest }, ref) => {
+  ({ type = 'text', id, label, disabled, error, value, clearValue, className, ...rest }, ref) => {
     const [showPassword, setShowPassword] = useState(false)
 
     const classes = {
@@ -26,10 +27,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         s.input,
         type === 'search' && s.withSearchIcon,
         type === 'password' && s.password,
-        error && s.error
+        error && s.error,
+        value && s.active
       ),
       searchIcon: clsx(s.searchIcon, value && s.activeIcon),
-      wrapper: clsx(s.wrapper, disabled && s.disabled),
+      wrapper: clsx(s.wrapper, disabled && s.disabled, className),
       showPasswordButton: clsx(s.showPasswordButton, disabled && s.disabledIcon),
     }
 
