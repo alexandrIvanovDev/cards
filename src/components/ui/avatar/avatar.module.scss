@@ -16,6 +16,12 @@
   background: transparent;
   border-radius: 100%;
 
+  &.large {
+    width: 96px;
+    height: 96px;
+    font-size: 2.25em;
+  }
+
   .avatarImg {
     width: 100%;
     height: 100%;

@@ -7,15 +7,18 @@ import s from './avatar.module.scss'
 
 import { getTheFirstNameLetters } from '@/common/utils/getTheFirstNameLetters.ts'
 
-type Props = {
+export type AvatarProps = {
   userName: string
   img?: string
   className?: string
+  size?: 'small' | 'large'
 }
 
-export const Avatar: FC<Props> = ({ img, userName, className }) => {
+export const Avatar: FC<AvatarProps> = ({ img, userName, className, size = 'small' }) => {
   const name = getTheFirstNameLetters(userName)
-  const classes = { root: clsx(s.root, className) }
+  const classes = {
+    root: clsx(s.root, size === 'large' && s.large, className),
+  }
 
   return (
     <AvatarRadix.Root className={classes.root}>
