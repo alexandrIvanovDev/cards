@@ -1,0 +1,32 @@
+@import '@/styles/mixins';
+
+.information {
+  @include flex(column, center, center, 0.5rem);
+
+  .name {
+    @include flex(row, center, center, 0.5rem);
+
+    .editIcon {
+      cursor: pointer;
+      transform: scale(0.8);
+      fill: var(--light-color-100);
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        fill: var(--primary-color-300);
+      }
+
+      &:active {
+        fill: var(--primary-color-700);
+      }
+    }
+  }
+
+  .email {
+    color: var(--dark-color-100);
+  }
+
+  .logoutIcon {
+    fill: var(--light-color-100);
+  }
+}
