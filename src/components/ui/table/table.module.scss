@@ -1,0 +1,19 @@
+.root {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid var(--dark-color-500);
+
+  .headCell {
+    padding: 6px 24px;
+    text-align: left;
+    background: var(--dark-color-500);
+  }
+}
+
+.row {
+  border-bottom: 1px solid var(--dark-color-500);
+}
+
+.cell {
+  padding: 6px 24px;
+}
