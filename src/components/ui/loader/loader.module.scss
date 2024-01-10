@@ -1,0 +1,8 @@
+@import '@/styles/mixins';
+
+.loader {
+  @include flex(row);
+
+  margin: 150px 0;
+  stroke: var(--primary-color-500);
+}
