@@ -1,5 +1,7 @@
+import { Router } from '@/app/providers/router'
+
 function App() {
-  return <div>App</div>
+  return <Router />
 }
 
 export default App

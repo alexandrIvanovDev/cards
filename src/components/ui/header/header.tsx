@@ -1,7 +1,10 @@
 import { FC } from 'react'
 
+import { Link } from 'react-router-dom'
+
 import s from './header.module.scss'
 
+import { routePaths } from '@/app/providers/router'
 import { Logo } from '@/assets/icons/Logo.tsx'
 import { LogoutIcon } from '@/assets/icons/Logout.tsx'
 import { ProfileIcon } from '@/assets/icons/Profile.tsx'
@@ -18,7 +21,9 @@ export const Header: FC<Props> = ({ data }) => {
   return (
     <header className={s.wrapper}>
       <div className={s.container}>
-        <Logo />
+        <Button as={Link} to={routePaths.main} variant="link">
+          <Logo />
+        </Button>
         {data ? (
           <div className={s.data}>
             <span className={s.name}>{data.name}</span>
@@ -39,7 +44,7 @@ export const Header: FC<Props> = ({ data }) => {
             </Dropdown>
           </div>
         ) : (
-          <Button as={'a'} variant={'primary'}>
+          <Button as={Link} to={routePaths.signIn} variant={'primary'} className={s.btn}>
             Sign In
           </Button>
         )}

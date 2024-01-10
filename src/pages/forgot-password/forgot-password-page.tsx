@@ -1,5 +1,8 @@
+import { Link } from 'react-router-dom'
+
 import s from './forgot-password-page.module.scss'
 
+import { routePaths } from '@/app/providers/router/routePaths.tsx'
 import { ForgotPasswordForm } from '@/components/auth/forgot-password'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -17,7 +20,9 @@ export const ForgotPasswordPage = () => {
       <Typography variant="body1" className={s.notification}>
         Did you remember your password?
       </Typography>
-      <Button variant="link">Try logging in</Button>
+      <Button variant="link" as={Link} to={routePaths.signIn} className={s.btn}>
+        Try logging in
+      </Button>
     </Card>
   )
 }
