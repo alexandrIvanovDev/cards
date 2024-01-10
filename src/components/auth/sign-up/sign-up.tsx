@@ -37,7 +37,7 @@ export const SignUpForm: FC<Props> = ({ onSubmit }) => {
         type="password"
         control={control}
         error={errors.confirmPassword?.message}
-        label="Password"
+        label="Confirm Password"
       />
       <Button className={s.btn}>Sign Up</Button>
     </form>

@@ -1,5 +1,8 @@
+import { Link } from 'react-router-dom'
+
 import s from './sign-up-page.module.scss'
 
+import { routePaths } from '@/app/providers/router/routePaths.tsx'
 import { SignUpForm } from '@/components/auth/sign-up'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -17,7 +20,9 @@ export const SignUpPage = () => {
       <Typography variant="body1" className={s.notification}>
         Already have an account?
       </Typography>
-      <Button variant="link">Sign In</Button>
+      <Button variant="link" as={Link} to={routePaths.signIn} className={s.btn}>
+        Sign In
+      </Button>
     </Card>
   )
 }
