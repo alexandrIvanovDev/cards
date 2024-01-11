@@ -1,4 +1,4 @@
-@import '@/styles/mixins';
+@import '@/app/styles/mixins';
 
 .overlay {
   position: fixed;
@@ -25,7 +25,6 @@
     }
 
     .close {
-
       @include flex(row, center, center);
 
       cursor: pointer;
