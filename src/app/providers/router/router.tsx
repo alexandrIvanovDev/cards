@@ -8,6 +8,7 @@ import {
 
 import { routePaths } from './routePaths.tsx'
 
+import { Decks } from '@/components/decks/decks.tsx'
 import { Layout } from '@/Layout.tsx'
 import { CreateNewPasswordPage } from '@/pages/create-new-password/create-new-password-page.tsx'
 import { ForgotPasswordPage } from '@/pages/forgot-password/forgot-password-page.tsx'
@@ -15,9 +16,9 @@ import { SignInPage } from '@/pages/sign-in/sign-in-page.tsx'
 import { SignUpPage } from '@/pages/sign-up/sign-up-page.tsx'
 
 const PrivateRoutes = () => {
-  const isAuthenticated = false
+  const isAuth = true
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={routePaths.signIn} />
+  return isAuth ? <Outlet /> : <Navigate to={routePaths.signIn} />
 }
 
 export const publicRoutes: RouteObject[] = [
@@ -27,7 +28,7 @@ export const publicRoutes: RouteObject[] = [
   { path: routePaths.forgotPassword, element: <ForgotPasswordPage /> },
 ]
 
-export const privateRoutes: RouteObject[] = [{ path: '/', element: <div>Main</div> }]
+export const privateRoutes: RouteObject[] = [{ path: '/', element: <Decks /> }]
 
 const router = createBrowserRouter([
   {
