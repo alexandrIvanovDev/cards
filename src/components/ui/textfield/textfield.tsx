@@ -11,7 +11,7 @@ import { Search } from '@/assets/icons/Search.tsx'
 import { Typography } from '@/components/ui/typography'
 
 export type TextFieldProps = {
-  type?: 'text' | 'password' | 'search'
+  type?: 'text' | 'password' | 'search' | 'number'
   label?: string
   error?: string | null
   clearValue?: () => void
@@ -27,8 +27,10 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         s.input,
         type === 'search' && s.withSearchIcon,
         type === 'password' && s.password,
+        type === 'number' && s.numberType,
         error && s.error,
-        value && s.active
+        value && s.active,
+        className
       ),
       searchIcon: clsx(s.searchIcon, value && s.activeIcon),
       wrapper: clsx(s.wrapper, disabled && s.disabled, className),
@@ -43,9 +45,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <div className={classes.wrapper}>
-        <Typography as="label" variant="body2" htmlFor={id} className={s.label}>
-          {label}
-        </Typography>
+        {label && (
+          <Typography as="label" variant="body2" htmlFor={id} className={s.label}>
+            {label}
+          </Typography>
+        )}
         <div className={s.inputWrapper}>
           {finalType === 'search' && <Search className={classes.searchIcon} />}
           <input
