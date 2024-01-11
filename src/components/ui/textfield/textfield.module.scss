@@ -97,6 +97,10 @@
       padding-right: 40px;
     }
 
+    &.numberType {
+      padding: 0;
+    }
+
     &.active {
       color: var(--light-color-100);
     }
