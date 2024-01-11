@@ -8,8 +8,9 @@ import {
 
 import { routePaths } from './routePaths.tsx'
 
+import { ErrorBoundary } from '@/app/providers/errorBoudary/error-boudary.tsx'
 import { Decks } from '@/components/decks/decks.tsx'
-import { Layout } from '@/Layout.tsx'
+import { Layout } from '@/components/layout/Layout.tsx'
 import { CreateNewPasswordPage } from '@/pages/create-new-password/create-new-password-page.tsx'
 import { ForgotPasswordPage } from '@/pages/forgot-password/forgot-password-page.tsx'
 import { SignInPage } from '@/pages/sign-in/sign-in-page.tsx'
@@ -28,11 +29,24 @@ export const publicRoutes: RouteObject[] = [
   { path: routePaths.forgotPassword, element: <ForgotPasswordPage /> },
 ]
 
-export const privateRoutes: RouteObject[] = [{ path: '/', element: <Decks /> }]
+export const privateRoutes: RouteObject[] = [
+  {
+    path: '/',
+    element: (
+      // <ErrorBoundary>
+      <Decks />
+      // </ErrorBoundary>
+    ),
+  },
+]
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
+    element: (
+      <ErrorBoundary>
+        <Layout />
+      </ErrorBoundary>
+    ),
     children: [
       {
         element: <PrivateRoutes />,
