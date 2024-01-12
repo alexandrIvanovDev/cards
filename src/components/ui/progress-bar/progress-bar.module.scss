@@ -1,0 +1,42 @@
+.wrapper {
+  position: fixed;
+  top: (var(--header-height));
+  left: 0;
+  width: 100%;
+
+  .progress2 {
+    background-color: var(--primary-color-100);
+  }
+
+  .progressBar2 {
+    height: 4px;
+    border-radius: 30px;
+    transition: 0.4s linear;
+    transition-property: width, background-color;
+  }
+
+  .progressMoved .progressBar2 {
+    background-color: var(--primary-color-700);
+    animation: progress 0.3s infinite;
+  }
+}
+
+@keyframes progress {
+  0% {
+    width: 0;
+    background: var(--primary-color-100);
+  }
+
+  100% {
+    width: 100%;
+    background: var(--primary-color-700);
+    box-shadow: 0 0 20px var(--primary-color-700);
+  }
+}
+
+@keyframes p {
+  90%,
+  100% {
+    --p: 100;
+  }
+}
