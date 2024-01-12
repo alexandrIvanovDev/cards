@@ -7,10 +7,8 @@ import s from './loader.module.scss'
 import { LoaderSpinner } from '@/assets/icons/Loader.tsx'
 
 export const Loader: FC<ComponentPropsWithoutRef<'div'>> = ({ className, ...rest }) => {
-  const mainClass = clsx(s.loader, className)
-
   return (
-    <div className={mainClass} {...rest}>
+    <div className={clsx(s.loader, className)} {...rest}>
       <LoaderSpinner />
     </div>
   )
