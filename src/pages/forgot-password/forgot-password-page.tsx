@@ -13,7 +13,7 @@ export const ForgotPasswordPage = () => {
 
   return (
     <Card className={s.wrapper}>
-      <Typography as="h2" variant="large">
+      <Typography as="h2" variant="large" className={s.title}>
         Forgot your password?
       </Typography>
       <ForgotPasswordForm onSubmit={onSubmit} />

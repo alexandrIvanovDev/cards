@@ -78,6 +78,15 @@
       border-color: var(--light-color-100);
     }
 
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+
+      -webkit-text-fill-color: var(--light-color-100) !important;
+    }
+
     &:active:not(:disabled, .error) {
       color: var(--light-color-100);
       border-color: var(--light-color-100);
