@@ -44,6 +44,9 @@ dependencies:
   '@reduxjs/toolkit':
     specifier: ^2.0.1
     version: 2.0.1(react-redux@9.0.4)(react@18.2.0)
+  async-mutex:
+    specifier: ^0.4.0
+    version: 0.4.0
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -75,7 +78,7 @@ devDependencies:
     version: 0.1.2
   '@it-incubator/stylelint-config':
     specifier: ^0.1.5
-    version: 0.1.5(postcss@8.4.31)(typescript@5.0.2)
+    version: 0.1.5(postcss@8.4.33)(typescript@5.0.2)
   '@storybook/addon-essentials':
     specifier: ^7.4.6
     version: 7.4.6(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
@@ -2224,12 +2227,12 @@ packages:
       prettier: 3.0.0
     dev: true
 
-  /@it-incubator/stylelint-config@0.1.5(postcss@8.4.31)(typescript@5.0.2):
+  /@it-incubator/stylelint-config@0.1.5(postcss@8.4.33)(typescript@5.0.2):
     resolution: {integrity: sha512-Jztg1mQj2e+ZoQ743p/iYx+C90hda9h5ctYL3tZkA4TSIoThedm28WAdif4EpIKXuCqJNXWlwJvl5YioducTig==}
     dependencies:
       stylelint: 15.10.1(typescript@5.0.2)
       stylelint-config-clean-order: 5.0.1(stylelint@15.10.1)
-      stylelint-config-standard-scss: 10.0.0(postcss@8.4.31)(stylelint@15.10.1)
+      stylelint-config-standard-scss: 10.0.0(postcss@8.4.33)(stylelint@15.10.1)
     transitivePeerDependencies:
       - postcss
       - supports-color
@@ -5250,6 +5253,12 @@ packages:
   /async-limiter@1.0.1:
     resolution: {integrity: sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==}
     dev: true
+
+  /async-mutex@0.4.0:
+    resolution: {integrity: sha512-eJFZ1YhRR8UN8eBLoNzcDPcy/jqjsg6I1AP+KvWQX80BqOSW1oJPJXDylPUEeMr2ZQvHgnQ//Lp6f3RQ1zI7HA==}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
 
   /async@3.2.4:
     resolution: {integrity: sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==}
@@ -8730,13 +8739,13 @@ packages:
       postcss: 8.4.31
     dev: true
 
-  /postcss-scss@4.0.9(postcss@8.4.31):
+  /postcss-scss@4.0.9(postcss@8.4.33):
     resolution: {integrity: sha512-AjKOeiwAitL/MXxQW2DliT28EKukvvbEWx3LBmJIRN8KfBGZbRTxNYW0kSqi1COiTZ57nZ9NW06S6ux//N1c9A==}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.4.29
     dependencies:
-      postcss: 8.4.31
+      postcss: 8.4.33
     dev: true
 
   /postcss-selector-parser@6.0.13:
@@ -9885,7 +9894,7 @@ packages:
       stylelint-order: 6.0.3(stylelint@15.10.1)
     dev: true
 
-  /stylelint-config-recommended-scss@12.0.0(postcss@8.4.31)(stylelint@15.10.1):
+  /stylelint-config-recommended-scss@12.0.0(postcss@8.4.33)(stylelint@15.10.1):
     resolution: {integrity: sha512-5Bb2mlGy6WLa30oNeKpZvavv2lowJUsUJO25+OA68GFTemlwd1zbFsL7q0bReKipOSU3sG47hKneZ6Nd+ctrFA==}
     peerDependencies:
       postcss: ^8.3.3
@@ -9894,8 +9903,8 @@ packages:
       postcss:
         optional: true
     dependencies:
-      postcss: 8.4.31
-      postcss-scss: 4.0.9(postcss@8.4.31)
+      postcss: 8.4.33
+      postcss-scss: 4.0.9(postcss@8.4.33)
       stylelint: 15.10.1(typescript@5.0.2)
       stylelint-config-recommended: 12.0.0(stylelint@15.10.1)
       stylelint-scss: 5.2.1(stylelint@15.10.1)
@@ -9909,7 +9918,7 @@ packages:
       stylelint: 15.10.1(typescript@5.0.2)
     dev: true
 
-  /stylelint-config-standard-scss@10.0.0(postcss@8.4.31)(stylelint@15.10.1):
+  /stylelint-config-standard-scss@10.0.0(postcss@8.4.33)(stylelint@15.10.1):
     resolution: {integrity: sha512-bChBEo1p3xUVWh/wenJI+josoMk21f2yuLDGzGjmKYcALfl2u3DFltY+n4UHswYiXghqXaA8mRh+bFy/q1hQlg==}
     peerDependencies:
       postcss: ^8.3.3
@@ -9918,9 +9927,9 @@ packages:
       postcss:
         optional: true
     dependencies:
-      postcss: 8.4.31
+      postcss: 8.4.33
       stylelint: 15.10.1(typescript@5.0.2)
-      stylelint-config-recommended-scss: 12.0.0(postcss@8.4.31)(stylelint@15.10.1)
+      stylelint-config-recommended-scss: 12.0.0(postcss@8.4.33)(stylelint@15.10.1)
       stylelint-config-standard: 33.0.0(stylelint@15.10.1)
     dev: true
 
