@@ -3,6 +3,14 @@
 .wrapper {
   @include flex(row, flex-start, center, 1rem);
 
+  position: relative;
+
+  .label {
+    position: absolute;
+    top: -25px;
+    left: 0;
+  }
+
   .count {
     width: 36px;
     height: 36px;

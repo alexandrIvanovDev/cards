@@ -1,7 +1,13 @@
+.label {
+  position: absolute;
+  top: -25px;
+  left: 0;
+}
+
 .tab {
   cursor: pointer;
 
-  padding: 0.5rem 1.5rem;
+  padding: 6px 24px;
 
   color: var(--light-color-100);
 
@@ -30,8 +36,8 @@
     outline: 2px solid var(--info-color-900);
   }
 
-  &:active {
-  }
+  // &:active {
+  // }
 
   &[data-state='active'] {
     color: var(--light-color-100);

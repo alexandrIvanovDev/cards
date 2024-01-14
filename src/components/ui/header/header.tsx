@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import s from './header.module.scss'
-import { ProfileInfo, ProfileInfoProps } from './profile-info/profile-info-type.tsx'
+import { ProfileInfo, ProfileInfoProps } from './profile-info/profile-info.tsx'
 
 import { routePaths } from '@/app/providers/router'
 import { Logo } from '@/assets/icons/Logo.tsx'
