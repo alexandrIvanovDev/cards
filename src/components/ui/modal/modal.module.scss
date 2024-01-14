@@ -7,7 +7,7 @@
 }
 
 .content {
-  @include flex(column, center, space-between, 1rem);
+  @include flex(column, center, space-between);
 
   position: fixed;
   top: 50%;
@@ -15,10 +15,12 @@
   transform: translate(-50%, -50%);
 
   width: 30vw;
-  padding: 1.5rem;
 
   .titleWrapper {
     @include flex(row, space-between, center);
+
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--dark-color-500);
 
     .title {
       color: var(--light-color-100);
@@ -37,5 +39,9 @@
 
       fill: var(--light-color-100);
     }
+  }
+
+  .childrenWrapper {
+    padding: 16px 24px;
   }
 }
