@@ -1,4 +1,4 @@
-import { baseApi } from '@/services/base-api.ts'
+import { baseApi } from '@/app/providers/store/base-api.ts'
 import {
   CreateDeckArgs,
   GetDeckByIdArgs,
