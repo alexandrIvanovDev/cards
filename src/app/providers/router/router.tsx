@@ -9,15 +9,21 @@ import {
 import { routePaths } from './routePaths.tsx'
 
 import { ErrorBoundary } from '@/app/providers/errorBoudary/error-boudary.tsx'
-import { Decks } from '@/components/decks/decks.tsx'
-import { Layout } from '@/components/ui/layout/Layout.tsx'
+import { PacksList } from '@/components/packs-list/packs-list.tsx'
+import { Layout } from '@/components/ui/layout/layout.tsx'
 import { CreateNewPasswordPage } from '@/pages/create-new-password/create-new-password-page.tsx'
 import { ForgotPasswordPage } from '@/pages/forgot-password/forgot-password-page.tsx'
+import { ProfilePage } from '@/pages/personal-information/profile-page.tsx'
 import { SignInPage } from '@/pages/sign-in/sign-in-page.tsx'
 import { SignUpPage } from '@/pages/sign-up/sign-up-page.tsx'
+import { useMeQuery } from '@/services/auth/auth.service.ts'
 
 const PrivateRoutes = () => {
-  const isAuth = true
+  const { isLoading, isError } = useMeQuery()
+
+  if (isLoading) return null
+
+  const isAuth = !isError
 
   return isAuth ? <Outlet /> : <Navigate to={routePaths.signIn} />
 }
@@ -31,8 +37,12 @@ export const publicRoutes: RouteObject[] = [
 
 export const privateRoutes: RouteObject[] = [
   {
-    path: '/',
-    element: <Decks />,
+    path: routePaths.packs,
+    element: <PacksList />,
+  },
+  {
+    path: routePaths.profile,
+    element: <ProfilePage />,
   },
 ]
 
@@ -43,6 +53,7 @@ const router = createBrowserRouter([
         <Layout />
       </ErrorBoundary>
     ),
+    path: routePaths.main,
     children: [
       {
         element: <PrivateRoutes />,

@@ -7,16 +7,28 @@ import { SignUpForm } from '@/components/auth/sign-up'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useSignUpMutation } from '@/services/auth/auth.service.ts'
+import { SignUpArgs } from '@/services/auth/auth.types.ts'
 
 export const SignUpPage = () => {
-  const onSubmit = () => {}
+  const [signUp] = useSignUpMutation()
+
+  const handleSignUp = async (data: SignUpArgs) => {
+    try {
+      const { email, password } = data
+
+      await signUp({ email, password })
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   return (
     <Card className={s.wrapper}>
       <Typography as="h2" variant="large">
         Sign Up
       </Typography>
-      <SignUpForm onSubmit={onSubmit} />
+      <SignUpForm onSubmit={handleSignUp} />
       <Typography variant="body1" className={s.notification}>
         Already have an account?
       </Typography>

@@ -6,6 +6,7 @@ import { clsx } from 'clsx'
 import s from './slider.module.scss'
 
 import { TextField } from '@/components/ui/textfield'
+import { Typography } from '@/components/ui/typography'
 
 type Props = {
   min: number
@@ -16,6 +17,7 @@ type Props = {
   minStepsBetweenThumbs?: number
   defaultValue?: Array<number>
   className?: string
+  label?: string
 }
 
 export const Slider: FC<Props> = props => {
@@ -28,11 +30,8 @@ export const Slider: FC<Props> = props => {
     minStepsBetweenThumbs = 1,
     className,
     defaultValue = [min, max],
+    label,
   } = props
-
-  const classes = {
-    wrapper: clsx(s.wrapper, className),
-  }
 
   const onChangeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = +e.currentTarget.value
@@ -68,7 +67,12 @@ export const Slider: FC<Props> = props => {
   }
 
   return (
-    <div className={classes.wrapper}>
+    <div className={clsx(s.wrapper, className)}>
+      {label && (
+        <Typography as="label" className={s.label}>
+          {label}
+        </Typography>
+      )}
       <TextField type="number" className={s.count} value={value[0]} onChange={onChangeMinValue} />
       <RadixSlider.Root
         defaultValue={defaultValue}

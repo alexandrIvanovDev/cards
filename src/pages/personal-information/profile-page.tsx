@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 import s from './personal-information-page.module.scss'
 
@@ -15,16 +15,16 @@ export type ProfileInfoDataType = {
   avatar?: string
 }
 
-type Props = {
-  data: ProfileInfoDataType
-}
+// type Props = {
+//   data: ProfileInfoDataType
+// }
 
 const userData: Pick<AvatarProps, 'userName' | 'img'> = {
   userName: 'Alex',
   img: '',
 }
 
-export const PersonalInformationPage: FC<Props> = ({ data }) => {
+export const ProfilePage = () => {
   const [editMode, setEditMode] = useState(false)
 
   const toggleEditMode = () => {
@@ -45,11 +45,12 @@ export const PersonalInformationPage: FC<Props> = ({ data }) => {
         userName={userData.userName}
         size="large"
         className={s.avatar}
+        editMode={editMode}
       />
       {editMode ? (
         <EditProfileForm onSubmit={saveChanges} />
       ) : (
-        <ProfileInfo name={data.name} email={data.email} changeName={toggleEditMode} />
+        <ProfileInfo name={'name'} email={'email'} changeName={toggleEditMode} />
       )}
     </Card>
   )

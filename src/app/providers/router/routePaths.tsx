@@ -1,4 +1,11 @@
-export type Routes = 'signIn' | 'signUp' | 'createNewPassword' | 'forgotPassword' | 'main'
+export type Routes =
+  | 'signIn'
+  | 'signUp'
+  | 'createNewPassword'
+  | 'forgotPassword'
+  | 'main'
+  | 'profile'
+  | 'packs'
 
 export const routePaths: Record<Routes, string> = {
   signIn: '/sign-in',
@@ -6,4 +13,6 @@ export const routePaths: Record<Routes, string> = {
   createNewPassword: '/create-new-password',
   forgotPassword: '/forgot-password',
   main: '/',
+  profile: '/profile',
+  packs: '/packs',
 }

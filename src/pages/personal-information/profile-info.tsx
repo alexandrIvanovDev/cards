@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
-import { ProfileInfoDataType } from './personal-information-page.tsx'
 import s from './profile-info.module.scss'
+import { ProfileInfoDataType } from './profile-page.tsx'
 
 import { EditIcon } from '@/assets/icons/Edit.tsx'
 import { LogoutIcon } from '@/assets/icons/Logout.tsx'
