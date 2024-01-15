@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import s from './personal-information-page.module.scss'
+import s from './profile-page.module.scss'
 
 import { EditProfileForm } from '@/components/auth/edit-profile'
 import { AvatarProps } from '@/components/ui/avatar'
@@ -8,6 +8,8 @@ import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { AvatarUploader } from '@/pages/personal-information/avatar-uploader.tsx'
 import { ProfileInfo } from '@/pages/personal-information/profile-info.tsx'
+import { useMeQuery } from '@/services/auth/auth.service.ts'
+import { User } from '@/services/auth/auth.types.ts'
 
 export type ProfileInfoDataType = {
   name: string
@@ -26,6 +28,7 @@ const userData: Pick<AvatarProps, 'userName' | 'img'> = {
 
 export const ProfilePage = () => {
   const [editMode, setEditMode] = useState(false)
+  const { data } = useMeQuery()
 
   const toggleEditMode = () => {
     setEditMode(!editMode)
@@ -50,7 +53,7 @@ export const ProfilePage = () => {
       {editMode ? (
         <EditProfileForm onSubmit={saveChanges} />
       ) : (
-        <ProfileInfo name={'name'} email={'email'} changeName={toggleEditMode} />
+        <ProfileInfo user={data as User} changeName={toggleEditMode} />
       )}
     </Card>
   )

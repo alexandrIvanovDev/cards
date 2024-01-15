@@ -6,6 +6,7 @@ export type Routes =
   | 'main'
   | 'profile'
   | 'packs'
+  | 'pack'
 
 export const routePaths: Record<Routes, string> = {
   signIn: '/sign-in',
@@ -15,4 +16,5 @@ export const routePaths: Record<Routes, string> = {
   main: '/',
   profile: '/profile',
   packs: '/packs',
+  pack: '/packs/:id',
 }

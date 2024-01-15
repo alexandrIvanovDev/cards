@@ -29,8 +29,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         type === 'password' && s.password,
         type === 'number' && s.numberType,
         error && s.error,
-        value && s.active,
-        className
+        value && s.active
       ),
       searchIcon: clsx(s.searchIcon, value && s.activeIcon),
       wrapper: clsx(s.wrapper, disabled && s.disabled, className),

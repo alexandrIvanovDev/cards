@@ -1,10 +1,12 @@
 import { baseApi } from '@/app/providers/store/base-api.ts'
 import {
   CreateDeckArgs,
-  GetDeckByIdArgs,
+  DeckByIdArgs,
   GetDecksArgs,
   GetDecksResponse,
-  GetDecksResponseItems,
+  DecksResponseItems,
+  GetCardsResponse,
+  GetCardsArgs,
 } from '@/services/cards.types.ts'
 
 export const deckService = baseApi.injectEndpoints({
@@ -16,7 +18,7 @@ export const deckService = baseApi.injectEndpoints({
       }),
       providesTags: ['Decks'],
     }),
-    getDeckById: builder.query<GetDecksResponseItems, GetDeckByIdArgs>({
+    getDeckById: builder.query<DecksResponseItems, DeckByIdArgs>({
       query: ({ id }) => `v1/decks/${id}`,
     }),
     createDeck: builder.mutation<void, CreateDeckArgs>({
@@ -27,7 +29,23 @@ export const deckService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Decks'],
     }),
+    deleteDeck: builder.mutation<DecksResponseItems, DeckByIdArgs>({
+      query: ({ id }) => ({
+        url: `v1/decks/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Decks'],
+    }),
+    getCards: builder.query<GetCardsResponse, GetCardsArgs>({
+      query: ({ id }) => `v1/decks/${id}/cards`,
+    }),
   }),
 })
 
-export const { useGetDecksQuery, useGetDeckByIdQuery, useCreateDeckMutation } = deckService
+export const {
+  useGetDecksQuery,
+  useGetDeckByIdQuery,
+  useCreateDeckMutation,
+  useDeleteDeckMutation,
+  useGetCardsQuery,
+} = deckService

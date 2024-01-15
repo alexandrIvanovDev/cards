@@ -1,7 +1,7 @@
 export type GetDecksResponse = {
   maxCardsCount: number
   pagination: GetDecksResponsePagination
-  items: GetDecksResponseItems[]
+  items: DecksResponseItems[]
 }
 export type GetDecksResponsePagination = {
   totalPages: number
@@ -13,7 +13,7 @@ export type GetDecksResponseItemsAuthor = {
   id: string
   name: string
 }
-export type GetDecksResponseItems = {
+export type DecksResponseItems = {
   id: string
   userId: string
   name: string
@@ -28,6 +28,21 @@ export type GetDecksResponseItems = {
   author: GetDecksResponseItemsAuthor
 }
 
+export type CardsResponseItems = {
+  id: string
+  deckId: string
+  userId: string
+  question: string
+  answer: string
+  shots: number
+  answerImg: string
+  questionImg: string
+  questionVideo: string
+  answerVideo: string
+  created: string
+  updated: string
+}
+
 export type GetDecksArgs = {
   minCardsCount?: number
   maxCardsCount?: number
@@ -38,7 +53,7 @@ export type GetDecksArgs = {
   itemsPerPage?: number
 }
 
-export type GetDeckByIdArgs = {
+export type DeckByIdArgs = {
   id: string
 }
 
@@ -47,3 +62,11 @@ export type CreateDeckArgs = {
   cover?: string
   isPrivate?: boolean
 }
+
+export type GetCardsResponse = {
+  items: CardsResponseItems[]
+  pagination: GetDecksResponsePagination
+  maxCardsCount: number
+}
+
+export type GetCardsArgs = { id: string }

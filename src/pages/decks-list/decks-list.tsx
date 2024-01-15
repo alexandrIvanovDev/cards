@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useState, KeyboardEvent } from 'react'
 
 import { Link } from 'react-router-dom'
 
-import s from './packs-list.module.scss'
+import s from './decks-list.module.scss'
 
 import { routePaths } from '@/app/providers/router'
 import { DeleteIcon } from '@/assets/icons/Delete.tsx'
+import { EditIcon } from '@/assets/icons/Edit.tsx'
+import { PlayIcon } from '@/assets/icons/Play.tsx'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Modal } from '@/components/ui/modal'
@@ -15,12 +17,19 @@ import { Table } from '@/components/ui/table'
 import { Tabs } from '@/components/ui/tabs'
 import { TextField } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
-import { useCreateDeckMutation, useGetDecksQuery } from '@/services/deck.service.ts'
+import { useMeQuery } from '@/services/auth/auth.service.ts'
+import {
+  useCreateDeckMutation,
+  useDeleteDeckMutation,
+  useGetDecksQuery,
+} from '@/services/deck.service.ts'
 
-export const PacksList = () => {
+export const DecksList = () => {
   const { data, isLoading } = useGetDecksQuery()
+  const { data: userData } = useMeQuery()
+  const [deleteDeck, { isLoading: deleteDeckIsLoading }] = useDeleteDeckMutation()
 
-  const [createDeck, { isLoading: isCreateLoading }] = useCreateDeckMutation()
+  const [createDeck, { isLoading: createDeckIsLoading }] = useCreateDeckMutation()
 
   const [value, setValue] = useState([2, 10])
 
@@ -37,15 +46,18 @@ export const PacksList = () => {
   const addNewPack = () => {
     createDeck({ name: newPackName })
     setOpenModal(false)
+    setNewPackName('')
   }
 
-  if (isLoading) {
-    return <ProgressBar />
+  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      addNewPack()
+    }
   }
 
   return (
     <div className={s.content}>
-      {isCreateLoading && <ProgressBar />}
+      {(isLoading || createDeckIsLoading || deleteDeckIsLoading) && <ProgressBar />}
       <div className={s.titleWrapper}>
         <Typography variant="large" as="h2">
           Packs List
@@ -61,7 +73,9 @@ export const PacksList = () => {
               label="Name pack"
               value={newPackName}
               onChange={e => setNewPackName(e.currentTarget.value)}
-            ></TextField>
+              onKeyDown={onKeyPressHandler}
+              autoFocus
+            />
             <Checkbox checked={false} onChange={() => {}} label="Private pack" />
             <div className={s.modalButtons}>
               <Button variant="secondary" onClick={() => setOpenModal(false)}>
@@ -76,7 +90,7 @@ export const PacksList = () => {
         <TextField type="search" placeholder="Input search" className={s.input} />
         <Tabs
           tabs={[
-            { value: 'my', text: 'My Cards' },
+            { value: 'my', text: 'My Cards', disabled: true },
             { value: 'all', text: 'All Cards' },
           ]}
           value={tabsValue}
@@ -85,7 +99,7 @@ export const PacksList = () => {
         />
         <Slider min={0} max={20} value={value} onValueChange={onChange} label="Number of cards" />
         <Button variant="secondary">
-          <DeleteIcon style={{ fill: 'white' }} /> Clear filter
+          <DeleteIcon style={{ transform: 'scale(0.75)', fill: 'white' }} /> Clear filter
         </Button>
       </div>
       <Table.Root>
@@ -95,20 +109,30 @@ export const PacksList = () => {
             <Table.HeadCell>Cards</Table.HeadCell>
             <Table.HeadCell>Last Updated</Table.HeadCell>
             <Table.HeadCell>Created by</Table.HeadCell>
+            <Table.HeadCell style={{ width: 150 }}></Table.HeadCell>
           </Table.Row>
         </Table.Head>
         <Table.Body>
           {data?.items?.map(deck => {
             return (
-              <Table.Row key={deck?.id}>
+              <Table.Row key={deck?.id} className={s.table}>
                 <Table.Cell className={s.nameCell}>
-                  <Link to={`${routePaths.packs}/${deck.id}`} className={s.btn}>
+                  <Typography as={Link} to={`${routePaths.packs}/${deck.id}`} className={s.name}>
                     {deck?.name}
-                  </Link>
+                  </Typography>
                 </Table.Cell>
-                <Table.Cell>{deck?.cardsCount}</Table.Cell>
-                <Table.Cell>{new Date(deck?.updated).toLocaleDateString()}</Table.Cell>
-                <Table.Cell>{deck?.author?.name}</Table.Cell>
+                <Table.Cell className={s.count}>{deck?.cardsCount}</Table.Cell>
+                <Table.Cell className={s.updated}>
+                  {new Date(deck?.updated).toLocaleDateString()}
+                </Table.Cell>
+                <Table.Cell className={s.author}>{deck?.author?.name}</Table.Cell>
+                <Table.Cell className={s.tableIcons}>
+                  <PlayIcon className={s.icon} />
+                  {userData?.id === deck.userId && <EditIcon className={s.icon} />}
+                  {userData?.id === deck.userId && (
+                    <DeleteIcon className={s.icon} onClick={() => deleteDeck({ id: deck.id })} />
+                  )}
+                </Table.Cell>
               </Table.Row>
             )
           })}

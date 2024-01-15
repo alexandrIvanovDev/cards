@@ -43,6 +43,7 @@ export const Default = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
+      marginTop: 20,
     }
 
     return (
@@ -72,6 +73,7 @@ export const ExampleWithInput = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
+      marginTop: 20,
     }
 
     return (

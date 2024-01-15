@@ -1,0 +1,51 @@
+@import '@/app/styles/mixins';
+
+.content {
+  @include container(1240px);
+
+  .btnBack {
+    padding: 0;
+    color: var(--light-color-100);
+    fill: var(--light-color-100);
+
+    &:hover {
+      fill: var(--primary-color-500);
+    }
+  }
+
+  .titleWrapper {
+    @include flex(row, space-between, center);
+
+    margin-top: 30px;
+
+    .title {
+      @include flex(row, center, center, 1rem);
+    }
+  }
+
+  .searchInput {
+    margin: 25px 0;
+  }
+
+  .notification {
+    @include flex(column, center, center, 1rem);
+
+    margin-top: 100px;
+
+    .text {
+      color: var(--dark-color-100);
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.modalContent {
+  @include flex(column, center, normal, 1rem);
+
+  .modalButtons {
+    @include flex(row, space-between, center);
+  }
+}

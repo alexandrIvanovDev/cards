@@ -16,4 +16,7 @@
 
 .cell {
   padding: 6px 24px;
+
+  // overflow-wrap: break-word;
+  word-break: break-all;
 }

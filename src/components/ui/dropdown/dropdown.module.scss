@@ -1,6 +1,8 @@
 @import '@/app/styles/mixins';
 
 .trigger {
+  @include flex;
+
   cursor: pointer;
   background: transparent;
   border: none;
