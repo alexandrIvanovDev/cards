@@ -12,8 +12,8 @@ import { ErrorBoundary } from '@/app/providers/errorBoudary/error-boudary.tsx'
 import { Layout } from '@/components/ui/layout/layout.tsx'
 import { CreateNewPasswordPage } from '@/pages/create-new-password/create-new-password-page.tsx'
 import { Deck } from '@/pages/deck/deck.tsx'
+import { DecksList } from '@/pages/decks-list/decks-list.tsx'
 import { ForgotPasswordPage } from '@/pages/forgot-password/forgot-password-page.tsx'
-import { PacksList } from '@/pages/packs-list/packs-list.tsx'
 import { ProfilePage } from '@/pages/personal-information/profile-page.tsx'
 import { SignInPage } from '@/pages/sign-in/sign-in-page.tsx'
 import { SignUpPage } from '@/pages/sign-up/sign-up-page.tsx'
@@ -39,7 +39,7 @@ export const publicRoutes: RouteObject[] = [
 export const privateRoutes: RouteObject[] = [
   {
     path: routePaths.packs,
-    element: <PacksList />,
+    element: <DecksList />,
   },
   {
     path: routePaths.profile,
