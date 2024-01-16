@@ -1,113 +1,102 @@
 import { useState } from 'react'
 
-import { clsx } from 'clsx'
 import { Link, useParams } from 'react-router-dom'
 
 import s from './deck.module.scss'
 
 import { ArrowBackIcon } from '@/assets/icons/ArrowBack.tsx'
-import { DeleteIcon } from '@/assets/icons/Delete.tsx'
-import { EditIcon } from '@/assets/icons/Edit.tsx'
-import { PlayIcon } from '@/assets/icons/Play.tsx'
 import { Button } from '@/components/ui/button'
-import { Dropdown, DropDownItemWithIcon } from '@/components/ui/dropdown'
-import { Modal } from '@/components/ui/modal'
+import { Loader } from '@/components/ui/loader'
 import { ProgressBar } from '@/components/ui/progress-bar'
-import { Table } from '@/components/ui/table'
-import { TextField } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
+import { CreateCardFormType } from '@/pages/deck/card-form/use-create-card.tsx'
+import { CardModal } from '@/pages/deck/card-modal/cardModal.tsx'
+import { DeckTable } from '@/pages/deck/deck-table/deck-table.tsx'
+import { DeckTitle } from '@/pages/deck/deck-title/deck-title.tsx'
 import { useMeQuery } from '@/services/auth/auth.service.ts'
-import { useGetCardsQuery, useGetDeckByIdQuery } from '@/services/deck.service.ts'
+import {
+  useCreateCardMutation,
+  useDeleteCardMutation,
+  useGetCardsQuery,
+} from '@/services/cards.service.ts'
+import { DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
+import { useGetDeckByIdQuery } from '@/services/deck.service.ts'
 
 export const Deck = () => {
   const { id } = useParams()
-  const { data, isLoading } = useGetDeckByIdQuery({ id: id as string })
-  const { data: cards } = useGetCardsQuery({ id: id as string })
+  const { data: deckData, isLoading } = useGetDeckByIdQuery({ id: id as string })
+  const { data: cardsData } = useGetCardsQuery({ id: id as string })
   const { data: userData } = useMeQuery()
+  const [createCard, { isLoading: createCardIsLoading }] = useCreateCardMutation()
+  const [deleteCard, { isLoading: deleteCardIsLoading }] = useDeleteCardMutation()
+  // const [updateCard, { isLoading: updateCardIsLoading }] = useUpdateCardMutation()
 
-  const [open, setOpen] = useState(false)
+  const [addCardModal, setAddCardModal] = useState(false)
 
-  const classes = {
-    addCardButton: clsx(!cards?.items.length && s.hidden),
+  // const [deleteCardModal, setDeleteCardModal] = useState(false)
+  //
+  // const [updateCardModal, setUpdateCardModal] = useState(false)
+
+  const isMyDeck = deckData?.userId === userData?.id
+
+  const addNewCard = (createCardData: CreateCardFormType) => {
+    createCard({
+      deckId: deckData?.id as string,
+      data: createCardData,
+    })
+    setAddCardModal(false)
   }
 
-  if (isLoading) return <ProgressBar />
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <div className={s.content}>
+      {(createCardIsLoading || deleteCardIsLoading) && <ProgressBar />}
       <Button as={Link} to={'..'} variant="link" className={s.btnBack}>
         <ArrowBackIcon className={s.iconBack} /> <Typography>Back to previous page</Typography>
       </Button>
       <div>
-        <div className={s.titleWrapper}>
-          <div className={s.title}>
-            <Typography as="h2" variant="large">
-              {data?.name}
-            </Typography>
-            {data?.userId === userData?.id && (
-              <Dropdown>
-                <div>
-                  <DropDownItemWithIcon icon={<PlayIcon />} text={'Learn'} />
-                  <DropDownItemWithIcon icon={<EditIcon />} text={'Edit'} />
-                  <DropDownItemWithIcon icon={<DeleteIcon />} text={'Delete'} />
-                </div>
-              </Dropdown>
-            )}
-          </div>
-          {data?.userId === userData?.id ? (
-            <Button className={classes.addCardButton}>Add New Card</Button>
-          ) : (
-            <Button>Learn Deck</Button>
-          )}
-        </div>
-        {cards?.items.length ? (
+        <DeckTitle
+          isMyDeck={isMyDeck}
+          cardsData={cardsData as GetCardsResponse}
+          openModal={addCardModal}
+          setOpenModal={setAddCardModal}
+          deckData={deckData as DecksResponseItems}
+          addNewCard={addNewCard}
+        />
+        {cardsData?.items.length ? (
           <>
-            <TextField type="search" placeholder="Card search" className={s.searchInput} />
-            <Table.Root>
-              <Table.Head>
-                <Table.Row>
-                  <Table.HeadCell>Question</Table.HeadCell>
-                  <Table.HeadCell>Answer</Table.HeadCell>
-                  <Table.HeadCell>Last Updated</Table.HeadCell>
-                  <Table.HeadCell>Grade</Table.HeadCell>
-                </Table.Row>
-              </Table.Head>
-              {cards?.items.map(card => {
-                return (
-                  <Table.Body key={card.id}>
-                    <Table.Row>
-                      <Table.Cell>{card.question}</Table.Cell>
-                      <Table.Cell>{card.answer}</Table.Cell>
-                      <Table.Cell>
-                        {new Date(card?.updated as string).toLocaleDateString()}
-                      </Table.Cell>
-                      <Table.Cell>{card.shots}</Table.Cell>
-                    </Table.Row>
-                  </Table.Body>
-                )
-              })}
-            </Table.Root>
+            <DeckTable
+              isMyDeck={isMyDeck}
+              cardsData={cardsData}
+              deleteCard={deleteCard}
+              // updateCard={updateCard}
+            />
           </>
         ) : (
           <div className={s.notification}>
-            <div className={s.text}>This deck is empty. Click add new card to fill this deck</div>
-            <Modal
-              open={open}
-              onOpenChange={() => setOpen(!open)}
-              trigger={<Button>Add New Card</Button>}
-              title="Add New Card"
-            >
-              <div className={s.modalContent}>
-                <TextField label="Question" />
-                <TextField label="Answer" />
-                <div className={s.modalButtons}>
-                  <Button variant="secondary" onClick={() => setOpen(false)}>
-                    Cancel
-                  </Button>
-                  <Button>Add new card</Button>
-                </div>
-              </div>
-            </Modal>
+            {isMyDeck ? (
+              <>
+                <Typography className={s.text}>
+                  This deck is empty. Click add new card to fill this deck
+                </Typography>
+
+                <CardModal
+                  open={addCardModal}
+                  onOpenChange={setAddCardModal}
+                  onSubmit={addNewCard}
+                  title="Add New Card"
+                  trigger={<Button>Add New Card</Button>}
+                  buttonText="Add New Card"
+                />
+              </>
+            ) : (
+              <Typography as="span" variant="h1" className={s.text}>
+                This deck is empty
+              </Typography>
+            )}
           </div>
         )}
       </div>
