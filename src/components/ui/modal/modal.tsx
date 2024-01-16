@@ -11,7 +11,7 @@ import { Typography } from '@/components/ui/typography'
 export type ModalProps = {
   open: boolean
   onOpenChange: (value: boolean) => void
-  trigger: ReactNode
+  trigger?: ReactNode
   title?: string
   children?: ReactNode
   className?: string

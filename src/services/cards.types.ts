@@ -71,6 +71,8 @@ export type GetCardsResponse = {
 
 export type GetCardsArgs = { id: string }
 
+export type DeleteCardsArgs = { id: string }
+
 export type CreateCardsArgs = {
   question: string
   answer: string
