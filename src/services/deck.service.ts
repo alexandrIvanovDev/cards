@@ -2,11 +2,9 @@ import { baseApi } from '@/app/providers/store/base-api.ts'
 import {
   CreateDeckArgs,
   DeckByIdArgs,
+  DecksResponseItems,
   GetDecksArgs,
   GetDecksResponse,
-  DecksResponseItems,
-  GetCardsResponse,
-  GetCardsArgs,
 } from '@/services/cards.types.ts'
 
 export const deckService = baseApi.injectEndpoints({
@@ -36,9 +34,6 @@ export const deckService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Decks'],
     }),
-    getCards: builder.query<GetCardsResponse, GetCardsArgs>({
-      query: ({ id }) => `v1/decks/${id}/cards`,
-    }),
   }),
 })
 
@@ -47,5 +42,4 @@ export const {
   useGetDeckByIdQuery,
   useCreateDeckMutation,
   useDeleteDeckMutation,
-  useGetCardsQuery,
 } = deckService

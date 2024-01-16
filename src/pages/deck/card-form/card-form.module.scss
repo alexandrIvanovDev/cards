@@ -1,0 +1,11 @@
+@import '@/app/styles/mixins';
+
+.modalContent {
+  @include flex(column, center, normal, 1rem);
+
+  .modalButtons {
+    @include flex(row, space-between, center);
+
+    padding: 16px 0;
+  }
+}

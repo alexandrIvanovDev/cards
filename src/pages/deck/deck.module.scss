@@ -13,20 +13,6 @@
     }
   }
 
-  .titleWrapper {
-    @include flex(row, space-between, center);
-
-    margin-top: 30px;
-
-    .title {
-      @include flex(row, center, center, 1rem);
-    }
-  }
-
-  .searchInput {
-    margin: 25px 0;
-  }
-
   .notification {
     @include flex(column, center, center, 1rem);
 
@@ -35,17 +21,5 @@
     .text {
       color: var(--dark-color-100);
     }
-  }
-}
-
-.hidden {
-  display: none;
-}
-
-.modalContent {
-  @include flex(column, center, normal, 1rem);
-
-  .modalButtons {
-    @include flex(row, space-between, center);
   }
 }
