@@ -1,0 +1,15 @@
+@import '@/app/styles/mixins';
+
+.titleWrapper {
+  @include flex(row, space-between, center);
+
+  margin-bottom: 36px;
+}
+
+.modalContent {
+  @include flex(column, center, normal, 1.5rem);
+
+  .modalButtons {
+    @include flex(row, space-between, center);
+  }
+}

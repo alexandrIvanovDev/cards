@@ -1,0 +1,11 @@
+@import '@/app/styles/mixins';
+
+.settingsWrapper {
+  @include flex(row, space-between, center);
+
+  margin-bottom: 36px;
+
+  .input {
+    width: 300px;
+  }
+}
