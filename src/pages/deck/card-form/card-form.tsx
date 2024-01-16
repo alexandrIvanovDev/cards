@@ -4,7 +4,7 @@ import s from './card-form.module.scss'
 
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
-import { CreateCardFormType, useCreateCard } from '@/pages/deck/use-create-card.tsx'
+import { CreateCardFormType, useCreateCard } from '@/pages/deck/card-form/use-create-card.tsx'
 
 type Props = {
   onSubmit: (data: CreateCardFormType) => void
