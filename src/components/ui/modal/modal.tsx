@@ -8,20 +8,23 @@ import { CloseIcon } from '@/assets/icons/CloseIcon.tsx'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 
-type Props = {
+export type ModalProps = {
   open: boolean
   onOpenChange: (value: boolean) => void
   trigger: ReactNode
   title?: string
   children?: ReactNode
+  className?: string
 }
 
 // TODO need to finish ref
-export const Modal: FC<Props> = forwardRef<ElementRef<typeof Dialog.Root>, Props>(
-  ({ open, onOpenChange, title, children, trigger }, ref) => {
+export const Modal: FC<ModalProps> = forwardRef<ElementRef<typeof Dialog.Root>, ModalProps>(
+  ({ open, onOpenChange, title, children, trigger, className }, ref) => {
     return (
       <Dialog.Root open={open} onOpenChange={onOpenChange}>
-        <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
+        <Dialog.Trigger asChild className={className}>
+          {trigger}
+        </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className={s.overlay} />
           <div ref={ref}>
