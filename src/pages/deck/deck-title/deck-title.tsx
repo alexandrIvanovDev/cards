@@ -11,13 +11,15 @@ import { EditIcon } from '@/assets/icons/Edit.tsx'
 import { PlayIcon } from '@/assets/icons/Play.tsx'
 import { Button } from '@/components/ui/button'
 import { Dropdown, DropDownItemWithIcon } from '@/components/ui/dropdown'
+import { Modal } from '@/components/ui/modal'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
+import { DeckForm } from '@/feature/decks-list/deck-form/deck-form.tsx'
 import { CreateCardFormType } from '@/pages/deck/card-form/use-create-card.tsx'
 import { CardModal } from '@/pages/deck/card-modal/cardModal.tsx'
 import { DeleteEntityModal } from '@/pages/deck/deck-table/deck-table.tsx'
-import { DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
-import { useDeleteDeckMutation } from '@/services/deck.service.ts'
+import { CreateDeckArgs, DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
+import { useDeleteDeckMutation, useUpdateDeckMutation } from '@/services/deck.service.ts'
 
 type Props = {
   isMyDeck: boolean
@@ -36,20 +38,40 @@ export const DeckTitle: FC<Props> = props => {
   }
 
   const [deleteDeckIsOpen, setDeleteDeckIsOpen] = useState(false)
-  // const [updateDeckIsOpen, setUpdateDeckIsOpen] = useState(false)
+  const [updateDeckIsOpen, setUpdateDeckIsOpen] = useState(false)
 
   const navigate = useNavigate()
 
   const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
+  const [updateDeck, { isLoading: updateDeckIsLoading }] = useUpdateDeckMutation()
 
   const removeDeck = async () => {
-    await deleteDeck({ id: deckData.id })
-    navigate(routePaths.packs)
+    try {
+      await deleteDeck({ id: deckData.id })
+
+      navigate(routePaths.packs)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  const editDeck = async (data: CreateDeckArgs) => {
+    try {
+      await updateDeck({ id: deckData.id, data })
+      setUpdateDeckIsOpen(false)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  const formData: CreateDeckArgs = {
+    name: deckData.name ?? '',
+    isPrivate: deckData.isPrivate ?? false,
   }
 
   return (
     <div className={s.titleWrapper}>
-      {isLoading && <ProgressBar />}
+      {(isLoading || updateDeckIsLoading) && <ProgressBar />}
       <div className={s.title}>
         <Typography as="h2" variant="large">
           {deckData?.name}
@@ -61,7 +83,7 @@ export const DeckTitle: FC<Props> = props => {
               <DropDownItemWithIcon
                 icon={<EditIcon />}
                 text={'Edit'}
-                // onSelect={() => setUpdateDeckIsOpen(true)}
+                onSelect={() => setUpdateDeckIsOpen(true)}
               />
               <DropDownItemWithIcon
                 icon={<DeleteIcon />}
@@ -86,7 +108,6 @@ export const DeckTitle: FC<Props> = props => {
         <Button disabled={cardsData?.items.length === 0}>Learn Deck</Button>
       )}
 
-      {/*Modal*/}
       <>
         <DeleteEntityModal
           title="Delete Card"
@@ -97,6 +118,15 @@ export const DeckTitle: FC<Props> = props => {
           callback={removeDeck}
           disabled={isLoading}
         />
+        <Modal title="Edit pack" open={updateDeckIsOpen} onOpenChange={setUpdateDeckIsOpen}>
+          <DeckForm
+            onSubmit={editDeck}
+            setIsOpen={setUpdateDeckIsOpen}
+            btnText={'Save Changes'}
+            formData={formData}
+            disabled={updateDeckIsLoading}
+          />
+        </Modal>
       </>
     </div>
   )
