@@ -6,16 +6,16 @@ import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
 import { DeckForm } from '@/feature/decks-list/deck-form/deck-form.tsx'
-import { CreateDeckArgs } from '@/services/cards.types.ts'
+import { DeckArgs } from '@/services/cards.types.ts'
 
 type Props = {
   isOpen: boolean
   setIsOpen: (value: boolean) => void
-  createDeck: (data: CreateDeckArgs) => void
+  createDeck: (data: DeckArgs) => void
 }
 
 export const DecksHeader: FC<Props> = ({ isOpen, setIsOpen, createDeck }) => {
-  const addNewCard = (data: CreateDeckArgs) => {
+  const addNewCard = (data: DeckArgs) => {
     createDeck({ ...data })
     setIsOpen(false)
   }

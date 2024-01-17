@@ -57,7 +57,7 @@ export type DeckByIdArgs = {
   id: string
 }
 
-export type CreateDeckArgs = {
+export type DeckArgs = {
   name: string
   cover?: string
   isPrivate?: boolean

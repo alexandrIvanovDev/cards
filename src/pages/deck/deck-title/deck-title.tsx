@@ -18,7 +18,7 @@ import { DeckForm } from '@/feature/decks-list/deck-form/deck-form.tsx'
 import { CreateCardFormType } from '@/pages/deck/card-form/use-create-card.tsx'
 import { CardModal } from '@/pages/deck/card-modal/cardModal.tsx'
 import { DeleteEntityModal } from '@/pages/deck/deck-table/deck-table.tsx'
-import { CreateDeckArgs, DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
+import { DeckArgs, DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
 import { useDeleteDeckMutation, useUpdateDeckMutation } from '@/services/deck.service.ts'
 
 type Props = {
@@ -55,7 +55,7 @@ export const DeckTitle: FC<Props> = props => {
     }
   }
 
-  const editDeck = async (data: CreateDeckArgs) => {
+  const editDeck = async (data: DeckArgs) => {
     try {
       await updateDeck({ id: deckData.id, data })
       setUpdateDeckIsOpen(false)
@@ -64,7 +64,7 @@ export const DeckTitle: FC<Props> = props => {
     }
   }
 
-  const formData: CreateDeckArgs = {
+  const formData: DeckArgs = {
     name: deckData.name ?? '',
     isPrivate: deckData.isPrivate ?? false,
   }
@@ -105,7 +105,7 @@ export const DeckTitle: FC<Props> = props => {
           buttonText="Add New Card"
         />
       ) : (
-        <Button disabled={cardsData?.items.length === 0}>Learn Deck</Button>
+        <Button disabled={deckData.cardsCount === 0}>Learn Deck</Button>
       )}
 
       <>
