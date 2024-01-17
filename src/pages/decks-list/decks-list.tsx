@@ -25,29 +25,19 @@ export const DecksList = () => {
 
   const [addNewPackIsOpen, setAddNewPackIsOpen] = useState(false)
 
-  const [newPackName, setNewPackName] = useState('')
-
   const onChange = (value: Array<number>) => {
     setSlideValue(value)
   }
 
   const [tabsValue, setTabsValue] = useState<string>('all')
 
-  const addNewPack = () => {
-    createDeck({ name: newPackName })
-    setAddNewPackIsOpen(false)
-    setNewPackName('')
-  }
-
   return (
     <div className={s.content}>
       {(isLoading || createDeckIsLoading || deleteDeckIsLoading) && <ProgressBar />}
       <DecksHeader
-        addNewPackIsOpen={addNewPackIsOpen}
-        setAddNewPackIsOpen={setAddNewPackIsOpen}
-        addNewPack={addNewPack}
-        newPackName={newPackName}
-        setNewPackName={setNewPackName}
+        isOpen={addNewPackIsOpen}
+        setIsOpen={setAddNewPackIsOpen}
+        createDeck={createDeck}
       />
       <DecksFilter
         tabsValue={tabsValue}
