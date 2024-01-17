@@ -22,9 +22,11 @@ export const Modal: FC<ModalProps> = forwardRef<ElementRef<typeof Dialog.Root>, 
   ({ open, onOpenChange, title, children, trigger, className }, ref) => {
     return (
       <Dialog.Root open={open} onOpenChange={onOpenChange}>
-        <Dialog.Trigger asChild className={className}>
-          {trigger}
-        </Dialog.Trigger>
+        {trigger && (
+          <Dialog.Trigger asChild className={className}>
+            {trigger}
+          </Dialog.Trigger>
+        )}
         <Dialog.Portal>
           <Dialog.Overlay className={s.overlay} />
           <div ref={ref}>
