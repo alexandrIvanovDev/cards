@@ -8,12 +8,13 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
-import { useSignInMutation } from '@/services/auth/auth.service.ts'
+import { useMeQuery, useSignInMutation } from '@/services/auth/auth.service.ts'
 import { LoginArgs } from '@/services/auth/auth.types.ts'
 
 export const SignInPage = () => {
   const [signIn, { isLoading }] = useSignInMutation()
   const navigate = useNavigate()
+  const { data } = useMeQuery()
 
   const handleLogin = async (data: LoginArgs) => {
     try {
@@ -23,6 +24,10 @@ export const SignInPage = () => {
     } catch (e) {
       console.error(e)
     }
+  }
+
+  if (data?.id) {
+    return navigate(routePaths.packs)
   }
 
   return (
