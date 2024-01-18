@@ -26,12 +26,12 @@ export const DecksHeader: FC<Props> = ({ isOpen, setIsOpen, createDeck }) => {
         Packs List
       </Typography>
       <Modal
-        trigger={<Button>Add new pack</Button>}
-        title="Add new pack"
+        trigger={<Button>Add New Deck</Button>}
+        title="Add New Deck"
         open={isOpen}
         onOpenChange={setIsOpen}
       >
-        <DeckForm onSubmit={addNewCard} setIsOpen={setIsOpen} btnText={'Add new pack'} />
+        <DeckForm onSubmit={addNewCard} setIsOpen={setIsOpen} btnText={'Add New Deck'} />
       </Modal>
     </div>
   )

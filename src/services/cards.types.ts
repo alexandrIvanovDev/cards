@@ -86,3 +86,8 @@ export type CreateCardsArgs = {
   questionVideo?: string
   answerVideo?: string
 }
+
+export type UpdateDeck = {
+  id: string
+  data: DeckArgs
+}

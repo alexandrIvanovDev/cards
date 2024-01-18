@@ -12,12 +12,14 @@ import {
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useGetDecksQuery,
+  useUpdateDeckMutation,
 } from '@/services/deck.service.ts'
 
 export const DecksList = () => {
   const { data, isLoading } = useGetDecksQuery()
   const { data: userData } = useMeQuery()
   const [deleteDeck, { isLoading: deleteDeckIsLoading }] = useDeleteDeckMutation()
+  const [updateDeck, { isLoading: updateDeckIsLoading }] = useUpdateDeckMutation()
 
   const [createDeck, { isLoading: createDeckIsLoading }] = useCreateDeckMutation()
 
@@ -33,7 +35,9 @@ export const DecksList = () => {
 
   return (
     <div className={s.content}>
-      {(isLoading || createDeckIsLoading || deleteDeckIsLoading) && <ProgressBar />}
+      {(isLoading || createDeckIsLoading || deleteDeckIsLoading || updateDeckIsLoading) && (
+        <ProgressBar />
+      )}
       <DecksHeader
         isOpen={addNewPackIsOpen}
         setIsOpen={setAddNewPackIsOpen}
@@ -49,6 +53,7 @@ export const DecksList = () => {
         data={data as GetDecksResponse}
         userId={userData?.id as string}
         deleteDeck={deleteDeck}
+        updateDeck={updateDeck}
       />
     </div>
   )
