@@ -73,6 +73,11 @@ export type GetCardsArgs = { id: string }
 
 export type DeleteCardsArgs = { id: string }
 
+export type UpdateCardType = {
+  id: string
+  data: CreateCardsArgs
+}
+
 export type CreateCardsArgs = {
   question: string
   answer: string

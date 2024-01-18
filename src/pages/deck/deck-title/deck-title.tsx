@@ -15,9 +15,9 @@ import { Modal } from '@/components/ui/modal'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
 import { DeckForm } from '@/feature/decks-list/deck-form/deck-form.tsx'
+import { DeleteEntityModal } from '@/feature/decks-list/delete-entity-modal/delete-entity-modal.tsx'
 import { CreateCardFormType } from '@/pages/deck/card-form/use-create-card.tsx'
 import { CardModal } from '@/pages/deck/card-modal/cardModal.tsx'
-import { DeleteEntityModal } from '@/pages/deck/deck-table/deck-table.tsx'
 import { DeckArgs, DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
 import { useDeleteDeckMutation, useUpdateDeckMutation } from '@/services/deck.service.ts'
 
@@ -110,7 +110,7 @@ export const DeckTitle: FC<Props> = props => {
 
       <>
         <DeleteEntityModal
-          title="Delete Card"
+          title="Delete Deck"
           open={deleteDeckIsOpen}
           onOpenChange={setDeleteDeckIsOpen}
           text={`deck ${deckData.name}? All cards will be deleted.`}
