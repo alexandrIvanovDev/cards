@@ -18,6 +18,7 @@ import {
   useCreateCardMutation,
   useDeleteCardMutation,
   useGetCardsQuery,
+  useUpdateCardMutation,
 } from '@/services/cards.service.ts'
 import { DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
 import { useGetDeckByIdQuery } from '@/services/deck.service.ts'
@@ -29,13 +30,9 @@ export const Deck = () => {
   const { data: userData } = useMeQuery()
   const [createCard, { isLoading: createCardIsLoading }] = useCreateCardMutation()
   const [deleteCard, { isLoading: deleteCardIsLoading }] = useDeleteCardMutation()
-  // const [updateCard, { isLoading: updateCardIsLoading }] = useUpdateCardMutation()
+  const [updateCard, { isLoading: updateCardIsLoading }] = useUpdateCardMutation()
 
   const [addCardModal, setAddCardModal] = useState(false)
-
-  // const [deleteCardModal, setDeleteCardModal] = useState(false)
-  //
-  // const [updateCardModal, setUpdateCardModal] = useState(false)
 
   const isMyDeck = deckData?.userId === userData?.id
 
@@ -53,7 +50,7 @@ export const Deck = () => {
 
   return (
     <div className={s.content}>
-      {(createCardIsLoading || deleteCardIsLoading) && <ProgressBar />}
+      {(createCardIsLoading || deleteCardIsLoading || updateCardIsLoading) && <ProgressBar />}
       <Button as={Link} to={'..'} variant="link" className={s.btnBack}>
         <ArrowBackIcon className={s.iconBack} /> <Typography>Back to previous page</Typography>
       </Button>
@@ -72,7 +69,7 @@ export const Deck = () => {
               isMyDeck={isMyDeck}
               cardsData={cardsData}
               deleteCard={deleteCard}
-              // updateCard={updateCard}
+              updateCard={updateCard}
             />
           </>
         ) : (

@@ -57,7 +57,7 @@ export type DeckByIdArgs = {
   id: string
 }
 
-export type CreateDeckArgs = {
+export type DeckArgs = {
   name: string
   cover?: string
   isPrivate?: boolean
@@ -73,6 +73,11 @@ export type GetCardsArgs = { id: string }
 
 export type DeleteCardsArgs = { id: string }
 
+export type UpdateCardType = {
+  id: string
+  data: CreateCardsArgs
+}
+
 export type CreateCardsArgs = {
   question: string
   answer: string
@@ -80,4 +85,9 @@ export type CreateCardsArgs = {
   answerImg?: string
   questionVideo?: string
   answerVideo?: string
+}
+
+export type UpdateDeck = {
+  id: string
+  data: DeckArgs
 }

@@ -27,9 +27,9 @@ export const deckService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Cards'],
     }),
-    updateCard: builder.mutation<CardsResponseItems, { deckId: string; data: CreateCardsArgs }>({
-      query: ({ deckId, data }) => ({
-        url: `v1/cards/${deckId}`,
+    updateCard: builder.mutation<CardsResponseItems, { id: string; data: CreateCardsArgs }>({
+      query: ({ id, data }) => ({
+        url: `v1/cards/${id}`,
         method: 'PATCH',
         body: data,
       }),

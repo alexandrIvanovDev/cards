@@ -1,6 +1,6 @@
 import { baseApi } from '@/app/providers/store/base-api.ts'
 import {
-  CreateDeckArgs,
+  DeckArgs,
   DeckByIdArgs,
   DecksResponseItems,
   GetDecksArgs,
@@ -20,7 +20,7 @@ export const deckService = baseApi.injectEndpoints({
       query: ({ id }) => `v1/decks/${id}`,
       providesTags: ['Decks'],
     }),
-    createDeck: builder.mutation<void, CreateDeckArgs>({
+    createDeck: builder.mutation<void, DeckArgs>({
       query: (arg: any) => ({
         url: 'v1/decks',
         method: 'POST',
@@ -28,7 +28,7 @@ export const deckService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Decks'],
     }),
-    updateDeck: builder.mutation<DecksResponseItems, { id: string; data: CreateDeckArgs }>({
+    updateDeck: builder.mutation<DecksResponseItems, { id: string; data: DeckArgs }>({
       query: ({ id, data }) => ({
         url: `v1/decks/${id}`,
         method: 'PATCH',

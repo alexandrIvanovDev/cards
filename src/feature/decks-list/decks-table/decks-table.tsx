@@ -2,17 +2,16 @@ import { FC } from 'react'
 
 import { Table } from '@/components/ui/table'
 import { DecksRow } from '@/feature/decks-list/decks-row/decks-row.tsx'
-import { DeckByIdArgs, GetDecksResponse } from '@/services/cards.types.ts'
+import { DeckByIdArgs, UpdateDeck, GetDecksResponse } from '@/services/cards.types.ts'
 
 type Props = {
   data: GetDecksResponse
   userId: string
   deleteDeck: (data: DeckByIdArgs) => void
+  updateDeck: (data: UpdateDeck) => void
 }
 
-export const DecksTable: FC<Props> = props => {
-  const { data, userId, deleteDeck } = props
-
+export const DecksTable: FC<Props> = ({ data, userId, deleteDeck, updateDeck }) => {
   return (
     <>
       <Table.Root>
@@ -26,20 +25,15 @@ export const DecksTable: FC<Props> = props => {
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {data?.items?.map(deck => {
-            const isMyDeck = userId === deck?.userId
-
-            return (
-              <DecksRow
-                key={deck.id}
-                deck={deck}
-                isMyDeck={isMyDeck}
-                // deleteDeckIsOpen={deleteDeckIsOpen}
-                // setDeleteDeckIsOpen={setDeleteDeckIsOpen}
-                deleteDeck={deleteDeck}
-              />
-            )
-          })}
+          {data?.items?.map(deck => (
+            <DecksRow
+              key={deck.id}
+              deck={deck}
+              userId={userId}
+              deleteDeck={deleteDeck}
+              updateDeck={updateDeck}
+            />
+          ))}
         </Table.Body>
       </Table.Root>
     </>
