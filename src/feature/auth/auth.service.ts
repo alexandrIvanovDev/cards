@@ -1,5 +1,5 @@
 import { baseApi } from '@/app/providers/store/base-api.ts'
-import { SignUpArgs, LoginArgs, User } from '@/feature/auth/auth.types.ts'
+import { SignUpArgs, LoginArgs, User, UpdateUserArgs } from '@/feature/auth/auth.types.ts'
 
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -17,6 +17,14 @@ export const authService = baseApi.injectEndpoints({
         return { data: res.data as User }
       },
       providesTags: ['Me'],
+    }),
+    updateUser: builder.mutation<User, UpdateUserArgs>({
+      query: args => ({
+        url: `v1/auth/me`,
+        method: 'PATCH',
+        body: args,
+      }),
+      invalidatesTags: ['Me'],
     }),
     signIn: builder.mutation<void, LoginArgs>({
       invalidatesTags: ['Me'],
@@ -43,4 +51,10 @@ export const authService = baseApi.injectEndpoints({
   }),
 })
 
-export const { useSignInMutation, useMeQuery, useSignUpMutation, useSignOutMutation } = authService
+export const {
+  useSignInMutation,
+  useMeQuery,
+  useSignUpMutation,
+  useSignOutMutation,
+  useUpdateUserMutation,
+} = authService

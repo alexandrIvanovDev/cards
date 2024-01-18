@@ -11,9 +11,10 @@ import { User } from '@/feature/auth/auth.types.ts'
 type ProfileInfoProps = {
   user: User
   changeName: () => void
+  logout: () => void
 }
 
-export const ProfileInfo: FC<ProfileInfoProps> = ({ changeName, user }) => {
+export const ProfileInfo: FC<ProfileInfoProps> = ({ changeName, user, logout }) => {
   return (
     <div className={s.information}>
       <Typography variant="h1" as="h3" className={s.name}>
@@ -22,8 +23,9 @@ export const ProfileInfo: FC<ProfileInfoProps> = ({ changeName, user }) => {
       <Typography variant="body2" className={s.email}>
         {user.email}
       </Typography>
-      <Button variant="secondary">
-        <LogoutIcon className={s.logoutIcon} /> Logout
+      <Button variant="secondary" onClick={logout}>
+        <LogoutIcon className={s.logoutIcon} />
+        <Typography variant={'subtitle2'}>Logout</Typography>
       </Button>
     </div>
   )
