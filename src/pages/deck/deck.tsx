@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import s from './deck.module.scss'
 
-import { ArrowBackIcon } from '@/assets/icons/ArrowBack.tsx'
+import { BackButton } from '@/components/ui/back-button/back-button.tsx'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { ProgressBar } from '@/components/ui/progress-bar'
@@ -51,9 +51,9 @@ export const Deck = () => {
   return (
     <div className={s.content}>
       {(createCardIsLoading || deleteCardIsLoading || updateCardIsLoading) && <ProgressBar />}
-      <Button as={Link} to={'..'} variant="link" className={s.btnBack}>
-        <ArrowBackIcon className={s.iconBack} /> <Typography>Back to previous page</Typography>
-      </Button>
+
+      <BackButton />
+
       <div>
         <DeckTitle
           isMyDeck={isMyDeck}
