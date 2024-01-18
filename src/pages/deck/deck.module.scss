@@ -3,16 +3,6 @@
 .content {
   @include container(1240px);
 
-  .btnBack {
-    padding: 0;
-    color: var(--light-color-100);
-    fill: var(--light-color-100);
-
-    &:hover {
-      fill: var(--primary-color-500);
-    }
-  }
-
   .notification {
     @include flex(column, center, center, 1rem);
 

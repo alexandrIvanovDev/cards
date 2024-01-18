@@ -19,3 +19,8 @@ export type SignUpArgs = {
   email: string
   password: string
 }
+
+export type UpdateUserArgs = {
+  name: string
+  avatar?: string
+}
