@@ -33,7 +33,7 @@ export const DecksList = () => {
 
   const [tabsValue, setTabsValue] = useState<string>('all')
 
-  console.log(1)
+  console.log(21)
 
   return (
     <div className={s.content}>
