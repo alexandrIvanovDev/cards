@@ -3,10 +3,10 @@ import { useState } from 'react'
 import s from './decks-list.module.scss'
 
 import { ProgressBar } from '@/components/ui/progress-bar/progress-bar.tsx'
+import { useMeQuery } from '@/feature/auth/auth.service.ts'
 import { DecksFilter } from '@/feature/decks-list/decks-filter/decks-filter.tsx'
 import { DecksHeader } from '@/feature/decks-list/decks-header/decks-header.tsx'
 import { DecksTable } from '@/feature/decks-list/decks-table/decks-table.tsx'
-import { useMeQuery } from '@/services/auth/auth.service.ts'
 import { GetDecksResponse } from '@/services/cards.types.ts'
 import {
   useCreateDeckMutation,
@@ -33,7 +33,7 @@ export const DecksList = () => {
 
   const [tabsValue, setTabsValue] = useState<string>('all')
 
-  console.log(21)
+  // console.log(21)
 
   return (
     <div className={s.content}>

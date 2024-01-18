@@ -12,6 +12,8 @@ import { ProfileIcon } from '@/assets/icons/Profile.tsx'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Dropdown, DropDownItem, DropDownItemWithIcon } from '@/components/ui/dropdown'
+import { ProgressBar } from '@/components/ui/progress-bar'
+import { useSignOutMutation } from '@/feature/auth/auth.service.ts'
 
 type Props = {
   data: ProfileInfoProps | null
@@ -20,8 +22,20 @@ type Props = {
 export const Header: FC<Props> = ({ data }) => {
   const navigate = useNavigate()
 
+  const [signOut, { isLoading }] = useSignOutMutation()
+
+  const logout = async () => {
+    try {
+      await signOut()
+      navigate(routePaths.signIn)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   return (
     <header className={s.wrapper}>
+      {isLoading && <ProgressBar />}
       <div className={s.container}>
         <Button as={Link} to={routePaths.packs} variant="link">
           <Logo />
@@ -45,7 +59,7 @@ export const Header: FC<Props> = ({ data }) => {
                   text={'My profile'}
                   onSelect={() => navigate(routePaths.profile)}
                 />
-                <DropDownItemWithIcon icon={<LogoutIcon />} text={'Sign out'} />
+                <DropDownItemWithIcon icon={<LogoutIcon />} text={'Sign out'} onSelect={logout} />
               </div>
             </Dropdown>
           </div>

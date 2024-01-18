@@ -2,7 +2,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 import { routePaths } from '@/app/providers/router'
 import { Header } from '@/components/ui/header'
-import { useMeQuery } from '@/services/auth/auth.service.ts'
+import { useMeQuery } from '@/feature/auth/auth.service.ts'
 
 export const Layout = () => {
   const { data: myData } = useMeQuery()
