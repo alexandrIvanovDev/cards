@@ -25,7 +25,6 @@ export const ForgotPasswordForm: FC<Props> = ({ onSubmit }) => {
         control={control}
         error={errors.email?.message}
         label="Email"
-        className={s.email}
       />
       <Typography className={s.text}>
         Enter your email address and we will send you further instructions

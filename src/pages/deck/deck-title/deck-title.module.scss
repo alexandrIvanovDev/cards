@@ -1,0 +1,15 @@
+@import '@/app/styles/mixins';
+
+.titleWrapper {
+  @include flex(row, space-between, center);
+
+  margin-top: 30px;
+
+  .title {
+    @include flex(row, center, center, 1rem);
+  }
+}
+
+.hidden {
+  display: none;
+}

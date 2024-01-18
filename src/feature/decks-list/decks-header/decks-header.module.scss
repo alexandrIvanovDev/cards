@@ -1,0 +1,7 @@
+@import '@/app/styles/mixins';
+
+.titleWrapper {
+  @include flex(row, space-between, center);
+
+  margin-bottom: 36px;
+}

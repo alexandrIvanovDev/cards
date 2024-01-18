@@ -1,4 +1,4 @@
-@import '@/styles/mixins';
+@import '@/app/styles/mixins';
 
 .root {
   user-select: none;
@@ -13,7 +13,7 @@
 
   vertical-align: middle;
 
-  background: transparent;
+  background: var(--primary-color-500);
   border-radius: 100%;
 
   &.large {
@@ -32,7 +32,7 @@
 
     width: 100%;
     height: 100%;
-    border: 1px solid var(--light-color-100);
+    border: 1px solid var(--primary-color-500);
     border-radius: 100%;
   }
 }

@@ -1,10 +1,9 @@
-@import '@/styles/mixins';
+@import '@/app/styles/mixins';
 
 .wrapper {
   @include flex(column, flex-start, center, 0.5rem);
+  @include container(420px);
 
-  width: 420px;
-  margin: 0 auto;
   padding: 1.5rem 2rem;
 
   .notification {
@@ -13,6 +12,6 @@
   }
 
   .signUp {
-    text-decoration: underline;
+    @include link-hover;
   }
 }

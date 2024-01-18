@@ -1,4 +1,4 @@
-@import '@/styles/mixins';
+@import '@/app/styles/mixins';
 
 .form {
   @include flex(column, center, normal, 1rem);
@@ -10,13 +10,10 @@
   }
 
   .forgotPassword {
+    @include link-hover;
+
     align-self: flex-end;
     margin-bottom: 30px;
     color: var(--light-color-100);
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 }

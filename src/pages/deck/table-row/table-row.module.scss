@@ -1,0 +1,9 @@
+@import '@/app/styles/mixins';
+
+.iconWrapper {
+  @include flex(row, center, center, 0.5rem);
+
+  .icon {
+    @include icon;
+  }
+}

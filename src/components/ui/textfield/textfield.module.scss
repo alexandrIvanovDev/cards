@@ -1,4 +1,4 @@
-@import '@/styles/mixins';
+@import '@/app/styles/mixins';
 
 .wrapper {
   @include flex(column, center, flex-start);
@@ -78,6 +78,15 @@
       border-color: var(--light-color-100);
     }
 
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+
+      -webkit-text-fill-color: var(--light-color-100) !important;
+    }
+
     &:active:not(:disabled, .error) {
       color: var(--light-color-100);
       border-color: var(--light-color-100);
@@ -95,6 +104,21 @@
 
     &.password {
       padding-right: 40px;
+    }
+
+    &.numberType {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+
+      color: var(--light-color-100);
+      text-align: center;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        margin: 0;
+        appearance: none;
+      }
     }
 
     &.active {

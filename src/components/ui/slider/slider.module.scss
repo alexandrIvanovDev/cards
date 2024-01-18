@@ -1,20 +1,18 @@
-@import '@/styles/mixins';
+@import '@/app/styles/mixins';
 
 .wrapper {
   @include flex(row, flex-start, center, 1rem);
 
+  position: relative;
+
+  .label {
+    position: absolute;
+    top: -25px;
+    left: 0;
+  }
+
   .count {
-    @include flex(row, center, center);
-
-    user-select: none;
-
     width: 36px;
-    height: 36px;
-
-    color: var(--light-color-100);
-
-    border: 1px solid var(--dark-color-300);
-    border-radius: var(--border-radius);
   }
 
   .root {
