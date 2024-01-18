@@ -1,13 +1,15 @@
-.btnBack {
-  padding: 0;
-  color: var(--light-color-100);
-  fill: var(--light-color-100);
+.wrapper {
+  .btnBack {
+    padding: 0;
+    color: var(--light-color-100);
+    fill: var(--light-color-100);
 
-  &:hover {
-    fill: var(--primary-color-500);
-  }
+    &:hover {
+      fill: var(--primary-color-500);
+    }
 
-  &:active {
-    fill: var(--primary-color-700);
+    &:active {
+      fill: var(--primary-color-700);
+    }
   }
 }
