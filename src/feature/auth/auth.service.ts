@@ -1,5 +1,11 @@
 import { baseApi } from '@/app/providers/store/base-api.ts'
-import { SignUpArgs, LoginArgs, User, UpdateUserArgs } from '@/feature/auth/auth.types.ts'
+import {
+  SignUpArgs,
+  LoginArgs,
+  User,
+  UpdateUserArgs,
+  RecoverPasswordArgs,
+} from '@/feature/auth/auth.types.ts'
 
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -16,6 +22,7 @@ export const authService = baseApi.injectEndpoints({
 
         return { data: res.data as User }
       },
+      extraOptions: { maxRetries: 1 },
       providesTags: ['Me'],
     }),
     updateUser: builder.mutation<User, UpdateUserArgs>({
@@ -48,6 +55,14 @@ export const authService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Me'],
     }),
+    // TODO
+    recoverPassword: builder.mutation<void, RecoverPasswordArgs>({
+      query: args => ({
+        url: `v1/auth/recover-password`,
+        method: 'POST',
+        body: args,
+      }),
+    }),
   }),
 })
 
@@ -57,4 +72,5 @@ export const {
   useSignUpMutation,
   useSignOutMutation,
   useUpdateUserMutation,
+  useRecoverPasswordMutation,
 } = authService
