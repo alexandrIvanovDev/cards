@@ -38,6 +38,10 @@ export const publicRoutes: RouteObject[] = [
 
 export const privateRoutes: RouteObject[] = [
   {
+    path: routePaths.main,
+    element: <Navigate to={routePaths.packs} />,
+  },
+  {
     path: routePaths.packs,
     element: <DecksList />,
   },
@@ -58,7 +62,6 @@ const router = createBrowserRouter([
         <Layout />
       </ErrorBoundary>
     ),
-    path: routePaths.main,
     children: [
       {
         element: <PrivateRoutes />,
