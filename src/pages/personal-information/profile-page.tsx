@@ -6,10 +6,10 @@ import { EditProfileForm } from '@/components/auth/edit-profile'
 import { AvatarProps } from '@/components/ui/avatar'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useMeQuery } from '@/feature/auth/auth.service.ts'
+import { User } from '@/feature/auth/auth.types.ts'
 import { AvatarUploader } from '@/pages/personal-information/avatar-uploader.tsx'
 import { ProfileInfo } from '@/pages/personal-information/profile-info.tsx'
-import { useMeQuery } from '@/services/auth/auth.service.ts'
-import { User } from '@/services/auth/auth.types.ts'
 
 export type ProfileInfoDataType = {
   name: string

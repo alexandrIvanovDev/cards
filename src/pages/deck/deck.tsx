@@ -9,11 +9,11 @@ import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
+import { useMeQuery } from '@/feature/auth/auth.service.ts'
 import { CreateCardFormType } from '@/pages/deck/card-form/use-create-card.tsx'
 import { CardModal } from '@/pages/deck/card-modal/cardModal.tsx'
 import { DeckTable } from '@/pages/deck/deck-table/deck-table.tsx'
 import { DeckTitle } from '@/pages/deck/deck-title/deck-title.tsx'
-import { useMeQuery } from '@/services/auth/auth.service.ts'
 import {
   useCreateCardMutation,
   useDeleteCardMutation,

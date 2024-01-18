@@ -7,8 +7,8 @@ import { SignUpForm } from '@/components/auth/sign-up'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
-import { useSignUpMutation } from '@/services/auth/auth.service.ts'
-import { SignUpArgs } from '@/services/auth/auth.types.ts'
+import { useSignUpMutation } from '@/feature/auth/auth.service.ts'
+import { SignUpArgs } from '@/feature/auth/auth.types.ts'
 
 export const SignUpPage = () => {
   const [signUp] = useSignUpMutation()

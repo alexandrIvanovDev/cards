@@ -6,7 +6,7 @@ import { EditIcon } from '@/assets/icons/Edit.tsx'
 import { LogoutIcon } from '@/assets/icons/Logout.tsx'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
-import { User } from '@/services/auth/auth.types.ts'
+import { User } from '@/feature/auth/auth.types.ts'
 
 type ProfileInfoProps = {
   user: User
