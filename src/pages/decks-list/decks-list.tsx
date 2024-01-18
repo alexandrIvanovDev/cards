@@ -33,8 +33,6 @@ export const DecksList = () => {
 
   const [tabsValue, setTabsValue] = useState<string>('all')
 
-  // console.log(21)
-
   return (
     <div className={s.content}>
       {(isLoading || createDeckIsLoading || deleteDeckIsLoading || updateDeckIsLoading) && (

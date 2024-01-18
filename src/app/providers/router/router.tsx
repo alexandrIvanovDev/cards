@@ -20,11 +20,11 @@ import { SignInPage } from '@/pages/sign-in/sign-in-page.tsx'
 import { SignUpPage } from '@/pages/sign-up/sign-up-page.tsx'
 
 const PrivateRoutes = () => {
-  const { isLoading, isError } = useMeQuery()
+  const { data, isLoading } = useMeQuery()
 
   if (isLoading) return null
 
-  const isAuth = !isError
+  const isAuth = data !== null
 
   return isAuth ? <Outlet /> : <Navigate to={routePaths.signIn} />
 }
