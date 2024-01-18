@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 import s from './sign-in-page.module.scss'
 
@@ -27,7 +27,7 @@ export const SignInPage = () => {
   }
 
   if (data?.id) {
-    return navigate(routePaths.packs)
+    return <Navigate to={routePaths.packs} />
   }
 
   return (
