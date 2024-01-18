@@ -15,8 +15,10 @@ type Props = {
 
 export const BackButton: FC<Props> = ({ className }) => {
   return (
-    <Button as={Link} to={'..'} variant="link" className={clsx(s.btnBack, className)}>
-      <ArrowBackIcon className={s.iconBack} /> <Typography>Back to previous page</Typography>
-    </Button>
+    <div className={clsx(s.wrapper, className)}>
+      <Button as={Link} to={'..'} variant="link" className={s.btnBack}>
+        <ArrowBackIcon className={s.iconBack} /> <Typography>Back to previous page</Typography>
+      </Button>
+    </div>
   )
 }
