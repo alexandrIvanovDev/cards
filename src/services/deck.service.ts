@@ -17,7 +17,9 @@ export const deckService = baseApi.injectEndpoints({
       providesTags: ['Decks'],
     }),
     getDeckById: builder.query<DecksResponseItems, DeckByIdArgs>({
-      query: ({ id }) => `v1/decks/${id}`,
+      query: ({ id }) => ({
+        url: `v1/decks/${id}`,
+      }),
       providesTags: ['Decks'],
     }),
     createDeck: builder.mutation<void, DeckArgs>({
