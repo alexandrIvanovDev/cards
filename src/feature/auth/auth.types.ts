@@ -24,3 +24,7 @@ export type UpdateUserArgs = {
   name: string
   avatar?: string
 }
+
+export type RecoverPasswordArgs = {
+  email: string
+}

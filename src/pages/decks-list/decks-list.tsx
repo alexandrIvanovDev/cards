@@ -1,7 +1,10 @@
 import { useState } from 'react'
 
+import { useSelector } from 'react-redux'
+
 import s from './decks-list.module.scss'
 
+import { RootState } from '@/app/providers/store/store.ts'
 import { ProgressBar } from '@/components/ui/progress-bar/progress-bar.tsx'
 import { useMeQuery } from '@/feature/auth/auth.service.ts'
 import { DecksFilter } from '@/feature/decks-list/decks-filter/decks-filter.tsx'
@@ -18,12 +21,13 @@ import {
 export const DecksList = () => {
   const { data, isLoading } = useGetDecksQuery()
   const { data: userData } = useMeQuery()
+  const { tabValue, cardsCount } = useSelector((state: RootState) => state.decks.filter)
+
   const [deleteDeck, { isLoading: deleteDeckIsLoading }] = useDeleteDeckMutation()
   const [updateDeck, { isLoading: updateDeckIsLoading }] = useUpdateDeckMutation()
-
   const [createDeck, { isLoading: createDeckIsLoading }] = useCreateDeckMutation()
 
-  const [sliderValue, setSlideValue] = useState([2, 10])
+  const [sliderValue, setSlideValue] = useState(cardsCount)
 
   const [addNewPackIsOpen, setAddNewPackIsOpen] = useState(false)
 
@@ -31,7 +35,9 @@ export const DecksList = () => {
     setSlideValue(value)
   }
 
-  const [tabsValue, setTabsValue] = useState<string>('all')
+  const [tabsValue, setTabsValue] = useState<string>(tabValue)
+
+  // const [search, setSearch] = useState(searchTerm)
 
   return (
     <div className={s.content}>
@@ -48,6 +54,7 @@ export const DecksList = () => {
         setTabsValue={setTabsValue}
         sliderValue={sliderValue}
         onChangeSliderValue={onChange}
+        maxCardsCount={data?.maxCardsCount as number}
       />
       <DecksTable
         data={data as GetDecksResponse}
