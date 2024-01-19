@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import s from './deck.module.scss'
 
-import { BackButton } from '@/components/ui/back-button/back-button.tsx'
+import { RootState } from '@/app/providers/store/store.ts'
+import { useDebounce } from '@/common/hooks/useDebounce.ts'
+import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { ProgressBar } from '@/components/ui/progress-bar'
@@ -14,6 +17,7 @@ import { CreateCardFormType } from '@/pages/deck/card-form/use-create-card.tsx'
 import { CardModal } from '@/pages/deck/card-modal/cardModal.tsx'
 import { DeckTable } from '@/pages/deck/deck-table/deck-table.tsx'
 import { DeckTitle } from '@/pages/deck/deck-title/deck-title.tsx'
+import { SearchCard } from '@/pages/deck/search-card/search-card.tsx'
 import {
   useCreateCardMutation,
   useDeleteCardMutation,
@@ -21,18 +25,33 @@ import {
   useUpdateCardMutation,
 } from '@/services/cards.service.ts'
 import { DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
+import { setCardsSearchTerm } from '@/services/cardsSlice.ts'
 import { useGetDeckByIdQuery } from '@/services/deck.service.ts'
 
 export const Deck = () => {
   const { id } = useParams()
+
+  const search = useSelector((state: RootState) => state.cards.searchTerm)
+
   const { data: deckData, isLoading } = useGetDeckByIdQuery({ id: id as string })
-  const { data: cardsData } = useGetCardsQuery({ id: id as string })
+  const { data: cardsData } = useGetCardsQuery({ id: id as string, answer: search })
   const { data: userData } = useMeQuery()
+
   const [createCard, { isLoading: createCardIsLoading }] = useCreateCardMutation()
   const [deleteCard, { isLoading: deleteCardIsLoading }] = useDeleteCardMutation()
   const [updateCard, { isLoading: updateCardIsLoading }] = useUpdateCardMutation()
 
+  const [searchValue, setSearchValue] = useState(search)
+
   const [addCardModal, setAddCardModal] = useState(false)
+
+  const debouncedValue = useDebounce(searchValue, 1000)
+
+  const dispatch = useDispatch()
+
+  const handleSearch = () => {
+    dispatch(setCardsSearchTerm(searchValue))
+  }
 
   const isMyDeck = deckData?.userId === userData?.id
 
@@ -43,6 +62,12 @@ export const Deck = () => {
     })
     setAddCardModal(false)
   }
+
+  useEffect(() => {
+    if (debouncedValue || debouncedValue === '') {
+      handleSearch()
+    }
+  }, [debouncedValue])
 
   if (isLoading) {
     return <Loader />
@@ -63,6 +88,8 @@ export const Deck = () => {
           deckData={deckData as DecksResponseItems}
           addNewCard={addNewCard}
         />
+        <SearchCard value={searchValue} setValue={setSearchValue} />
+
         {cardsData?.items.length ? (
           <>
             <DeckTable

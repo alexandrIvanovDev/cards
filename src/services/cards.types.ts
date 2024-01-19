@@ -69,7 +69,10 @@ export type GetCardsResponse = {
   maxCardsCount: number
 }
 
-export type GetCardsArgs = { id: string }
+export type GetCardsArgs = {
+  id: string
+  answer?: string
+}
 
 export type DeleteCardsArgs = { id: string }
 

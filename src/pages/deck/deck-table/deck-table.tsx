@@ -1,9 +1,6 @@
 import { FC } from 'react'
 
-import s from './deck-table.module.scss'
-
 import { Table } from '@/components/ui/table'
-import { TextField } from '@/components/ui/textfield'
 import { TableRow } from '@/pages/deck/table-row/table-row.tsx'
 import { DeleteCardsArgs, GetCardsResponse, UpdateCardType } from '@/services/cards.types.ts'
 
@@ -19,7 +16,6 @@ export const DeckTable: FC<Props> = props => {
 
   return (
     <>
-      <TextField type="search" placeholder="Card search" className={s.searchInput} />
       <Table.Root>
         <Table.Head>
           <Table.Row>

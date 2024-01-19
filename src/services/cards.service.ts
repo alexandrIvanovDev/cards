@@ -9,7 +9,10 @@ import {
 export const deckService = baseApi.injectEndpoints({
   endpoints: builder => ({
     getCards: builder.query<GetCardsResponse, GetCardsArgs>({
-      query: ({ id }) => `v1/decks/${id}/cards`,
+      query: ({ id, answer }) => ({
+        url: `v1/decks/${id}/cards`,
+        params: { answer } ?? {},
+      }),
       providesTags: ['Cards'],
     }),
     createCard: builder.mutation<void, { deckId: string; data: CreateCardsArgs }>({

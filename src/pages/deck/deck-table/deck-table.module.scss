@@ -1,9 +1,5 @@
 @import '@/app/styles/mixins';
 
-.searchInput {
-  margin: 25px 0;
-}
-
 .deleteCardModal {
   @include flex(column, center, normal, 1.5rem);
 
