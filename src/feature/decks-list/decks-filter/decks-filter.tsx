@@ -13,17 +13,20 @@ type Props = {
   setTabsValue: (value: string) => void
   sliderValue: Array<number>
   onChangeSliderValue: (value: Array<number>) => void
+  maxCardsCount: number
 }
 
 export const DecksFilter: FC<Props> = props => {
-  const { tabsValue, onChangeSliderValue, sliderValue, setTabsValue } = props
+  const { tabsValue, onChangeSliderValue, sliderValue, setTabsValue, maxCardsCount } = props
+
+  const clearFilter = () => {}
 
   return (
     <div className={s.settingsWrapper}>
       <TextField type="search" placeholder="Input search" className={s.input} />
       <Tabs
         tabs={[
-          { value: 'my', text: 'My Cards', disabled: true },
+          { value: 'my', text: 'My Cards' },
           { value: 'all', text: 'All Cards' },
         ]}
         value={tabsValue}
@@ -32,13 +35,13 @@ export const DecksFilter: FC<Props> = props => {
       />
       <Slider
         min={0}
-        max={20}
+        max={maxCardsCount}
         value={sliderValue}
         onValueChange={onChangeSliderValue}
         label="Number of cards"
       />
-      <Button variant="secondary">
-        <DeleteIcon style={{ transform: 'scale(0.75)', fill: 'white' }} /> Clear filter
+      <Button variant="secondary" onClick={clearFilter}>
+        <DeleteIcon className={s.deleteIcon} /> Clear filter
       </Button>
     </div>
   )

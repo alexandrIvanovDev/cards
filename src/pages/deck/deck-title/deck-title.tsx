@@ -74,7 +74,7 @@ export const DeckTitle: FC<Props> = props => {
       {(isLoading || updateDeckIsLoading) && <ProgressBar />}
       <div className={s.title}>
         <Typography as="h2" variant="large">
-          {deckData?.name}
+          {deckData?.name ?? ''}
         </Typography>
         {isMyDeck && (
           <Dropdown>

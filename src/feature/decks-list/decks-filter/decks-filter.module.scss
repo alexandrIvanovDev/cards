@@ -8,4 +8,9 @@
   .input {
     width: 300px;
   }
+
+  .deleteIcon {
+    transform: scale(0.75);
+    fill: var(--light-color-100);
+  }
 }
