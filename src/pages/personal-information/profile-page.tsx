@@ -6,7 +6,6 @@ import s from './profile-page.module.scss'
 
 import { routePaths } from '@/app/providers/router'
 import { EditProfileForm } from '@/components/auth/edit-profile'
-import { AvatarProps } from '@/components/ui/avatar'
 import { BackButton } from '@/components/ui/back-button'
 import { Card } from '@/components/ui/card'
 import { ProgressBar } from '@/components/ui/progress-bar'
@@ -19,21 +18,6 @@ import {
 import { UpdateUserArgs, User } from '@/feature/auth/auth.types.ts'
 import { AvatarUploader } from '@/pages/personal-information/avatar-uploader.tsx'
 import { ProfileInfo } from '@/pages/personal-information/profile-info.tsx'
-
-export type ProfileInfoDataType = {
-  name: string
-  email: string
-  avatar?: string
-}
-
-// type Props = {
-//   data: ProfileInfoDataType
-// }
-
-const userData: Pick<AvatarProps, 'userName' | 'img'> = {
-  userName: 'Alex',
-  img: '',
-}
 
 export const ProfilePage = () => {
   const [editMode, setEditMode] = useState(false)
@@ -69,8 +53,8 @@ export const ProfilePage = () => {
           Personal Information
         </Typography>
         <AvatarUploader
-          img={userData.img}
-          userName={userData.userName}
+          img={data?.avatar as string}
+          userName={data?.name as string}
           size="large"
           className={s.avatar}
           editMode={editMode}
