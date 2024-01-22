@@ -10,6 +10,7 @@ import { useDebounce } from '@/common/hooks/useDebounce.ts'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
+import { Pagination } from '@/components/ui/pagination'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/feature/auth/auth.service.ts'
@@ -25,16 +26,22 @@ import {
   useUpdateCardMutation,
 } from '@/services/cards.service.ts'
 import { DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
-import { setCardsSearchTerm } from '@/services/cardsSlice.ts'
+import { setCardsSearchTerm, setCurrentPage, setPageSize } from '@/services/cardsSlice.ts'
 import { useGetDeckByIdQuery } from '@/services/deck.service.ts'
 
 export const Deck = () => {
   const { id } = useParams()
 
   const search = useSelector((state: RootState) => state.cards.searchTerm)
+  const { currentPage, pageSize } = useSelector((state: RootState) => state.cards.pagination)
 
   const { data: deckData, isLoading } = useGetDeckByIdQuery({ id: id as string })
-  const { data: cardsData } = useGetCardsQuery({ id: id as string, answer: search })
+  const { data: cardsData } = useGetCardsQuery({
+    id: id as string,
+    answer: search,
+    currentPage,
+    itemsPerPage: pageSize,
+  })
   const { data: userData } = useMeQuery()
 
   const [createCard, { isLoading: createCardIsLoading }] = useCreateCardMutation()
@@ -61,6 +68,14 @@ export const Deck = () => {
       data: createCardData,
     })
     setAddCardModal(false)
+  }
+
+  const changePage = (page: number) => {
+    dispatch(setCurrentPage(page))
+  }
+
+  const changePageSize = (pageSize: number) => {
+    dispatch(setPageSize(pageSize))
   }
 
   useEffect(() => {
@@ -124,6 +139,13 @@ export const Deck = () => {
           </div>
         )}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        itemsPerPage={pageSize}
+        totalPages={cardsData?.pagination.totalPages ?? 1}
+        changePage={changePage}
+        changePageSize={changePageSize}
+      />
     </div>
   )
 }
