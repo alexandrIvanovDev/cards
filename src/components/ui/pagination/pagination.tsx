@@ -62,7 +62,9 @@ export const Pagination: FC<Props> = props => {
               </Typography>
             </div>
           ) : (
-            <div className={s.dots}>{page}</div>
+            <div className={s.dots} key={i}>
+              {page}
+            </div>
           )
         })}
 

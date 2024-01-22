@@ -11,9 +11,7 @@ type Props = {
   updateCard: ({ id, data }: UpdateCardType) => void
 }
 
-export const DeckTable: FC<Props> = props => {
-  const { isMyDeck, cardsData, deleteCard, updateCard } = props
-
+export const DeckTable: FC<Props> = ({ isMyDeck, cardsData, deleteCard, updateCard }) => {
   return (
     <>
       <Table.Root>
@@ -21,23 +19,21 @@ export const DeckTable: FC<Props> = props => {
           <Table.Row>
             <Table.HeadCell>Question</Table.HeadCell>
             <Table.HeadCell>Answer</Table.HeadCell>
-            <Table.HeadCell>Last Updated</Table.HeadCell>
-            <Table.HeadCell>Grade</Table.HeadCell>
+            <Table.HeadCell style={{ width: 200 }}>Last Updated</Table.HeadCell>
+            <Table.HeadCell style={{ width: 180 }}>Grade</Table.HeadCell>
             {isMyDeck && <Table.HeadCell style={{ width: 100 }}></Table.HeadCell>}
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {cardsData?.items.map(card => {
-            return (
-              <TableRow
-                key={card.id}
-                isMyDeck={isMyDeck}
-                card={card}
-                deleteCard={deleteCard}
-                updateCard={updateCard}
-              />
-            )
-          })}
+          {cardsData?.items.map(card => (
+            <TableRow
+              key={card.id}
+              isMyDeck={isMyDeck}
+              card={card}
+              deleteCard={deleteCard}
+              updateCard={updateCard}
+            />
+          ))}
         </Table.Body>
       </Table.Root>
     </>
