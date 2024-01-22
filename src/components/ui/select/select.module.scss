@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .root {
   display: flex;
   flex-direction: column;
@@ -91,4 +93,17 @@
       border-radius: 0 0 2px 2px;
     }
   }
+
+  .smallSizeItem {
+    @include font(var(--fs-s), var(--fw-regular), var(--line-height-m));
+
+    padding: 0 0.4rem;
+  }
+}
+
+.smallSizeTrigger {
+  @include font(var(--fs-s), var(--fw-regular), var(--line-height-m));
+
+  width: 50px;
+  padding: 0 0.4rem;
 }

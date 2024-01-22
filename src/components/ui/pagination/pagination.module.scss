@@ -1,0 +1,78 @@
+@import '@/app/styles/mixins';
+
+.wrapper {
+  @include flex(row, center, center, 0.5rem);
+
+  margin-top: 20px;
+
+  .pages {
+    @include flex(row, center, center, 0.5rem);
+
+    .arrowBtn {
+      @include flex;
+
+      cursor: pointer;
+
+      width: 24px;
+      height: 24px;
+
+      border-radius: 2px;
+
+      transition: 0.3s;
+
+      &:disabled {
+        cursor: initial;
+      }
+
+      &:hover:not(:disabled) {
+        background: var(--dark-color-500);
+      }
+
+      .disabled {
+        cursor: initial;
+        fill: var(--dark-color-100);
+      }
+    }
+
+    .page {
+      @include flex;
+
+      cursor: pointer;
+
+      min-width: 24px;
+      height: 24px;
+      padding: 0 3px;
+
+      border-radius: 2px;
+
+      transition: 0.3s;
+
+      &:hover:not(.activePage) {
+        background: var(--dark-color-500);
+      }
+    }
+
+    .activePage {
+      color: var(--dark-color-900);
+      background: var(--light-color-100);
+    }
+
+    .dots {
+      @include flex;
+
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .control {
+    @include flex(row, center, center, 0.5rem);
+  }
+}
+
+.arrowIcon {
+  cursor: pointer;
+  transform: scale(0.75);
+  fill: var(--light-color-100);
+  transition: all 0.3s ease-in-out;
+}

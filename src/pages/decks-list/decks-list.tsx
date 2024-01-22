@@ -6,6 +6,7 @@ import s from './decks-list.module.scss'
 
 import { AppDispatch, RootState } from '@/app/providers/store/store.ts'
 import { useDebounce } from '@/common/hooks/useDebounce.ts'
+import { Pagination } from '@/components/ui/pagination'
 import { ProgressBar } from '@/components/ui/progress-bar/progress-bar.tsx'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/feature/auth/auth.service.ts'
@@ -19,19 +20,29 @@ import {
   useGetDecksQuery,
   useUpdateDeckMutation,
 } from '@/services/deck.service.ts'
-import { setCardsCount, setSearchTerm, setTabValue } from '@/services/decksSlice.ts'
+import {
+  setCardsCount,
+  setCurrentPage,
+  setPageSize,
+  setSearchTerm,
+  setTabValue,
+} from '@/services/decksSlice.ts'
 
 export const DecksList = () => {
   const { data: userData } = useMeQuery()
   const { tabValue, cardsCount, searchTerm } = useSelector((state: RootState) => state.decks.filter)
+  const { currentPage, pageSize } = useSelector((state: RootState) => state.decks.pagination)
+
   const { data, isLoading, isFetching } = useGetDecksQuery(
     {
       authorId: tabValue,
       name: searchTerm,
       minCardsCount: cardsCount[0],
       maxCardsCount: cardsCount[1],
-    },
-    { refetchOnMountOrArgChange: true }
+      itemsPerPage: pageSize,
+      currentPage: currentPage,
+    }
+    // { refetchOnMountOrArgChange: true }
   )
 
   const [deleteDeck, { isLoading: deleteDeckIsLoading }] = useDeleteDeckMutation()
@@ -70,6 +81,14 @@ export const DecksList = () => {
     setSearch('')
     onTabValueChange('')
     setSlideValue([0, data?.maxCardsCount ?? 10])
+  }
+
+  const changePageSize = (pageSize: number) => {
+    dispatch(setPageSize(pageSize))
+  }
+
+  const changePage = (page: number) => {
+    dispatch(setCurrentPage(page))
   }
 
   useEffect(() => {
@@ -116,6 +135,13 @@ export const DecksList = () => {
           updateDeck={updateDeck}
         />
       )}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={data?.pagination.totalPages ?? 10}
+        itemsPerPage={pageSize}
+        changePage={changePage}
+        changePageSize={changePageSize}
+      />
     </div>
   )
 }
