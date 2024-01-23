@@ -1,19 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { Link, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 import s from './deck.module.scss'
 
-import { ArrowBackIcon } from '@/assets/icons/ArrowBack.tsx'
+import { RootState } from '@/app/providers/store/store.ts'
+import { useDebounce } from '@/common/hooks/useDebounce.ts'
+import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
+import { Pagination } from '@/components/ui/pagination'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
+import { useMeQuery } from '@/feature/auth/auth.service.ts'
 import { CreateCardFormType } from '@/pages/deck/card-form/use-create-card.tsx'
 import { CardModal } from '@/pages/deck/card-modal/cardModal.tsx'
 import { DeckTable } from '@/pages/deck/deck-table/deck-table.tsx'
 import { DeckTitle } from '@/pages/deck/deck-title/deck-title.tsx'
-import { useMeQuery } from '@/services/auth/auth.service.ts'
+import { SearchCard } from '@/pages/deck/search-card/search-card.tsx'
 import {
   useCreateCardMutation,
   useDeleteCardMutation,
@@ -21,18 +26,39 @@ import {
   useUpdateCardMutation,
 } from '@/services/cards.service.ts'
 import { DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
+import { setCardsSearchTerm, setCurrentPage, setPageSize } from '@/services/cardsSlice.ts'
 import { useGetDeckByIdQuery } from '@/services/deck.service.ts'
 
 export const Deck = () => {
   const { id } = useParams()
+
+  const search = useSelector((state: RootState) => state.cards.searchTerm)
+  const { currentPage, pageSize } = useSelector((state: RootState) => state.cards.pagination)
+
   const { data: deckData, isLoading } = useGetDeckByIdQuery({ id: id as string })
-  const { data: cardsData } = useGetCardsQuery({ id: id as string })
+  const { data: cardsData } = useGetCardsQuery({
+    id: id as string,
+    question: search,
+    currentPage,
+    itemsPerPage: pageSize,
+  })
   const { data: userData } = useMeQuery()
+
   const [createCard, { isLoading: createCardIsLoading }] = useCreateCardMutation()
   const [deleteCard, { isLoading: deleteCardIsLoading }] = useDeleteCardMutation()
   const [updateCard, { isLoading: updateCardIsLoading }] = useUpdateCardMutation()
 
+  const [searchValue, setSearchValue] = useState(search)
+
   const [addCardModal, setAddCardModal] = useState(false)
+
+  const debouncedValue = useDebounce(searchValue, 1000)
+
+  const dispatch = useDispatch()
+
+  const handleSearch = () => {
+    dispatch(setCardsSearchTerm(searchValue))
+  }
 
   const isMyDeck = deckData?.userId === userData?.id
 
@@ -44,6 +70,24 @@ export const Deck = () => {
     setAddCardModal(false)
   }
 
+  const changePage = (page: number) => {
+    dispatch(setCurrentPage(page))
+  }
+
+  const changePageSize = (pageSize: number) => {
+    dispatch(setPageSize(pageSize))
+  }
+
+  useEffect(() => {
+    if (debouncedValue || debouncedValue === '') {
+      handleSearch()
+    }
+
+    return () => {
+      dispatch(setCardsSearchTerm(''))
+    }
+  }, [debouncedValue])
+
   if (isLoading) {
     return <Loader />
   }
@@ -51,9 +95,9 @@ export const Deck = () => {
   return (
     <div className={s.content}>
       {(createCardIsLoading || deleteCardIsLoading || updateCardIsLoading) && <ProgressBar />}
-      <Button as={Link} to={'..'} variant="link" className={s.btnBack}>
-        <ArrowBackIcon className={s.iconBack} /> <Typography>Back to previous page</Typography>
-      </Button>
+
+      <BackButton />
+
       <div>
         <DeckTitle
           isMyDeck={isMyDeck}
@@ -63,6 +107,8 @@ export const Deck = () => {
           deckData={deckData as DecksResponseItems}
           addNewCard={addNewCard}
         />
+        <SearchCard value={searchValue} setValue={setSearchValue} />
+
         {cardsData?.items.length ? (
           <>
             <DeckTable
@@ -97,6 +143,13 @@ export const Deck = () => {
           </div>
         )}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        itemsPerPage={pageSize}
+        totalPages={cardsData?.pagination.totalPages ?? 1}
+        changePage={changePage}
+        changePageSize={changePageSize}
+      />
     </div>
   )
 }

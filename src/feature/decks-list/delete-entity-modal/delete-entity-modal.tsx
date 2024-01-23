@@ -1,9 +1,10 @@
 import { FC } from 'react'
 
+import s from './delete-entity-modal.module.scss'
+
 import { Button } from '@/components/ui/button'
 import { Modal, ModalProps } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
-import s from '@/pages/deck/deck-table/deck-table.module.scss'
 
 type Props = ModalProps & {
   text: string

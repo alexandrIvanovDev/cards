@@ -41,6 +41,7 @@ export type CardsResponseItems = {
   answerVideo: string
   created: string
   updated: string
+  grade: number
 }
 
 export type GetDecksArgs = {
@@ -69,7 +70,14 @@ export type GetCardsResponse = {
   maxCardsCount: number
 }
 
-export type GetCardsArgs = { id: string }
+export type GetCardsArgs = {
+  id: string
+  question?: string
+  answer?: string
+  currentPage?: number
+  itemsPerPage?: number
+  orderBy?: string
+}
 
 export type DeleteCardsArgs = { id: string }
 

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 import s from './sign-in-page.module.scss'
 
@@ -8,26 +8,23 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
-import { useMeQuery, useSignInMutation } from '@/services/auth/auth.service.ts'
-import { LoginArgs } from '@/services/auth/auth.types.ts'
+import { useMeQuery, useSignInMutation } from '@/feature/auth/auth.service.ts'
+import { LoginArgs } from '@/feature/auth/auth.types.ts'
 
 export const SignInPage = () => {
   const [signIn, { isLoading }] = useSignInMutation()
-  const navigate = useNavigate()
   const { data } = useMeQuery()
 
   const handleLogin = async (data: LoginArgs) => {
     try {
       await signIn(data)
-
-      navigate(routePaths.packs)
     } catch (e) {
       console.error(e)
     }
   }
 
   if (data?.id) {
-    return navigate(routePaths.packs)
+    return <Navigate to={routePaths.packs} />
   }
 
   return (

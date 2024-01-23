@@ -1,13 +1,13 @@
-@import '@/app/styles/mixins';
+.row {
+  .updated {
+    width: 180px;
+  }
 
-.searchInput {
-  margin: 25px 0;
-}
+  .grade {
+    width: 160px;
+  }
 
-.deleteCardModal {
-  @include flex(column, center, normal, 1.5rem);
-
-  .btns {
-    @include flex(row, space-between, center);
+  .controls {
+    width: 110px;
   }
 }

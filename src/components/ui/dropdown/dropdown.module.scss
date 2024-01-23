@@ -10,6 +10,11 @@
 
   .icon {
     fill: transparent;
+    transition: 0.3s;
+
+    &:hover {
+      transform: rotate(90deg);
+    }
   }
 }
 

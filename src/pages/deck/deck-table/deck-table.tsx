@@ -3,7 +3,6 @@ import { FC } from 'react'
 import s from './deck-table.module.scss'
 
 import { Table } from '@/components/ui/table'
-import { TextField } from '@/components/ui/textfield'
 import { TableRow } from '@/pages/deck/table-row/table-row.tsx'
 import { DeleteCardsArgs, GetCardsResponse, UpdateCardType } from '@/services/cards.types.ts'
 
@@ -14,34 +13,29 @@ type Props = {
   updateCard: ({ id, data }: UpdateCardType) => void
 }
 
-export const DeckTable: FC<Props> = props => {
-  const { isMyDeck, cardsData, deleteCard, updateCard } = props
-
+export const DeckTable: FC<Props> = ({ isMyDeck, cardsData, deleteCard, updateCard }) => {
   return (
     <>
-      <TextField type="search" placeholder="Card search" className={s.searchInput} />
       <Table.Root>
         <Table.Head>
-          <Table.Row>
+          <Table.Row className={s.row}>
             <Table.HeadCell>Question</Table.HeadCell>
             <Table.HeadCell>Answer</Table.HeadCell>
-            <Table.HeadCell>Last Updated</Table.HeadCell>
-            <Table.HeadCell>Grade</Table.HeadCell>
-            {isMyDeck && <Table.HeadCell style={{ width: 100 }}></Table.HeadCell>}
+            <Table.HeadCell className={s.updated}>Last Updated</Table.HeadCell>
+            <Table.HeadCell className={s.grade}>Grade</Table.HeadCell>
+            {isMyDeck && <Table.HeadCell className={s.controls}></Table.HeadCell>}
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {cardsData?.items.map(card => {
-            return (
-              <TableRow
-                key={card.id}
-                isMyDeck={isMyDeck}
-                card={card}
-                deleteCard={deleteCard}
-                updateCard={updateCard}
-              />
-            )
-          })}
+          {cardsData?.items.map(card => (
+            <TableRow
+              key={card.id}
+              isMyDeck={isMyDeck}
+              card={card}
+              deleteCard={deleteCard}
+              updateCard={updateCard}
+            />
+          ))}
         </Table.Body>
       </Table.Root>
     </>

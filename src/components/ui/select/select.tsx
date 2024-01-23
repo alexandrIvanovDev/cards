@@ -22,12 +22,19 @@ export type SelectProps = {
   placeholder?: string
   label?: string
   required?: boolean
+  className?: string
+  smallSize?: boolean
 }
 
 export const Select: FC<SelectProps> = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProps>(
-  ({ options, onChange, disabled, value, label, placeholder, required }, ref) => {
+  (
+    { options, onChange, disabled, value, label, placeholder, required, className, smallSize },
+    ref
+  ) => {
     const classes = {
       label: clsx(s.label, disabled && s.disabledLabel),
+      trigger: clsx(s.trigger, smallSize && s.smallSizeTrigger, className),
+      item: clsx(s.item, smallSize && s.smallSizeItem),
     }
 
     return (
@@ -41,7 +48,7 @@ export const Select: FC<SelectProps> = forwardRef<ElementRef<typeof RadixSelect.
           disabled={disabled}
           required={required}
         >
-          <RadixSelect.Trigger className={s.trigger} asChild ref={ref}>
+          <RadixSelect.Trigger className={classes.trigger} asChild ref={ref}>
             <div>
               <RadixSelect.Value placeholder={placeholder} />
               <RadixSelect.Icon className={s.iconWrapper}>
@@ -53,7 +60,7 @@ export const Select: FC<SelectProps> = forwardRef<ElementRef<typeof RadixSelect.
             <RadixSelect.Content className={s.content} position="popper" sideOffset={-1}>
               <RadixSelect.Viewport>
                 {options.map(o => (
-                  <RadixSelect.Item value={o.value} key={o.value} className={s.item}>
+                  <RadixSelect.Item value={o.value} key={o.value} className={classes.item}>
                     <RadixSelect.ItemText>{o.label}</RadixSelect.ItemText>
                   </RadixSelect.Item>
                 ))}

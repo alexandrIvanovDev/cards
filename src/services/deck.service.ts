@@ -5,6 +5,7 @@ import {
   DecksResponseItems,
   GetDecksArgs,
   GetDecksResponse,
+  UpdateDeck,
 } from '@/services/cards.types.ts'
 
 export const deckService = baseApi.injectEndpoints({
@@ -17,7 +18,9 @@ export const deckService = baseApi.injectEndpoints({
       providesTags: ['Decks'],
     }),
     getDeckById: builder.query<DecksResponseItems, DeckByIdArgs>({
-      query: ({ id }) => `v1/decks/${id}`,
+      query: ({ id }) => ({
+        url: `v1/decks/${id}`,
+      }),
       providesTags: ['Decks'],
     }),
     createDeck: builder.mutation<void, DeckArgs>({
@@ -28,7 +31,7 @@ export const deckService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Decks'],
     }),
-    updateDeck: builder.mutation<DecksResponseItems, { id: string; data: DeckArgs }>({
+    updateDeck: builder.mutation<DecksResponseItems, UpdateDeck>({
       query: ({ id, data }) => ({
         url: `v1/decks/${id}`,
         method: 'PATCH',

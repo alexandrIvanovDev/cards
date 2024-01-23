@@ -4,6 +4,7 @@ import s from './table-row.module.scss'
 
 import { DeleteIcon } from '@/assets/icons/Delete.tsx'
 import { EditIcon } from '@/assets/icons/Edit.tsx'
+import { Rating } from '@/components/ui/rating'
 import { Table } from '@/components/ui/table'
 import { DeleteEntityModal } from '@/feature/decks-list/delete-entity-modal/delete-entity-modal.tsx'
 import { CardModal } from '@/pages/deck/card-modal/cardModal.tsx'
@@ -28,7 +29,6 @@ export const TableRow: FC<Props> = props => {
   const [updateCardIsOpen, setUpdateCardIsOpen] = useState(false)
 
   const editCard = (data: CreateCardsArgs) => {
-    console.log(card.id)
     updateCard({ id: card.id, data })
     setUpdateCardIsOpen(false)
   }
@@ -39,7 +39,9 @@ export const TableRow: FC<Props> = props => {
         <Table.Cell>{card.question}</Table.Cell>
         <Table.Cell>{card.answer}</Table.Cell>
         <Table.Cell>{new Date(card?.updated as string).toLocaleDateString()}</Table.Cell>
-        <Table.Cell>{card.shots}</Table.Cell>
+        <Table.Cell>
+          <Rating rating={card.grade} className={s.rating} />
+        </Table.Cell>
 
         {isMyDeck && (
           <Table.Cell className={s.iconWrapper}>

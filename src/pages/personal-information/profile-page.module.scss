@@ -1,13 +1,21 @@
 @import '@/app/styles/mixins';
 
-.wrapper {
-  @include flex(column, flex-start, center);
+.content {
+  @include container(1240px);
 
-  @include container(420px);
+  .backBtn {
+    margin-bottom: 50px;
+  }
 
-  padding: 1.5rem 2rem;
+  .wrapper {
+    @include flex(column, flex-start, center);
 
-  .avatar {
-    margin: 30px 0 10px;
+    @include container(420px);
+
+    padding: 1.5rem 2rem;
+
+    .avatar {
+      margin: 30px 0 10px;
+    }
   }
 }
