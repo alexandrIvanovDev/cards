@@ -33,7 +33,7 @@ const PrivateRoutes = () => {
 export const publicRoutes: RouteObject[] = [
   { path: routePaths.signIn, element: <SignInPage /> },
   { path: routePaths.signUp, element: <SignUpPage /> },
-  { path: routePaths.createNewPassword, element: <CreateNewPasswordPage /> },
+  { path: `${routePaths.createNewPassword}/:token`, element: <CreateNewPasswordPage /> },
   { path: routePaths.forgotPassword, element: <ForgotPasswordPage /> },
   { path: `${routePaths.checkEmail}/:email`, element: <CheckEmail /> },
 ]

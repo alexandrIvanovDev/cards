@@ -5,6 +5,7 @@ import {
   User,
   UpdateUserArgs,
   RecoverPasswordArgs,
+  CreateNewPassword,
 } from '@/feature/auth/auth.types.ts'
 
 export const authService = baseApi.injectEndpoints({
@@ -65,6 +66,13 @@ export const authService = baseApi.injectEndpoints({
         },
       }),
     }),
+    createNewPassword: builder.mutation<void, CreateNewPassword>({
+      query: ({ token, password }) => ({
+        url: `v1/auth/reset-password/${token}`,
+        method: 'POST',
+        body: { password },
+      }),
+    }),
   }),
 })
 
@@ -75,4 +83,5 @@ export const {
   useSignOutMutation,
   useUpdateUserMutation,
   useRecoverPasswordMutation,
+  useCreateNewPasswordMutation,
 } = authService
