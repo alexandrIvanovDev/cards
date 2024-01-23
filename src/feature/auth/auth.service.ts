@@ -55,12 +55,14 @@ export const authService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Me'],
     }),
-    // TODO
     recoverPassword: builder.mutation<void, RecoverPasswordArgs>({
       query: args => ({
         url: `v1/auth/recover-password`,
         method: 'POST',
-        body: args,
+        body: {
+          email: args.email,
+          html: '<h1>Hi, ##name##</h1><p>Click <a href="https://cards-seven-iota.vercel.app/create-new-password/##token##">here</a> to recover your password</p>',
+        },
       }),
     }),
   }),

@@ -7,14 +7,16 @@ export type Routes =
   | 'profile'
   | 'packs'
   | 'pack'
+  | 'checkEmail'
 
 export const routePaths: Record<Routes, string> = {
   signIn: '/sign-in',
   signUp: '/sign-up',
-  createNewPassword: '/create-new-password',
+  createNewPassword: '/create-new-password/:token',
   forgotPassword: '/forgot-password',
   main: '/',
   profile: '/profile',
   packs: '/packs',
   pack: '/packs/:id',
+  checkEmail: '/check-email',
 }
