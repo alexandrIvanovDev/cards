@@ -28,3 +28,8 @@ export type UpdateUserArgs = {
 export type RecoverPasswordArgs = {
   email: string
 }
+
+export type CreateNewPassword = {
+  token: string
+  password: string
+}
