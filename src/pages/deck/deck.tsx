@@ -38,7 +38,7 @@ export const Deck = () => {
   const { data: deckData, isLoading } = useGetDeckByIdQuery({ id: id as string })
   const { data: cardsData } = useGetCardsQuery({
     id: id as string,
-    answer: search,
+    question: search,
     currentPage,
     itemsPerPage: pageSize,
   })
@@ -81,6 +81,10 @@ export const Deck = () => {
   useEffect(() => {
     if (debouncedValue || debouncedValue === '') {
       handleSearch()
+    }
+
+    return () => {
+      dispatch(setCardsSearchTerm(''))
     }
   }, [debouncedValue])
 
