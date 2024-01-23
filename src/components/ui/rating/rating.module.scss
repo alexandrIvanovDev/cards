@@ -1,0 +1,9 @@
+@import '@/app/styles/mixins';
+
+.wrapper {
+  .star {
+    width: 16px;
+    height: 16px;
+    fill: var(--warning-color-300);
+  }
+}

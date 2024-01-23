@@ -40,6 +40,8 @@ export const Pagination: FC<Props> = props => {
     rightArrow: clsx(s.arrowIcon, rightArrowDisabled && s.disabled),
   }
 
+  if (pages.length === 0) return null
+
   return (
     <div className={classes.wrapper}>
       <div className={s.pages}>

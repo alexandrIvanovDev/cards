@@ -1,5 +1,9 @@
 @import '@/app/styles/mixins';
 
+.rating {
+  @include flex(row, center, center, 0.5rem);
+}
+
 .iconWrapper {
   @include flex(row, center, center, 0.5rem);
 
