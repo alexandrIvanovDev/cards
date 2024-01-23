@@ -45,6 +45,8 @@ export const DecksList = () => {
     // { refetchOnMountOrArgChange: true }
   )
 
+  console.log(1)
+
   const [deleteDeck, { isLoading: deleteDeckIsLoading }] = useDeleteDeckMutation()
   const [updateDeck, { isLoading: updateDeckIsLoading }] = useUpdateDeckMutation()
   const [createDeck, { isLoading: createDeckIsLoading }] = useCreateDeckMutation()
