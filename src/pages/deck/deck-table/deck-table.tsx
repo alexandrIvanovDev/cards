@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import s from './deck-table.module.scss'
+
 import { Table } from '@/components/ui/table'
 import { TableRow } from '@/pages/deck/table-row/table-row.tsx'
 import { DeleteCardsArgs, GetCardsResponse, UpdateCardType } from '@/services/cards.types.ts'
@@ -16,12 +18,12 @@ export const DeckTable: FC<Props> = ({ isMyDeck, cardsData, deleteCard, updateCa
     <>
       <Table.Root>
         <Table.Head>
-          <Table.Row>
+          <Table.Row className={s.row}>
             <Table.HeadCell>Question</Table.HeadCell>
             <Table.HeadCell>Answer</Table.HeadCell>
-            <Table.HeadCell style={{ width: 200 }}>Last Updated</Table.HeadCell>
-            <Table.HeadCell style={{ width: 180 }}>Grade</Table.HeadCell>
-            {isMyDeck && <Table.HeadCell style={{ width: 100 }}></Table.HeadCell>}
+            <Table.HeadCell className={s.updated}>Last Updated</Table.HeadCell>
+            <Table.HeadCell className={s.grade}>Grade</Table.HeadCell>
+            {isMyDeck && <Table.HeadCell className={s.controls}></Table.HeadCell>}
           </Table.Row>
         </Table.Head>
         <Table.Body>

@@ -11,7 +11,7 @@ export const deckService = baseApi.injectEndpoints({
     getCards: builder.query<GetCardsResponse, GetCardsArgs>({
       query: ({ id, ...rest }) => ({
         url: `v1/decks/${id}/cards`,
-        params: { ...rest } ?? {},
+        params: { ...rest },
       }),
       providesTags: ['Cards'],
     }),
