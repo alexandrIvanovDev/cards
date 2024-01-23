@@ -11,6 +11,7 @@ import { routePaths } from './routePaths.tsx'
 import { ErrorBoundary } from '@/app/providers/errorBoudary/error-boudary.tsx'
 import { Layout } from '@/components/ui/layout/layout.tsx'
 import { useMeQuery } from '@/feature/auth/auth.service.ts'
+import { CheckEmail } from '@/pages/check-email/check-email.tsx'
 import { CreateNewPasswordPage } from '@/pages/create-new-password/create-new-password-page.tsx'
 import { Deck } from '@/pages/deck/deck.tsx'
 import { DecksList } from '@/pages/decks-list/decks-list.tsx'
@@ -34,6 +35,7 @@ export const publicRoutes: RouteObject[] = [
   { path: routePaths.signUp, element: <SignUpPage /> },
   { path: routePaths.createNewPassword, element: <CreateNewPasswordPage /> },
   { path: routePaths.forgotPassword, element: <ForgotPasswordPage /> },
+  { path: `${routePaths.checkEmail}/:email`, element: <CheckEmail /> },
 ]
 
 export const privateRoutes: RouteObject[] = [
