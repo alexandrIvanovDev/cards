@@ -5,6 +5,8 @@ import { clsx } from 'clsx'
 
 import s from './radio-group.module.scss'
 
+import { Typography } from '@/components/ui/typography'
+
 export type RadioType = {
   value: string
   label: string
@@ -19,6 +21,8 @@ export type RadioGroupProps = {
   disabled?: boolean
   className?: string
 }
+
+//TODO fix sizes
 
 export const RadioGroup: FC<RadioGroupProps> = forwardRef<
   ElementRef<typeof Radio.Root>,
@@ -44,7 +48,7 @@ export const RadioGroup: FC<RadioGroupProps> = forwardRef<
             <Radio.Indicator className={s.indicator} />
           </Radio.Item>
           <label className={classes.label} htmlFor={r.value}>
-            {r.label}
+            <Typography variant={'body2'}>{r.label}</Typography>
           </label>
         </div>
       ))}

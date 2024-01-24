@@ -33,7 +33,11 @@ export const DecksList = () => {
   const { tabValue, cardsCount, searchTerm } = useSelector((state: RootState) => state.decks.filter)
   const { currentPage, pageSize } = useSelector((state: RootState) => state.decks.pagination)
 
-  const { data, isLoading, isFetching } = useGetDecksQuery(
+  const {
+    data,
+    isLoading: getDecksIsLoading,
+    isFetching,
+  } = useGetDecksQuery(
     {
       authorId: tabValue,
       name: searchTerm,
@@ -44,8 +48,6 @@ export const DecksList = () => {
     }
     // { refetchOnMountOrArgChange: true }
   )
-
-  console.log(1)
 
   const [deleteDeck, { isLoading: deleteDeckIsLoading }] = useDeleteDeckMutation()
   const [updateDeck, { isLoading: updateDeckIsLoading }] = useUpdateDeckMutation()
@@ -93,6 +95,13 @@ export const DecksList = () => {
     dispatch(setCurrentPage(page))
   }
 
+  const isLoading =
+    getDecksIsLoading ||
+    createDeckIsLoading ||
+    deleteDeckIsLoading ||
+    updateDeckIsLoading ||
+    isFetching
+
   useEffect(() => {
     if (debouncedValue || debouncedValue === '') {
       handleSearch()
@@ -104,11 +113,7 @@ export const DecksList = () => {
 
   return (
     <div className={s.content}>
-      {(isLoading ||
-        createDeckIsLoading ||
-        deleteDeckIsLoading ||
-        updateDeckIsLoading ||
-        isFetching) && <ProgressBar />}
+      {isLoading && <ProgressBar />}
       <DecksHeader
         isOpen={addNewPackIsOpen}
         setIsOpen={setAddNewPackIsOpen}

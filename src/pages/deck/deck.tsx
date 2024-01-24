@@ -35,8 +35,8 @@ export const Deck = () => {
   const search = useSelector((state: RootState) => state.cards.searchTerm)
   const { currentPage, pageSize } = useSelector((state: RootState) => state.cards.pagination)
 
-  const { data: deckData, isLoading } = useGetDeckByIdQuery({ id: id as string })
-  const { data: cardsData } = useGetCardsQuery({
+  const { data: deckData, isLoading: getDeckIsLoading } = useGetDeckByIdQuery({ id: id as string })
+  const { data: cardsData, isLoading: getCardsIsLoading } = useGetCardsQuery({
     id: id as string,
     question: search,
     currentPage,
@@ -78,6 +78,9 @@ export const Deck = () => {
     dispatch(setPageSize(pageSize))
   }
 
+  const isLoading =
+    createCardIsLoading || deleteCardIsLoading || updateCardIsLoading || getCardsIsLoading
+
   useEffect(() => {
     if (debouncedValue || debouncedValue === '') {
       handleSearch()
@@ -88,13 +91,13 @@ export const Deck = () => {
     }
   }, [debouncedValue])
 
-  if (isLoading) {
+  if (getDeckIsLoading) {
     return <Loader />
   }
 
   return (
     <div className={s.content}>
-      {(createCardIsLoading || deleteCardIsLoading || updateCardIsLoading) && <ProgressBar />}
+      {isLoading && <ProgressBar />}
 
       <BackButton />
 
