@@ -16,6 +16,7 @@ import { CreateNewPasswordPage } from '@/pages/create-new-password/create-new-pa
 import { Deck } from '@/pages/deck/deck.tsx'
 import { DecksList } from '@/pages/decks-list/decks-list.tsx'
 import { ForgotPasswordPage } from '@/pages/forgot-password/forgot-password-page.tsx'
+import { NotFound } from '@/pages/not-found/not-found.tsx'
 import { ProfilePage } from '@/pages/personal-information/profile-page.tsx'
 import { SignInPage } from '@/pages/sign-in/sign-in-page.tsx'
 import { SignUpPage } from '@/pages/sign-up/sign-up-page.tsx'
@@ -36,6 +37,7 @@ export const publicRoutes: RouteObject[] = [
   { path: `${routePaths.createNewPassword}/:token`, element: <CreateNewPasswordPage /> },
   { path: routePaths.forgotPassword, element: <ForgotPasswordPage /> },
   { path: `${routePaths.checkEmail}/:email`, element: <CheckEmail /> },
+  { path: routePaths.notFound, element: <NotFound /> },
 ]
 
 export const privateRoutes: RouteObject[] = [
