@@ -20,6 +20,13 @@ export const SignUpForm: FC<Props> = ({ onSubmit }) => {
       <DevTool control={control} />
 
       <ControlledTextField
+        name={'name'}
+        control={control}
+        error={errors.name?.message}
+        label="Name"
+      />
+
+      <ControlledTextField
         name={'email'}
         control={control}
         error={errors.email?.message}
