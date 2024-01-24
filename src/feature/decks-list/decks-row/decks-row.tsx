@@ -66,7 +66,7 @@ export const DecksRow: FC<Props> = ({ deck, userId, deleteDeck, updateDeck }) =>
           <button className={s.learnButton} disabled={disabledIcon}>
             <PlayIcon
               className={clsx(s.icon, disabledIcon && s.disabledIcon)}
-              onClick={() => navigate(`${routePaths.packs}/${deck.id}${routePaths.learn}`)}
+              onClick={() => navigate(`${routePaths.learn}/${deck.id}`)}
             />
           </button>
           {isMyDeck && <DeleteIcon className={s.icon} onClick={() => setDeleteDeckIsOpen(true)} />}
