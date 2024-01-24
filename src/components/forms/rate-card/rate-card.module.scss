@@ -1,0 +1,5 @@
+@import '@/app/styles/mixins';
+
+.form {
+  @include flex(column, center, normal, 1rem);
+}

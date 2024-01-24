@@ -99,3 +99,7 @@ export type UpdateDeck = {
   id: string
   data: DeckArgs
 }
+export type SaveGradeCardArgs = {
+  cardId: string
+  grade: number
+}

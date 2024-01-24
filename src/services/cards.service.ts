@@ -4,6 +4,8 @@ import {
   CreateCardsArgs,
   GetCardsArgs,
   GetCardsResponse,
+  SaveGradeCardArgs,
+  UpdateCardType,
 } from '@/services/cards.types.ts'
 
 export const deckService = baseApi.injectEndpoints({
@@ -30,10 +32,25 @@ export const deckService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Cards'],
     }),
-    updateCard: builder.mutation<CardsResponseItems, { id: string; data: CreateCardsArgs }>({
+    updateCard: builder.mutation<CardsResponseItems, UpdateCardType>({
       query: ({ id, data }) => ({
         url: `v1/cards/${id}`,
         method: 'PATCH',
+        body: data,
+      }),
+      invalidatesTags: ['Cards'],
+    }),
+    getRandomCard: builder.query<CardsResponseItems, { id: string }>({
+      query: ({ id }) => ({
+        url: `v1/decks/${id}/learn`,
+        // params: { ...rest },
+      }),
+    }),
+    // TODO
+    rateCard: builder.mutation<CardsResponseItems, SaveGradeCardArgs & { id: string }>({
+      query: ({ id, ...data }) => ({
+        url: `v1/decks/${id}/learn`,
+        method: 'POST',
         body: data,
       }),
       invalidatesTags: ['Cards'],
@@ -46,4 +63,6 @@ export const {
   useCreateCardMutation,
   useDeleteCardMutation,
   useUpdateCardMutation,
+  useGetRandomCardQuery,
+  useRateCardMutation,
 } = deckService

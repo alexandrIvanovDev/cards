@@ -1,0 +1,30 @@
+@import '@/app/styles/mixins';
+
+.content {
+  @include container(1240px);
+
+  .card {
+    @include container(420px);
+    @include flex(column, center, normal, 0.5rem);
+
+    padding: 36px;
+
+    .title {
+      margin-bottom: 35px;
+      text-align: center;
+    }
+
+    .questionWrapper {
+      @include flex(row, flex-start, normal, 0.5rem);
+    }
+
+    .attempts {
+      margin-bottom: 25px;
+      color: var(--dark-color-100);
+    }
+
+    .answerWrapper {
+      @include flex(column, center, normal, 1rem);
+    }
+  }
+}

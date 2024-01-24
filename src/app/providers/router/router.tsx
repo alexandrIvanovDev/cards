@@ -16,6 +16,7 @@ import { CreateNewPasswordPage } from '@/pages/create-new-password/create-new-pa
 import { Deck } from '@/pages/deck/deck.tsx'
 import { DecksList } from '@/pages/decks-list/decks-list.tsx'
 import { ForgotPasswordPage } from '@/pages/forgot-password/forgot-password-page.tsx'
+import { Learn } from '@/pages/learn/learn.tsx'
 import { NotFound } from '@/pages/not-found/not-found.tsx'
 import { ProfilePage } from '@/pages/personal-information/profile-page.tsx'
 import { SignInPage } from '@/pages/sign-in/sign-in-page.tsx'
@@ -56,6 +57,10 @@ export const privateRoutes: RouteObject[] = [
   {
     path: routePaths.pack,
     element: <Deck />,
+  },
+  {
+    path: `${routePaths.learn}/:id`,
+    element: <Learn />,
   },
 ]
 

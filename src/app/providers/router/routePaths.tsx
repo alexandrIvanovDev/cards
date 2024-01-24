@@ -9,6 +9,7 @@ export type Routes =
   | 'pack'
   | 'checkEmail'
   | 'notFound'
+  | 'learn'
 
 export const routePaths: Record<Routes, string> = {
   signIn: '/sign-in',
@@ -20,5 +21,6 @@ export const routePaths: Record<Routes, string> = {
   packs: '/packs',
   pack: '/packs/:id',
   checkEmail: '/check-email',
+  learn: '/learn',
   notFound: '/*',
 }
