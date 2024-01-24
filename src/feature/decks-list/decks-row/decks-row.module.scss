@@ -22,19 +22,28 @@
 
     width: 150px;
 
+    .learnButton {
+      @include flex;
+    }
+
     .icon {
       cursor: pointer;
       transform: scale(0.75);
       fill: var(--light-color-100);
       transition: all 0.3s ease-in-out;
 
-      &:hover {
+      &:hover:not(.disabledIcon) {
         fill: var(--primary-color-300);
       }
 
-      &:active {
+      &:active:not(.disabledIcon) {
         fill: var(--primary-color-700);
       }
+    }
+
+    .disabledIcon {
+      cursor: initial;
+      fill: var(--dark-color-100);
     }
   }
 }

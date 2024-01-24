@@ -40,12 +40,17 @@ type ItemPropsWithIcon = {
   icon: ReactNode
   text: string
   onSelect?: () => void
+  disabled?: boolean
 }
 
-export const DropDownItemWithIcon: FC<ItemPropsWithIcon> = ({ icon, text, onSelect }) => {
+export const DropDownItemWithIcon: FC<ItemPropsWithIcon> = ({ icon, text, onSelect, disabled }) => {
   return (
     <>
-      <DropdownMenu.Item className={s.item} onSelect={onSelect}>
+      <DropdownMenu.Item
+        className={clsx(s.item, disabled && s.disabledItem)}
+        onSelect={onSelect}
+        disabled={disabled}
+      >
         {icon}
         <Typography>{text}</Typography>
       </DropdownMenu.Item>

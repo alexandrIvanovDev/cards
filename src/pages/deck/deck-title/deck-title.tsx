@@ -65,8 +65,8 @@ export const DeckTitle: FC<Props> = props => {
   }
 
   const formData: DeckArgs = {
-    name: deckData.name ?? '',
-    isPrivate: deckData.isPrivate ?? false,
+    name: deckData?.name ?? '',
+    isPrivate: deckData?.isPrivate ?? false,
   }
 
   return (
@@ -79,7 +79,12 @@ export const DeckTitle: FC<Props> = props => {
         {isMyDeck && (
           <Dropdown>
             <div>
-              <DropDownItemWithIcon icon={<PlayIcon />} text={'Learn'} />
+              <DropDownItemWithIcon
+                icon={<PlayIcon />}
+                text={'Learn'}
+                disabled={deckData.cardsCount === 0}
+                onSelect={() => navigate(`${routePaths.learn}/${deckData.id}`)}
+              />
               <DropDownItemWithIcon
                 icon={<EditIcon />}
                 text={'Edit'}
@@ -105,7 +110,7 @@ export const DeckTitle: FC<Props> = props => {
           buttonText="Add New Card"
         />
       ) : (
-        <Button disabled={deckData.cardsCount === 0}>Learn Deck</Button>
+        <Button disabled={deckData?.cardsCount === 0}>Learn Deck</Button>
       )}
 
       <>

@@ -49,6 +49,12 @@
   }
 }
 
+.disabledItem {
+  cursor: initial;
+  color: var(--dark-color-100);
+  fill: var(--dark-color-100);
+}
+
 .separator {
   height: 1px;
   margin: 0 12px;

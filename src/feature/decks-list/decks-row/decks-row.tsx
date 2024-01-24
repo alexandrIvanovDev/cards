@@ -1,6 +1,7 @@
 import { FC, useState } from 'react'
 
-import { Link } from 'react-router-dom'
+import { clsx } from 'clsx'
+import { Link, useNavigate } from 'react-router-dom'
 
 import s from './decks-row.module.scss'
 
@@ -28,6 +29,8 @@ export const DecksRow: FC<Props> = ({ deck, userId, deleteDeck, updateDeck }) =>
   const [deleteDeckIsOpen, setDeleteDeckIsOpen] = useState(false)
   const [updateDeckIsOpen, setUpdateDeckIsOpen] = useState(false)
 
+  const navigate = useNavigate()
+
   const removeDeck = () => {
     deleteDeck({ id: deck.id })
     setDeleteDeckIsOpen(false)
@@ -43,6 +46,8 @@ export const DecksRow: FC<Props> = ({ deck, userId, deleteDeck, updateDeck }) =>
     isPrivate: deck.isPrivate,
   }
 
+  const disabledIcon = deck.cardsCount === 0
+
   return (
     <>
       <Table.Row className={s.row}>
@@ -57,8 +62,13 @@ export const DecksRow: FC<Props> = ({ deck, userId, deleteDeck, updateDeck }) =>
         </Table.Cell>
         <Table.Cell className={s.author}>{deck?.author?.name}</Table.Cell>
         <Table.Cell className={s.tableIcons}>
-          <PlayIcon className={s.icon} />
           {isMyDeck && <EditIcon className={s.icon} onClick={() => setUpdateDeckIsOpen(true)} />}
+          <button className={s.learnButton} disabled={disabledIcon}>
+            <PlayIcon
+              className={clsx(s.icon, disabledIcon && s.disabledIcon)}
+              onClick={() => navigate(`${routePaths.packs}/${deck.id}${routePaths.learn}`)}
+            />
+          </button>
           {isMyDeck && <DeleteIcon className={s.icon} onClick={() => setDeleteDeckIsOpen(true)} />}
         </Table.Cell>
       </Table.Row>
