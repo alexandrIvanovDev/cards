@@ -1,0 +1,29 @@
+@import '@/app/styles/mixins';
+
+.headCell {
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover:not(.notSortable) {
+    background: var(--dark-color-300);
+  }
+
+  .cell {
+    @include flex(row, flex-start, center, 0.5rem);
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    fill: var(--light-color-100);
+    transition: 0.3s;
+  }
+
+  .reversedIcon {
+    transform: rotate(180deg);
+  }
+}
+
+.notSortable {
+  cursor: initial;
+}
