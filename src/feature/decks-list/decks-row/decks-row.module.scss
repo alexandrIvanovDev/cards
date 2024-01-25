@@ -17,12 +17,22 @@
     }
   }
 
+  .count {
+    width: 180px;
+  }
+
+  .updated {
+    width: 220px;
+  }
+
+  .author {
+    width: 200px;
+  }
+
   .tableIcons {
     @include flex(row, center, center, 6px);
 
-    width: 150px;
-
-    .learnButton {
+    .buttonWrapper {
       @include flex;
     }
 

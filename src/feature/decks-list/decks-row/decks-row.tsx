@@ -46,7 +46,7 @@ export const DecksRow: FC<Props> = ({ deck, userId, deleteDeck, updateDeck }) =>
     isPrivate: deck.isPrivate,
   }
 
-  const disabledIcon = deck.cardsCount === 0
+  const disabledPlayIcon = deck.cardsCount === 0
 
   return (
     <>
@@ -61,15 +61,19 @@ export const DecksRow: FC<Props> = ({ deck, userId, deleteDeck, updateDeck }) =>
           {new Date(deck?.updated).toLocaleDateString()}
         </Table.Cell>
         <Table.Cell className={s.author}>{deck?.author?.name}</Table.Cell>
-        <Table.Cell className={s.tableIcons}>
-          {isMyDeck && <EditIcon className={s.icon} onClick={() => setUpdateDeckIsOpen(true)} />}
-          <button className={s.learnButton} disabled={disabledIcon}>
-            <PlayIcon
-              className={clsx(s.icon, disabledIcon && s.disabledIcon)}
-              onClick={() => navigate(`${routePaths.learn}/${deck.id}`)}
-            />
-          </button>
-          {isMyDeck && <DeleteIcon className={s.icon} onClick={() => setDeleteDeckIsOpen(true)} />}
+        <Table.Cell style={{ width: 180 }}>
+          <div className={s.tableIcons}>
+            {isMyDeck && <EditIcon className={s.icon} onClick={() => setUpdateDeckIsOpen(true)} />}
+            <button className={s.buttonWrapper} disabled={disabledPlayIcon}>
+              <PlayIcon
+                className={clsx(s.icon, disabledPlayIcon && s.disabledIcon)}
+                onClick={() => navigate(`${routePaths.learn}/${deck.id}`)}
+              />
+            </button>
+            {isMyDeck && (
+              <DeleteIcon className={s.icon} onClick={() => setDeleteDeckIsOpen(true)} />
+            )}
+          </div>
         </Table.Cell>
       </Table.Row>
       <>

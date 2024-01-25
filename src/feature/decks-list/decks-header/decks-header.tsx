@@ -12,9 +12,10 @@ type Props = {
   isOpen: boolean
   setIsOpen: (value: boolean) => void
   createDeck: (data: DeckArgs) => void
+  isFetching: boolean
 }
 
-export const DecksHeader: FC<Props> = ({ isOpen, setIsOpen, createDeck }) => {
+export const DecksHeader: FC<Props> = ({ isOpen, setIsOpen, createDeck, isFetching }) => {
   const addNewCard = (data: DeckArgs) => {
     createDeck({ ...data })
     setIsOpen(false)
@@ -26,7 +27,7 @@ export const DecksHeader: FC<Props> = ({ isOpen, setIsOpen, createDeck }) => {
         Packs List
       </Typography>
       <Modal
-        trigger={<Button>Add New Deck</Button>}
+        trigger={<Button disabled={isFetching}>Add New Deck</Button>}
         title="Add New Deck"
         open={isOpen}
         onOpenChange={setIsOpen}

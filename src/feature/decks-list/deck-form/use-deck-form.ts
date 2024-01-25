@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { DeckArgs } from '@/services/cards.types.ts'
 
 const deckSchema = z.object({
-  name: z.string().min(3, { message: 'Name must be longer than or equal to 3 characters' }),
+  name: z.string().trim().min(3, { message: 'Name must be longer than or equal to 3 characters' }),
   isPrivate: z.boolean(),
 })
 
@@ -18,7 +18,7 @@ export const useDeckForm = (data: DeckArgs) => {
     formState: { errors },
   } = useForm<DeckFormType>({
     resolver: zodResolver(deckSchema),
-    defaultValues: { ...data },
+    defaultValues: { name: data?.name ?? '', isPrivate: data?.isPrivate ?? false },
   })
 
   return { control, handleSubmit, errors }
