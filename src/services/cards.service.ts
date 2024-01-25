@@ -23,14 +23,14 @@ export const cardsService = baseApi.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: ['Cards'],
+      invalidatesTags: ['Cards', 'Decks'],
     }),
     deleteCard: builder.mutation<void, { id: string }>({
       query: ({ id }) => ({
         url: `v1/cards/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Cards'],
+      invalidatesTags: ['Cards', 'Decks'],
     }),
     updateCard: builder.mutation<CardsResponseItems, UpdateCardType>({
       query: ({ id, data }) => ({

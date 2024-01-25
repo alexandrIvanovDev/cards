@@ -110,7 +110,12 @@ export const DeckTitle: FC<Props> = props => {
           buttonText="Add New Card"
         />
       ) : (
-        <Button disabled={deckData?.cardsCount === 0}>Learn Deck</Button>
+        <Button
+          disabled={deckData?.cardsCount === 0}
+          onClick={() => navigate(`${routePaths.learn}/${deckData.id}`)}
+        >
+          Learn Deck
+        </Button>
       )}
 
       <>
