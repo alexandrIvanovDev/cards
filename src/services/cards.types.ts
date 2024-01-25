@@ -49,7 +49,7 @@ export type GetDecksArgs = {
   maxCardsCount?: number
   name?: string
   authorId?: string
-  orderBy?: string
+  orderBy?: string | null
   currentPage?: number
   itemsPerPage?: number
 }
@@ -103,3 +103,5 @@ export type SaveGradeCardArgs = {
   cardId: string
   grade: number
 }
+
+export type Order = 'asc' | 'desc'

@@ -1,29 +1,35 @@
 import { FC } from 'react'
 
 import { Table } from '@/components/ui/table'
+import { TableHead } from '@/components/ui/table-head/table-head.tsx'
 import { DecksRow } from '@/feature/decks-list/decks-row/decks-row.tsx'
-import { DeckByIdArgs, UpdateDeck, GetDecksResponse } from '@/services/cards.types.ts'
+import { DeckByIdArgs, GetDecksResponse, UpdateDeck } from '@/services/cards.types.ts'
+
+const headColumns = [
+  { fieldName: 'name', label: 'Name', sortable: true },
+  { fieldName: 'cardsCount', label: 'Cards', sortable: true },
+  { fieldName: 'updated', label: 'Last Updated', sortable: true },
+  { fieldName: 'author.name', label: 'Created by', sortable: true },
+  { fieldName: 'icons', label: '', sortable: false },
+]
 
 type Props = {
   data: GetDecksResponse
   userId: string
   deleteDeck: (data: DeckByIdArgs) => void
   updateDeck: (data: UpdateDeck) => void
+  sort: any
+  setSort: (sort: any) => void
 }
 
-export const DecksTable: FC<Props> = ({ data, userId, deleteDeck, updateDeck }) => {
+export const DecksTable: FC<Props> = props => {
+  const { data, userId, deleteDeck, updateDeck, sort, setSort } = props
+
   return (
     <>
       <Table.Root>
-        <Table.Head>
-          <Table.Row>
-            <Table.HeadCell>Name</Table.HeadCell>
-            <Table.HeadCell>Cards</Table.HeadCell>
-            <Table.HeadCell>Last Updated</Table.HeadCell>
-            <Table.HeadCell>Created by</Table.HeadCell>
-            <Table.HeadCell style={{ width: 150 }}></Table.HeadCell>
-          </Table.Row>
-        </Table.Head>
+        <TableHead columns={headColumns} sort={sort} setSort={setSort} />
+
         <Table.Body>
           {data?.items?.map(deck => (
             <DecksRow

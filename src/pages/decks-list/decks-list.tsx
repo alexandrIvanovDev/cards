@@ -6,8 +6,10 @@ import s from './decks-list.module.scss'
 
 import { AppDispatch, RootState } from '@/app/providers/store/store.ts'
 import { useDebounce } from '@/common/hooks/useDebounce.ts'
+import { getSortedString } from '@/common/utils/getSortedString.ts'
 import { Pagination } from '@/components/ui/pagination'
 import { ProgressBar } from '@/components/ui/progress-bar/progress-bar.tsx'
+import { Sort } from '@/components/ui/table-head/table-head.tsx'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/feature/auth/auth.service.ts'
 import { DecksFilter } from '@/feature/decks-list/decks-filter/decks-filter.tsx'
@@ -33,21 +35,24 @@ export const DecksList = () => {
   const { tabValue, cardsCount, searchTerm } = useSelector((state: RootState) => state.decks.filter)
   const { currentPage, pageSize } = useSelector((state: RootState) => state.decks.pagination)
 
+  const [sort, setSort] = useState<Sort>({ field: 'updated', order: 'desc' })
+
   const {
-    data,
+    data: decksData,
+    currentData,
     isLoading: getDecksIsLoading,
     isFetching,
-  } = useGetDecksQuery(
-    {
-      authorId: tabValue,
-      name: searchTerm,
-      minCardsCount: cardsCount[0],
-      maxCardsCount: cardsCount[1],
-      itemsPerPage: pageSize,
-      currentPage: currentPage,
-    }
-    // { refetchOnMountOrArgChange: true }
-  )
+  } = useGetDecksQuery({
+    authorId: tabValue,
+    name: searchTerm,
+    minCardsCount: cardsCount[0],
+    maxCardsCount: cardsCount[1],
+    itemsPerPage: pageSize,
+    currentPage: currentPage,
+    orderBy: getSortedString(sort),
+  })
+
+  const data = currentData ?? decksData
 
   const [deleteDeck, { isLoading: deleteDeckIsLoading }] = useDeleteDeckMutation()
   const [updateDeck, { isLoading: updateDeckIsLoading }] = useUpdateDeckMutation()
@@ -118,6 +123,7 @@ export const DecksList = () => {
         isOpen={addNewPackIsOpen}
         setIsOpen={setAddNewPackIsOpen}
         createDeck={createDeck}
+        isFetching={isFetching}
       />
       <DecksFilter
         userId={userData?.id ?? ''}
@@ -132,7 +138,7 @@ export const DecksList = () => {
       />
       {!data?.items.length ? (
         <Typography className={s.noDataMessage} variant={'h2'} as={'h2'}>
-          No data with this filter
+          No data available
         </Typography>
       ) : (
         <DecksTable
@@ -140,6 +146,8 @@ export const DecksList = () => {
           userId={userData?.id as string}
           deleteDeck={deleteDeck}
           updateDeck={updateDeck}
+          sort={sort}
+          setSort={setSort}
         />
       )}
       <Pagination
