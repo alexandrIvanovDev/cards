@@ -1,10 +1,20 @@
 @import '@/app/styles/mixins';
 
 .row {
-  .nameCell {
+  .nameWrapper {
+    @include flex(row, flex-start, center, 1rem);
+
+    color: var(--light-color-100);
+    text-decoration: none;
+
+    .cover {
+      width: 80px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+
     .name {
-      color: white;
-      text-decoration: none;
       transition: 0.3s ease-in-out;
 
       &:hover {
@@ -29,31 +39,35 @@
     width: 200px;
   }
 
-  .tableIcons {
-    @include flex(row, center, center, 6px);
+  .controls {
+    width: 180px;
 
-    .buttonWrapper {
-      @include flex;
-    }
+    .icons {
+      @include flex(row, center, center, 6px);
 
-    .icon {
-      cursor: pointer;
-      transform: scale(0.75);
-      fill: var(--light-color-100);
-      transition: all 0.3s ease-in-out;
-
-      &:hover:not(.disabledIcon) {
-        fill: var(--primary-color-300);
+      .buttonWrapper {
+        @include flex;
       }
 
-      &:active:not(.disabledIcon) {
-        fill: var(--primary-color-700);
-      }
-    }
+      .icon {
+        cursor: pointer;
+        transform: scale(0.75);
+        fill: var(--light-color-100);
+        transition: all 0.3s ease-in-out;
 
-    .disabledIcon {
-      cursor: initial;
-      fill: var(--dark-color-100);
+        &:hover:not(.disabledIcon) {
+          fill: var(--primary-color-300);
+        }
+
+        &:active:not(.disabledIcon) {
+          fill: var(--primary-color-700);
+        }
+      }
+
+      .disabledIcon {
+        cursor: initial;
+        fill: var(--dark-color-100);
+      }
     }
   }
 }
