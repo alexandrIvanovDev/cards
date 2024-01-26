@@ -1,17 +1,10 @@
 import { FC } from 'react'
 
+import { decksListTableHeader } from '@/common/data/decks-list-table-header.ts'
 import { Table } from '@/components/ui/table'
 import { TableHead } from '@/components/ui/table-head/table-head.tsx'
 import { DecksRow } from '@/feature/decks-list/decks-row/decks-row.tsx'
 import { DeckByIdArgs, GetDecksResponse, UpdateDeck } from '@/services/cards.types.ts'
-
-const headColumns = [
-  { fieldName: 'name', label: 'Name', sortable: true },
-  { fieldName: 'cardsCount', label: 'Cards', sortable: true },
-  { fieldName: 'updated', label: 'Last Updated', sortable: true },
-  { fieldName: 'author.name', label: 'Created by', sortable: true },
-  { fieldName: 'icons', label: '', sortable: false },
-]
 
 type Props = {
   data: GetDecksResponse
@@ -28,7 +21,7 @@ export const DecksTable: FC<Props> = props => {
   return (
     <>
       <Table.Root>
-        <TableHead columns={headColumns} sort={sort} setSort={setSort} />
+        <TableHead columns={decksListTableHeader} sort={sort} setSort={setSort} />
 
         <Table.Body>
           {data?.items?.map(deck => (

@@ -1,13 +1,31 @@
 @import '@/app/styles/mixins';
 
-.rating {
-  @include flex(row, center, center, 0.5rem);
-}
+.row {
+  .answerCell {
+    width: 350px;
+  }
 
-.iconWrapper {
-  @include flex(row, center, center, 0.5rem);
+  .updatedCell {
+    width: 200px;
+  }
 
-  .icon {
-    @include icon;
+  .ratingCell {
+    width: 180px;
+
+    .rating {
+      @include flex(row, center, center, 0.5rem);
+    }
+  }
+
+  .iconsCell {
+    width: 150px;
+
+    .iconWrapper {
+      @include flex(row, center, center, 0.5rem);
+
+      .icon {
+        @include icon;
+      }
+    }
   }
 }

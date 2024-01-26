@@ -22,9 +22,7 @@ type Props = {
   updateCard: ({ id, data }: UpdateCardType) => void
 }
 
-export const TableRow: FC<Props> = props => {
-  const { card, isMyDeck, deleteCard, updateCard } = props
-
+export const TableRow: FC<Props> = ({ card, isMyDeck, deleteCard, updateCard }) => {
   const [deleteCardIsOpen, setDeleteCardIsOpen] = useState(false)
   const [updateCardIsOpen, setUpdateCardIsOpen] = useState(false)
 
@@ -35,18 +33,22 @@ export const TableRow: FC<Props> = props => {
 
   return (
     <>
-      <Table.Row key={card.id}>
+      <Table.Row className={s.row}>
         <Table.Cell>{card.question}</Table.Cell>
-        <Table.Cell>{card.answer}</Table.Cell>
-        <Table.Cell>{new Date(card?.updated as string).toLocaleDateString()}</Table.Cell>
-        <Table.Cell>
+        <Table.Cell className={s.answerCell}>{card.answer}</Table.Cell>
+        <Table.Cell className={s.updatedCell}>
+          {new Date(card?.updated as string).toLocaleDateString()}
+        </Table.Cell>
+        <Table.Cell className={s.ratingCell}>
           <Rating rating={card.grade} className={s.rating} />
         </Table.Cell>
 
         {isMyDeck && (
-          <Table.Cell className={s.iconWrapper}>
-            <EditIcon onClick={() => setUpdateCardIsOpen(true)} className={s.icon} />
-            <DeleteIcon onClick={() => setDeleteCardIsOpen(true)} className={s.icon} />
+          <Table.Cell className={s.iconsCell}>
+            <div className={s.iconWrapper}>
+              <EditIcon onClick={() => setUpdateCardIsOpen(true)} className={s.icon} />
+              <DeleteIcon onClick={() => setDeleteCardIsOpen(true)} className={s.icon} />
+            </div>
           </Table.Cell>
         )}
       </Table.Row>
