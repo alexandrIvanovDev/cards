@@ -76,7 +76,7 @@ export type GetCardsArgs = {
   answer?: string
   currentPage?: number
   itemsPerPage?: number
-  orderBy?: string
+  orderBy?: string | null
 }
 
 export type DeleteCardsArgs = { id: string }

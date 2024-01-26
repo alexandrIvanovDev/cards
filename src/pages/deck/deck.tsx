@@ -7,11 +7,13 @@ import s from './deck.module.scss'
 
 import { RootState } from '@/app/providers/store/store.ts'
 import { useDebounce } from '@/common/hooks/useDebounce.ts'
+import { getSortedString } from '@/common/utils/getSortedString.ts'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
 import { ProgressBar } from '@/components/ui/progress-bar'
+import { Sort } from '@/components/ui/table-head'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/feature/auth/auth.service.ts'
 import { CreateCardFormType } from '@/pages/deck/card-form/use-create-card.tsx'
@@ -35,12 +37,15 @@ export const Deck = () => {
   const search = useSelector((state: RootState) => state.cards.searchTerm)
   const { currentPage, pageSize } = useSelector((state: RootState) => state.cards.pagination)
 
+  const [sort, setSort] = useState<Sort>({ field: 'updated', order: 'desc' })
+
   const { data: deckData, isLoading: getDeckIsLoading } = useGetDeckByIdQuery({ id: id as string })
   const { data: cardsData, isLoading: getCardsIsLoading } = useGetCardsQuery({
     id: id as string,
     question: search,
     currentPage,
     itemsPerPage: pageSize,
+    orderBy: getSortedString(sort),
   })
   const { data: userData } = useMeQuery()
 
@@ -119,6 +124,8 @@ export const Deck = () => {
               cardsData={cardsData}
               deleteCard={deleteCard}
               updateCard={updateCard}
+              sort={sort}
+              setSort={setSort}
             />
           </>
         ) : (

@@ -1,8 +1,8 @@
 import { FC } from 'react'
 
-import s from './deck-table.module.scss'
-
+import { deckTableHeader } from '@/common/data/deck-table-header.ts'
 import { Table } from '@/components/ui/table'
+import { Sort, TableHead } from '@/components/ui/table-head'
 import { TableRow } from '@/pages/deck/table-row/table-row.tsx'
 import { DeleteCardsArgs, GetCardsResponse, UpdateCardType } from '@/services/cards.types.ts'
 
@@ -11,21 +11,20 @@ type Props = {
   cardsData: GetCardsResponse
   deleteCard: (data: DeleteCardsArgs) => void
   updateCard: ({ id, data }: UpdateCardType) => void
+  sort: Sort
+  setSort: (value: Sort) => void
 }
 
-export const DeckTable: FC<Props> = ({ isMyDeck, cardsData, deleteCard, updateCard }) => {
+export const DeckTable: FC<Props> = props => {
+  const { isMyDeck, cardsData, deleteCard, updateCard, sort, setSort } = props
+
+  const columns = deckTableHeader.filter(col => (isMyDeck ? col : col.fieldName !== 'controls'))
+
   return (
     <>
       <Table.Root>
-        <Table.Head>
-          <Table.Row className={s.row}>
-            <Table.HeadCell>Question</Table.HeadCell>
-            <Table.HeadCell>Answer</Table.HeadCell>
-            <Table.HeadCell className={s.updated}>Last Updated</Table.HeadCell>
-            <Table.HeadCell className={s.grade}>Grade</Table.HeadCell>
-            {isMyDeck && <Table.HeadCell className={s.controls}></Table.HeadCell>}
-          </Table.Row>
-        </Table.Head>
+        <TableHead columns={columns} sort={sort} setSort={setSort} />
+
         <Table.Body>
           {cardsData?.items.map(card => (
             <TableRow
