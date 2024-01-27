@@ -35,7 +35,7 @@ export const SignInPage = () => {
           Sign In
         </Typography>
         <SignInForm onSubmit={handleLogin} />
-        <Typography variant="body1" className={s.notification}>
+        <Typography variant="body2" className={s.notification}>
           {"Don't have an account?"}
         </Typography>
         <Button variant="link" className={s.signUp} as={Link} to={routePaths.signUp}>

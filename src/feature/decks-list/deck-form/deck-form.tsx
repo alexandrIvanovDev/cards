@@ -4,6 +4,7 @@ import s from './deck-form.module.scss'
 
 import { ControlledCheckbox, ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
+import { Typography } from '@/components/ui/typography'
 import { DeckFormType, useDeckForm } from '@/feature/decks-list/deck-form/use-deck-form.ts'
 import { DeckArgs } from '@/services/cards.types.ts'
 
@@ -30,10 +31,14 @@ export const DeckForm: FC<Props> = ({ onSubmit, setIsOpen, btnText, formData, di
       <ControlledCheckbox control={control} name={'isPrivate'} label="Private pack" />
       <div className={s.modalButtons}>
         <Button variant="secondary" type="button" onClick={() => setIsOpen(false)}>
-          Cancel
+          <Typography variant={'subtitle2'} as={'span'}>
+            Cancel
+          </Typography>
         </Button>
         <Button type="submit" disabled={disabled}>
-          {btnText}
+          <Typography variant={'subtitle2'} as={'span'}>
+            {btnText}
+          </Typography>
         </Button>
       </div>
     </form>

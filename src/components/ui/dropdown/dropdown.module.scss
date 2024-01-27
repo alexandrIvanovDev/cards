@@ -47,6 +47,12 @@
     outline: none;
     fill: var(--primary-color-500);
   }
+
+  .itemIcon {
+    @include flex;
+
+    transform: scale(0.75);
+  }
 }
 
 .disabledItem {

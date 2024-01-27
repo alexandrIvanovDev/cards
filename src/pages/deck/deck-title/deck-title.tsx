@@ -105,7 +105,13 @@ export const DeckTitle: FC<Props> = props => {
           onOpenChange={setOpenModal}
           onSubmit={addNewCard}
           className={classes.addCard}
-          trigger={<Button>Add New Card</Button>}
+          trigger={
+            <Button>
+              <Typography variant={'subtitle2'} as={'span'}>
+                Add New Card
+              </Typography>
+            </Button>
+          }
           title="Add New Card"
           buttonText="Add New Card"
         />

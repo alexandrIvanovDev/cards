@@ -27,7 +27,13 @@ export const DecksHeader: FC<Props> = ({ isOpen, setIsOpen, createDeck, isFetchi
         Packs List
       </Typography>
       <Modal
-        trigger={<Button disabled={isFetching}>Add New Deck</Button>}
+        trigger={
+          <Button disabled={isFetching}>
+            <Typography variant={'subtitle2'} as={'span'}>
+              Add New Deck
+            </Typography>
+          </Button>
+        }
         title="Add New Deck"
         open={isOpen}
         onOpenChange={setIsOpen}

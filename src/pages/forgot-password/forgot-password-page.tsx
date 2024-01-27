@@ -28,7 +28,7 @@ export const ForgotPasswordPage = () => {
           Forgot your password?
         </Typography>
         <ForgotPasswordForm onSubmit={onSubmit} />
-        <Typography variant="body1" className={s.notification}>
+        <Typography variant="body2" className={s.notification}>
           Did you remember your password?
         </Typography>
         <Button variant="link" as={Link} to={routePaths.signIn} className={s.btn}>

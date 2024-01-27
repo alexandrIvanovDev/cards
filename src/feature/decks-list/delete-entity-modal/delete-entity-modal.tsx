@@ -22,10 +22,14 @@ export const DeleteEntityModal: FC<Props> = props => {
         <Typography>Do you really want to remove {text}</Typography>
         <div className={s.btns}>
           <Button variant="secondary" onClick={() => onOpenChange(!open)}>
-            Cancel
+            <Typography variant={'subtitle2'} as={'span'}>
+              Cancel
+            </Typography>
           </Button>
           <Button onClick={callback} disabled={disabled}>
-            {btnText}
+            <Typography variant={'subtitle2'} as={'span'}>
+              {btnText}
+            </Typography>
           </Button>
         </div>
       </div>

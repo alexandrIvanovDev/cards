@@ -34,7 +34,7 @@ export const Modal: FC<ModalProps> = forwardRef<ElementRef<typeof Dialog.Root>, 
               <Card className={s.content}>
                 {title && (
                   <div className={s.titleWrapper}>
-                    <Typography as="h2" variant="h2" className={s.title}>
+                    <Typography as="h3" variant="h3" className={s.title}>
                       {title}
                     </Typography>
                     <Dialog.Close className={s.close}>

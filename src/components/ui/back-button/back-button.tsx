@@ -16,8 +16,9 @@ type Props = {
 export const BackButton: FC<Props> = ({ className }) => {
   return (
     <div className={clsx(s.wrapper, className)}>
-      <Button as={Link} to={'..'} variant="link" className={s.btnBack}>
-        <ArrowBackIcon className={s.iconBack} /> <Typography>Back to previous page</Typography>
+      <Button as={Link} to={'..'} variant="link" className={s.btn}>
+        <ArrowBackIcon className={s.icon} />{' '}
+        <Typography variant={'body2'}>Back to previous page</Typography>
       </Button>
     </div>
   )

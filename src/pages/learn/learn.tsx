@@ -43,7 +43,11 @@ export const Learn = () => {
           Number of attempts: {card?.shots}
         </Typography>
         {!isShowAnswer ? (
-          <Button onClick={() => setIsShowAnswer(true)}>Show answer</Button>
+          <Button onClick={() => setIsShowAnswer(true)}>
+            <Typography variant={'subtitle2'} as={'span'}>
+              Show answer
+            </Typography>
+          </Button>
         ) : (
           <div className={s.answerWrapper}>
             <div className={s.questionWrapper}>

@@ -24,10 +24,14 @@ export const CreateNewPasswordForm: FC<Props> = ({ onSubmit }) => {
         label="Password"
         className={s.password}
       />
-      <Typography className={s.text}>
+      <Typography className={s.text} variant={'body2'}>
         Create new password and we will send you further instructions to email
       </Typography>
-      <Button className={s.btn}>Create New Password</Button>
+      <Button className={s.btn}>
+        <Typography variant={'subtitle2'} as={'span'}>
+          Create New Password
+        </Typography>
+      </Button>
     </form>
   )
 }

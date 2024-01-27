@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { Tabs } from '@/components/ui/tabs'
 import { TextField } from '@/components/ui/textfield'
+import { Typography } from '@/components/ui/typography'
 
 type Props = {
   userId: string
@@ -70,7 +71,10 @@ export const DecksFilter: FC<Props> = props => {
         label="Number of cards"
       />
       <Button variant="secondary" onClick={clearFilter}>
-        <DeleteIcon className={s.deleteIcon} /> Clear filter
+        <DeleteIcon className={s.deleteIcon} />
+        <Typography variant={'subtitle2'} as={'span'}>
+          Clear filter
+        </Typography>
       </Button>
     </div>
   )

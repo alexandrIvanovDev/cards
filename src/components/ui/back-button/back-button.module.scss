@@ -1,5 +1,5 @@
 .wrapper {
-  .btnBack {
+  .btn {
     padding: 0;
     color: var(--light-color-100);
     fill: var(--light-color-100);
@@ -10,6 +10,11 @@
 
     &:active {
       fill: var(--primary-color-700);
+    }
+
+    .icon {
+      width: 18px;
+      height: 18px;
     }
   }
 }

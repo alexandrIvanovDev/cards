@@ -69,11 +69,11 @@ export const Slider: FC<Props> = props => {
   return (
     <div className={clsx(s.wrapper, className)}>
       {label && (
-        <Typography as="label" className={s.label}>
+        <Typography variant={'body2'} as={'label'} className={s.label}>
           {label}
         </Typography>
       )}
-      <TextField type="number" className={s.count} value={value[0]} onChange={onChangeMinValue} />
+      <TextField type={'number'} className={s.count} value={value[0]} onChange={onChangeMinValue} />
       <RadixSlider.Root
         defaultValue={defaultValue}
         onValueChange={onValueChange}
@@ -91,7 +91,7 @@ export const Slider: FC<Props> = props => {
         <RadixSlider.Thumb className={s.thumb} />
       </RadixSlider.Root>
       <TextField
-        type="number"
+        type={'number'}
         className={s.count}
         value={value[1]}
         onChange={onChangeMaxValue}

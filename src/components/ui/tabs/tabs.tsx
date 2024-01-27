@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import * as RadixTabs from '@radix-ui/react-tabs'
+import { clsx } from 'clsx'
 
 import s from './tabs.module.scss'
 
@@ -22,14 +23,9 @@ type TabsProps = {
 
 export const Tabs: FC<TabsProps> = ({ tabs, value, className, onValueChange, label }) => {
   return (
-    <RadixTabs.Root
-      defaultValue={value}
-      className={className}
-      onValueChange={onValueChange}
-      style={{ position: 'relative' }}
-    >
+    <RadixTabs.Root value={value} className={clsx(s.root, className)} onValueChange={onValueChange}>
       {label && (
-        <Typography as="label" className={s.label}>
+        <Typography variant={'body2'} as={'label'} className={s.label}>
           {label}
         </Typography>
       )}
@@ -41,7 +37,9 @@ export const Tabs: FC<TabsProps> = ({ tabs, value, className, onValueChange, lab
             key={tab.value}
             disabled={tab.disabled}
           >
-            {tab.text}
+            <Typography variant={'body1'} as={'span'}>
+              {tab.text}
+            </Typography>
           </RadixTabs.Trigger>
         ))}
       </RadixTabs.List>

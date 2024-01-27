@@ -4,6 +4,7 @@ import s from './card-form.module.scss'
 
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
+import { Typography } from '@/components/ui/typography'
 import { CreateCardFormType, useCreateCard } from '@/pages/deck/card-form/use-create-card.tsx'
 
 type Props = {
@@ -35,9 +36,15 @@ export const CardForm: FC<Props> = props => {
       />
       <div className={s.modalButtons}>
         <Button type="button" variant="secondary" onClick={closeModal}>
-          Cancel
+          <Typography variant={'subtitle2'} as={'span'}>
+            Cancel
+          </Typography>
         </Button>
-        <Button type="submit">{buttonText}</Button>
+        <Button type="submit">
+          <Typography variant={'subtitle2'} as={'span'}>
+            {buttonText}
+          </Typography>
+        </Button>
       </div>
     </form>
   )

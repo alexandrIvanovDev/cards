@@ -13,6 +13,7 @@ import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Dropdown, DropDownItem, DropDownItemWithIcon } from '@/components/ui/dropdown'
 import { ProgressBar } from '@/components/ui/progress-bar'
+import { Typography } from '@/components/ui/typography'
 import { useSignOutMutation } from '@/feature/auth/auth.service.ts'
 
 type Props = {
@@ -64,8 +65,10 @@ export const Header: FC<Props> = ({ data }) => {
             </Dropdown>
           </div>
         ) : (
-          <Button as={Link} to={routePaths.signIn} variant={'primary'} className={s.btn}>
-            Sign In
+          <Button as={Link} to={routePaths.signIn} variant={'secondary'} className={s.btn}>
+            <Typography variant={'subtitle2'} as={'span'}>
+              Sign In
+            </Typography>
           </Button>
         )}
       </div>

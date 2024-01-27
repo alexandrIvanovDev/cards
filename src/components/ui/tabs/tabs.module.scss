@@ -1,54 +1,58 @@
-.label {
-  position: absolute;
-  top: -25px;
-  left: 0;
-}
+.root {
+  position: relative;
 
-.tab {
-  cursor: pointer;
-
-  padding: 6px 24px;
-
-  color: var(--light-color-100);
-
-  background: transparent;
-  border: 1px solid var(--dark-color-300);
-  border-left: none;
-
-  transition: all 0.3s;
-
-  &:first-child {
-    border-left: 1px solid var(--dark-color-300);
-    border-radius: 2px 0 0 2px;
+  .label {
+    position: absolute;
+    top: -25px;
+    left: 0;
   }
 
-  &:last-child {
-    border-radius: 0 2px 2px 0;
-  }
+  .tab {
+    cursor: pointer;
 
-  &:hover {
-    color: var(--light-color-900);
-    background: var(--dark-color-300);
-    border-color: var(--dark-color-100);
-  }
+    padding: 6px 24px;
 
-  &:focus-visible {
-    outline: 2px solid var(--info-color-900);
-  }
-
-  // &:active {
-  // }
-
-  &[data-state='active'] {
     color: var(--light-color-100);
-    background: var(--primary-color-500);
-    border-color: var(--primary-color-500);
-  }
 
-  &[data-disabled] {
-    cursor: initial;
-    color: var(--dark-color-300);
-    background: var(--dark-color-700);
-    border-color: var(--dark-color-300);
+    background: transparent;
+    border: 1px solid var(--dark-color-300);
+    border-left: none;
+
+    transition: all 0.3s;
+
+    &:first-child {
+      border-left: 1px solid var(--dark-color-300);
+      border-radius: 2px 0 0 2px;
+    }
+
+    &:last-child {
+      border-radius: 0 2px 2px 0;
+    }
+
+    &:hover {
+      color: var(--light-color-900);
+      background: var(--dark-color-300);
+      border-color: var(--dark-color-100);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--info-color-900);
+    }
+
+    // &:active {
+    // }
+
+    &[data-state='active'] {
+      color: var(--light-color-100);
+      background: var(--primary-color-500);
+      border-color: var(--primary-color-500);
+    }
+
+    &[data-disabled] {
+      cursor: initial;
+      color: var(--dark-color-300);
+      background: var(--dark-color-700);
+      border-color: var(--dark-color-300);
+    }
   }
 }

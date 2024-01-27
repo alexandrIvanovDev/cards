@@ -5,6 +5,7 @@ import { SignUpFormType, useSignUp } from './use-sign-up.tsx'
 
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
+import { Typography } from '@/components/ui/typography'
 
 type Props = {
   onSubmit: (data: SignUpFormType) => void
@@ -42,7 +43,11 @@ export const SignUpForm: FC<Props> = ({ onSubmit }) => {
         error={errors.confirmPassword?.message}
         label="Confirm Password"
       />
-      <Button className={s.btn}>Sign Up</Button>
+      <Button className={s.btn}>
+        <Typography variant={'subtitle2'} as={'span'}>
+          Sign Up
+        </Typography>
+      </Button>
     </form>
   )
 }

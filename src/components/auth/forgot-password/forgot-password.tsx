@@ -22,10 +22,14 @@ export const ForgotPasswordForm: FC<Props> = ({ onSubmit }) => {
         error={errors.email?.message}
         label="Email"
       />
-      <Typography className={s.text}>
+      <Typography className={s.text} variant={'body2'}>
         Enter your email address and we will send you further instructions
       </Typography>
-      <Button className={s.btn}>Send Instructions</Button>
+      <Button className={s.btn}>
+        <Typography variant={'subtitle2'} as={'span'}>
+          Send Instructions
+        </Typography>
+      </Button>
     </form>
   )
 }

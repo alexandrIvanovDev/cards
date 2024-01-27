@@ -5,6 +5,7 @@ import { UpdateUserFormType, useEditProfile } from './use-edit-profile.tsx'
 
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
+import { Typography } from '@/components/ui/typography'
 
 type Props = {
   name: string
@@ -22,7 +23,11 @@ export const EditProfileForm: FC<Props> = ({ onSubmit, name }) => {
         error={errors.name?.message}
         label="Nickname"
       />
-      <Button className={s.btn}>Save changes</Button>
+      <Button className={s.btn}>
+        <Typography variant={'subtitle2'} as={'span'}>
+          Save changes
+        </Typography>
+      </Button>
     </form>
   )
 }

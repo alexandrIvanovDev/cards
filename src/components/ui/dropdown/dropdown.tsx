@@ -51,8 +51,8 @@ export const DropDownItemWithIcon: FC<ItemPropsWithIcon> = ({ icon, text, onSele
         onSelect={onSelect}
         disabled={disabled}
       >
-        {icon}
-        <Typography>{text}</Typography>
+        <div className={s.itemIcon}>{icon}</div>
+        <Typography variant={'body2'}>{text}</Typography>
       </DropdownMenu.Item>
       <DropdownMenu.Separator className={s.separator} />
     </>

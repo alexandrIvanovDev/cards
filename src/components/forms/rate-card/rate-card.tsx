@@ -7,6 +7,7 @@ import s from './rate-card.module.scss'
 import { ControlledRadio } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
 import { RadioType } from '@/components/ui/radio-group'
+import { Typography } from '@/components/ui/typography'
 
 export type RateCardType = { grade: string }
 
@@ -28,7 +29,11 @@ export const RateCard: FC<Props> = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
       <ControlledRadio name={'grade'} control={control} radioButtons={radioButtons} />
-      <Button className={s.btn}>Next question</Button>
+      <Button className={s.btn}>
+        <Typography variant={'subtitle2'} as={'span'}>
+          Next question
+        </Typography>
+      </Button>
     </form>
   )
 }

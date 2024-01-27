@@ -46,7 +46,11 @@ export const SignInForm: FC<Props> = ({ onSubmit }) => {
       >
         Forgot Password?
       </Typography>
-      <Button>Sign In</Button>
+      <Button>
+        <Typography variant={'subtitle2'} as={'span'}>
+          Sign In
+        </Typography>
+      </Button>
     </form>
   )
 }

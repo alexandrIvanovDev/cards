@@ -132,7 +132,7 @@ export const Deck = () => {
           <div className={s.notification}>
             {isMyDeck ? (
               <>
-                <Typography className={s.text}>
+                <Typography className={s.text} variant={'body1'}>
                   This deck is empty. Click add new card to fill this deck
                 </Typography>
 
@@ -141,7 +141,13 @@ export const Deck = () => {
                   onOpenChange={setAddCardModal}
                   onSubmit={addNewCard}
                   title="Add New Card"
-                  trigger={<Button>Add New Card</Button>}
+                  trigger={
+                    <Button>
+                      <Typography variant={'subtitle2'} as={'span'}>
+                        Add New Card
+                      </Typography>
+                    </Button>
+                  }
                   buttonText="Add New Card"
                 />
               </>

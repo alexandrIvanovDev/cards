@@ -25,7 +25,7 @@ export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Checkb
     }
 
     return (
-      <Typography as="label" className={classes.label}>
+      <Typography as="label" variant={'body2'} className={classes.label}>
         <div className={classes.wrapper}>
           <RadixCheckbox.Root
             ref={ref}

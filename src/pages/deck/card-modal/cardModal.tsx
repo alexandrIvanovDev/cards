@@ -18,14 +18,7 @@ export const CardModal: FC<Props> = props => {
   }
 
   return (
-    <Modal
-      // open={open}
-      onOpenChange={onOpenChange}
-      // trigger={trigger}
-      // title={title}
-      // className={className}
-      {...rest}
-    >
+    <Modal onOpenChange={onOpenChange} {...rest}>
       <CardForm
         onSubmit={onSubmit}
         closeModal={closeModal}
