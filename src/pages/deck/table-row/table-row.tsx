@@ -1,11 +1,13 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 import s from './table-row.module.scss'
 
 import { DeleteIcon } from '@/assets/icons/Delete.tsx'
 import { EditIcon } from '@/assets/icons/Edit.tsx'
+import { Cover } from '@/components/ui/cover'
 import { Rating } from '@/components/ui/rating'
 import { Table } from '@/components/ui/table'
+import { Typography } from '@/components/ui/typography'
 import { DeleteEntityModal } from '@/feature/decks-list/delete-entity-modal/delete-entity-modal.tsx'
 import { CardModal } from '@/pages/deck/card-modal/cardModal.tsx'
 import {
@@ -22,7 +24,7 @@ type Props = {
   updateCard: ({ id, data }: UpdateCardType) => void
 }
 
-export const TableRow: FC<Props> = ({ card, isMyDeck, deleteCard, updateCard }) => {
+export const TableRow = ({ card, isMyDeck, deleteCard, updateCard }: Props) => {
   const [deleteCardIsOpen, setDeleteCardIsOpen] = useState(false)
   const [updateCardIsOpen, setUpdateCardIsOpen] = useState(false)
 
@@ -34,8 +36,18 @@ export const TableRow: FC<Props> = ({ card, isMyDeck, deleteCard, updateCard }) 
   return (
     <>
       <Table.Row className={s.row}>
-        <Table.Cell>{card.question}</Table.Cell>
-        <Table.Cell className={s.answerCell}>{card.answer}</Table.Cell>
+        <Table.Cell>
+          <div className={s.questionWrapper}>
+            <Cover cover={card?.questionImg} />
+            <Typography variant={'body2'}>{card?.question}</Typography>
+          </div>
+        </Table.Cell>
+        <Table.Cell className={s.answerCell}>
+          <div className={s.answerWrapper}>
+            <Cover cover={card?.answerImg} />
+            <Typography variant={'body2'}>{card?.answer}</Typography>
+          </div>
+        </Table.Cell>
         <Table.Cell className={s.updatedCell}>
           {new Date(card?.updated as string).toLocaleDateString()}
         </Table.Cell>

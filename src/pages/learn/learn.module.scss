@@ -16,6 +16,10 @@
 
     .questionWrapper {
       @include flex(row, flex-start, normal, 0.5rem);
+
+      .question {
+        word-break: break-all;
+      }
     }
 
     .attempts {
@@ -23,8 +27,16 @@
       color: var(--dark-color-100);
     }
 
-    .answerWrapper {
+    .answerBlock {
       @include flex(column, center, normal, 1rem);
+
+      .answerWrapper {
+        @include flex(row, flex-start, normal, 0.5rem);
+
+        .answer {
+          word-break: break-all;
+        }
+      }
     }
   }
 }

@@ -1,8 +1,16 @@
 @import '@/app/styles/mixins';
 
 .row {
+  .questionWrapper {
+    @include flex(row, flex-start, center, 1rem);
+  }
+
   .answerCell {
     width: 350px;
+
+    .answerWrapper {
+      @include flex(row, flex-start, center, 1rem);
+    }
   }
 
   .updatedCell {

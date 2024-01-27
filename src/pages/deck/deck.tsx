@@ -40,7 +40,11 @@ export const Deck = () => {
   const [sort, setSort] = useState<Sort>({ field: 'updated', order: 'desc' })
 
   const { data: deckData, isLoading: getDeckIsLoading } = useGetDeckByIdQuery({ id: id as string })
-  const { data: cardsData, isLoading: getCardsIsLoading } = useGetCardsQuery({
+  const {
+    data: cardsData,
+    isLoading: getCardsIsLoading,
+    isFetching,
+  } = useGetCardsQuery({
     id: id as string,
     question: search,
     currentPage,
@@ -84,7 +88,11 @@ export const Deck = () => {
   }
 
   const isLoading =
-    createCardIsLoading || deleteCardIsLoading || updateCardIsLoading || getCardsIsLoading
+    createCardIsLoading ||
+    deleteCardIsLoading ||
+    updateCardIsLoading ||
+    getCardsIsLoading ||
+    isFetching
 
   useEffect(() => {
     if (debouncedValue || debouncedValue === '') {

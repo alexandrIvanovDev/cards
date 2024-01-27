@@ -36,7 +36,9 @@ export const Learn = () => {
         </Typography>
         <div className={s.questionWrapper}>
           <Typography variant={'subtitle1'}>Question:</Typography>
-          <Typography variant={'body1'}>{card?.question}</Typography>
+          <Typography variant={'body1'} className={s.question}>
+            {card?.question}
+          </Typography>
         </div>
 
         <Typography variant={'body2'} className={s.attempts}>
@@ -49,10 +51,12 @@ export const Learn = () => {
             </Typography>
           </Button>
         ) : (
-          <div className={s.answerWrapper}>
-            <div className={s.questionWrapper}>
+          <div className={s.answerBlock}>
+            <div className={s.answerWrapper}>
               <Typography variant={'subtitle1'}>Answer:</Typography>
-              <Typography variant={'body1'}>{card?.answer}</Typography>
+              <Typography variant={'body1'} className={s.answer}>
+                {card?.answer}
+              </Typography>
             </div>
             <Typography variant={'subtitle1'}>Rate yourself:</Typography>
             <RateCard onSubmit={onSubmit} />
