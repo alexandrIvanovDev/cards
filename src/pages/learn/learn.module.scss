@@ -7,23 +7,35 @@
     @include container(420px);
     @include flex(column, center, normal, 0.5rem);
 
+    // overflow: auto;
+    // max-height: 700px;
     padding: 36px;
 
     .title {
-      margin-bottom: 35px;
+      margin-bottom: 15px;
       text-align: center;
     }
 
     .questionWrapper {
-      @include flex(row, flex-start, normal, 0.5rem);
+      @include flex(column, flex-start, flex-start, 1rem);
 
-      .question {
-        word-break: break-all;
+      .questionText {
+        @include flex(row, flex-start, normal, 0.5rem);
+
+        .question {
+          word-break: break-all;
+        }
+      }
+
+      .questionImg {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
       }
     }
 
     .attempts {
-      margin-bottom: 25px;
+      margin-bottom: 10px;
       color: var(--dark-color-100);
     }
 
@@ -36,6 +48,12 @@
         .answer {
           word-break: break-all;
         }
+      }
+
+      .answerImg {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
       }
     }
   }

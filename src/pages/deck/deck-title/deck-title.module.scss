@@ -13,3 +13,12 @@
 .hidden {
   display: none;
 }
+
+.cover {
+  width: 250px;
+  height: 150px;
+  margin-top: 20px;
+
+  object-fit: cover;
+  border-radius: 2px;
+}

@@ -16,12 +16,7 @@ import { DecksFilter } from '@/feature/decks-list/decks-filter/decks-filter.tsx'
 import { DecksHeader } from '@/feature/decks-list/decks-header/decks-header.tsx'
 import { DecksTable } from '@/feature/decks-list/decks-table/decks-table.tsx'
 import { GetDecksResponse } from '@/services/cards.types.ts'
-import {
-  useCreateDeckMutation,
-  useDeleteDeckMutation,
-  useGetDecksQuery,
-  useUpdateDeckMutation,
-} from '@/services/deck.service.ts'
+import { useCreateDeckMutation, useGetDecksQuery } from '@/services/deck.service.ts'
 import {
   setCardsCount,
   setCurrentPage,
@@ -54,8 +49,6 @@ export const DecksList = () => {
 
   const data = currentData ?? decksData
 
-  const [deleteDeck, { isLoading: deleteDeckIsLoading }] = useDeleteDeckMutation()
-  const [updateDeck, { isLoading: updateDeckIsLoading }] = useUpdateDeckMutation()
   const [createDeck, { isLoading: createDeckIsLoading }] = useCreateDeckMutation()
 
   const dispatch = useDispatch<AppDispatch>()
@@ -100,12 +93,7 @@ export const DecksList = () => {
     dispatch(setCurrentPage(page))
   }
 
-  const isLoading =
-    getDecksIsLoading ||
-    createDeckIsLoading ||
-    deleteDeckIsLoading ||
-    updateDeckIsLoading ||
-    isFetching
+  const isLoading = getDecksIsLoading || createDeckIsLoading || isFetching
 
   useEffect(() => {
     if (debouncedValue || debouncedValue === '') {
@@ -144,8 +132,6 @@ export const DecksList = () => {
         <DecksTable
           data={data as GetDecksResponse}
           userId={userData?.id as string}
-          deleteDeck={deleteDeck}
-          updateDeck={updateDeck}
           sort={sort}
           setSort={setSort}
         />

@@ -35,15 +35,21 @@ export const Learn = () => {
           Learn {deck?.name}
         </Typography>
         <div className={s.questionWrapper}>
-          <Typography variant={'subtitle1'}>Question:</Typography>
-          <Typography variant={'body1'} className={s.question}>
-            {card?.question}
-          </Typography>
+          <div className={s.questionText}>
+            <Typography variant={'subtitle1'}>Question:</Typography>
+            <Typography variant={'body1'} className={s.question}>
+              {card?.question}
+            </Typography>
+          </div>
+          {card?.questionImg && (
+            <img src={card.questionImg} alt="questionImg" className={s.questionImg} />
+          )}
         </div>
 
         <Typography variant={'body2'} className={s.attempts}>
           Number of attempts: {card?.shots}
         </Typography>
+
         {!isShowAnswer ? (
           <Button onClick={() => setIsShowAnswer(true)}>
             <Typography variant={'subtitle2'} as={'span'}>
@@ -58,6 +64,9 @@ export const Learn = () => {
                 {card?.answer}
               </Typography>
             </div>
+            {card?.answerImg && (
+              <img src={card.answerImg} alt="answerImg" className={s.answerImg} />
+            )}
             <Typography variant={'subtitle1'}>Rate yourself:</Typography>
             <RateCard onSubmit={onSubmit} />
           </div>

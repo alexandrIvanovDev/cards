@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 import { clsx } from 'clsx'
 import { Link, useNavigate } from 'react-router-dom'
@@ -15,17 +15,19 @@ import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
 import { DeckForm } from '@/feature/decks-list/deck-form/deck-form.tsx'
 import { DeleteEntityModal } from '@/feature/decks-list/delete-entity-modal/delete-entity-modal.tsx'
-import { DeckArgs, DeckByIdArgs, DecksResponseItems, UpdateDeck } from '@/services/cards.types.ts'
+import { DeckArgs, DecksResponseItems } from '@/services/cards.types.ts'
+import { useDeleteDeckMutation, useUpdateDeckMutation } from '@/services/deck.service.ts'
 
 type Props = {
   deck: DecksResponseItems
   userId: string
-  deleteDeck: (data: DeckByIdArgs) => void
-  updateDeck: (data: UpdateDeck) => void
 }
 
-export const DecksRow: FC<Props> = ({ deck, userId, deleteDeck, updateDeck }) => {
+export const DecksRow = ({ deck, userId }: Props) => {
   const isMyDeck = userId === deck.userId
+
+  const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
+  const [updateDeck] = useUpdateDeckMutation()
 
   const [deleteDeckIsOpen, setDeleteDeckIsOpen] = useState(false)
   const [updateDeckIsOpen, setUpdateDeckIsOpen] = useState(false)
@@ -83,7 +85,12 @@ export const DecksRow: FC<Props> = ({ deck, userId, deleteDeck, updateDeck }) =>
               />
             </button>
             {isMyDeck && (
-              <DeleteIcon className={s.icon} onClick={() => setDeleteDeckIsOpen(true)} />
+              <button className={s.buttonWrapper} disabled={isLoading}>
+                <DeleteIcon
+                  className={clsx(s.icon, isLoading && s.disabledIcon)}
+                  onClick={() => setDeleteDeckIsOpen(true)}
+                />
+              </button>
             )}
           </div>
         </Table.Cell>

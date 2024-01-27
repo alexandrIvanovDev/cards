@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 import { clsx } from 'clsx'
 import { useNavigate } from 'react-router-dom'
@@ -30,7 +30,7 @@ type Props = {
   addNewCard: (createCardData: CreateCardFormType) => void
 }
 
-export const DeckTitle: FC<Props> = props => {
+export const DeckTitle = (props: Props) => {
   const { cardsData, isMyDeck, deckData, openModal, setOpenModal, addNewCard } = props
 
   const classes = {
@@ -70,59 +70,63 @@ export const DeckTitle: FC<Props> = props => {
   }
 
   return (
-    <div className={s.titleWrapper}>
-      {(isLoading || updateDeckIsLoading) && <ProgressBar />}
-      <div className={s.title}>
-        <Typography as="h2" variant="large">
-          {deckData?.name ?? ''}
-        </Typography>
-        {isMyDeck && (
-          <Dropdown>
-            <div>
-              <DropDownItemWithIcon
-                icon={<PlayIcon />}
-                text={'Learn'}
-                disabled={deckData.cardsCount === 0}
-                onSelect={() => navigate(`${routePaths.learn}/${deckData.id}`)}
-              />
-              <DropDownItemWithIcon
-                icon={<EditIcon />}
-                text={'Edit'}
-                onSelect={() => setUpdateDeckIsOpen(true)}
-              />
-              <DropDownItemWithIcon
-                icon={<DeleteIcon />}
-                text={'Delete'}
-                onSelect={() => setDeleteDeckIsOpen(true)}
-              />
-            </div>
-          </Dropdown>
+    <>
+      <div className={s.titleWrapper}>
+        {(isLoading || updateDeckIsLoading) && <ProgressBar />}
+        <div className={s.title}>
+          <Typography as="h2" variant="large">
+            {deckData?.name ?? ''}
+          </Typography>
+          {isMyDeck && (
+            <Dropdown>
+              <div>
+                <DropDownItemWithIcon
+                  icon={<PlayIcon />}
+                  text={'Learn'}
+                  disabled={deckData.cardsCount === 0}
+                  onSelect={() => navigate(`${routePaths.learn}/${deckData.id}`)}
+                />
+                <DropDownItemWithIcon
+                  icon={<EditIcon />}
+                  text={'Edit'}
+                  onSelect={() => setUpdateDeckIsOpen(true)}
+                />
+                <DropDownItemWithIcon
+                  icon={<DeleteIcon />}
+                  text={'Delete'}
+                  onSelect={() => setDeleteDeckIsOpen(true)}
+                />
+              </div>
+            </Dropdown>
+          )}
+        </div>
+        {isMyDeck ? (
+          <CardModal
+            open={openModal}
+            onOpenChange={setOpenModal}
+            onSubmit={addNewCard}
+            className={classes.addCard}
+            trigger={
+              <Button>
+                <Typography variant={'subtitle2'} as={'span'}>
+                  Add New Card
+                </Typography>
+              </Button>
+            }
+            title="Add New Card"
+            buttonText="Add New Card"
+          />
+        ) : (
+          <Button
+            disabled={deckData?.cardsCount === 0}
+            onClick={() => navigate(`${routePaths.learn}/${deckData.id}`)}
+          >
+            Learn Deck
+          </Button>
         )}
       </div>
-      {isMyDeck ? (
-        <CardModal
-          open={openModal}
-          onOpenChange={setOpenModal}
-          onSubmit={addNewCard}
-          className={classes.addCard}
-          trigger={
-            <Button>
-              <Typography variant={'subtitle2'} as={'span'}>
-                Add New Card
-              </Typography>
-            </Button>
-          }
-          title="Add New Card"
-          buttonText="Add New Card"
-        />
-      ) : (
-        <Button
-          disabled={deckData?.cardsCount === 0}
-          onClick={() => navigate(`${routePaths.learn}/${deckData.id}`)}
-        >
-          Learn Deck
-        </Button>
-      )}
+
+      {deckData.cover && <img src={deckData.cover} alt="cover" className={s.cover} />}
 
       <>
         <DeleteEntityModal
@@ -144,6 +148,6 @@ export const DeckTitle: FC<Props> = props => {
           />
         </Modal>
       </>
-    </div>
+    </>
   )
 }
