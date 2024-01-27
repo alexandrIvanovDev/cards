@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import { DevTool } from '@hookform/devtools'
 import { Link } from 'react-router-dom'
 
 import s from './sign-in.module.scss'
@@ -20,8 +19,6 @@ export const SignInForm: FC<Props> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-      <DevTool control={control} />
-
       <ControlledTextField
         name={'email'}
         control={control}

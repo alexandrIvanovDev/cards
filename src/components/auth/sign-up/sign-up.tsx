@@ -1,7 +1,5 @@
 import { FC } from 'react'
 
-import { DevTool } from '@hookform/devtools'
-
 import s from './sign-up.module.scss'
 import { SignUpFormType, useSignUp } from './use-sign-up.tsx'
 
@@ -17,8 +15,6 @@ export const SignUpForm: FC<Props> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-      <DevTool control={control} />
-
       <ControlledTextField
         name={'name'}
         control={control}

@@ -1,9 +1,7 @@
 import { FC } from 'react'
 
-import { DevTool } from '@hookform/devtools'
-
 import s from './create-new-password.module.scss'
-import { useCreateNewPassword, CreateNewPasswordFormType } from './use-create-new-password.tsx'
+import { CreateNewPasswordFormType, useCreateNewPassword } from './use-create-new-password.tsx'
 
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
@@ -18,8 +16,6 @@ export const CreateNewPasswordForm: FC<Props> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-      <DevTool control={control} />
-
       <ControlledTextField
         name={'password'}
         type="password"

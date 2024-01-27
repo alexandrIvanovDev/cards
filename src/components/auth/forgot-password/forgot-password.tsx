@@ -1,7 +1,5 @@
 import { FC } from 'react'
 
-import { DevTool } from '@hookform/devtools'
-
 import s from './forgot-password.module.scss'
 import { ForgotPasswordFormType, useForgotPassword } from './use-forgot-password.tsx'
 
@@ -18,8 +16,6 @@ export const ForgotPasswordForm: FC<Props> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-      <DevTool control={control} />
-
       <ControlledTextField
         name={'email'}
         control={control}

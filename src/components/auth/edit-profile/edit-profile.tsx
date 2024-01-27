@@ -1,7 +1,5 @@
 import { FC } from 'react'
 
-import { DevTool } from '@hookform/devtools'
-
 import s from './edit-profile.module.scss'
 import { UpdateUserFormType, useEditProfile } from './use-edit-profile.tsx'
 
@@ -18,8 +16,6 @@ export const EditProfileForm: FC<Props> = ({ onSubmit, name }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-      <DevTool control={control} />
-
       <ControlledTextField
         name={'name'}
         control={control}
