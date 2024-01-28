@@ -65,7 +65,7 @@ export const Header: FC<Props> = ({ data }) => {
             </Dropdown>
           </div>
         ) : (
-          <Button as={Link} to={routePaths.signIn} variant={'secondary'} className={s.btn}>
+          <Button as={Link} to={routePaths.signIn} className={s.btn}>
             <Typography variant={'subtitle2'} as={'span'}>
               Sign In
             </Typography>

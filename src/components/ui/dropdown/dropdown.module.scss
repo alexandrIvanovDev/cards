@@ -36,8 +36,6 @@
 }
 
 .item {
-  @include flex(row, flex-start, center, 1rem);
-
   padding: 12px;
   fill: var(--light-color-100);
   transition: all 0.3s;
@@ -48,10 +46,14 @@
     fill: var(--primary-color-500);
   }
 
-  .itemIcon {
-    @include flex;
+  .animatedItem {
+    @include flex(row, flex-start, center, 1rem);
 
-    transform: scale(0.75);
+    .itemIcon {
+      @include flex;
+
+      transform: scale(0.75);
+    }
   }
 }
 

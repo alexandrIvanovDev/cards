@@ -1,6 +1,7 @@
-import { ElementRef, FC, forwardRef, ReactNode } from 'react'
+import { ElementRef, forwardRef, ReactNode } from 'react'
 
 import * as Dialog from '@radix-ui/react-dialog'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import s from './modal.module.scss'
 
@@ -18,7 +19,7 @@ export type ModalProps = {
 }
 
 // TODO need to finish ref
-export const Modal: FC<ModalProps> = forwardRef<ElementRef<typeof Dialog.Root>, ModalProps>(
+export const Modal = forwardRef<ElementRef<typeof Dialog.Root>, ModalProps>(
   ({ open, onOpenChange, title, children, trigger, className }, ref) => {
     return (
       <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -29,23 +30,34 @@ export const Modal: FC<ModalProps> = forwardRef<ElementRef<typeof Dialog.Root>, 
         )}
         <Dialog.Portal>
           <Dialog.Overlay className={s.overlay} />
-          <div ref={ref}>
-            <Dialog.Content forceMount asChild ref={ref}>
-              <Card className={s.content}>
-                {title && (
-                  <div className={s.titleWrapper}>
-                    <Typography as="h3" variant="h3" className={s.title}>
-                      {title}
-                    </Typography>
-                    <Dialog.Close className={s.close}>
-                      <CloseIcon />
-                    </Dialog.Close>
-                  </div>
-                )}
-                <div className={s.childrenWrapper}>{children}</div>
-              </Card>
-            </Dialog.Content>
-          </div>
+          {/*<div ref={ref}>*/}
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+              >
+                <Dialog.Content forceMount asChild ref={ref}>
+                  <Card className={s.content}>
+                    {title && (
+                      <div className={s.titleWrapper}>
+                        <Typography as="h3" variant="h3" className={s.title}>
+                          {title}
+                        </Typography>
+                        <Dialog.Close className={s.close}>
+                          <CloseIcon />
+                        </Dialog.Close>
+                      </div>
+                    )}
+                    <div className={s.childrenWrapper}>{children}</div>
+                  </Card>
+                </Dialog.Content>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {/*</div>*/}
         </Dialog.Portal>
       </Dialog.Root>
     )

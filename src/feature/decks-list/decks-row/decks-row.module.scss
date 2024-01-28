@@ -2,7 +2,10 @@
 
 .row {
   .nameWrapper {
-    @include flex(row, flex-start, center, 1rem);
+    display: inline-flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
 
     color: var(--light-color-100);
     text-decoration: none;

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { clsx } from 'clsx'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import s from './deck-title.module.scss'
 
@@ -117,12 +117,15 @@ export const DeckTitle = (props: Props) => {
             buttonText="Add New Card"
           />
         ) : (
-          <Button
-            disabled={deckData?.cardsCount === 0}
-            onClick={() => navigate(`${routePaths.learn}/${deckData.id}`)}
-          >
-            Learn Deck
-          </Button>
+          deckData?.cardsCount > 0 && (
+            <Button
+              as={Link}
+              to={`${routePaths.learn}/${deckData.id}`}
+              onClick={() => navigate(`${routePaths.learn}/${deckData.id}`)}
+            >
+              <Typography variant={'subtitle2'}>Learn Deck</Typography>
+            </Button>
+          )
         )}
       </div>
 
