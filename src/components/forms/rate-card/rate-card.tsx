@@ -1,9 +1,9 @@
-import { FC } from 'react'
-
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 import s from './rate-card.module.scss'
 
+import { routePaths } from '@/app/providers/router'
 import { ControlledRadio } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
 import { RadioType } from '@/components/ui/radio-group'
@@ -20,20 +20,24 @@ const radioButtons: Array<RadioType> = [
 ]
 
 type Props = {
+  deckId: string
   onSubmit: (data: RateCardType) => void
 }
 
-export const RateCard: FC<Props> = ({ onSubmit }) => {
+export const RateCard = ({ onSubmit, deckId }: Props) => {
   const { control, handleSubmit } = useForm<RateCardType>({ defaultValues: { grade: '1' } })
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
       <ControlledRadio name={'grade'} control={control} radioButtons={radioButtons} />
-      <Button className={s.btn}>
-        <Typography variant={'subtitle2'} as={'span'}>
-          Next question
-        </Typography>
-      </Button>
+      <div className={s.btns}>
+        <Button>
+          <Typography variant={'subtitle2'}>Next question</Typography>
+        </Button>
+        <Button as={Link} to={`${routePaths.packs}/${deckId}`} variant={'secondary'}>
+          <Typography variant={'subtitle2'}>Complete the training</Typography>
+        </Button>
+      </div>
     </form>
   )
 }

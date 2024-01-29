@@ -39,6 +39,10 @@
       color: var(--dark-color-100);
     }
 
+    .btns {
+      @include flex(column, center, normal, 1rem);
+    }
+
     .answerBlock {
       @include flex(column, center, normal, 1rem);
 

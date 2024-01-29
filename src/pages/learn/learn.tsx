@@ -1,9 +1,10 @@
 import { useState } from 'react'
 
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import s from './learn.module.scss'
 
+import { routePaths } from '@/app/providers/router'
 import { RateCard, RateCardType } from '@/components/forms/rate-card/rate-card.tsx'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
@@ -51,11 +52,14 @@ export const Learn = () => {
         </Typography>
 
         {!isShowAnswer ? (
-          <Button onClick={() => setIsShowAnswer(true)}>
-            <Typography variant={'subtitle2'} as={'span'}>
-              Show answer
-            </Typography>
-          </Button>
+          <div className={s.btns}>
+            <Button onClick={() => setIsShowAnswer(true)}>
+              <Typography variant={'subtitle2'}>Show answer</Typography>
+            </Button>
+            <Button as={Link} to={`${routePaths.packs}/${id}`} variant={'secondary'}>
+              <Typography variant={'subtitle2'}>Complete the training</Typography>
+            </Button>
+          </div>
         ) : (
           <div className={s.answerBlock}>
             <div className={s.answerWrapper}>
@@ -68,7 +72,7 @@ export const Learn = () => {
               <img src={card.answerImg} alt="answerImg" className={s.answerImg} />
             )}
             <Typography variant={'subtitle1'}>Rate yourself:</Typography>
-            <RateCard onSubmit={onSubmit} />
+            <RateCard onSubmit={onSubmit} deckId={id} />
           </div>
         )}
       </Card>

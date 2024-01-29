@@ -2,4 +2,8 @@
 
 .form {
   @include flex(column, center, normal, 1rem);
+
+  .btns {
+    @include flex(column, center, normal, 1rem);
+  }
 }
