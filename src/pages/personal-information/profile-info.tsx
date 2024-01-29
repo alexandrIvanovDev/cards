@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import s from './profile-info.module.scss'
 
 import { EditIcon } from '@/assets/icons/Edit.tsx'
@@ -14,7 +12,7 @@ type ProfileInfoProps = {
   logout: () => void
 }
 
-export const ProfileInfo: FC<ProfileInfoProps> = ({ changeName, user, logout }) => {
+export const ProfileInfo = ({ changeName, user, logout }: ProfileInfoProps) => {
   return (
     <div className={s.information}>
       <Typography variant="h1" as="h3" className={s.name}>

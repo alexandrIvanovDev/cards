@@ -4,9 +4,11 @@
   @include flex(column, center, normal, 1rem);
 
   width: 100%;
-  padding: 10px 0 40px;
+  padding: 10px 0;
 
-  .btn {
+  .buttons {
+    @include flex(row, space-between, normal, 1rem);
+
     margin-top: 20px;
   }
 }

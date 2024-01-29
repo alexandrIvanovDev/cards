@@ -60,7 +60,11 @@ export const ProfilePage = () => {
           editMode={editMode}
         />
         {editMode ? (
-          <EditProfileForm onSubmit={saveChanges} name={data?.name as string} />
+          <EditProfileForm
+            onSubmit={saveChanges}
+            name={data?.name as string}
+            toggleEditMode={toggleEditMode}
+          />
         ) : (
           <ProfileInfo user={data as User} changeName={toggleEditMode} logout={logout} />
         )}

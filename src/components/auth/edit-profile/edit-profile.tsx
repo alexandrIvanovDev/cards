@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import s from './edit-profile.module.scss'
 import { UpdateUserFormType, useEditProfile } from './use-edit-profile.tsx'
 
@@ -10,9 +8,10 @@ import { Typography } from '@/components/ui/typography'
 type Props = {
   name: string
   onSubmit: (data: UpdateUserFormType) => void
+  toggleEditMode: () => void
 }
 
-export const EditProfileForm: FC<Props> = ({ onSubmit, name }) => {
+export const EditProfileForm = ({ onSubmit, name, toggleEditMode }: Props) => {
   const { control, handleSubmit, errors } = useEditProfile(name)
 
   return (
@@ -23,11 +22,14 @@ export const EditProfileForm: FC<Props> = ({ onSubmit, name }) => {
         error={errors.name?.message}
         label="Nickname"
       />
-      <Button className={s.btn}>
-        <Typography variant={'subtitle2'} as={'span'}>
-          Save changes
-        </Typography>
-      </Button>
+      <div className={s.buttons}>
+        <Button fullWidth variant={'secondary'} type={'button'} onClick={toggleEditMode}>
+          <Typography variant={'subtitle2'}>Back</Typography>
+        </Button>
+        <Button fullWidth>
+          <Typography variant={'subtitle2'}>Save changes</Typography>
+        </Button>
+      </div>
     </form>
   )
 }
