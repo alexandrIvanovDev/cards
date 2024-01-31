@@ -3,6 +3,11 @@
 .modalContent {
   @include flex(column, center, normal, 1.5rem);
 
+  .cover {
+    height: 150px;
+    object-fit: cover;
+  }
+
   .modalButtons {
     @include flex(row, space-between, center);
   }

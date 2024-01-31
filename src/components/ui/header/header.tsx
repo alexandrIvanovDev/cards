@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import { Link, useNavigate } from 'react-router-dom'
 
 import s from './header.module.scss'
@@ -20,7 +18,7 @@ type Props = {
   data: ProfileInfoProps | null
 }
 
-export const Header: FC<Props> = ({ data }) => {
+export const Header = ({ data }: Props) => {
   const navigate = useNavigate()
 
   const [signOut, { isLoading }] = useSignOutMutation()

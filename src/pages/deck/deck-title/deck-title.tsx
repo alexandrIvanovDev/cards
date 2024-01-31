@@ -55,7 +55,7 @@ export const DeckTitle = (props: Props) => {
     }
   }
 
-  const editDeck = async (data: DeckArgs) => {
+  const editDeck = async (data: FormData) => {
     try {
       await updateDeck({ id: deckData.id, data })
       setUpdateDeckIsOpen(false)

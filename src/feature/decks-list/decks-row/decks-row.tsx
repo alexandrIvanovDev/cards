@@ -39,7 +39,7 @@ export const DecksRow = ({ deck, userId }: Props) => {
     setDeleteDeckIsOpen(false)
   }
 
-  const editDeck = (data: DeckArgs) => {
+  const editDeck = (data: FormData) => {
     updateDeck({ id: deck.id, data })
     setUpdateDeckIsOpen(false)
   }

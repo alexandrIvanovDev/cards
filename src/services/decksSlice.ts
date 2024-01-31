@@ -18,12 +18,12 @@ export const decksSlice = createSlice({
   initialState: {
     pagination: {
       currentPage: 1,
-      pageSize: 10,
+      pageSize: 7,
     },
     filter: {
       searchTerm: '',
       tabValue: '',
-      cardsCount: [0, 10],
+      cardsCount: [0, 30],
     },
   } as InitialState,
   reducers: {

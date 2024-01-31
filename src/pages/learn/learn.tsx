@@ -1,10 +1,9 @@
 import { useState } from 'react'
 
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import s from './learn.module.scss'
 
-import { routePaths } from '@/app/providers/router'
 import { RateCard, RateCardType } from '@/components/forms/rate-card/rate-card.tsx'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
@@ -15,6 +14,7 @@ import { useGetDeckByIdQuery } from '@/services/deck.service.ts'
 
 export const Learn = () => {
   const params = useParams()
+  const navigate = useNavigate()
   const id = params.id as string
   const [isShowAnswer, setIsShowAnswer] = useState(false)
 
@@ -56,7 +56,7 @@ export const Learn = () => {
             <Button onClick={() => setIsShowAnswer(true)}>
               <Typography variant={'subtitle2'}>Show answer</Typography>
             </Button>
-            <Button as={Link} to={`${routePaths.packs}/${id}`} variant={'secondary'}>
+            <Button onClick={() => navigate(-1)} variant={'secondary'}>
               <Typography variant={'subtitle2'}>Complete the training</Typography>
             </Button>
           </div>
@@ -72,7 +72,7 @@ export const Learn = () => {
               <img src={card.answerImg} alt="answerImg" className={s.answerImg} />
             )}
             <Typography variant={'subtitle1'}>Rate yourself:</Typography>
-            <RateCard onSubmit={onSubmit} deckId={id} />
+            <RateCard onSubmit={onSubmit} />
           </div>
         )}
       </Card>

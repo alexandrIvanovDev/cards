@@ -1,9 +1,8 @@
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import s from './rate-card.module.scss'
 
-import { routePaths } from '@/app/providers/router'
 import { ControlledRadio } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
 import { RadioType } from '@/components/ui/radio-group'
@@ -20,12 +19,13 @@ const radioButtons: Array<RadioType> = [
 ]
 
 type Props = {
-  deckId: string
   onSubmit: (data: RateCardType) => void
 }
 
-export const RateCard = ({ onSubmit, deckId }: Props) => {
+export const RateCard = ({ onSubmit }: Props) => {
   const { control, handleSubmit } = useForm<RateCardType>({ defaultValues: { grade: '1' } })
+
+  const navigate = useNavigate()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -34,7 +34,7 @@ export const RateCard = ({ onSubmit, deckId }: Props) => {
         <Button>
           <Typography variant={'subtitle2'}>Next question</Typography>
         </Button>
-        <Button as={Link} to={`${routePaths.packs}/${deckId}`} variant={'secondary'}>
+        <Button onClick={() => navigate(-1)} variant={'secondary'}>
           <Typography variant={'subtitle2'}>Complete the training</Typography>
         </Button>
       </div>
