@@ -1,18 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CreateNewPasswordForm } from '@/components/auth/create-new-password/create-new-password.tsx'
+import { EditProfileForm } from './edit-profile.tsx'
 
 const meta = {
-  title: 'Auth/CreateNewPasswordForm',
-  component: CreateNewPasswordForm,
-} satisfies Meta<typeof CreateNewPasswordForm>
+  title: 'Auth/EditProfileForm',
+  component: EditProfileForm,
+} satisfies Meta<typeof EditProfileForm>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
+    name: 'Alex',
     onSubmit: data => {
+      // @ts-ignore
       alert(JSON.stringify(data))
     },
   },

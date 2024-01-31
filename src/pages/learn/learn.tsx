@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import s from './learn.module.scss'
 
-import { RateCard, RateCardType } from '@/components/forms/rate-card/rate-card.tsx'
+import { RateCard, RateCardType } from '@/components/forms/rate-card'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'

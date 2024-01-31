@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ForgotPasswordForm } from '@/components/auth/forgot-password/forgot-password.tsx'
+import { ForgotPasswordForm } from './forgot-password.tsx'
 
 const meta = {
   title: 'Auth/ForgotPasswordForm',
@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     onSubmit: data => {
+      // @ts-ignore
       alert(JSON.stringify(data))
     },
   },

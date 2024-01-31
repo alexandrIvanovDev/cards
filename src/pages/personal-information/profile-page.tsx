@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom'
 import s from './profile-page.module.scss'
 
 import { routePaths } from '@/app/providers/router'
-import { EditProfileForm } from '@/components/auth/edit-profile'
+import { EditProfileForm } from '@/components/forms/edit-profile'
 import { BackButton } from '@/components/ui/back-button'
 import { Card } from '@/components/ui/card'
 import { ProgressBar } from '@/components/ui/progress-bar'
