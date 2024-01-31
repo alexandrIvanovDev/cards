@@ -47,6 +47,7 @@ export const DecksRow = ({ deck, userId }: Props) => {
   const formData: DeckArgs = {
     name: deck.name,
     isPrivate: deck.isPrivate,
+    cover: deck?.cover ?? '',
   }
 
   const disabledPlayIcon = deck.cardsCount === 0
@@ -109,7 +110,7 @@ export const DecksRow = ({ deck, userId }: Props) => {
             onSubmit={editDeck}
             setIsOpen={setUpdateDeckIsOpen}
             btnText={'Save Changes'}
-            formData={formData}
+            data={formData}
             // disabled={updateDeckIsLoading}
           />
         </Modal>

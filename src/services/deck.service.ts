@@ -1,6 +1,5 @@
 import { baseApi } from '@/app/providers/store/base-api.ts'
 import {
-  DeckArgs,
   DeckByIdArgs,
   DecksResponseItems,
   GetDecksArgs,
@@ -23,7 +22,7 @@ export const deckService = baseApi.injectEndpoints({
       }),
       providesTags: ['Decks'],
     }),
-    createDeck: builder.mutation<void, DeckArgs>({
+    createDeck: builder.mutation<void, FormData>({
       query: (arg: any) => ({
         url: 'v1/decks',
         method: 'POST',

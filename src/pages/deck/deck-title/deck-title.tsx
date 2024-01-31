@@ -129,7 +129,7 @@ export const DeckTitle = (props: Props) => {
         )}
       </div>
 
-      {deckData.cover && <img src={deckData.cover} alt="cover" className={s.cover} />}
+      {deckData?.cover && <img src={deckData.cover} alt="cover" className={s.cover} />}
 
       <>
         <DeleteEntityModal
@@ -146,7 +146,7 @@ export const DeckTitle = (props: Props) => {
             onSubmit={editDeck}
             setIsOpen={setUpdateDeckIsOpen}
             btnText={'Save Changes'}
-            formData={formData}
+            data={formData}
             disabled={updateDeckIsLoading}
           />
         </Modal>

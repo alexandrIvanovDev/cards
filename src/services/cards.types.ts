@@ -97,11 +97,22 @@ export type CreateCardsArgs = {
 
 export type UpdateDeck = {
   id: string
-  data: DeckArgs
+  data: FormData
 }
+
 export type SaveGradeCardArgs = {
   cardId: string
   grade: number
 }
 
 export type Order = 'asc' | 'desc'
+
+export type Error = {
+  data: {
+    message: string
+    path: string
+    statusCode: number
+    timestamp: string
+  }
+  status: number
+}
