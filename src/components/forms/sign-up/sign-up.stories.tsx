@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SignInForm } from '@/components/auth/sign-in'
+import { SignUpForm } from './sign-up.tsx'
 
 const meta = {
-  title: 'Auth/SignInForm',
-  component: SignInForm,
-} satisfies Meta<typeof SignInForm>
+  title: 'Auth/SignUpForm',
+  component: SignUpForm,
+} satisfies Meta<typeof SignUpForm>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     onSubmit: data => {
+      // @ts-ignore
       alert(JSON.stringify(data))
     },
   },

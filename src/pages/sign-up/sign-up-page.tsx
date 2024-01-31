@@ -1,10 +1,11 @@
 import { Link, Navigate } from 'react-router-dom'
 
+import { SignUpForm } from '../../components/forms/sign-up'
+
 import s from './sign-up-page.module.scss'
 
 import { routePaths } from '@/app/providers/router/routePaths.tsx'
-import { SignUpForm } from '@/components/auth/sign-up'
-import { SignUpFormType } from '@/components/auth/sign-up/use-sign-up.tsx'
+import { SignUpFormType } from '@/components/forms/sign-up/use-sign-up.tsx'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ProgressBar } from '@/components/ui/progress-bar'

@@ -1,9 +1,11 @@
 import { Link, Navigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
+import { SignInForm } from '../../components/forms/sign-in'
 
 import s from './sign-in-page.module.scss'
 
 import { routePaths } from '@/app/providers/router'
-import { SignInForm } from '@/components/auth/sign-in'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ProgressBar } from '@/components/ui/progress-bar'
@@ -17,10 +19,24 @@ export const SignInPage = () => {
 
   const handleLogin = async (data: LoginArgs) => {
     try {
-      await signIn(data)
+      return await signIn(data)
+
+      // toast.success('You are successfully authorized')
     } catch (e) {
       console.error(e)
+      toast.error('Error')
     }
+    // signIn(data)
+    //   .then(res => {
+    //     if (res.error.status === 401) {
+    //       throw new Error('Some error')
+    //     }
+    //
+    //     return res
+    //   })
+    //   .catch(e => {
+    //     console.log(e)
+    //   })
   }
 
   if (data?.id) {
