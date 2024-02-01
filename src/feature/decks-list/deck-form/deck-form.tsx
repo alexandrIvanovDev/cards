@@ -45,7 +45,7 @@ export const DeckForm: FC<Props> = ({ onSubmit, setIsOpen, btnText, data, disabl
       />
       {url && <img src={url} alt={'cover'} className={s.cover} />}
       {data?.cover && <img src={data.cover} alt={'cover'} className={s.cover} />}
-      <Uploader file={file} setFile={setFile} />
+      <Uploader setFile={setFile} />
       <ControlledCheckbox control={control} name={'isPrivate'} label="Private pack" />
       <div className={s.modalButtons}>
         <Button variant="secondary" type="button" onClick={() => setIsOpen(false)}>

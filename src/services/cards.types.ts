@@ -83,16 +83,7 @@ export type DeleteCardsArgs = { id: string }
 
 export type UpdateCardType = {
   id: string
-  data: CreateCardsArgs
-}
-
-export type CreateCardsArgs = {
-  question: string
-  answer: string
-  questionImg?: string
-  answerImg?: string
-  questionVideo?: string
-  answerVideo?: string
+  data: FormData
 }
 
 export type UpdateDeck = {

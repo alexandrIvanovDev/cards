@@ -16,7 +16,6 @@ import { ProgressBar } from '@/components/ui/progress-bar'
 import { Sort } from '@/components/ui/table-head'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/feature/auth/auth.service.ts'
-import { CreateCardFormType } from '@/pages/deck/card-form/use-create-card.tsx'
 import { CardModal } from '@/pages/deck/card-modal/cardModal.tsx'
 import { DeckTable } from '@/pages/deck/deck-table/deck-table.tsx'
 import { DeckTitle } from '@/pages/deck/deck-title/deck-title.tsx'
@@ -71,7 +70,7 @@ export const Deck = () => {
 
   const isMyDeck = deckData?.userId === userData?.id
 
-  const addNewCard = (createCardData: CreateCardFormType) => {
+  const addNewCard = (createCardData: FormData) => {
     createCard({
       deckId: deckData?.id as string,
       data: createCardData,

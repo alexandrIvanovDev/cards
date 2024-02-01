@@ -1,7 +1,6 @@
 import { baseApi } from '@/app/providers/store/base-api.ts'
 import {
   CardsResponseItems,
-  CreateCardsArgs,
   GetCardsArgs,
   GetCardsResponse,
   SaveGradeCardArgs,
@@ -17,7 +16,7 @@ export const cardsService = baseApi.injectEndpoints({
       }),
       providesTags: ['Cards'],
     }),
-    createCard: builder.mutation<void, { deckId: string; data: CreateCardsArgs }>({
+    createCard: builder.mutation<void, { deckId: string; data: FormData }>({
       query: ({ deckId, data }) => ({
         url: `v1/decks/${deckId}/cards`,
         method: 'POST',

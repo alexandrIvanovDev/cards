@@ -2,16 +2,18 @@ import { FC } from 'react'
 
 import { Modal, ModalProps } from '@/components/ui/modal'
 import { CardForm } from '@/pages/deck/card-form/card-form.tsx'
-import { CreateCardFormType } from '@/pages/deck/card-form/use-create-card.tsx'
 
 type Props = ModalProps & {
-  onSubmit: (data: CreateCardFormType) => void
+  onSubmit: (data: FormData) => void
   question?: string
   answer?: string
+  questionImg?: string
+  answerImg?: string
   buttonText: string
 }
 export const CardModal: FC<Props> = props => {
-  const { onSubmit, question, answer, buttonText, onOpenChange, ...rest } = props
+  const { onSubmit, question, answer, buttonText, answerImg, questionImg, onOpenChange, ...rest } =
+    props
 
   const closeModal = () => {
     onOpenChange(!open)
@@ -24,6 +26,8 @@ export const CardModal: FC<Props> = props => {
         closeModal={closeModal}
         answer={answer}
         question={question}
+        answerImg={answerImg}
+        questionImg={questionImg}
         buttonText={buttonText}
       />
     </Modal>
