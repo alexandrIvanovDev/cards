@@ -11,23 +11,31 @@ import { EditIcon } from '@/assets/icons/Edit.tsx'
 import { PlayIcon } from '@/assets/icons/Play.tsx'
 import { Cover } from '@/components/ui/cover'
 import { Modal } from '@/components/ui/modal'
+import { Skeleton } from '@/components/ui/skeleton'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
 import { DeckForm } from '@/feature/decks-list/deck-form/deck-form.tsx'
 import { DeleteEntityModal } from '@/feature/decks-list/delete-entity-modal/delete-entity-modal.tsx'
 import { DeckArgs, DecksResponseItems } from '@/services/cards.types.ts'
-import { useDeleteDeckMutation, useUpdateDeckMutation } from '@/services/deck.service.ts'
+import {
+  useDeleteDeckMutation,
+  useGetDecksQuery,
+  useUpdateDeckMutation,
+} from '@/services/deck.service.ts'
 
 type Props = {
   deck: DecksResponseItems
   userId: string
+  isFetching: boolean
 }
 
-export const DecksRow = ({ deck, userId }: Props) => {
+export const DecksRow = ({ deck, userId, isFetching }: Props) => {
   const isMyDeck = userId === deck.userId
 
-  const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
+  const [deleteDeck, { isLoading: deleteDeckIsLoading }] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
+
+  const { isLoading } = useGetDecksQuery()
 
   const [deleteDeckIsOpen, setDeleteDeckIsOpen] = useState(false)
   const [updateDeckIsOpen, setUpdateDeckIsOpen] = useState(false)
@@ -52,12 +60,14 @@ export const DecksRow = ({ deck, userId }: Props) => {
 
   const disabledPlayIcon = deck.cardsCount === 0
 
+  const isLoadingData = isLoading || isFetching
+
   return (
     <>
       <Table.Row className={s.row}>
         <Table.Cell>
           <Typography as={Link} to={`${routePaths.packs}/${deck.id}`} className={s.nameWrapper}>
-            <Cover cover={deck?.cover} />
+            {isLoadingData ? <Skeleton className={s.skeleton} /> : <Cover cover={deck?.cover} />}
             <Typography className={s.name} variant={'body2'}>
               {deck?.name}
             </Typography>
@@ -86,9 +96,9 @@ export const DecksRow = ({ deck, userId }: Props) => {
               />
             </button>
             {isMyDeck && (
-              <button className={s.buttonWrapper} disabled={isLoading}>
+              <button className={s.buttonWrapper} disabled={deleteDeckIsLoading}>
                 <DeleteIcon
-                  className={clsx(s.icon, isLoading && s.disabledIcon)}
+                  className={clsx(s.icon, deleteDeckIsLoading && s.disabledIcon)}
                   onClick={() => setDeleteDeckIsOpen(true)}
                 />
               </button>

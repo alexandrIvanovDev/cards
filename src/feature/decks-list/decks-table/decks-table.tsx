@@ -9,16 +9,19 @@ type Props = {
   userId: string
   sort: Sort
   setSort: (sort: Sort) => void
+  isFetching: boolean
 }
 
-export const DecksTable = ({ data, userId, sort, setSort }: Props) => {
+export const DecksTable = ({ data, userId, sort, setSort, isFetching }: Props) => {
   return (
     <>
       <Table.Root>
         <TableHead columns={decksListTableHeader} sort={sort} setSort={setSort} />
 
         <Table.Body>
-          {data?.items?.map(deck => <DecksRow key={deck.id} deck={deck} userId={userId} />)}
+          {data?.items?.map(deck => (
+            <DecksRow key={deck.id} deck={deck} userId={userId} isFetching={isFetching} />
+          ))}
         </Table.Body>
       </Table.Root>
     </>

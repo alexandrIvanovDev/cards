@@ -10,6 +10,11 @@
     color: var(--light-color-100);
     text-decoration: none;
 
+    .skeleton {
+      width: 80px;
+      height: 50px;
+    }
+
     .name {
       transition: 0.3s ease-in-out;
 
@@ -24,11 +29,11 @@
   }
 
   .count {
-    width: 180px;
+    width: 150px;
   }
 
   .updated {
-    width: 220px;
+    width: 180px;
   }
 
   .author {

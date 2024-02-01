@@ -36,7 +36,7 @@ export const DecksList = () => {
     data: decksData,
     currentData,
     isLoading: getDecksIsLoading,
-    isFetching,
+    isFetching: getDecksIsFetching,
   } = useGetDecksQuery({
     authorId: tabValue,
     name: searchTerm,
@@ -75,6 +75,7 @@ export const DecksList = () => {
   const onTabValueChange = (value: string) => {
     setTabsValue(value)
     dispatch(setTabValue(value))
+    dispatch(setCurrentPage(1))
   }
 
   const clearFilter = () => {
@@ -93,7 +94,7 @@ export const DecksList = () => {
     dispatch(setCurrentPage(page))
   }
 
-  const isLoading = getDecksIsLoading || createDeckIsLoading || isFetching
+  const isLoading = getDecksIsLoading || createDeckIsLoading || getDecksIsFetching
 
   useEffect(() => {
     if (debouncedValue || debouncedValue === '') {
@@ -111,7 +112,7 @@ export const DecksList = () => {
         isOpen={addNewPackIsOpen}
         setIsOpen={setAddNewPackIsOpen}
         createDeck={createDeck}
-        isFetching={isFetching}
+        isFetching={getDecksIsFetching}
       />
       <DecksFilter
         userId={userData?.id ?? ''}
@@ -134,6 +135,7 @@ export const DecksList = () => {
           userId={userData?.id as string}
           sort={sort}
           setSort={setSort}
+          isFetching={getDecksIsFetching}
         />
       )}
       <Pagination

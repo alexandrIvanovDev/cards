@@ -6,7 +6,7 @@
   }
 
   .answerCell {
-    width: 350px;
+    width: 275px;
 
     .answerWrapper {
       @include flex(row, flex-start, center, 1rem);
@@ -35,5 +35,10 @@
         @include icon;
       }
     }
+  }
+
+  .skeleton {
+    width: 80px;
+    height: 50px;
   }
 }
