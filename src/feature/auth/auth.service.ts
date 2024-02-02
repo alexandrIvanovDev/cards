@@ -1,11 +1,10 @@
 import { baseApi } from '@/app/providers/store/base-api.ts'
 import {
-  SignUpArgs,
-  LoginArgs,
-  User,
-  UpdateUserArgs,
-  RecoverPasswordArgs,
   CreateNewPassword,
+  LoginArgs,
+  RecoverPasswordArgs,
+  SignUpArgs,
+  User,
 } from '@/feature/auth/auth.types.ts'
 
 export const authService = baseApi.injectEndpoints({
@@ -26,7 +25,7 @@ export const authService = baseApi.injectEndpoints({
       extraOptions: { maxRetries: 1 },
       providesTags: ['Me'],
     }),
-    updateUser: builder.mutation<User, UpdateUserArgs>({
+    updateUser: builder.mutation<User, FormData>({
       query: args => ({
         url: `v1/auth/me`,
         method: 'PATCH',

@@ -1,30 +1,36 @@
-import { ChangeEvent, useId } from 'react'
+import { ChangeEvent, ReactNode } from 'react'
+
+import { clsx } from 'clsx'
 
 import s from './uploader.module.scss'
 
-import { ImageIcon } from '@/assets/icons/Image.tsx'
+import { genericFileConstraints } from '@/common/data/validationFields.ts'
 import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
 
 type Props = {
-  // file: File | null
-  setFile: (value: File | null) => void
+  loadFile: (value: File) => void
+  children: ReactNode
+  className?: string
 }
 
-export const Uploader = ({ setFile }: Props) => {
-  const id = useId()
-
+export const Uploader = ({ children, className, loadFile }: Props) => {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files) {
-      setFile(e.currentTarget.files[0])
+      const file = e.currentTarget.files[0]
+
+      try {
+        genericFileConstraints.parse(file)
+        loadFile(file)
+      } catch (e) {
+        console.warn(e)
+      }
     }
   }
 
   return (
-    <Button as={'label'} variant={'secondary'} htmlFor={id} className={s.label}>
-      <ImageIcon className={s.icon} />
-      <Typography variant={'subtitle2'}>Upload file</Typography>
-      <input type="file" id={id} className={s.input} onChange={handleFileChange} />
+    <Button as={'label'} variant={'secondary'} className={clsx(s.label, className)}>
+      {children}
+      <input type="file" className={s.input} onChange={handleFileChange} />
     </Button>
   )
 }

@@ -15,13 +15,15 @@ import {
   useSignOutMutation,
   useUpdateUserMutation,
 } from '@/feature/auth/auth.service.ts'
-import { UpdateUserArgs, User } from '@/feature/auth/auth.types.ts'
-import { AvatarUploader } from '@/pages/personal-information/avatar-uploader.tsx'
-import { ProfileInfo } from '@/pages/personal-information/profile-info.tsx'
+import { UpdateUserArgs } from '@/feature/auth/auth.types.ts'
+import { AvatarUploader } from '@/feature/profile/avatar-uploader'
+import { ProfileInfo } from '@/feature/profile/profile-info'
 
 export const ProfilePage = () => {
   const [editMode, setEditMode] = useState(false)
-  const { data } = useMeQuery()
+
+  const { data, isLoading: getUserIsLoading } = useMeQuery()
+
   const [updateUser, { isLoading: updateUserIsLoading }] = useUpdateUserMutation()
   const [signOut, { isLoading: signOutIsLoading }] = useSignOutMutation()
 
@@ -40,13 +42,32 @@ export const ProfilePage = () => {
   }
 
   const saveChanges = async (data: UpdateUserArgs) => {
-    await updateUser(data)
+    const formData = new FormData()
+
+    formData.append('name', data.name)
+
+    await updateUser(formData)
     toggleEditMode()
   }
 
+  const loadNewImg = async (file: File) => {
+    const formData = new FormData()
+
+    formData.append('avatar', file)
+
+    await updateUser(formData)
+  }
+
+  const userData = {
+    name: data?.name as string,
+    email: data?.email as string,
+  }
+
+  const isLoading = getUserIsLoading || updateUserIsLoading || signOutIsLoading
+
   return (
     <div className={s.content}>
-      {(updateUserIsLoading || signOutIsLoading) && <ProgressBar />}
+      {isLoading && <ProgressBar />}
       <BackButton className={s.backBtn} />
       <Card className={s.wrapper}>
         <Typography as="h2" variant="large">
@@ -54,19 +75,19 @@ export const ProfilePage = () => {
         </Typography>
         <AvatarUploader
           img={data?.avatar as string}
-          userName={data?.name as string}
-          size="large"
+          userName={userData.name}
           className={s.avatar}
           editMode={editMode}
+          loadNewImg={loadNewImg}
         />
         {editMode ? (
           <EditProfileForm
             onSubmit={saveChanges}
-            name={data?.name as string}
+            name={userData.name}
             toggleEditMode={toggleEditMode}
           />
         ) : (
-          <ProfileInfo user={data as User} changeName={toggleEditMode} logout={logout} />
+          <ProfileInfo user={userData} changeName={toggleEditMode} logout={logout} />
         )}
       </Card>
     </div>

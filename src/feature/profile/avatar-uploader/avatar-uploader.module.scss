@@ -13,23 +13,14 @@
     width: 24px;
     height: 24px;
 
-    background: var(--dark-color-300);
-    border: 1px solid var(--dark-color-300);
-    border-radius: var(--border-radius);
+    .uploader {
+      padding: 0;
+    }
 
     .icon {
       cursor: pointer;
       transform: scale(0.8);
       fill: var(--light-color-100);
-      transition: all 0.3s ease-in-out;
-
-      &:hover {
-        fill: var(--primary-color-300);
-      }
-
-      &:active {
-        fill: var(--primary-color-700);
-      }
     }
   }
 }

@@ -7,7 +7,7 @@ import { Typography } from '@/components/ui/typography'
 import { User } from '@/feature/auth/auth.types.ts'
 
 type ProfileInfoProps = {
-  user: User
+  user: Pick<User, 'name' | 'email'>
   changeName: () => void
   logout: () => void
 }
