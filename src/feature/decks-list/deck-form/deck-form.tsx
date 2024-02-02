@@ -21,9 +21,13 @@ type Props = {
 export const DeckForm: FC<Props> = ({ onSubmit, setIsOpen, btnText, data, disabled }) => {
   const { control, handleSubmit, errors } = useDeckForm(data as DeckArgs)
 
-  const [file, setFile] = useState<File | null>(null)
+  const [file, setFile] = useState<File>()
 
-  const url = file && URL.createObjectURL(file)
+  let url = file && URL.createObjectURL(file)
+
+  if (!url && data?.cover) {
+    url = data.cover
+  }
 
   const onSubmitData = (data: DeckFormType) => {
     const form = new FormData()
@@ -44,11 +48,10 @@ export const DeckForm: FC<Props> = ({ onSubmit, setIsOpen, btnText, data, disabl
         error={errors.name?.message}
         autoFocus
       />
-      {url && <img src={url} alt={'cover'} className={s.cover} />}
-      {data?.cover && <img src={data.cover} alt={'cover'} className={s.cover} />}
-      <Uploader setFile={setFile}>
+      {(url || data?.cover) && <img src={url} alt={'cover'} className={s.cover} />}
+      <Uploader loadFile={setFile}>
         <ImageIcon className={s.icon} />
-        <Typography variant={'subtitle2'}>Upload file</Typography>
+        <Typography variant={'subtitle2'}>{url ? 'Change cover' : 'Upload file'}</Typography>
       </Uploader>
       <ControlledCheckbox control={control} name={'isPrivate'} label="Private pack" />
       <div className={s.modalButtons}>

@@ -20,22 +20,22 @@ type Props = {
 }
 
 export const CardForm: FC<Props> = props => {
-  let { onSubmit, closeModal, answer, question, buttonText, questionImg, answerImg } = props
+  const { onSubmit, closeModal, answer, question, buttonText, questionImg, answerImg } = props
 
   const { control, handleSubmit, errors } = useCreateCard(question, answer)
 
   const [questionFile, setQuestionFile] = useState<File | null>(null)
   const [answerFile, setAnswerFile] = useState<File | null>(null)
 
-  const questionUrl = questionFile && URL.createObjectURL(questionFile)
-  const answerUrl = answerFile && URL.createObjectURL(answerFile)
+  let questionUrl = questionFile && URL.createObjectURL(questionFile)
+  let answerUrl = answerFile && URL.createObjectURL(answerFile)
 
-  if (!questionImg && questionUrl) {
-    questionImg = questionUrl
+  if (!questionUrl && questionImg) {
+    questionUrl = questionImg
   }
 
-  if (!answerImg && answerUrl) {
-    answerImg = answerUrl
+  if (!answerUrl && answerImg) {
+    answerUrl = answerImg
   }
 
   const onSubmitData = (data: CreateCardFormType) => {
@@ -57,10 +57,12 @@ export const CardForm: FC<Props> = props => {
         name={'question'}
         error={errors?.question?.message}
       />
-      {questionImg && <img src={questionImg} alt={'question cover'} className={s.cover} />}
-      <Uploader setFile={setQuestionFile}>
+      {questionUrl && <img src={questionUrl} alt={'question cover'} className={s.cover} />}
+      <Uploader loadFile={setQuestionFile}>
         <ImageIcon className={s.icon} />
-        <Typography variant={'subtitle2'}>Change Image</Typography>
+        <Typography variant={'subtitle2'}>
+          {questionUrl ? 'Change cover' : 'Upload Image'}
+        </Typography>
       </Uploader>
       <ControlledTextField
         label="Answer"
@@ -68,10 +70,10 @@ export const CardForm: FC<Props> = props => {
         name={'answer'}
         error={errors?.answer?.message}
       />
-      {answerImg && <img src={answerImg} alt={'answer cover'} className={s.cover} />}
-      <Uploader setFile={setAnswerFile}>
+      {answerUrl && <img src={answerUrl} alt={'answer cover'} className={s.cover} />}
+      <Uploader loadFile={setAnswerFile}>
         <ImageIcon className={s.icon} />
-        <Typography variant={'subtitle2'}>Change Image</Typography>
+        <Typography variant={'subtitle2'}>{answerUrl ? 'Change cover' : 'Upload Image'}</Typography>
       </Uploader>
       <div className={s.modalButtons}>
         <Button type="button" variant="secondary" onClick={closeModal}>
