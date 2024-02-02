@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { genericNameConstraint } from '@/common/data/validation.ts'
+import { genericNameConstraint } from '@/common/data/validationFields.ts'
 import { DeckArgs } from '@/services/cards.types.ts'
 
 const deckSchema = z.object({

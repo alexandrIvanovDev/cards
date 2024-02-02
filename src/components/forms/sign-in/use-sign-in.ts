@@ -2,7 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { genericEmailConstraint, genericPasswordConstraint } from '@/common/data/validation.ts'
+import {
+  genericEmailConstraint,
+  genericPasswordConstraint,
+} from '@/common/data/validationFields.ts'
 
 const signInSchema = z.object({
   email: genericEmailConstraint,

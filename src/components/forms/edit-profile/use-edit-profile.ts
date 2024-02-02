@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { genericAvatarConstraint, genericNameConstraint } from '@/common/data/validation.ts'
+import { genericAvatarConstraint, genericNameConstraint } from '@/common/data/validationFields.ts'
 
 const updateUserSchema = z.object({
   name: genericNameConstraint,

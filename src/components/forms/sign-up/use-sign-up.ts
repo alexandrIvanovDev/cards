@@ -6,7 +6,7 @@ import {
   genericEmailConstraint,
   genericNameConstraint,
   genericPasswordConstraint,
-} from '@/common/data/validation.ts'
+} from '@/common/data/validationFields.ts'
 
 const signUpSchema = z
   .object({

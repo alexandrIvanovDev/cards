@@ -11,4 +11,4 @@ export const genericPasswordConstraint = z
 
 export const genericEmailConstraint = z.string().email()
 
-export const genericAvatarConstraint = z.string().email()
+export const genericAvatarConstraint = z.string().optional()

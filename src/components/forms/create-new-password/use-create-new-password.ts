@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { genericPasswordConstraint } from '@/common/data/validation.ts'
+import { genericPasswordConstraint } from '@/common/data/validationFields.ts'
 
 const createNewPasswordSchema = z.object({
   password: genericPasswordConstraint,
