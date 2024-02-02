@@ -1,11 +1,10 @@
 import { Link, Navigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { SignInForm } from '../../components/forms/sign-in'
-
-import s from './sign-in-page.module.scss'
+import s from './sign-in.module.scss'
 
 import { routePaths } from '@/app/providers/router'
+import { SignInForm } from '@/components/forms/sign-in'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ProgressBar } from '@/components/ui/progress-bar'
@@ -13,7 +12,7 @@ import { Typography } from '@/components/ui/typography'
 import { useMeQuery, useSignInMutation } from '@/feature/auth/auth.service.ts'
 import { LoginArgs } from '@/feature/auth/auth.types.ts'
 
-export const SignInPage = () => {
+export const SignIn = () => {
   const [signIn, { isLoading }] = useSignInMutation()
   const { data } = useMeQuery()
 

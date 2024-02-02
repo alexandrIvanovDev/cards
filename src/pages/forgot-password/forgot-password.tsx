@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 
-import s from './forgot-password-page.module.scss'
+import s from './forgot-password.module.scss'
 
 import { routePaths } from '@/app/providers/router/routePaths.tsx'
 import { ForgotPasswordForm } from '@/components/forms/forgot-password'
@@ -11,7 +11,7 @@ import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
 import { useRecoverPasswordMutation } from '@/feature/auth'
 
-export const ForgotPasswordPage = () => {
+export const ForgotPassword = () => {
   const [recoverPassword, { isLoading }] = useRecoverPasswordMutation()
   const navigate = useNavigate()
 

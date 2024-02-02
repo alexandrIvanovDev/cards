@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 
-import s from './create-new-password-page.module.scss'
+import s from './create-new-password.module.scss'
 
 import { routePaths } from '@/app/providers/router'
 import { CreateNewPasswordForm } from '@/components/forms/create-new-password'
@@ -10,7 +10,7 @@ import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
 import { useCreateNewPasswordMutation } from '@/feature/auth'
 
-export const CreateNewPasswordPage = () => {
+export const CreateNewPassword = () => {
   const [createNewPassword, { isLoading }] = useCreateNewPasswordMutation()
 
   const { token } = useParams()

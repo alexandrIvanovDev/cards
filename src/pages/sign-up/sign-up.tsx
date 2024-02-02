@@ -1,6 +1,6 @@
 import { Link, Navigate } from 'react-router-dom'
 
-import s from './sign-up-page.module.scss'
+import s from './sign-up.module.scss'
 
 import { routePaths } from '@/app/providers/router/routePaths.tsx'
 import { SignUpForm } from '@/components/forms/sign-up'
@@ -11,7 +11,7 @@ import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery, useSignInMutation, useSignUpMutation } from '@/feature/auth'
 
-export const SignUpPage = () => {
+export const SignUp = () => {
   const [signUp, { isLoading: signUpIsLoading }] = useSignUpMutation()
   const [signIn, { isLoading: signInIsLoading }] = useSignInMutation()
   const { data: userData } = useMeQuery()

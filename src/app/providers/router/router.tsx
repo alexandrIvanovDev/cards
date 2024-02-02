@@ -8,19 +8,21 @@ import {
 
 import { routePaths } from './routePaths.tsx'
 
-import { ErrorBoundary } from '@/app/providers/errorBoudary/error-boudary.tsx'
+import { ErrorBoundary } from '@/app/providers/errorBoudary'
 import { Layout } from '@/components/ui/layout/layout.tsx'
 import { useMeQuery } from '@/feature/auth/auth.service.ts'
-import { CheckEmail } from '@/pages/check-email/check-email.tsx'
-import { CreateNewPasswordPage } from '@/pages/create-new-password/create-new-password-page.tsx'
-import { Deck } from '@/pages/deck/deck.tsx'
-import { DecksList } from '@/pages/decks-list/decks-list.tsx'
-import { ForgotPasswordPage } from '@/pages/forgot-password/forgot-password-page.tsx'
-import { Learn } from '@/pages/learn/learn.tsx'
-import { NotFound } from '@/pages/not-found/not-found.tsx'
-import { ProfilePage } from '@/pages/personal-information/profile-page.tsx'
-import { SignInPage } from '@/pages/sign-in/sign-in-page.tsx'
-import { SignUpPage } from '@/pages/sign-up/sign-up-page.tsx'
+import {
+  CheckEmail,
+  CreateNewPassword,
+  Deck,
+  DecksList,
+  ForgotPassword,
+  Learn,
+  NotFound,
+  PersonalInformation,
+  SignIn,
+  SignUp,
+} from '@/pages'
 
 const PrivateRoutes = () => {
   const { data, isLoading } = useMeQuery()
@@ -33,10 +35,10 @@ const PrivateRoutes = () => {
 }
 
 export const publicRoutes: RouteObject[] = [
-  { path: routePaths.signIn, element: <SignInPage /> },
-  { path: routePaths.signUp, element: <SignUpPage /> },
-  { path: `${routePaths.createNewPassword}/:token`, element: <CreateNewPasswordPage /> },
-  { path: routePaths.forgotPassword, element: <ForgotPasswordPage /> },
+  { path: routePaths.signIn, element: <SignIn /> },
+  { path: routePaths.signUp, element: <SignUp /> },
+  { path: `${routePaths.createNewPassword}/:token`, element: <CreateNewPassword /> },
+  { path: routePaths.forgotPassword, element: <ForgotPassword /> },
   { path: `${routePaths.checkEmail}/:email`, element: <CheckEmail /> },
   { path: routePaths.notFound, element: <NotFound /> },
 ]
@@ -52,7 +54,7 @@ export const privateRoutes: RouteObject[] = [
   },
   {
     path: routePaths.profile,
-    element: <ProfilePage />,
+    element: <PersonalInformation />,
   },
   {
     path: routePaths.pack,

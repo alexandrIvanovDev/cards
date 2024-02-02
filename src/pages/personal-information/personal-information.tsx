@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Navigate } from 'react-router-dom'
 
-import s from './profile-page.module.scss'
+import s from './personal-information.module.scss'
 
 import { routePaths } from '@/app/providers/router'
 import { EditProfileForm } from '@/components/forms/edit-profile'
@@ -19,7 +19,7 @@ import { UpdateUserArgs } from '@/feature/auth/auth.types.ts'
 import { AvatarUploader } from '@/feature/profile/avatar-uploader'
 import { ProfileInfo } from '@/feature/profile/profile-info'
 
-export const ProfilePage = () => {
+export const PersonalInformation = () => {
   const [editMode, setEditMode] = useState(false)
 
   const { data, isLoading: getUserIsLoading } = useMeQuery()
