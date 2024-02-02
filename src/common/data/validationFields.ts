@@ -1,13 +1,15 @@
 import { z } from 'zod'
 
-export const genericNameConstraint = z
-  .string()
-  .trim()
-  .min(3, { message: 'Name must be longer than or equal to 3 characters' })
+function getConstraint(field: string) {
+  return z
+    .string()
+    .trim()
+    .min(3, { message: `${field} must be longer than or equal to 3 characters` })
+}
 
-export const genericPasswordConstraint = z
-  .string()
-  .min(3, { message: 'String must contain at least 3 character(s)' })
+export const genericNameConstraint = getConstraint('Name')
+
+export const genericPasswordConstraint = getConstraint('Password')
 
 export const genericEmailConstraint = z.string().email()
 
@@ -23,3 +25,7 @@ export const genericFileConstraints = z
     file => ACCEPTED_IMAGE_TYPES.includes(file?.type),
     'Only .jpg, .jpeg, .png and .webp formats are supported.'
   )
+
+export const genericQuestionConstraint = getConstraint('Question')
+
+export const genericAnswerConstraint = getConstraint('Answer')
