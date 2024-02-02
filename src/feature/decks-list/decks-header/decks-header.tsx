@@ -2,10 +2,10 @@ import { FC } from 'react'
 
 import s from './decks-header.module.scss'
 
+import { DeckForm } from '@/components/forms/deck-form'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
-import { DeckForm } from '@/feature/decks-list/deck-form/deck-form.tsx'
 
 type Props = {
   isOpen: boolean

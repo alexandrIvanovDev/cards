@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import s from './search-card.module.scss'
+import s from './search.module.scss'
 
 import { TextField } from '@/components/ui/textfield'
 

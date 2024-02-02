@@ -2,9 +2,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import {
+  genericAnswerConstraint,
+  genericQuestionConstraint,
+} from '@/common/data/validationFields.ts'
+
 const createCardSchema = z.object({
-  question: z.string().min(3, { message: 'Question must be longer than or equal to 3 characters' }),
-  answer: z.string().min(3, { message: 'Answer must be longer than or equal to 3 characters' }),
+  question: genericQuestionConstraint,
+  answer: genericAnswerConstraint,
 })
 
 export type CreateCardFormType = z.infer<typeof createCardSchema>

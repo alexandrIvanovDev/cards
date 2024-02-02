@@ -1,13 +1,13 @@
 import { FC, useState } from 'react'
 
 import s from './card-form.module.scss'
+import { CreateCardFormType, useCreateCard } from './use-create-card.ts'
 
 import { ImageIcon } from '@/assets/icons/Image.tsx'
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { Uploader } from '@/components/ui/uploader'
-import { CreateCardFormType, useCreateCard } from '@/pages/deck/card-form/use-create-card.tsx'
 
 type Props = {
   onSubmit: (data: FormData) => void

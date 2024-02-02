@@ -8,7 +8,7 @@
 
     .editIcon {
       cursor: pointer;
-      transform: scale(0.8);
+      transform: scale(0.75);
       fill: var(--light-color-100);
       transition: all 0.3s ease-in-out;
 
@@ -27,6 +27,7 @@
   }
 
   .logoutIcon {
+    transform: scale(0.75);
     fill: var(--light-color-100);
   }
 }

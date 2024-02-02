@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { deckTableHeader } from '@/common/data/deck-table-header.ts'
 import { Table } from '@/components/ui/table'
 import { Sort, TableHead } from '@/components/ui/table-head'
-import { TableRow } from '@/pages/deck/table-row/table-row.tsx'
+import { TableRow } from '@/feature/deck/ui/deck-row/table-row.tsx'
 import { DeleteCardsArgs, GetCardsResponse, UpdateCardType } from '@/services/cards.types.ts'
 
 type Props = {

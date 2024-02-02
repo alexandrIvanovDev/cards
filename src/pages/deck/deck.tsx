@@ -16,10 +16,10 @@ import { ProgressBar } from '@/components/ui/progress-bar'
 import { Sort } from '@/components/ui/table-head'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/feature/auth/auth.service.ts'
-import { CardModal } from '@/pages/deck/card-modal/cardModal.tsx'
-import { DeckTable } from '@/pages/deck/deck-table/deck-table.tsx'
-import { DeckTitle } from '@/pages/deck/deck-title/deck-title.tsx'
-import { SearchCard } from '@/pages/deck/search-card/search-card.tsx'
+import { CardModal } from '@/feature/deck/ui/card-modal'
+import { DeckTable } from '@/feature/deck/ui/deck-table'
+import { DeckTitle } from '@/feature/deck/ui/deck-title'
+import { SearchCard } from '@/feature/deck/ui/search'
 import {
   useCreateCardMutation,
   useDeleteCardMutation,

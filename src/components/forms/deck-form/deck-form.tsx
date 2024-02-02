@@ -4,10 +4,10 @@ import s from './deck-form.module.scss'
 
 import { ImageIcon } from '@/assets/icons/Image.tsx'
 import { ControlledCheckbox, ControlledTextField } from '@/components/controlled'
+import { DeckFormType, useDeckForm } from '@/components/forms/deck-form/use-deck-form.ts'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { Uploader } from '@/components/ui/uploader/uploader.tsx'
-import { DeckFormType, useDeckForm } from '@/feature/decks-list/deck-form/use-deck-form.ts'
 import { DeckArgs } from '@/services/cards.types.ts'
 
 type Props = {

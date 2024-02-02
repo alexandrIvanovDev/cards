@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
+import { CardForm } from '@/components/forms/card-form'
 import { Modal, ModalProps } from '@/components/ui/modal'
-import { CardForm } from '@/pages/deck/card-form/card-form.tsx'
 
 type Props = ModalProps & {
   onSubmit: (data: FormData) => void
