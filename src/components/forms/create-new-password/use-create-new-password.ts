@@ -2,8 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { genericPasswordConstraint } from '@/common/data/validation.ts'
+
 const createNewPasswordSchema = z.object({
-  password: z.string().min(3, { message: 'String must contain at least 3 character(s)' }),
+  password: genericPasswordConstraint,
 })
 
 export type CreateNewPasswordFormType = z.infer<typeof createNewPasswordSchema>

@@ -2,9 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { genericEmailConstraint, genericPasswordConstraint } from '@/common/data/validation.ts'
+
 const signInSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(3, { message: 'String must contain at least 3 character(s)' }),
+  email: genericEmailConstraint,
+  password: genericPasswordConstraint,
   rememberMe: z.boolean(),
 })
 

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import s from './sign-up.module.scss'
-import { SignUpFormType, useSignUp } from './use-sign-up.tsx'
+import { SignUpFormType, useSignUp } from './use-sign-up.ts'
 
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'

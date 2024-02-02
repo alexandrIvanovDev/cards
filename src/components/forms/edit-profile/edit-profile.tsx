@@ -1,5 +1,5 @@
 import s from './edit-profile.module.scss'
-import { UpdateUserFormType, useEditProfile } from './use-edit-profile.tsx'
+import { UpdateUserFormType, useEditProfile } from './use-edit-profile.ts'
 
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'

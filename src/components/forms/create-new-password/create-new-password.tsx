@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import s from './create-new-password.module.scss'
-import { CreateNewPasswordFormType, useCreateNewPassword } from './use-create-new-password.tsx'
+import { CreateNewPasswordFormType, useCreateNewPassword } from './use-create-new-password.ts'
 
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'

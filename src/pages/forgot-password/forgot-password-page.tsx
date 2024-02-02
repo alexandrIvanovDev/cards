@@ -1,11 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
 
-import { ForgotPasswordForm } from '../../components/forms/forgot-password'
-
 import s from './forgot-password-page.module.scss'
 
 import { routePaths } from '@/app/providers/router/routePaths.tsx'
-import { ForgotPasswordFormType } from '@/components/forms/forgot-password/use-forgot-password.tsx'
+import { ForgotPasswordForm } from '@/components/forms/forgot-password'
+import { ForgotPasswordFormType } from '@/components/forms/forgot-password/use-forgot-password.ts'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ProgressBar } from '@/components/ui/progress-bar'

@@ -2,9 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { genericAvatarConstraint, genericNameConstraint } from '@/common/data/validation.ts'
+
 const updateUserSchema = z.object({
-  name: z.string().min(3, 'String must contain at least 3 character(s)'),
-  avatar: z.string().optional(),
+  name: genericNameConstraint,
+  avatar: genericAvatarConstraint,
 })
 
 export type UpdateUserFormType = z.infer<typeof updateUserSchema>

@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
 import s from './sign-in.module.scss'
-import { SignInFormType, useSignIn } from './use-sign-in.tsx'
+import { SignInFormType, useSignIn } from './use-sign-in.ts'
 
 import { routePaths } from '@/app/providers/router'
 import { ControlledCheckbox, ControlledTextField } from '@/components/controlled'

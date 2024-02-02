@@ -2,8 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { genericEmailConstraint } from '@/common/data/validation.ts'
+
 const forgotPasswordSchema = z.object({
-  email: z.string().email(),
+  email: genericEmailConstraint,
 })
 
 export type ForgotPasswordFormType = z.infer<typeof forgotPasswordSchema>

@@ -2,14 +2,18 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import {
+  genericEmailConstraint,
+  genericNameConstraint,
+  genericPasswordConstraint,
+} from '@/common/data/validation.ts'
+
 const signUpSchema = z
   .object({
-    name: z.string().min(3, { message: 'Name must contain at least 3 character(s)' }),
-    email: z.string().email(),
-    password: z.string().min(3, { message: 'Password must contain at least 3 character(s)' }),
-    confirmPassword: z
-      .string()
-      .min(3, { message: 'Password must contain at least 3 character(s)' }),
+    name: genericNameConstraint,
+    email: genericEmailConstraint,
+    password: genericPasswordConstraint,
+    confirmPassword: genericPasswordConstraint,
   })
   .refine(data => data.password === data.confirmPassword, {
     message: "Passwords don't match",

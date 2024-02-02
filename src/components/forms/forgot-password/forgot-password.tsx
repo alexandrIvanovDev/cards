@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import s from './forgot-password.module.scss'
-import { ForgotPasswordFormType, useForgotPassword } from './use-forgot-password.tsx'
+import { ForgotPasswordFormType, useForgotPassword } from './use-forgot-password.ts'
 
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
