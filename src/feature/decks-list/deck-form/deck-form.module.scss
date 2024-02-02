@@ -3,6 +3,12 @@
 .modalContent {
   @include flex(column, center, normal, 1.5rem);
 
+  .icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--light-color-100);
+  }
+
   .cover {
     height: 150px;
     object-fit: cover;

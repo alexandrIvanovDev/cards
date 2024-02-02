@@ -2,6 +2,7 @@ import { FC, useState } from 'react'
 
 import s from './card-form.module.scss'
 
+import { ImageIcon } from '@/assets/icons/Image.tsx'
 import { ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
@@ -57,7 +58,10 @@ export const CardForm: FC<Props> = props => {
         error={errors?.question?.message}
       />
       {questionImg && <img src={questionImg} alt={'question cover'} className={s.cover} />}
-      <Uploader setFile={setQuestionFile} />
+      <Uploader setFile={setQuestionFile}>
+        <ImageIcon className={s.icon} />
+        <Typography variant={'subtitle2'}>Change Image</Typography>
+      </Uploader>
       <ControlledTextField
         label="Answer"
         control={control}
@@ -65,7 +69,10 @@ export const CardForm: FC<Props> = props => {
         error={errors?.answer?.message}
       />
       {answerImg && <img src={answerImg} alt={'answer cover'} className={s.cover} />}
-      <Uploader setFile={setAnswerFile} />
+      <Uploader setFile={setAnswerFile}>
+        <ImageIcon className={s.icon} />
+        <Typography variant={'subtitle2'}>Change Image</Typography>
+      </Uploader>
       <div className={s.modalButtons}>
         <Button type="button" variant="secondary" onClick={closeModal}>
           <Typography variant={'subtitle2'} as={'span'}>

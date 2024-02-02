@@ -1,7 +1,7 @@
 @import '@/app/styles/mixins';
 
 .content {
-  @include container(1240px);
+  @include container(var(--container-width));
 
   .backBtn {
     margin-bottom: 50px;

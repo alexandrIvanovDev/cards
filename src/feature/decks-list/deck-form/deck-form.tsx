@@ -2,6 +2,7 @@ import { FC, useState } from 'react'
 
 import s from './deck-form.module.scss'
 
+import { ImageIcon } from '@/assets/icons/Image.tsx'
 import { ControlledCheckbox, ControlledTextField } from '@/components/controlled'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
@@ -45,7 +46,10 @@ export const DeckForm: FC<Props> = ({ onSubmit, setIsOpen, btnText, data, disabl
       />
       {url && <img src={url} alt={'cover'} className={s.cover} />}
       {data?.cover && <img src={data.cover} alt={'cover'} className={s.cover} />}
-      <Uploader setFile={setFile} />
+      <Uploader setFile={setFile}>
+        <ImageIcon className={s.icon} />
+        <Typography variant={'subtitle2'}>Upload file</Typography>
+      </Uploader>
       <ControlledCheckbox control={control} name={'isPrivate'} label="Private pack" />
       <div className={s.modalButtons}>
         <Button variant="secondary" type="button" onClick={() => setIsOpen(false)}>
