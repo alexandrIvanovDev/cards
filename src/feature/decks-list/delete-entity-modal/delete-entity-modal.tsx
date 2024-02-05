@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import s from './delete-entity-modal.module.scss'
 
@@ -13,17 +13,22 @@ type Props = ModalProps & {
   disabled?: boolean
 }
 
-export const DeleteEntityModal: FC<Props> = props => {
+export const DeleteEntityModal = (props: Props) => {
   const { text, btnText, open, onOpenChange, callback, disabled, ...rest } = props
+
+  const { t } = useTranslation()
 
   return (
     <Modal open={open} onOpenChange={onOpenChange} {...rest}>
       <div className={s.deleteCardModal}>
-        <Typography>Do you really want to remove {text}</Typography>
+        {/* eslint-disable-next-line i18next/no-literal-string */}
+        <Typography>
+          {t('Do you really want to remove')} {text}
+        </Typography>
         <div className={s.btns}>
           <Button variant="secondary" onClick={() => onOpenChange(!open)}>
             <Typography variant={'subtitle2'} as={'span'}>
-              Cancel
+              {t('Cancel')}
             </Typography>
           </Button>
           <Button onClick={callback} disabled={disabled}>

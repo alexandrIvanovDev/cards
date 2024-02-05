@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -32,6 +33,8 @@ import { useGetDeckByIdQuery } from '@/services/deck.service.ts'
 
 export const Deck = () => {
   const { id } = useParams()
+
+  const { t } = useTranslation()
 
   const search = useSelector((state: RootState) => state.cards.searchTerm)
   const { currentPage, pageSize } = useSelector((state: RootState) => state.cards.pagination)
@@ -140,27 +143,27 @@ export const Deck = () => {
             {isMyDeck ? (
               <>
                 <Typography className={s.text} variant={'body1'}>
-                  This deck is empty. Click add new card to fill this deck
+                  {t('This deck is empty. Click add new card to fill this deck')}
                 </Typography>
 
                 <CardModal
                   open={addCardModal}
                   onOpenChange={setAddCardModal}
                   onSubmit={addNewCard}
-                  title="Add New Card"
+                  title={t('Add New Card')}
                   trigger={
                     <Button>
                       <Typography variant={'subtitle2'} as={'span'}>
-                        Add New Card
+                        {t('Add New Card')}
                       </Typography>
                     </Button>
                   }
-                  buttonText="Add New Card"
+                  buttonText={t('Add New Card')}
                 />
               </>
             ) : (
               <Typography as="span" variant="h1" className={s.text}>
-                This deck is empty
+                {t('This deck is empty')}
               </Typography>
             )}
           </div>

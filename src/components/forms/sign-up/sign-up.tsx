@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import s from './sign-up.module.scss'
 import { SignUpFormType, useSignUp } from './use-sign-up.ts'
@@ -11,8 +11,10 @@ type Props = {
   onSubmit: (data: SignUpFormType) => void
 }
 
-export const SignUpForm: FC<Props> = ({ onSubmit }) => {
+export const SignUpForm = ({ onSubmit }: Props) => {
   const { control, handleSubmit, errors } = useSignUp()
+
+  const { t } = useTranslation()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -20,32 +22,31 @@ export const SignUpForm: FC<Props> = ({ onSubmit }) => {
         name={'name'}
         control={control}
         error={errors.name?.message}
-        label="Name"
+        label={t('Name')}
       />
-
       <ControlledTextField
         name={'email'}
         control={control}
         error={errors.email?.message}
-        label="Email"
+        label={t('Email')}
       />
       <ControlledTextField
         name={'password'}
         type="password"
         control={control}
         error={errors.password?.message}
-        label="Password"
+        label={t('Password')}
       />
       <ControlledTextField
         name={'confirmPassword'}
         type="password"
         control={control}
         error={errors.confirmPassword?.message}
-        label="Confirm Password"
+        label={t('Confirm Password')}
       />
       <Button className={s.btn}>
         <Typography variant={'subtitle2'} as={'span'}>
-          Sign Up
+          {t('Sign Up')}
         </Typography>
       </Button>
     </form>

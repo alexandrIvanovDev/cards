@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import s from './forgot-password.module.scss'
 import { ForgotPasswordFormType, useForgotPassword } from './use-forgot-password.ts'
@@ -11,8 +11,10 @@ type Props = {
   onSubmit: (data: ForgotPasswordFormType) => void
 }
 
-export const ForgotPasswordForm: FC<Props> = ({ onSubmit }) => {
+export const ForgotPasswordForm = ({ onSubmit }: Props) => {
   const { control, handleSubmit, errors } = useForgotPassword()
+
+  const { t } = useTranslation()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -20,14 +22,14 @@ export const ForgotPasswordForm: FC<Props> = ({ onSubmit }) => {
         name={'email'}
         control={control}
         error={errors.email?.message}
-        label="Email"
+        label={t('Email')}
       />
       <Typography className={s.text} variant={'body2'}>
-        Enter your email address and we will send you further instructions
+        {t('Enter your email address and we will send you further instructions')}
       </Typography>
       <Button className={s.btn}>
         <Typography variant={'subtitle2'} as={'span'}>
-          Send Instructions
+          {t('Send Instructions')}
         </Typography>
       </Button>
     </form>

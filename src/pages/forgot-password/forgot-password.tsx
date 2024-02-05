@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 
 import s from './forgot-password.module.scss'
@@ -15,6 +16,8 @@ export const ForgotPassword = () => {
   const [recoverPassword, { isLoading }] = useRecoverPasswordMutation()
   const navigate = useNavigate()
 
+  const { t } = useTranslation()
+
   const onSubmit = async (data: ForgotPasswordFormType) => {
     await recoverPassword(data)
     navigate(`${routePaths.checkEmail}/${data.email}`)
@@ -25,14 +28,14 @@ export const ForgotPassword = () => {
       {isLoading && <ProgressBar />}
       <Card className={s.wrapper}>
         <Typography as="h2" variant="large" className={s.title}>
-          Forgot your password?
+          {t('Forgot your password?')}
         </Typography>
         <ForgotPasswordForm onSubmit={onSubmit} />
         <Typography variant="body2" className={s.notification}>
-          Did you remember your password?
+          {t('Did you remember your password?')}
         </Typography>
         <Button variant="link" as={Link} to={routePaths.signIn} className={s.btn}>
-          Try logging in
+          {t('Try logging in')}
         </Button>
       </Card>
     </>

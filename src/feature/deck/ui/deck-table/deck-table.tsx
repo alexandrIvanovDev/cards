@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import { deckTableHeader } from '@/common/data/deck-table-header.ts'
 import { Table } from '@/components/ui/table'
 import { Sort, TableHead } from '@/components/ui/table-head'
@@ -15,7 +13,7 @@ type Props = {
   setSort: (value: Sort) => void
 }
 
-export const DeckTable: FC<Props> = props => {
+export const DeckTable = (props: Props) => {
   const { isMyDeck, cardsData, deleteCard, updateCard, sort, setSort } = props
 
   const columns = deckTableHeader.filter(col => (isMyDeck ? col : col.fieldName !== 'controls'))

@@ -69,9 +69,9 @@ export const privateRoutes: RouteObject[] = [
 const router = createBrowserRouter([
   {
     element: (
-      <ErrorBoundary>
-        <Layout />
-      </ErrorBoundary>
+      // <ErrorBoundary>
+      <Layout />
+      // </ErrorBoundary>
     ),
     children: [
       {
@@ -80,6 +80,7 @@ const router = createBrowserRouter([
       },
       ...publicRoutes,
     ],
+    errorElement: <ErrorBoundary />,
   },
 ])
 

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import s from './create-new-password.module.scss'
 import { CreateNewPasswordFormType, useCreateNewPassword } from './use-create-new-password.ts'
@@ -11,8 +11,10 @@ type Props = {
   onSubmit: (data: CreateNewPasswordFormType) => void
 }
 
-export const CreateNewPasswordForm: FC<Props> = ({ onSubmit }) => {
+export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
   const { control, handleSubmit, errors } = useCreateNewPassword()
+
+  const { t } = useTranslation()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -21,15 +23,15 @@ export const CreateNewPasswordForm: FC<Props> = ({ onSubmit }) => {
         type="password"
         control={control}
         error={errors.password?.message}
-        label="Password"
+        label={t('Password')}
         className={s.password}
       />
       <Typography className={s.text} variant={'body2'}>
-        Create new password and we will send you further instructions to email
+        {t('Create new password and we will send you further instructions to email')}
       </Typography>
       <Button className={s.btn}>
         <Typography variant={'subtitle2'} as={'span'}>
-          Create New Password
+          {t('Create New Password')}
         </Typography>
       </Button>
     </form>

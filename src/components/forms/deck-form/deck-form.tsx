@@ -1,4 +1,6 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
+
+import { useTranslation } from 'react-i18next'
 
 import s from './deck-form.module.scss'
 
@@ -18,8 +20,10 @@ type Props = {
   disabled?: boolean
 }
 
-export const DeckForm: FC<Props> = ({ onSubmit, setIsOpen, btnText, data, disabled }) => {
+export const DeckForm = ({ onSubmit, setIsOpen, btnText, data, disabled }: Props) => {
   const { control, handleSubmit, errors } = useDeckForm(data as DeckArgs)
+
+  const { t } = useTranslation()
 
   const [file, setFile] = useState<File>()
 
@@ -42,7 +46,7 @@ export const DeckForm: FC<Props> = ({ onSubmit, setIsOpen, btnText, data, disabl
   return (
     <form className={s.modalContent} onSubmit={handleSubmit(onSubmitData)}>
       <ControlledTextField
-        label="Name pack"
+        label={t('Name pack')}
         control={control}
         name={'name'}
         error={errors.name?.message}
@@ -51,13 +55,13 @@ export const DeckForm: FC<Props> = ({ onSubmit, setIsOpen, btnText, data, disabl
       {(url || data?.cover) && <img src={url} alt={'cover'} className={s.cover} />}
       <Uploader loadFile={setFile}>
         <ImageIcon className={s.icon} />
-        <Typography variant={'subtitle2'}>{url ? 'Change cover' : 'Upload file'}</Typography>
+        <Typography variant={'subtitle2'}>{url ? t('Change cover') : t('Upload Image')}</Typography>
       </Uploader>
-      <ControlledCheckbox control={control} name={'isPrivate'} label="Private pack" />
+      <ControlledCheckbox control={control} name={'isPrivate'} label={t('Private pack')} />
       <div className={s.modalButtons}>
         <Button variant="secondary" type="button" onClick={() => setIsOpen(false)}>
           <Typography variant={'subtitle2'} as={'span'}>
-            Cancel
+            {t('Cancel')}
           </Typography>
         </Button>
         <Button type="submit" disabled={disabled}>

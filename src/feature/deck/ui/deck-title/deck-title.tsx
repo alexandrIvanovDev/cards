@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { clsx } from 'clsx'
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 
 import s from './deck-title.module.scss'
@@ -31,6 +32,8 @@ type Props = {
 
 export const DeckTitle = (props: Props) => {
   const { cardsData, isMyDeck, deckData, openModal, setOpenModal, addNewCard } = props
+
+  const { t } = useTranslation()
 
   const classes = {
     addCard: clsx(!cardsData?.items.length && s.hidden),
@@ -82,18 +85,18 @@ export const DeckTitle = (props: Props) => {
               <div>
                 <DropDownItemWithIcon
                   icon={<PlayIcon />}
-                  text={'Learn'}
+                  text={t('Learn')}
                   disabled={deckData.cardsCount === 0}
                   onSelect={() => navigate(`${routePaths.learn}/${deckData.id}`)}
                 />
                 <DropDownItemWithIcon
                   icon={<EditIcon />}
-                  text={'Edit'}
+                  text={t('Edit')}
                   onSelect={() => setUpdateDeckIsOpen(true)}
                 />
                 <DropDownItemWithIcon
                   icon={<DeleteIcon />}
-                  text={'Delete'}
+                  text={t('Delete')}
                   onSelect={() => setDeleteDeckIsOpen(true)}
                 />
               </div>
@@ -109,12 +112,12 @@ export const DeckTitle = (props: Props) => {
             trigger={
               <Button>
                 <Typography variant={'subtitle2'} as={'span'}>
-                  Add New Card
+                  {t('Add New Card')}
                 </Typography>
               </Button>
             }
-            title="Add New Card"
-            buttonText="Add New Card"
+            title={t('Add New Card')}
+            buttonText={t('Add New Card')}
           />
         ) : (
           deckData?.cardsCount > 0 && (
@@ -123,7 +126,7 @@ export const DeckTitle = (props: Props) => {
               to={`${routePaths.learn}/${deckData.id}`}
               onClick={() => navigate(`${routePaths.learn}/${deckData.id}`)}
             >
-              <Typography variant={'subtitle2'}>Learn Deck</Typography>
+              <Typography variant={'subtitle2'}>{t('Learn Deck')}</Typography>
             </Button>
           )
         )}
@@ -133,19 +136,19 @@ export const DeckTitle = (props: Props) => {
 
       <>
         <DeleteEntityModal
-          title="Delete Deck"
+          title={t('Delete Deck')}
           open={deleteDeckIsOpen}
           onOpenChange={setDeleteDeckIsOpen}
-          text={`deck ${formData.name}? All cards will be deleted.`}
-          btnText="Delete Deck"
+          text={`${t('deck')} ${formData.name}? ${t('All cards will be deleted')}.`}
+          btnText={t('Delete Deck')}
           callback={removeDeck}
           disabled={isLoading}
         />
-        <Modal title="Edit pack" open={updateDeckIsOpen} onOpenChange={setUpdateDeckIsOpen}>
+        <Modal title={t('Edit Deck')} open={updateDeckIsOpen} onOpenChange={setUpdateDeckIsOpen}>
           <DeckForm
             onSubmit={editDeck}
             setIsOpen={setUpdateDeckIsOpen}
-            btnText={'Save Changes'}
+            btnText={t('Save Changes')}
             data={formData}
             disabled={updateDeckIsLoading}
           />

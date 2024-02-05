@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import { CardForm } from '@/components/forms/card-form'
 import { Modal, ModalProps } from '@/components/ui/modal'
 
@@ -11,7 +9,7 @@ type Props = ModalProps & {
   answerImg?: string
   buttonText: string
 }
-export const CardModal: FC<Props> = props => {
+export const CardModal = (props: Props) => {
   const { onSubmit, question, answer, buttonText, answerImg, questionImg, onOpenChange, ...rest } =
     props
 

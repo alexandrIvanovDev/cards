@@ -1,5 +1,4 @@
-import { FC } from 'react'
-
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import s from './sign-in.module.scss'
@@ -14,8 +13,10 @@ type Props = {
   onSubmit: (data: SignInFormType) => void
 }
 
-export const SignInForm: FC<Props> = ({ onSubmit }) => {
+export const SignInForm = ({ onSubmit }: Props) => {
   const { handleSubmit, control, errors } = useSignIn()
+
+  const { t } = useTranslation()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -23,19 +24,19 @@ export const SignInForm: FC<Props> = ({ onSubmit }) => {
         name={'email'}
         control={control}
         error={errors.email?.message}
-        label="Email"
+        label={t('Email')}
       />
       <ControlledTextField
         name={'password'}
         type="password"
         control={control}
         error={errors.password?.message}
-        label="Password"
+        label={t('Password')}
       />
       <ControlledCheckbox
         name={'rememberMe'}
         control={control}
-        label="Remember me"
+        label={t('Remember me')}
         className={s.checkbox}
       />
       <Typography
@@ -44,11 +45,11 @@ export const SignInForm: FC<Props> = ({ onSubmit }) => {
         as={Link}
         to={routePaths.forgotPassword}
       >
-        Forgot Password?
+        {t('Forgot Password?')}
       </Typography>
       <Button>
         <Typography variant={'subtitle2'} as={'span'}>
-          Sign In
+          {t('Sign In')}
         </Typography>
       </Button>
     </form>

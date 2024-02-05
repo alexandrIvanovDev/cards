@@ -1,6 +1,5 @@
-import { FC } from 'react'
-
 import { clsx } from 'clsx'
+import { useTranslation } from 'react-i18next'
 
 import s from './table-head.module.scss'
 
@@ -26,7 +25,9 @@ type Props = {
   setSort?: (value: Sort) => void
 }
 
-export const TableHead: FC<Props> = ({ columns, sort, setSort }) => {
+export const TableHead = ({ columns, sort, setSort }: Props) => {
+  const { t } = useTranslation()
+
   const handleSort = (field: string, sortable?: boolean) => {
     if (!setSort || !sortable) {
       return
@@ -59,7 +60,7 @@ export const TableHead: FC<Props> = ({ columns, sort, setSort }) => {
               key={cell.fieldName}
             >
               <div className={s.cell}>
-                <Typography variant={'subtitle2'}>{cell.label}</Typography>
+                <Typography variant={'subtitle2'}>{t(cell.label)}</Typography>
                 {sort && sort.field === cell.fieldName && (
                   <ArrowDownIcon className={classes.icon} />
                 )}

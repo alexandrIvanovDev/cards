@@ -1,6 +1,5 @@
-import { FC } from 'react'
-
 import { clsx } from 'clsx'
+import { useTranslation } from 'react-i18next'
 
 import s from './pagination.module.scss'
 
@@ -19,8 +18,10 @@ type Props = {
   className?: string
 }
 
-export const Pagination: FC<Props> = props => {
+export const Pagination = (props: Props) => {
   const { currentPage, totalPages, changePage, changePageSize, itemsPerPage, className } = props
+
+  const { t } = useTranslation()
 
   const pages = returnPaginationRange(totalPages, currentPage, 1)
 
@@ -80,7 +81,7 @@ export const Pagination: FC<Props> = props => {
 
       <div className={s.control}>
         <Typography as={'p'} variant={'body2'}>
-          Show
+          {t('Show')}
         </Typography>
         <Select
           options={selectOptions}
@@ -89,7 +90,7 @@ export const Pagination: FC<Props> = props => {
           onChange={e => changePageSize(+e)}
         />
         <Typography as={'p'} variant={'body2'}>
-          on the page
+          {t('on the page')}
         </Typography>
       </div>
     </div>

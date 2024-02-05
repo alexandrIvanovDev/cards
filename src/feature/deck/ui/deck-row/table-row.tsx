@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { useTranslation } from 'react-i18next'
+
 import s from './table-row.module.scss'
 
 import { DeleteIcon } from '@/assets/icons/Delete.tsx'
@@ -24,6 +26,8 @@ type Props = {
 export const TableRow = ({ card, isMyDeck, deleteCard, updateCard }: Props) => {
   const [deleteCardIsOpen, setDeleteCardIsOpen] = useState(false)
   const [updateCardIsOpen, setUpdateCardIsOpen] = useState(false)
+
+  const { t } = useTranslation()
 
   const { isLoading: getCardsIsLoading, isFetching } = useGetCardsQuery({ id: card.deckId })
 
@@ -68,15 +72,15 @@ export const TableRow = ({ card, isMyDeck, deleteCard, updateCard }: Props) => {
 
       <>
         <DeleteEntityModal
-          title="Delete Card"
+          title={t('Delete Card')}
           open={deleteCardIsOpen}
           onOpenChange={setDeleteCardIsOpen}
-          text={'this card'}
-          btnText="Delete Card"
+          text={t('this card')}
+          btnText={t('Delete Card')}
           callback={() => deleteCard({ id: card.id })}
         />
         <CardModal
-          title="Edit Card"
+          title={t('Edit Card')}
           open={updateCardIsOpen}
           onOpenChange={setUpdateCardIsOpen}
           onSubmit={editCard}
@@ -84,7 +88,7 @@ export const TableRow = ({ card, isMyDeck, deleteCard, updateCard }: Props) => {
           answer={card.answer}
           questionImg={card.questionImg}
           answerImg={card.answerImg}
-          buttonText="Save Changes"
+          buttonText={t('Save Changes')}
         />
       </>
     </>

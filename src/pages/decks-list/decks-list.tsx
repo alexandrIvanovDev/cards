@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
 import s from './decks-list.module.scss'
@@ -31,6 +32,8 @@ export const DecksList = () => {
   const { currentPage, pageSize } = useSelector((state: RootState) => state.decks.pagination)
 
   const [sort, setSort] = useState<Sort>({ field: 'updated', order: 'desc' })
+
+  const { t } = useTranslation()
 
   const {
     data: decksData,
@@ -127,7 +130,7 @@ export const DecksList = () => {
       />
       {!data?.items.length ? (
         <Typography className={s.noDataMessage} variant={'h2'} as={'h2'}>
-          No data available
+          {t('No data available')}
         </Typography>
       ) : (
         <DecksTable

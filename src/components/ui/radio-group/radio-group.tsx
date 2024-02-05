@@ -2,6 +2,7 @@ import { ElementRef, FC, forwardRef } from 'react'
 
 import * as Radio from '@radix-ui/react-radio-group'
 import { clsx } from 'clsx'
+import { useTranslation } from 'react-i18next'
 
 import s from './radio-group.module.scss'
 
@@ -28,6 +29,7 @@ export const RadioGroup: FC<RadioGroupProps> = forwardRef<
   ElementRef<typeof Radio.Root>,
   RadioGroupProps
 >(({ radioButtons, defaultValue, disabled, className, onValueChange, value }, ref) => {
+  const { t } = useTranslation()
   const classes = {
     root: clsx(s.root, className),
     label: clsx(s.label, disabled && s.disabled),
@@ -48,7 +50,7 @@ export const RadioGroup: FC<RadioGroupProps> = forwardRef<
             <Radio.Indicator className={s.indicator} />
           </Radio.Item>
           <label className={classes.label} htmlFor={r.value}>
-            <Typography variant={'body2'}>{r.label}</Typography>
+            <Typography variant={'body2'}>{t(r.label)}</Typography>
           </label>
         </div>
       ))}

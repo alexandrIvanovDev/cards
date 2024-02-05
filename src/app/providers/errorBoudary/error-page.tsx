@@ -1,9 +1,13 @@
+import { useTranslation } from 'react-i18next'
+
 import s from './error-page.module.scss'
 
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 
 export const ErrorPage = () => {
+  const { t } = useTranslation()
+
   const reloadPage = () => {
     window.location.reload()
   }
@@ -11,9 +15,9 @@ export const ErrorPage = () => {
   return (
     <div className={s.wrapper}>
       <Typography as="h2" variant="large">
-        Something went wrong
+        {t('Something went wrong')}
       </Typography>
-      <Button onClick={reloadPage}>Reload the page</Button>
+      <Button onClick={reloadPage}>{t('Reload the page')}</Button>
     </div>
   )
 }

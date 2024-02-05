@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import s from './decks-header.module.scss'
 
@@ -14,7 +14,9 @@ type Props = {
   isFetching: boolean
 }
 
-export const DecksHeader: FC<Props> = ({ isOpen, setIsOpen, createDeck, isFetching }) => {
+export const DecksHeader = ({ isOpen, setIsOpen, createDeck, isFetching }: Props) => {
+  const { t } = useTranslation()
+
   const addNewCard = (data: FormData) => {
     createDeck(data)
     setIsOpen(false)
@@ -23,21 +25,21 @@ export const DecksHeader: FC<Props> = ({ isOpen, setIsOpen, createDeck, isFetchi
   return (
     <div className={s.titleWrapper}>
       <Typography variant="large" as="h2">
-        Packs List
+        {t('Packs List')}
       </Typography>
       <Modal
         trigger={
           <Button disabled={isFetching}>
             <Typography variant={'subtitle2'} as={'span'}>
-              Add New Deck
+              {t('Add New Deck')}
             </Typography>
           </Button>
         }
-        title="Add New Deck"
+        title={t('Add New Deck')}
         open={isOpen}
         onOpenChange={setIsOpen}
       >
-        <DeckForm onSubmit={addNewCard} setIsOpen={setIsOpen} btnText={'Add New Deck'} />
+        <DeckForm onSubmit={addNewCard} setIsOpen={setIsOpen} btnText={t('Add New Deck')} />
       </Modal>
     </div>
   )

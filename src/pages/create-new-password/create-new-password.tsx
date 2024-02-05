@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import s from './create-new-password.module.scss'
@@ -13,6 +14,8 @@ import { useCreateNewPasswordMutation } from '@/feature/auth'
 export const CreateNewPassword = () => {
   const [createNewPassword, { isLoading }] = useCreateNewPasswordMutation()
 
+  const { t } = useTranslation()
+
   const { token } = useParams()
   const navigate = useNavigate()
 
@@ -26,7 +29,7 @@ export const CreateNewPassword = () => {
       {isLoading && <ProgressBar />}
       <Card className={s.wrapper}>
         <Typography as="h2" variant="large">
-          Create new password
+          {t('Create New Password')}
         </Typography>
         <CreateNewPasswordForm onSubmit={onSubmit} />
       </Card>

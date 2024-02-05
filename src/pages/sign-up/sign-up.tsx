@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link, Navigate } from 'react-router-dom'
 
 import s from './sign-up.module.scss'
@@ -15,6 +16,8 @@ export const SignUp = () => {
   const [signUp, { isLoading: signUpIsLoading }] = useSignUpMutation()
   const [signIn, { isLoading: signInIsLoading }] = useSignInMutation()
   const { data: userData } = useMeQuery()
+
+  const { t } = useTranslation()
 
   const handleSignUp = async (data: SignUpFormType) => {
     try {
@@ -35,14 +38,14 @@ export const SignUp = () => {
     <Card className={s.wrapper}>
       {(signUpIsLoading || signInIsLoading) && <ProgressBar />}
       <Typography as="h2" variant="large">
-        Sign Up
+        {t('Sign Up')}
       </Typography>
       <SignUpForm onSubmit={handleSignUp} />
       <Typography variant="body2" className={s.notification}>
-        Already have an account?
+        {t('Already have an account?')}
       </Typography>
       <Button variant="link" as={Link} to={routePaths.signIn} className={s.btn}>
-        Sign In
+        {t('Sign In')}
       </Button>
     </Card>
   )

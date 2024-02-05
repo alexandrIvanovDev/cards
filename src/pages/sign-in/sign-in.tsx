@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link, Navigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -15,6 +16,8 @@ import { LoginArgs } from '@/feature/auth/auth.types.ts'
 export const SignIn = () => {
   const [signIn, { isLoading }] = useSignInMutation()
   const { data } = useMeQuery()
+
+  const { t } = useTranslation()
 
   const handleLogin = async (data: LoginArgs) => {
     try {
@@ -47,14 +50,14 @@ export const SignIn = () => {
       {isLoading && <ProgressBar />}
       <Card className={s.wrapper}>
         <Typography as="h2" variant="large">
-          Sign In
+          {t('Sign In')}
         </Typography>
         <SignInForm onSubmit={handleLogin} />
         <Typography variant="body2" className={s.notification}>
-          {"Don't have an account?"}
+          {t("Don't have an account?")}
         </Typography>
         <Button variant="link" className={s.signUp} as={Link} to={routePaths.signUp}>
-          Sign Up
+          {t('Sign Up')}
         </Button>
       </Card>
     </>

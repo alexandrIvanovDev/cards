@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import s from './learn.module.scss'
@@ -18,6 +19,8 @@ export const Learn = () => {
   const id = params.id as string
   const [isShowAnswer, setIsShowAnswer] = useState(false)
 
+  const { t } = useTranslation()
+
   const { data: card } = useGetRandomCardQuery({ id })
   const { data: deck } = useGetDeckByIdQuery({ id })
 
@@ -33,11 +36,11 @@ export const Learn = () => {
       <BackButton />
       <Card className={s.card}>
         <Typography as={'h2'} variant={'large'} className={s.title}>
-          Learn {deck?.name}
+          {t('Learn')} {deck?.name}
         </Typography>
         <div className={s.questionWrapper}>
           <div className={s.questionText}>
-            <Typography variant={'subtitle1'}>Question:</Typography>
+            <Typography variant={'subtitle1'}>{t('Question')}:</Typography>
             <Typography variant={'body1'} className={s.question}>
               {card?.question}
             </Typography>
@@ -48,22 +51,22 @@ export const Learn = () => {
         </div>
 
         <Typography variant={'body2'} className={s.attempts}>
-          Number of attempts: {card?.shots}
+          {t('Number of attempts')}: {card?.shots}
         </Typography>
 
         {!isShowAnswer ? (
           <div className={s.btns}>
             <Button onClick={() => setIsShowAnswer(true)}>
-              <Typography variant={'subtitle2'}>Show answer</Typography>
+              <Typography variant={'subtitle2'}>{t('Show answer')}</Typography>
             </Button>
             <Button onClick={() => navigate(-1)} variant={'secondary'}>
-              <Typography variant={'subtitle2'}>Complete the training</Typography>
+              <Typography variant={'subtitle2'}>{t('Complete the training')}</Typography>
             </Button>
           </div>
         ) : (
           <div className={s.answerBlock}>
             <div className={s.answerWrapper}>
-              <Typography variant={'subtitle1'}>Answer:</Typography>
+              <Typography variant={'subtitle1'}>{t('Answer')}:</Typography>
               <Typography variant={'body1'} className={s.answer}>
                 {card?.answer}
               </Typography>
@@ -71,7 +74,7 @@ export const Learn = () => {
             {card?.answerImg && (
               <img src={card.answerImg} alt="answerImg" className={s.answerImg} />
             )}
-            <Typography variant={'subtitle1'}>Rate yourself:</Typography>
+            <Typography variant={'subtitle1'}>{t('Rate yourself')}:</Typography>
             <RateCard onSubmit={onSubmit} />
           </div>
         )}

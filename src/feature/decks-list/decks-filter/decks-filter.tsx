@@ -1,4 +1,6 @@
-import { ChangeEvent, FC } from 'react'
+import { ChangeEvent } from 'react'
+
+import { useTranslation } from 'react-i18next'
 
 import s from './decks-filter.module.scss'
 
@@ -21,7 +23,7 @@ type Props = {
   clearFilter: () => void
 }
 
-export const DecksFilter: FC<Props> = props => {
+export const DecksFilter = (props: Props) => {
   const {
     tabsValue,
     onChangeSliderValue,
@@ -33,6 +35,8 @@ export const DecksFilter: FC<Props> = props => {
     setSearch,
     clearFilter,
   } = props
+
+  const { t } = useTranslation()
 
   // const dispatch = useDispatch()
 
@@ -49,31 +53,31 @@ export const DecksFilter: FC<Props> = props => {
     <div className={s.settingsWrapper}>
       <TextField
         type="search"
-        placeholder="Input search"
+        placeholder={t('Input search')}
         className={s.input}
         value={search}
         onChange={onChangeSearch}
       />
       <Tabs
         tabs={[
-          { value: userId, text: 'My Cards' },
-          { value: '', text: 'All Cards' },
+          { value: userId, text: t('My Cards') },
+          { value: '', text: t('All Cards') },
         ]}
         value={tabsValue}
         onValueChange={setTabsValue}
-        label="Show packs cards"
+        label={t('Show packs cards')}
       />
       <Slider
         min={0}
         max={maxCardsCount}
         value={sliderValue}
         onValueChange={onChangeSliderValue}
-        label="Number of cards"
+        label={t('Number of cards')}
       />
       <Button variant="secondary" onClick={clearFilter}>
         <DeleteIcon className={s.deleteIcon} />
         <Typography variant={'subtitle2'} as={'span'}>
-          Clear filter
+          {t('Clear filter')}
         </Typography>
       </Button>
     </div>

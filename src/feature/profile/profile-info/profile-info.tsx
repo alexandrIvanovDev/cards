@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import s from './profile-info.module.scss'
 
 import { EditIcon } from '@/assets/icons/Edit.tsx'
@@ -13,6 +15,8 @@ type ProfileInfoProps = {
 }
 
 export const ProfileInfo = ({ changeName, user, logout }: ProfileInfoProps) => {
+  const { t } = useTranslation()
+
   return (
     <div className={s.information}>
       <Typography variant="h1" as="h3" className={s.name}>
@@ -23,7 +27,7 @@ export const ProfileInfo = ({ changeName, user, logout }: ProfileInfoProps) => {
       </Typography>
       <Button variant="secondary" onClick={logout}>
         <LogoutIcon className={s.logoutIcon} />
-        <Typography variant={'subtitle2'}>Logout</Typography>
+        <Typography variant={'subtitle2'}>{t('Logout')}</Typography>
       </Button>
     </div>
   )

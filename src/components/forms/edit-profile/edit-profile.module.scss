@@ -7,7 +7,7 @@
   padding: 10px 0;
 
   .buttons {
-    @include flex(row, space-between, normal, 1rem);
+    @include flex(column, space-between, normal, 1rem);
 
     margin-top: 20px;
   }

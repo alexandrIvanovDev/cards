@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { useTranslation } from 'react-i18next'
 import { Navigate } from 'react-router-dom'
 
 import s from './personal-information.module.scss'
@@ -23,6 +24,8 @@ export const PersonalInformation = () => {
   const [editMode, setEditMode] = useState(false)
 
   const { data, isLoading: getUserIsLoading } = useMeQuery()
+
+  const { t } = useTranslation()
 
   const [updateUser, { isLoading: updateUserIsLoading }] = useUpdateUserMutation()
   const [signOut, { isLoading: signOutIsLoading }] = useSignOutMutation()
@@ -71,7 +74,7 @@ export const PersonalInformation = () => {
       <BackButton className={s.backBtn} />
       <Card className={s.wrapper}>
         <Typography as="h2" variant="large">
-          Personal Information
+          {t('Personal Information')}
         </Typography>
         <AvatarUploader
           img={data?.avatar as string}

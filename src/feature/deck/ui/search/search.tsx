@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import s from './search.module.scss'
 
@@ -9,11 +9,13 @@ type Props = {
   setValue: (value: string) => void
 }
 
-export const SearchCard: FC<Props> = ({ value, setValue }) => {
+export const SearchCard = ({ value, setValue }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <TextField
       type="search"
-      placeholder="Card search"
+      placeholder={t('Card search')}
       className={s.searchInput}
       value={value}
       onChange={e => setValue(e.currentTarget.value)}

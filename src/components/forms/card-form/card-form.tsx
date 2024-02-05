@@ -1,4 +1,6 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
+
+import { useTranslation } from 'react-i18next'
 
 import s from './card-form.module.scss'
 import { CreateCardFormType, useCreateCard } from './use-create-card.ts'
@@ -19,10 +21,12 @@ type Props = {
   buttonText?: string
 }
 
-export const CardForm: FC<Props> = props => {
+export const CardForm = (props: Props) => {
   const { onSubmit, closeModal, answer, question, buttonText, questionImg, answerImg } = props
 
   const { control, handleSubmit, errors } = useCreateCard(question, answer)
+
+  const { t } = useTranslation()
 
   const [questionFile, setQuestionFile] = useState<File | null>(null)
   const [answerFile, setAnswerFile] = useState<File | null>(null)
@@ -52,7 +56,7 @@ export const CardForm: FC<Props> = props => {
   return (
     <form className={s.modalContent} onSubmit={handleSubmit(onSubmitData)}>
       <ControlledTextField
-        label="Question"
+        label={t('Question')}
         control={control}
         name={'question'}
         error={errors?.question?.message}
@@ -61,11 +65,11 @@ export const CardForm: FC<Props> = props => {
       <Uploader loadFile={setQuestionFile}>
         <ImageIcon className={s.icon} />
         <Typography variant={'subtitle2'}>
-          {questionUrl ? 'Change cover' : 'Upload Image'}
+          {questionUrl ? t('Change cover') : t('Upload Image')}
         </Typography>
       </Uploader>
       <ControlledTextField
-        label="Answer"
+        label={t('Answer')}
         control={control}
         name={'answer'}
         error={errors?.answer?.message}
@@ -73,12 +77,14 @@ export const CardForm: FC<Props> = props => {
       {answerUrl && <img src={answerUrl} alt={'answer cover'} className={s.cover} />}
       <Uploader loadFile={setAnswerFile}>
         <ImageIcon className={s.icon} />
-        <Typography variant={'subtitle2'}>{answerUrl ? 'Change cover' : 'Upload Image'}</Typography>
+        <Typography variant={'subtitle2'}>
+          {answerUrl ? t('Change cover') : t('Upload Image')}
+        </Typography>
       </Uploader>
       <div className={s.modalButtons}>
         <Button type="button" variant="secondary" onClick={closeModal}>
           <Typography variant={'subtitle2'} as={'span'}>
-            Cancel
+            {t('Cancel')}
           </Typography>
         </Button>
         <Button type="submit">

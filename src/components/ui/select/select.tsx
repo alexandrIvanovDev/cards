@@ -1,4 +1,4 @@
-import { ElementRef, FC, forwardRef } from 'react'
+import { ElementRef, forwardRef } from 'react'
 
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as Label from '@radix-ui/react-label'
@@ -26,7 +26,7 @@ export type SelectProps = {
   smallSize?: boolean
 }
 
-export const Select: FC<SelectProps> = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProps>(
+export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProps>(
   (
     { options, onChange, disabled, value, label, placeholder, required, className, smallSize },
     ref

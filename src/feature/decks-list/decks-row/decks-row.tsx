@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { clsx } from 'clsx'
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 
 import s from './decks-row.module.scss'
@@ -31,6 +32,8 @@ type Props = {
 
 export const DecksRow = ({ deck, userId, isFetching }: Props) => {
   const isMyDeck = userId === deck.userId
+
+  const { t } = useTranslation()
 
   const [deleteDeck, { isLoading: deleteDeckIsLoading }] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
@@ -108,18 +111,18 @@ export const DecksRow = ({ deck, userId, isFetching }: Props) => {
       </Table.Row>
       <>
         <DeleteEntityModal
-          title={'Delete Deck'}
+          title={t('Delete Deck')}
           open={deleteDeckIsOpen}
           onOpenChange={setDeleteDeckIsOpen}
-          text={`deck ${deck.name}? All cards will be deleted`}
-          btnText={'Delete Deck'}
+          text={`${t('deck')} ${deck.name}? ${t('All cards will be deleted')}`}
+          btnText={t('Delete Deck')}
           callback={removeDeck}
         />
-        <Modal title="Edit Deck" open={updateDeckIsOpen} onOpenChange={setUpdateDeckIsOpen}>
+        <Modal title={t('Edit Deck')} open={updateDeckIsOpen} onOpenChange={setUpdateDeckIsOpen}>
           <DeckForm
             onSubmit={editDeck}
             setIsOpen={setUpdateDeckIsOpen}
-            btnText={'Save Changes'}
+            btnText={t('Save Changes')}
             data={formData}
             // disabled={updateDeckIsLoading}
           />
