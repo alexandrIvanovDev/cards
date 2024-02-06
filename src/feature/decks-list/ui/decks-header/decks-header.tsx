@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { useTranslation } from 'react-i18next'
 
 import s from './decks-header.module.scss'
@@ -8,13 +10,13 @@ import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
 
 type Props = {
-  isOpen: boolean
-  setIsOpen: (value: boolean) => void
   createDeck: (data: FormData) => void
-  isFetching: boolean
+  disabled: boolean
 }
 
-export const DecksHeader = ({ isOpen, setIsOpen, createDeck, isFetching }: Props) => {
+export const DecksHeader = ({ createDeck, disabled }: Props) => {
+  const [isOpen, setIsOpen] = useState(false)
+
   const { t } = useTranslation()
 
   const addNewCard = (data: FormData) => {
@@ -27,20 +29,14 @@ export const DecksHeader = ({ isOpen, setIsOpen, createDeck, isFetching }: Props
       <Typography variant="large" as="h2">
         {t('Packs List')}
       </Typography>
-      <Modal
-        trigger={
-          <Button disabled={isFetching}>
-            <Typography variant={'subtitle2'} as={'span'}>
-              {t('Add New Deck')}
-            </Typography>
-          </Button>
-        }
-        title={t('Add New Deck')}
-        open={isOpen}
-        onOpenChange={setIsOpen}
-      >
+      <Modal title={t('Add New Deck')} open={isOpen} onOpenChange={setIsOpen}>
         <DeckForm onSubmit={addNewCard} setIsOpen={setIsOpen} btnText={t('Add New Deck')} />
       </Modal>
+      <Button disabled={disabled} onClick={() => setIsOpen(true)}>
+        <Typography variant={'subtitle2'} as={'span'}>
+          {t('Add New Deck')}
+        </Typography>
+      </Button>
     </div>
   )
 }

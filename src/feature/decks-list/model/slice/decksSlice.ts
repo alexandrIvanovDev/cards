@@ -14,7 +14,7 @@ export type InitialState = {
 }
 
 export const decksSlice = createSlice({
-  name: 'filter',
+  name: 'decks',
   initialState: {
     pagination: {
       currentPage: 1,

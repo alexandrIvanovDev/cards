@@ -3,7 +3,7 @@
 .wrapper {
   @include flex(row, center, center, 0.5rem);
 
-  margin-top: 20px;
+  margin: 25px 0;
 
   .pages {
     @include flex(row, center, center, 0.5rem);

@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { baseApi } from '@/app/providers/store/base-api.ts'
+import { decksSlice } from '@/feature/decks-list/model/slice'
 import { cardsSlice } from '@/services/cardsSlice.ts'
-import { decksSlice } from '@/services/decksSlice.ts'
 
 export const store = configureStore({
   reducer: {

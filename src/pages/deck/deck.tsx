@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import s from './deck.module.scss'
 
 import { RootState } from '@/app/providers/store/store.ts'
-import { useDebounce } from '@/common/hooks/useDebounce.ts'
+import { useAppDispatch } from '@/common/hooks/use-app-dispatch.ts'
+import { useDebounce } from '@/common/hooks/use-debounce.ts'
 import { getSortedString } from '@/common/utils/getSortedString.ts'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
@@ -21,15 +22,16 @@ import { CardModal } from '@/feature/deck/ui/card-modal'
 import { DeckTable } from '@/feature/deck/ui/deck-table'
 import { DeckTitle } from '@/feature/deck/ui/deck-title'
 import { SearchCard } from '@/feature/deck/ui/search'
+import { Deck as DeckType } from '@/feature/decks-list/services'
+import { useGetDeckByIdQuery } from '@/feature/decks-list/services/deck.service.ts'
 import {
   useCreateCardMutation,
   useDeleteCardMutation,
   useGetCardsQuery,
   useUpdateCardMutation,
 } from '@/services/cards.service.ts'
-import { DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
+import { GetCardsResponse } from '@/services/cards.types.ts'
 import { setCardsSearchTerm, setCurrentPage, setPageSize } from '@/services/cardsSlice.ts'
-import { useGetDeckByIdQuery } from '@/services/deck.service.ts'
 
 export const Deck = () => {
   const { id } = useParams()
@@ -65,7 +67,7 @@ export const Deck = () => {
 
   const debouncedValue = useDebounce(searchValue, 1000)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const handleSearch = () => {
     dispatch(setCardsSearchTerm(searchValue))
@@ -122,7 +124,7 @@ export const Deck = () => {
           cardsData={cardsData as GetCardsResponse}
           openModal={addCardModal}
           setOpenModal={setAddCardModal}
-          deckData={deckData as DecksResponseItems}
+          deckData={deckData as DeckType}
           addNewCard={addNewCard}
         />
         <SearchCard value={searchValue} setValue={setSearchValue} />

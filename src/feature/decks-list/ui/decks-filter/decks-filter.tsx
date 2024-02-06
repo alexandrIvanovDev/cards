@@ -1,5 +1,3 @@
-import { ChangeEvent } from 'react'
-
 import { useTranslation } from 'react-i18next'
 
 import s from './decks-filter.module.scss'
@@ -7,47 +5,49 @@ import s from './decks-filter.module.scss'
 import { DeleteIcon } from '@/assets/icons/Delete.tsx'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
-import { Tabs } from '@/components/ui/tabs'
+import { Tabs, TabType } from '@/components/ui/tabs'
 import { TextField } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
 
 type Props = {
   userId: string
   tabsValue: string
-  setTabsValue: (value: string) => void
+  setTabValue: (value: string) => void
   sliderValue: Array<number>
-  onChangeSliderValue: (value: Array<number>) => void
+  setCardsCount: (value: Array<number>) => void
   maxCardsCount: number
   search: string
-  setSearch: (value: string) => void
-  clearFilter: () => void
+  setSearchTerm: (value: string) => void
 }
 
 export const DecksFilter = (props: Props) => {
   const {
     tabsValue,
-    onChangeSliderValue,
+    setCardsCount,
     sliderValue,
-    setTabsValue,
+    setTabValue,
     maxCardsCount,
     userId,
     search,
-    setSearch,
-    clearFilter,
+    setSearchTerm,
   } = props
 
   const { t } = useTranslation()
 
-  // const dispatch = useDispatch()
-
-  // const onTabValueChange = (value: string) => {
-  //   setTabsValue(value)
-  //   dispatch(setTabValue(value))
-  // }
-
-  const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.currentTarget.value)
+  const clearSearchValue = () => {
+    setSearchTerm('')
   }
+
+  const clearFilter = () => {
+    setSearchTerm('')
+    setCardsCount([0, maxCardsCount])
+    setTabValue('')
+  }
+
+  const tabs: Array<TabType> = [
+    { value: userId, text: t('My Cards') },
+    { value: '', text: t('All Cards') },
+  ]
 
   return (
     <div className={s.settingsWrapper}>
@@ -56,22 +56,20 @@ export const DecksFilter = (props: Props) => {
         placeholder={t('Input search')}
         className={s.input}
         value={search}
-        onChange={onChangeSearch}
+        onChange={e => setSearchTerm(e.currentTarget.value)}
+        clearValue={clearSearchValue}
       />
       <Tabs
-        tabs={[
-          { value: userId, text: t('My Cards') },
-          { value: '', text: t('All Cards') },
-        ]}
+        tabs={tabs}
         value={tabsValue}
-        onValueChange={setTabsValue}
+        onValueChange={setTabValue}
         label={t('Show packs cards')}
       />
       <Slider
         min={0}
         max={maxCardsCount}
         value={sliderValue}
-        onValueChange={onChangeSliderValue}
+        onValueChange={setCardsCount}
         label={t('Number of cards')}
       />
       <Button variant="secondary" onClick={clearFilter}>

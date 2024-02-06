@@ -16,16 +16,16 @@ import { Modal } from '@/components/ui/modal'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
-import { DeleteEntityModal } from '@/feature/decks-list/delete-entity-modal/delete-entity-modal.tsx'
-import { DeckArgs, DecksResponseItems } from '@/services/cards.types.ts'
+import { Deck, DeckArgs } from '@/feature/decks-list/services'
 import {
   useDeleteDeckMutation,
   useGetDecksQuery,
   useUpdateDeckMutation,
-} from '@/services/deck.service.ts'
+} from '@/feature/decks-list/services/deck.service.ts'
+import { DeleteEntityModal } from '@/feature/decks-list/ui/delete-entity-modal/delete-entity-modal.tsx'
 
 type Props = {
-  deck: DecksResponseItems
+  deck: Deck
   userId: string
   isFetching: boolean
 }

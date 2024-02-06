@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import s from './header.module.scss'
 import { ProfileInfo, ProfileInfoProps } from './profile-info/profile-info.tsx'
@@ -8,6 +9,7 @@ import { routePaths } from '@/app/providers/router'
 import { Logo } from '@/assets/icons/Logo.tsx'
 import { LogoutIcon } from '@/assets/icons/Logout.tsx'
 import { ProfileIcon } from '@/assets/icons/Profile.tsx'
+import { requestHandler } from '@/common/utils/requestHandler.ts'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Dropdown, DropDownItem, DropDownItemWithIcon } from '@/components/ui/dropdown'
@@ -25,15 +27,20 @@ export const Header = ({ data }: Props) => {
 
   const [signOut, { isLoading }] = useSignOutMutation()
 
+  // TODO global loader
+  // const isLoading = useAppSelector(state =>
+  //   Object.values(state.baseApi.queries).some(query => query?.status === 'pending')
+  // )
+
   const { t } = useTranslation()
 
   const logout = async () => {
-    try {
-      await signOut()
-      navigate(routePaths.signIn)
-    } catch (e) {
-      console.error(e)
-    }
+    await requestHandler(async () => {
+      await signOut().unwrap()
+      toast(t('You have successfully logged out'))
+
+      return <Navigate to={routePaths.signIn} />
+    })
   }
 
   return (

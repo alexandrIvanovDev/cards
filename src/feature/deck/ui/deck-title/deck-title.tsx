@@ -17,14 +17,18 @@ import { Modal } from '@/components/ui/modal'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
 import { CardModal } from '@/feature/deck/ui/card-modal/card-modal.tsx'
-import { DeleteEntityModal } from '@/feature/decks-list/delete-entity-modal/delete-entity-modal.tsx'
-import { DeckArgs, DecksResponseItems, GetCardsResponse } from '@/services/cards.types.ts'
-import { useDeleteDeckMutation, useUpdateDeckMutation } from '@/services/deck.service.ts'
+import { Deck, DeckArgs } from '@/feature/decks-list/services'
+import {
+  useDeleteDeckMutation,
+  useUpdateDeckMutation,
+} from '@/feature/decks-list/services/deck.service.ts'
+import { DeleteEntityModal } from '@/feature/decks-list/ui/delete-entity-modal/delete-entity-modal.tsx'
+import { GetCardsResponse } from '@/services/cards.types.ts'
 
 type Props = {
   isMyDeck: boolean
   cardsData: GetCardsResponse
-  deckData: DecksResponseItems
+  deckData: Deck
   openModal: boolean
   setOpenModal: (value: boolean) => void
   addNewCard: (createCardData: FormData) => void

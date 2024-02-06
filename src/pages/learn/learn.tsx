@@ -9,9 +9,10 @@ import { RateCard, RateCardType } from '@/components/forms/rate-card'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { Loader } from '@/components/ui/loader'
 import { Typography } from '@/components/ui/typography'
+import { useGetDeckByIdQuery } from '@/feature/decks-list/services/deck.service.ts'
 import { useGetRandomCardQuery, useRateCardMutation } from '@/services/cards.service.ts'
-import { useGetDeckByIdQuery } from '@/services/deck.service.ts'
 
 export const Learn = () => {
   const params = useParams()
@@ -21,7 +22,7 @@ export const Learn = () => {
 
   const { t } = useTranslation()
 
-  const { data: card } = useGetRandomCardQuery({ id })
+  const { data: card, isLoading: cardIsLoading } = useGetRandomCardQuery({ id })
   const { data: deck } = useGetDeckByIdQuery({ id })
 
   const [rateCard] = useRateCardMutation()
@@ -29,6 +30,10 @@ export const Learn = () => {
   const onSubmit = async (data: RateCardType) => {
     await rateCard({ id: id, cardId: card!.id, grade: +data.grade })
     setIsShowAnswer(false)
+  }
+
+  if (cardIsLoading) {
+    return <Loader />
   }
 
   return (

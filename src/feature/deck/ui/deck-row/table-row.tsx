@@ -12,7 +12,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
 import { CardModal } from '@/feature/deck/ui/card-modal/card-modal.tsx'
-import { DeleteEntityModal } from '@/feature/decks-list/delete-entity-modal/delete-entity-modal.tsx'
+import { DeleteEntityModal } from '@/feature/decks-list/ui/delete-entity-modal/delete-entity-modal.tsx'
 import { useGetCardsQuery } from '@/services/cards.service.ts'
 import { CardsResponseItems, DeleteCardsArgs, UpdateCardType } from '@/services/cards.types.ts'
 

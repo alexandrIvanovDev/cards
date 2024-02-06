@@ -12,6 +12,10 @@ type Props = {
 export const SearchCard = ({ value, setValue }: Props) => {
   const { t } = useTranslation()
 
+  const clearValue = () => {
+    setValue('')
+  }
+
   return (
     <TextField
       type="search"
@@ -19,6 +23,7 @@ export const SearchCard = ({ value, setValue }: Props) => {
       className={s.searchInput}
       value={value}
       onChange={e => setValue(e.currentTarget.value)}
+      clearValue={clearValue}
     />
   )
 }

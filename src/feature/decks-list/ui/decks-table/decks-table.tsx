@@ -1,11 +1,11 @@
 import { decksListTableHeader } from '@/common/data/decks-list-table-header.ts'
 import { Table } from '@/components/ui/table'
 import { Sort, TableHead } from '@/components/ui/table-head/table-head.tsx'
-import { DecksRow } from '@/feature/decks-list/decks-row/decks-row.tsx'
-import { GetDecksResponse } from '@/services/cards.types.ts'
+import { GetDecks } from '@/feature/decks-list/services'
+import { DecksRow } from '@/feature/decks-list/ui/decks-row/decks-row.tsx'
 
 type Props = {
-  data: GetDecksResponse
+  data: GetDecks
   userId: string
   sort: Sort
   setSort: (sort: Sort) => void
