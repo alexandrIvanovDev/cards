@@ -1,9 +1,11 @@
 import { useTranslation } from 'react-i18next'
 import { Link, Navigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import s from './sign-up.module.scss'
 
 import { routePaths } from '@/app/providers/router/routePaths.tsx'
+import { requestHandler } from '@/common/utils/requestHandler.ts'
 import { SignUpForm } from '@/components/forms/sign-up'
 import { SignUpFormType } from '@/components/forms/sign-up/use-sign-up.ts'
 import { Button } from '@/components/ui/button'
@@ -20,15 +22,16 @@ export const SignUp = () => {
   const { t } = useTranslation()
 
   const handleSignUp = async (data: SignUpFormType) => {
-    try {
-      const { confirmPassword, ...rest } = data
+    const { confirmPassword, ...rest } = data
 
-      await signUp(rest)
-      await signIn(rest)
-    } catch (e) {
-      console.error(e)
-    }
+    await requestHandler(async () => {
+      await signUp(rest).unwrap()
+      await signIn(rest).unwrap()
+      toast.success(t('You have successfully registered'))
+    })
   }
+
+  const isLoading = signUpIsLoading || signInIsLoading
 
   if (userData?.id) {
     return <Navigate to={routePaths.packs} />
@@ -36,7 +39,7 @@ export const SignUp = () => {
 
   return (
     <Card className={s.wrapper}>
-      {(signUpIsLoading || signInIsLoading) && <ProgressBar />}
+      {isLoading && <ProgressBar />}
       <Typography as="h2" variant="large">
         {t('Sign Up')}
       </Typography>

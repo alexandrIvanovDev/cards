@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import s from './sign-in.module.scss'
 
 import { routePaths } from '@/app/providers/router'
+import { requestHandler } from '@/common/utils/requestHandler.ts'
 import { SignInForm } from '@/components/forms/sign-in'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -20,25 +21,10 @@ export const SignIn = () => {
   const { t } = useTranslation()
 
   const handleLogin = async (data: LoginArgs) => {
-    try {
-      return await signIn(data)
-
-      // toast.success('You are successfully authorized')
-    } catch (e) {
-      console.error(e)
-      toast.error('Error')
-    }
-    // signIn(data)
-    //   .then(res => {
-    //     if (res.error.status === 401) {
-    //       throw new Error('Some error')
-    //     }
-    //
-    //     return res
-    //   })
-    //   .catch(e => {
-    //     console.log(e)
-    //   })
+    await requestHandler(async () => {
+      await signIn(data).unwrap()
+      toast.success(t('You have successfully authorized'))
+    })
   }
 
   if (data?.id) {
