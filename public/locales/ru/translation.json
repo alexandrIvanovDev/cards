@@ -77,5 +77,11 @@
   "Forgot": "Забыл",
   "A lot of thought": "Много думал",
   "Confused": "Смутился",
-  "Knew the answer": "Знал ответ"
+  "Knew the answer": "Знал ответ",
+  "You have successfully registered": "Вы успешно зарегистрировались",
+  "You have successfully authorized": "Вы успешно авторизовались",
+  "The password has been changed": "Пароль был изменен",
+  "You have successfully logged out": "Вы успешно вышли из системы",
+  "Your avatar has been successfully changed": "Ваш аватар успешно изменен",
+  "Your name has been successfully changed": "Ваше имя успешно изменено"
 }

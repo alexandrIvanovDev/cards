@@ -1,9 +1,11 @@
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import s from './create-new-password.module.scss'
 
 import { routePaths } from '@/app/providers/router'
+import { requestHandler } from '@/common/utils/requestHandler.ts'
 import { CreateNewPasswordForm } from '@/components/forms/create-new-password'
 import { CreateNewPasswordFormType } from '@/components/forms/create-new-password/use-create-new-password.ts'
 import { Card } from '@/components/ui/card'
@@ -20,8 +22,11 @@ export const CreateNewPassword = () => {
   const navigate = useNavigate()
 
   const onSubmit = async (data: CreateNewPasswordFormType) => {
-    await createNewPassword({ token: token as string, ...data })
-    navigate(routePaths.signIn)
+    await requestHandler(async () => {
+      await createNewPassword({ token: token as string, ...data }).unwrap()
+      toast.success(t('The password has been changed'))
+      navigate(routePaths.signIn)
+    })
   }
 
   return (

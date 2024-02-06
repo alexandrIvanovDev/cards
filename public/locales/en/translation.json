@@ -79,5 +79,11 @@
   "Forgot": "Forgot",
   "A lot of thought": "A lot of thought",
   "Confused": "Confused",
-  "Knew the answer": "Knew the answer"
+  "Knew the answer": "Knew the answer",
+  "You have successfully registered": "You have successfully registered",
+  "You have successfully authorized": "You have successfully authorized",
+  "The password has been changed": "The password has been changed",
+  "You have successfully logged out": "You have successfully logged out",
+  "Your avatar has been successfully changed": "Your avatar has been successfully changed",
+  "Your name has been successfully changed": "Your name has been successfully changed"
 }

@@ -5,6 +5,7 @@ import { clsx } from 'clsx'
 import s from './uploader.module.scss'
 
 import { genericFileConstraints } from '@/common/data/validationFields.ts'
+import { notificationHandler } from '@/common/utils/notification-handler.ts'
 import { Button } from '@/components/ui/button'
 
 type Props = {
@@ -22,7 +23,7 @@ export const Uploader = ({ children, className, loadFile }: Props) => {
         genericFileConstraints.parse(file)
         loadFile(file)
       } catch (e) {
-        console.warn(e)
+        notificationHandler(e)
       }
     }
   }

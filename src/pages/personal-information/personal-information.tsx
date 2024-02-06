@@ -2,10 +2,13 @@ import { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { Navigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import s from './personal-information.module.scss'
 
 import { routePaths } from '@/app/providers/router'
+import { notificationHandler } from '@/common/utils/notification-handler.ts'
+import { requestHandler } from '@/common/utils/requestHandler.ts'
 import { EditProfileForm } from '@/components/forms/edit-profile'
 import { BackButton } from '@/components/ui/back-button'
 import { Card } from '@/components/ui/card'
@@ -31,34 +34,41 @@ export const PersonalInformation = () => {
   const [signOut, { isLoading: signOutIsLoading }] = useSignOutMutation()
 
   const logout = async () => {
-    try {
-      await signOut()
+    await requestHandler(async () => {
+      await signOut().unwrap()
+      toast(t('You have successfully logged out'))
 
       return <Navigate to={routePaths.signIn} />
-    } catch (e) {
-      console.error(e)
-    }
+    })
   }
 
   const toggleEditMode = () => {
     setEditMode(!editMode)
   }
 
-  const saveChanges = async (data: UpdateUserArgs) => {
+  const changeUserName = async (data: UpdateUserArgs) => {
     const formData = new FormData()
 
     formData.append('name', data.name)
 
-    await updateUser(formData)
-    toggleEditMode()
+    await requestHandler(async () => {
+      await updateUser(formData).unwrap()
+      toast.success(t('Your name has been successfully changed'))
+      toggleEditMode()
+    })
   }
 
   const loadNewImg = async (file: File) => {
-    const formData = new FormData()
+    try {
+      const formData = new FormData()
 
-    formData.append('avatar', file)
+      formData.append('avatar', file)
 
-    await updateUser(formData)
+      await updateUser(formData).unwrap()
+      toast.success(t('Your avatar has been successfully changed'))
+    } catch (e) {
+      notificationHandler(e)
+    }
   }
 
   const userData = {
@@ -85,7 +95,7 @@ export const PersonalInformation = () => {
         />
         {editMode ? (
           <EditProfileForm
-            onSubmit={saveChanges}
+            onSubmit={changeUserName}
             name={userData.name}
             toggleEditMode={toggleEditMode}
           />
