@@ -1,6 +1,6 @@
 @import '@/app/styles/mixins';
 
-.wrapper {
+.header {
   @include flex(row);
 
   width: 100vw;

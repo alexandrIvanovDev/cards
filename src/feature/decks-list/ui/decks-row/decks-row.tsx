@@ -27,10 +27,10 @@ import { DeleteEntityModal } from '@/feature/decks-list/ui/delete-entity-modal/d
 type Props = {
   deck: Deck
   userId: string
-  isFetching: boolean
+  getDecksIsFetching: boolean
 }
 
-export const DecksRow = ({ deck, userId, isFetching }: Props) => {
+export const DecksRow = ({ deck, userId, getDecksIsFetching }: Props) => {
   const isMyDeck = userId === deck.userId
 
   const { t } = useTranslation()
@@ -63,7 +63,7 @@ export const DecksRow = ({ deck, userId, isFetching }: Props) => {
 
   const disabledPlayIcon = deck.cardsCount === 0
 
-  const isLoadingData = isLoading || isFetching
+  const isLoadingData = isLoading || getDecksIsFetching
 
   return (
     <>

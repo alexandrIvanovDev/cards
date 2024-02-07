@@ -9,6 +9,7 @@ import { routePaths } from '@/app/providers/router'
 import { Logo } from '@/assets/icons/Logo.tsx'
 import { LogoutIcon } from '@/assets/icons/Logout.tsx'
 import { ProfileIcon } from '@/assets/icons/Profile.tsx'
+import { useAppSelector } from '@/common/hooks/use-app-selector.ts'
 import { requestHandler } from '@/common/utils/requestHandler.ts'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -25,12 +26,11 @@ type Props = {
 export const Header = ({ data }: Props) => {
   const navigate = useNavigate()
 
-  const [signOut, { isLoading }] = useSignOutMutation()
+  const [signOut] = useSignOutMutation()
 
-  // TODO global loader
-  // const isLoading = useAppSelector(state =>
-  //   Object.values(state.baseApi.queries).some(query => query?.status === 'pending')
-  // )
+  const isLoading = useAppSelector(state =>
+    Object.values(state.baseApi.queries).some(query => query?.status === 'pending')
+  )
 
   const { t } = useTranslation()
 
@@ -44,7 +44,7 @@ export const Header = ({ data }: Props) => {
   }
 
   return (
-    <header className={s.wrapper}>
+    <header className={s.header}>
       {isLoading && <ProgressBar />}
       <div className={s.container}>
         <Button as={Link} to={routePaths.packs} variant="link">

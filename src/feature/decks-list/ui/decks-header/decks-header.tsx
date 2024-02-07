@@ -8,13 +8,13 @@ import { DeckForm } from '@/components/forms/deck-form'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
+import { useCreateDeckMutation } from '@/feature/decks-list/services'
 
-type Props = {
-  createDeck: (data: FormData) => void
-  disabled: boolean
-}
+type Props = { disabled: boolean }
 
-export const DecksHeader = ({ createDeck, disabled }: Props) => {
+export const DecksHeader = ({ disabled }: Props) => {
+  const [createDeck] = useCreateDeckMutation()
+
   const [isOpen, setIsOpen] = useState(false)
 
   const { t } = useTranslation()

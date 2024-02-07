@@ -7,17 +7,13 @@ import s from './decks-list.module.scss'
 import { useDebounce } from '@/common/hooks/use-debounce.ts'
 import { getSortedString } from '@/common/utils/getSortedString.ts'
 import { Pagination } from '@/components/ui/pagination'
-import { ProgressBar } from '@/components/ui/progress-bar/progress-bar.tsx'
 import { Sort } from '@/components/ui/table-head/table-head.tsx'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/feature/auth/auth.service.ts'
 import { useDecksFilter } from '@/feature/decks-list/model/hooks/use-decks-filter.ts'
 import { usePagination } from '@/feature/decks-list/model/hooks/use-pagination.ts'
 import { GetDecks } from '@/feature/decks-list/services'
-import {
-  useCreateDeckMutation,
-  useGetDecksQuery,
-} from '@/feature/decks-list/services/deck.service.ts'
+import { useGetDecksQuery } from '@/feature/decks-list/services/deck.service.ts'
 import { DecksFilter } from '@/feature/decks-list/ui/decks-filter/decks-filter.tsx'
 import { DecksHeader } from '@/feature/decks-list/ui/decks-header/decks-header.tsx'
 import { DecksTable } from '@/feature/decks-list/ui/decks-table/decks-table.tsx'
@@ -39,7 +35,6 @@ export const DecksList = () => {
   const {
     data: decksData,
     currentData,
-    isLoading: getDecksIsLoading,
     isFetching: getDecksIsFetching,
   } = useGetDecksQuery({
     authorId: tabValue,
@@ -55,10 +50,6 @@ export const DecksList = () => {
 
   const totalPages = data?.pagination.totalPages as number
 
-  const [createDeck, { isLoading: createDeckIsLoading }] = useCreateDeckMutation()
-
-  const isLoading = getDecksIsLoading || createDeckIsLoading || getDecksIsFetching
-
   const totalCount = data?.pagination.totalItems
 
   useEffect(() => {
@@ -69,8 +60,7 @@ export const DecksList = () => {
 
   return (
     <div className={s.content}>
-      {isLoading && <ProgressBar />}
-      <DecksHeader createDeck={createDeck} disabled={getDecksIsFetching} />
+      <DecksHeader disabled={getDecksIsFetching} />
       <DecksFilter
         userId={userData?.id ?? ''}
         tabsValue={tabValue}
@@ -91,7 +81,7 @@ export const DecksList = () => {
           userId={userData?.id as string}
           sort={sort}
           setSort={setSort}
-          isFetching={getDecksIsFetching}
+          getDecksIsFetching={getDecksIsFetching}
         />
       )}
       <Pagination

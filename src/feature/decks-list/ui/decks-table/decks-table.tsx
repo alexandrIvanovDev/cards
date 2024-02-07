@@ -9,10 +9,10 @@ type Props = {
   userId: string
   sort: Sort
   setSort: (sort: Sort) => void
-  isFetching: boolean
+  getDecksIsFetching: boolean
 }
 
-export const DecksTable = ({ data, userId, sort, setSort, isFetching }: Props) => {
+export const DecksTable = ({ data, userId, sort, setSort, getDecksIsFetching }: Props) => {
   return (
     <>
       <Table.Root>
@@ -20,7 +20,12 @@ export const DecksTable = ({ data, userId, sort, setSort, isFetching }: Props) =
 
         <Table.Body>
           {data?.items?.map(deck => (
-            <DecksRow key={deck.id} deck={deck} userId={userId} isFetching={isFetching} />
+            <DecksRow
+              key={deck.id}
+              deck={deck}
+              userId={userId}
+              getDecksIsFetching={getDecksIsFetching}
+            />
           ))}
         </Table.Body>
       </Table.Root>
