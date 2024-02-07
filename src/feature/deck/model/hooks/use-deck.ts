@@ -1,3 +1,5 @@
+import { useParams } from 'react-router-dom'
+
 import { useAppDispatch } from '@/common/hooks/use-app-dispatch.ts'
 import { useAppSelector } from '@/common/hooks/use-app-selector.ts'
 import {
@@ -9,6 +11,9 @@ import {
 export const useDeck = () => {
   const { currentPage, pageSize } = useAppSelector(state => state.deck.pagination)
   const searchTerm = useAppSelector(state => state.deck.searchTerm)
+  const { id } = useParams()
+
+  const deckId = id as string
 
   const dispatch = useAppDispatch()
 
@@ -24,5 +29,5 @@ export const useDeck = () => {
     dispatch(setCardsSearchTerm(value))
   }
 
-  return { currentPage, pageSize, searchTerm, setCurrentPage, setPageSize, setSearchTerm }
+  return { currentPage, pageSize, searchTerm, deckId, setCurrentPage, setPageSize, setSearchTerm }
 }

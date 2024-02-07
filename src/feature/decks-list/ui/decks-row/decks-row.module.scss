@@ -10,21 +10,21 @@
     color: var(--light-color-100);
     text-decoration: none;
 
+    .name {
+      transition: 0.3s ease-in-out;
+    }
+
+    &:hover .name {
+      color: var(--primary-color-500);
+    }
+
+    &:active .name {
+      color: var(--primary-color-700);
+    }
+
     .skeleton {
       width: 80px;
       height: 50px;
-    }
-
-    .name {
-      transition: 0.3s ease-in-out;
-
-      &:hover {
-        color: var(--primary-color-500);
-      }
-
-      &:active {
-        color: var(--primary-color-700);
-      }
     }
   }
 

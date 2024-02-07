@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
 
 import s from './deck.module.scss'
 
@@ -31,21 +30,19 @@ import { Deck as DeckType } from '@/feature/decks-list/services'
 import { useGetDeckByIdQuery } from '@/feature/decks-list/services/decks-list.service.ts'
 
 export const Deck = () => {
-  const { id } = useParams()
+  const { currentPage, pageSize, searchTerm, deckId, setCurrentPage, setPageSize, setSearchTerm } =
+    useDeck()
 
   const { t } = useTranslation()
-
-  const { currentPage, pageSize, searchTerm, setCurrentPage, setPageSize, setSearchTerm } =
-    useDeck()
 
   const [sort, setSort] = useState<Sort>({ field: 'updated', order: 'desc' })
 
   const debouncedValue = useDebounce(searchTerm, 1000)
 
-  const { data: deckData, isLoading: getDeckIsLoading } = useGetDeckByIdQuery({ id: id as string })
+  const { data: deckData, isLoading: getDeckIsLoading } = useGetDeckByIdQuery({ id: deckId })
 
   const { data: cardsData } = useGetCardsQuery({
-    id: id as string,
+    id: deckId,
     question: debouncedValue,
     currentPage,
     itemsPerPage: pageSize,
@@ -68,6 +65,9 @@ export const Deck = () => {
     })
     setAddCardModal(false)
   }
+
+  const totalItems = cardsData?.pagination.totalItems ?? 5
+  const totalPages = cardsData?.pagination.totalPages ?? 1
 
   const isLoading = createCardIsLoading || deleteCardIsLoading || updateCardIsLoading
 
@@ -135,7 +135,8 @@ export const Deck = () => {
       <Pagination
         currentPage={currentPage}
         itemsPerPage={pageSize}
-        totalPages={cardsData?.pagination.totalPages ?? 1}
+        totalPages={totalPages}
+        totalCount={totalItems}
         changePage={setCurrentPage}
         changePageSize={setPageSize}
       />

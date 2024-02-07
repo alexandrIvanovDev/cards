@@ -10,6 +10,7 @@ import { routePaths } from '@/app/providers/router'
 import { DeleteIcon } from '@/assets/icons/Delete.tsx'
 import { EditIcon } from '@/assets/icons/Edit.tsx'
 import { PlayIcon } from '@/assets/icons/Play.tsx'
+import { notificationHandler } from '@/common/utils/notification-handler.ts'
 import { DeckForm } from '@/components/forms/deck-form'
 import { Button } from '@/components/ui/button'
 import { Dropdown, DropDownItemWithIcon } from '@/components/ui/dropdown'
@@ -39,10 +40,6 @@ export const DeckTitle = (props: Props) => {
 
   const { t } = useTranslation()
 
-  const classes = {
-    addCard: clsx(!cardsData?.items.length && s.hidden),
-  }
-
   const [deleteDeckIsOpen, setDeleteDeckIsOpen] = useState(false)
   const [updateDeckIsOpen, setUpdateDeckIsOpen] = useState(false)
 
@@ -53,20 +50,20 @@ export const DeckTitle = (props: Props) => {
 
   const removeDeck = async () => {
     try {
-      await deleteDeck({ id: deckData.id })
+      await deleteDeck({ id: deckData.id }).unwrap()
 
       navigate(routePaths.packs)
     } catch (e) {
-      console.error(e)
+      notificationHandler(e)
     }
   }
 
   const editDeck = async (data: FormData) => {
     try {
-      await updateDeck({ id: deckData.id, data })
+      await updateDeck({ id: deckData.id, data }).unwrap()
       setUpdateDeckIsOpen(false)
     } catch (e) {
-      console.error(e)
+      notificationHandler(e)
     }
   }
 
@@ -113,7 +110,7 @@ export const DeckTitle = (props: Props) => {
               open={openModal}
               onOpenChange={setOpenModal}
               onSubmit={addNewCard}
-              className={classes.addCard}
+              className={clsx(!cardsData?.items.length && s.hidden)}
               title={t('Add New Card')}
               buttonText={t('Add New Card')}
             />

@@ -47,7 +47,6 @@ export const DecksList = () => {
   const data = currentData ?? decksData
 
   const totalPages = data?.pagination.totalPages as number
-
   const totalCount = data?.pagination.totalItems
 
   useEffect(() => {
@@ -86,6 +85,7 @@ export const DecksList = () => {
         currentPage={currentPage}
         totalPages={totalPages}
         itemsPerPage={pageSize}
+        totalCount={totalCount}
         changePage={setCurrentPage}
         changePageSize={setPageSize}
       />

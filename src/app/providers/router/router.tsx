@@ -19,7 +19,7 @@ import {
   ForgotPassword,
   Learn,
   NotFound,
-  PersonalInformation,
+  Profile,
   SignIn,
   SignUp,
 } from '@/pages'
@@ -54,7 +54,7 @@ export const privateRoutes: RouteObject[] = [
   },
   {
     path: routePaths.profile,
-    element: <PersonalInformation />,
+    element: <Profile />,
   },
   {
     path: routePaths.pack,

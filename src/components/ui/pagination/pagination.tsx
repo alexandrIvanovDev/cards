@@ -15,11 +15,20 @@ type Props = {
   itemsPerPage: number
   changePage: (value: number) => void
   changePageSize: (value: number) => void
+  totalCount?: number
   className?: string
 }
 
 export const Pagination = (props: Props) => {
-  const { currentPage, totalPages, changePage, changePageSize, itemsPerPage, className } = props
+  const {
+    currentPage,
+    totalPages,
+    changePage,
+    changePageSize,
+    itemsPerPage,
+    totalCount = 5,
+    className,
+  } = props
 
   const { t } = useTranslation()
 
@@ -41,7 +50,7 @@ export const Pagination = (props: Props) => {
     rightArrow: clsx(s.arrowIcon, rightArrowDisabled && s.disabled),
   }
 
-  if (pages.length === 0) return null
+  if (pages.length === 0 || totalCount < 5) return null
 
   return (
     <div className={classes.wrapper}>
