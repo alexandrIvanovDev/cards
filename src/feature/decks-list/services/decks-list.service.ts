@@ -7,7 +7,7 @@ import {
   UpdateDeck,
 } from '@/feature/decks-list/services'
 
-export const deckService = baseApi.injectEndpoints({
+export const decksListService = baseApi.injectEndpoints({
   endpoints: builder => ({
     getDecks: builder.query<GetDecks, GetDecksArgs | void>({
       query: args => ({
@@ -54,4 +54,4 @@ export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useUpdateDeckMutation,
-} = deckService
+} = decksListService

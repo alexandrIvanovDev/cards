@@ -11,8 +11,8 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Loader } from '@/components/ui/loader'
 import { Typography } from '@/components/ui/typography'
-import { useGetDeckByIdQuery } from '@/feature/decks-list/services/deck.service.ts'
-import { useGetRandomCardQuery, useRateCardMutation } from '@/services/cards.service.ts'
+import { useGetRandomCardQuery, useRateCardMutation } from '@/feature/deck/services/deck.service.ts'
+import { useGetDeckByIdQuery } from '@/feature/decks-list/services/decks-list.service.ts'
 
 export const Learn = () => {
   const params = useParams()

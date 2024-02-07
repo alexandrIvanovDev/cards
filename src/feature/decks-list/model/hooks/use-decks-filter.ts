@@ -7,7 +7,7 @@ import {
 } from '@/feature/decks-list/model/slice'
 
 export const useDecksFilter = () => {
-  const { searchTerm, cardsCount, tabValue } = useAppSelector(state => state.decks.filter)
+  const { searchTerm, cardsCount, tabValue } = useAppSelector(state => state.decksList.filter)
 
   const dispatch = useAppDispatch()
 

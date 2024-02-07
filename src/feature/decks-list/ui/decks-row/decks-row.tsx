@@ -21,7 +21,7 @@ import {
   useDeleteDeckMutation,
   useGetDecksQuery,
   useUpdateDeckMutation,
-} from '@/feature/decks-list/services/deck.service.ts'
+} from '@/feature/decks-list/services/decks-list.service.ts'
 import { DeleteEntityModal } from '@/feature/decks-list/ui/delete-entity-modal/delete-entity-modal.tsx'
 
 type Props = {

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export type InitialState = {
+type InitialState = {
   pagination: {
     currentPage: number
     pageSize: number
@@ -9,8 +9,8 @@ export type InitialState = {
   searchTerm: string
 }
 
-export const cardsSlice = createSlice({
-  name: 'cards',
+export const deckSlice = createSlice({
+  name: 'deck',
   initialState: {
     pagination: {
       currentPage: 1,
@@ -31,4 +31,4 @@ export const cardsSlice = createSlice({
   },
 })
 
-export const { setCardsSearchTerm, setPageSize, setCurrentPage } = cardsSlice.actions
+export const { setCardsSearchTerm, setPageSize, setCurrentPage } = deckSlice.actions

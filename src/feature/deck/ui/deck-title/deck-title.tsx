@@ -16,18 +16,18 @@ import { Dropdown, DropDownItemWithIcon } from '@/components/ui/dropdown'
 import { Modal } from '@/components/ui/modal'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
+import { GetCards } from '@/feature/deck/services/deck.types.ts'
 import { CardModal } from '@/feature/deck/ui/card-modal/card-modal.tsx'
 import { Deck, DeckArgs } from '@/feature/decks-list/services'
 import {
   useDeleteDeckMutation,
   useUpdateDeckMutation,
-} from '@/feature/decks-list/services/deck.service.ts'
+} from '@/feature/decks-list/services/decks-list.service.ts'
 import { DeleteEntityModal } from '@/feature/decks-list/ui/delete-entity-modal/delete-entity-modal.tsx'
-import { GetCardsResponse } from '@/services/cards.types.ts'
 
 type Props = {
   isMyDeck: boolean
-  cardsData: GetCardsResponse
+  cardsData: GetCards
   deckData: Deck
   openModal: boolean
   setOpenModal: (value: boolean) => void
@@ -108,21 +108,21 @@ export const DeckTitle = (props: Props) => {
           )}
         </div>
         {isMyDeck ? (
-          <CardModal
-            open={openModal}
-            onOpenChange={setOpenModal}
-            onSubmit={addNewCard}
-            className={classes.addCard}
-            trigger={
-              <Button>
-                <Typography variant={'subtitle2'} as={'span'}>
-                  {t('Add New Card')}
-                </Typography>
-              </Button>
-            }
-            title={t('Add New Card')}
-            buttonText={t('Add New Card')}
-          />
+          <>
+            <CardModal
+              open={openModal}
+              onOpenChange={setOpenModal}
+              onSubmit={addNewCard}
+              className={classes.addCard}
+              title={t('Add New Card')}
+              buttonText={t('Add New Card')}
+            />
+            <Button onClick={() => setOpenModal(true)}>
+              <Typography variant={'subtitle2'} as={'span'}>
+                {t('Add New Card')}
+              </Typography>
+            </Button>
+          </>
         ) : (
           deckData?.cardsCount > 0 && (
             <Button

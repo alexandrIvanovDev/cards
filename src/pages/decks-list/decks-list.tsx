@@ -9,11 +9,9 @@ import { getSortedString } from '@/common/utils/getSortedString.ts'
 import { Pagination } from '@/components/ui/pagination'
 import { Sort } from '@/components/ui/table-head/table-head.tsx'
 import { Typography } from '@/components/ui/typography'
-import { useMeQuery } from '@/feature/auth/auth.service.ts'
-import { useDecksFilter } from '@/feature/decks-list/model/hooks/use-decks-filter.ts'
-import { usePagination } from '@/feature/decks-list/model/hooks/use-pagination.ts'
-import { GetDecks } from '@/feature/decks-list/services'
-import { useGetDecksQuery } from '@/feature/decks-list/services/deck.service.ts'
+import { useMeQuery } from '@/feature/auth'
+import { useDecksFilter, useDecksPagination } from '@/feature/decks-list/model/hooks'
+import { GetDecks, useGetDecksQuery } from '@/feature/decks-list/services'
 import { DecksFilter } from '@/feature/decks-list/ui/decks-filter/decks-filter.tsx'
 import { DecksHeader } from '@/feature/decks-list/ui/decks-header/decks-header.tsx'
 import { DecksTable } from '@/feature/decks-list/ui/decks-table/decks-table.tsx'
@@ -23,7 +21,7 @@ export const DecksList = () => {
 
   const { searchTerm, cardsCount, tabValue, setSearchTerm, setTabValue, setCardsCount } =
     useDecksFilter()
-  const { currentPage, pageSize, setCurrentPage, setPageSize } = usePagination()
+  const { currentPage, pageSize, setCurrentPage, setPageSize } = useDecksPagination()
 
   const [sort, setSort] = useState<Sort>({ field: 'updated', order: 'desc' })
 

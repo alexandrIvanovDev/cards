@@ -1,13 +1,13 @@
 import { deckTableHeader } from '@/common/data/deck-table-header.ts'
 import { Table } from '@/components/ui/table'
 import { Sort, TableHead } from '@/components/ui/table-head'
+import { DeleteCardArgs, GetCards, UpdateCardType } from '@/feature/deck/services/deck.types.ts'
 import { TableRow } from '@/feature/deck/ui/deck-row/table-row.tsx'
-import { DeleteCardsArgs, GetCardsResponse, UpdateCardType } from '@/services/cards.types.ts'
 
 type Props = {
   isMyDeck: boolean
-  cardsData: GetCardsResponse
-  deleteCard: (data: DeleteCardsArgs) => void
+  cardsData: GetCards
+  deleteCard: (data: DeleteCardArgs) => void
   updateCard: ({ id, data }: UpdateCardType) => void
   sort: Sort
   setSort: (value: Sort) => void

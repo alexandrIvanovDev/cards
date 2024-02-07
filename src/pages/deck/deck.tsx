@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import s from './deck.module.scss'
 
-import { RootState } from '@/app/providers/store/store.ts'
-import { useAppDispatch } from '@/common/hooks/use-app-dispatch.ts'
 import { useDebounce } from '@/common/hooks/use-debounce.ts'
 import { getSortedString } from '@/common/utils/getSortedString.ts'
 import { BackButton } from '@/components/ui/back-button'
@@ -18,39 +15,38 @@ import { ProgressBar } from '@/components/ui/progress-bar'
 import { Sort } from '@/components/ui/table-head'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/feature/auth/auth.service.ts'
-import { CardModal } from '@/feature/deck/ui/card-modal'
-import { DeckTable } from '@/feature/deck/ui/deck-table'
-import { DeckTitle } from '@/feature/deck/ui/deck-title'
-import { SearchCard } from '@/feature/deck/ui/search'
-import { Deck as DeckType } from '@/feature/decks-list/services'
-import { useGetDeckByIdQuery } from '@/feature/decks-list/services/deck.service.ts'
+import { useDeck } from '@/feature/deck/model/hooks/use-deck.ts'
 import {
   useCreateCardMutation,
   useDeleteCardMutation,
   useGetCardsQuery,
   useUpdateCardMutation,
-} from '@/services/cards.service.ts'
-import { GetCardsResponse } from '@/services/cards.types.ts'
-import { setCardsSearchTerm, setCurrentPage, setPageSize } from '@/services/cardsSlice.ts'
+} from '@/feature/deck/services/deck.service.ts'
+import { GetCards } from '@/feature/deck/services/deck.types.ts'
+import { CardModal } from '@/feature/deck/ui/card-modal'
+import { DeckTable } from '@/feature/deck/ui/deck-table'
+import { DeckTitle } from '@/feature/deck/ui/deck-title'
+import { SearchCard } from '@/feature/deck/ui/search'
+import { Deck as DeckType } from '@/feature/decks-list/services'
+import { useGetDeckByIdQuery } from '@/feature/decks-list/services/decks-list.service.ts'
 
 export const Deck = () => {
   const { id } = useParams()
 
   const { t } = useTranslation()
 
-  const search = useSelector((state: RootState) => state.cards.searchTerm)
-  const { currentPage, pageSize } = useSelector((state: RootState) => state.cards.pagination)
+  const { currentPage, pageSize, searchTerm, setCurrentPage, setPageSize, setSearchTerm } =
+    useDeck()
 
   const [sort, setSort] = useState<Sort>({ field: 'updated', order: 'desc' })
 
+  const debouncedValue = useDebounce(searchTerm, 1000)
+
   const { data: deckData, isLoading: getDeckIsLoading } = useGetDeckByIdQuery({ id: id as string })
-  const {
-    data: cardsData,
-    isLoading: getCardsIsLoading,
-    isFetching,
-  } = useGetCardsQuery({
+
+  const { data: cardsData } = useGetCardsQuery({
     id: id as string,
-    question: search,
+    question: debouncedValue,
     currentPage,
     itemsPerPage: pageSize,
     orderBy: getSortedString(sort),
@@ -61,17 +57,7 @@ export const Deck = () => {
   const [deleteCard, { isLoading: deleteCardIsLoading }] = useDeleteCardMutation()
   const [updateCard, { isLoading: updateCardIsLoading }] = useUpdateCardMutation()
 
-  const [searchValue, setSearchValue] = useState(search)
-
   const [addCardModal, setAddCardModal] = useState(false)
-
-  const debouncedValue = useDebounce(searchValue, 1000)
-
-  const dispatch = useAppDispatch()
-
-  const handleSearch = () => {
-    dispatch(setCardsSearchTerm(searchValue))
-  }
 
   const isMyDeck = deckData?.userId === userData?.id
 
@@ -83,30 +69,7 @@ export const Deck = () => {
     setAddCardModal(false)
   }
 
-  const changePage = (page: number) => {
-    dispatch(setCurrentPage(page))
-  }
-
-  const changePageSize = (pageSize: number) => {
-    dispatch(setPageSize(pageSize))
-  }
-
-  const isLoading =
-    createCardIsLoading ||
-    deleteCardIsLoading ||
-    updateCardIsLoading ||
-    getCardsIsLoading ||
-    isFetching
-
-  useEffect(() => {
-    if (debouncedValue || debouncedValue === '') {
-      handleSearch()
-    }
-
-    return () => {
-      dispatch(setCardsSearchTerm(''))
-    }
-  }, [debouncedValue])
+  const isLoading = createCardIsLoading || deleteCardIsLoading || updateCardIsLoading
 
   if (getDeckIsLoading) {
     return <Loader />
@@ -121,13 +84,13 @@ export const Deck = () => {
       <div>
         <DeckTitle
           isMyDeck={isMyDeck}
-          cardsData={cardsData as GetCardsResponse}
+          cardsData={cardsData as GetCards}
           openModal={addCardModal}
           setOpenModal={setAddCardModal}
           deckData={deckData as DeckType}
           addNewCard={addNewCard}
         />
-        <SearchCard value={searchValue} setValue={setSearchValue} />
+        <SearchCard value={searchTerm} setValue={setSearchTerm} />
 
         {cardsData?.items.length ? (
           <>
@@ -153,19 +116,17 @@ export const Deck = () => {
                   onOpenChange={setAddCardModal}
                   onSubmit={addNewCard}
                   title={t('Add New Card')}
-                  trigger={
-                    <Button>
-                      <Typography variant={'subtitle2'} as={'span'}>
-                        {t('Add New Card')}
-                      </Typography>
-                    </Button>
-                  }
                   buttonText={t('Add New Card')}
                 />
+                <Button onClick={() => setAddCardModal(true)}>
+                  <Typography variant={'subtitle2'} as={'span'}>
+                    {t('Add New Card')}
+                  </Typography>
+                </Button>
               </>
             ) : (
               <Typography as="span" variant="h1" className={s.text}>
-                {t('This deck is empty')}
+                {t('No data available')}
               </Typography>
             )}
           </div>
@@ -175,8 +136,8 @@ export const Deck = () => {
         currentPage={currentPage}
         itemsPerPage={pageSize}
         totalPages={cardsData?.pagination.totalPages ?? 1}
-        changePage={changePage}
-        changePageSize={changePageSize}
+        changePage={setCurrentPage}
+        changePageSize={setPageSize}
       />
     </div>
   )

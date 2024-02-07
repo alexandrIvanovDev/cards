@@ -1,6 +1,6 @@
 import { Pagination } from '@/feature/decks-list/services/types.ts'
 
-export type CardsResponseItems = {
+export type CardItem = {
   id: string
   deckId: string
   userId: string
@@ -16,8 +16,8 @@ export type CardsResponseItems = {
   grade: number
 }
 
-export type GetCardsResponse = {
-  items: CardsResponseItems[]
+export type GetCards = {
+  items: CardItem[]
   pagination: Pagination
   maxCardsCount: number
 }
@@ -31,7 +31,7 @@ export type GetCardsArgs = {
   orderBy?: string | null
 }
 
-export type DeleteCardsArgs = { id: string }
+export type DeleteCardArgs = { id: string }
 
 export type UpdateCardType = {
   id: string
@@ -44,13 +44,3 @@ export type SaveGradeCardArgs = {
 }
 
 export type Order = 'asc' | 'desc'
-
-export type Error = {
-  data: {
-    message: string
-    path: string
-    statusCode: number
-    timestamp: string
-  }
-  status: number
-}

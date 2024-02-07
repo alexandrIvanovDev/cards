@@ -5,8 +5,8 @@ import {
   setPageSize as onChangePageSize,
 } from '@/feature/decks-list/model/slice'
 
-export const usePagination = () => {
-  const { currentPage, pageSize } = useAppSelector(state => state.decks.pagination)
+export const useDecksPagination = () => {
+  const { currentPage, pageSize } = useAppSelector(state => state.decksList.pagination)
 
   const dispatch = useAppDispatch()
 

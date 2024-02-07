@@ -1,15 +1,15 @@
 import { baseApi } from '@/app/providers/store/base-api.ts'
 import {
-  CardsResponseItems,
+  CardItem,
   GetCardsArgs,
-  GetCardsResponse,
+  GetCards,
   SaveGradeCardArgs,
   UpdateCardType,
-} from '@/services/cards.types.ts'
+} from '@/feature/deck/services/deck.types.ts'
 
-export const cardsService = baseApi.injectEndpoints({
+export const deckService = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getCards: builder.query<GetCardsResponse, GetCardsArgs>({
+    getCards: builder.query<GetCards, GetCardsArgs>({
       query: ({ id, ...rest }) => ({
         url: `v1/decks/${id}/cards`,
         params: { ...rest },
@@ -31,7 +31,7 @@ export const cardsService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Cards', 'Decks'],
     }),
-    updateCard: builder.mutation<CardsResponseItems, UpdateCardType>({
+    updateCard: builder.mutation<CardItem, UpdateCardType>({
       query: ({ id, data }) => ({
         url: `v1/cards/${id}`,
         method: 'PATCH',
@@ -39,13 +39,13 @@ export const cardsService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Cards'],
     }),
-    getRandomCard: builder.query<CardsResponseItems, { id: string }>({
+    getRandomCard: builder.query<CardItem, { id: string }>({
       query: ({ id }) => ({
         url: `v1/decks/${id}/learn`,
         // params: { ...rest },
       }),
     }),
-    rateCard: builder.mutation<CardsResponseItems, SaveGradeCardArgs & { id: string }>({
+    rateCard: builder.mutation<CardItem, SaveGradeCardArgs & { id: string }>({
       query: ({ id, ...data }) => ({
         url: `v1/decks/${id}/learn`,
         method: 'POST',
@@ -58,7 +58,7 @@ export const cardsService = baseApi.injectEndpoints({
         const newCard = data.data
 
         const res = dispatch(
-          cardsService.util.updateQueryData('getRandomCard', { id }, () => newCard)
+          deckService.util.updateQueryData('getRandomCard', { id }, () => newCard)
         )
 
         try {
@@ -80,4 +80,4 @@ export const {
   useUpdateCardMutation,
   useGetRandomCardQuery,
   useRateCardMutation,
-} = cardsService
+} = deckService

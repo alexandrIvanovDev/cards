@@ -11,15 +11,15 @@ import { Rating } from '@/components/ui/rating'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
+import { useGetCardsQuery } from '@/feature/deck/services/deck.service.ts'
+import { CardItem, DeleteCardArgs, UpdateCardType } from '@/feature/deck/services/deck.types.ts'
 import { CardModal } from '@/feature/deck/ui/card-modal/card-modal.tsx'
 import { DeleteEntityModal } from '@/feature/decks-list/ui/delete-entity-modal/delete-entity-modal.tsx'
-import { useGetCardsQuery } from '@/services/cards.service.ts'
-import { CardsResponseItems, DeleteCardsArgs, UpdateCardType } from '@/services/cards.types.ts'
 
 type Props = {
   isMyDeck: boolean
-  card: CardsResponseItems
-  deleteCard: (data: DeleteCardsArgs) => void
+  card: CardItem
+  deleteCard: (data: DeleteCardArgs) => void
   updateCard: ({ id, data }: UpdateCardType) => void
 }
 

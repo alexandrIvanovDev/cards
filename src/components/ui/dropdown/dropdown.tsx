@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ElementRef, forwardRef, ReactNode } from 'react'
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
@@ -25,35 +25,39 @@ const liVariants = {
   hidden: { opacity: 0, x: -100 },
 }
 
-export const Dropdown = ({ children, trigger, align = 'end', className }: Props) => {
-  return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild className={s.trigger}>
-        {trigger ?? (
-          <button>
-            <MoreIcon className={s.icon} />
-          </button>
-        )}
-      </DropdownMenu.Trigger>
+export const Dropdown = forwardRef<ElementRef<'div'>, Props>(
+  ({ children, trigger, align = 'end', className }, ref) => {
+    return (
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger asChild className={s.trigger}>
+          {trigger ?? (
+            <button>
+              <MoreIcon className={s.icon} />
+            </button>
+          )}
+        </DropdownMenu.Trigger>
 
-      <DropdownMenu.Portal>
-        <AnimatePresence>
-          <motion.ul
-            initial={'hidden'}
-            animate={'visible'}
-            exit={{ opacity: 0 }}
-            variants={ulVariants}
-          >
-            <DropdownMenu.Content className={`${s.content} ${className}`} align={align}>
-              {children}
-              <DropdownMenu.Arrow className={s.arrow} />
-            </DropdownMenu.Content>
-          </motion.ul>
-        </AnimatePresence>
-      </DropdownMenu.Portal>
-    </DropdownMenu.Root>
-  )
-}
+        <DropdownMenu.Portal>
+          <div ref={ref}>
+            <AnimatePresence>
+              <motion.ul
+                initial={'hidden'}
+                animate={'visible'}
+                exit={{ opacity: 0 }}
+                variants={ulVariants}
+              >
+                <DropdownMenu.Content className={`${s.content} ${className}`} align={align}>
+                  {children}
+                  <DropdownMenu.Arrow className={s.arrow} />
+                </DropdownMenu.Content>
+              </motion.ul>
+            </AnimatePresence>
+          </div>
+        </DropdownMenu.Portal>
+      </DropdownMenu.Root>
+    )
+  }
+)
 
 type ItemPropsWithIcon = {
   icon: ReactNode

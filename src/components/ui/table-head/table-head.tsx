@@ -6,7 +6,7 @@ import s from './table-head.module.scss'
 import { ArrowDownIcon } from '@/assets/icons/ArrowDown.tsx'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
-import { Order } from '@/services/cards.types.ts'
+import { Order } from '@/feature/deck/services/deck.types.ts'
 
 export type Columns = {
   fieldName: string
