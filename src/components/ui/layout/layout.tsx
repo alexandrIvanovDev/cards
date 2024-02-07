@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom'
 
 import { Header } from '@/components/ui/header'
-import { useMeQuery } from '@/feature/auth/auth.service.ts'
+import { Toast } from '@/components/ui/toast'
+import { useMeQuery } from '@/feature/auth/serivices/auth.service.ts'
 
 export const Layout = () => {
   const { data: myData } = useMeQuery()
@@ -18,6 +19,7 @@ export const Layout = () => {
     <>
       <Header data={data} />
       <Outlet />
+      <Toast />
     </>
   )
 }

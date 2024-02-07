@@ -6,10 +6,11 @@ import s from './decks-list.module.scss'
 
 import { useDebounce } from '@/common/hooks/use-debounce.ts'
 import { getSortedString } from '@/common/utils/getSortedString.ts'
+import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
 import { Sort } from '@/components/ui/table-head/table-head.tsx'
 import { Typography } from '@/components/ui/typography'
-import { useMeQuery } from '@/feature/auth'
+import { useMeQuery } from '@/feature/auth/serivices'
 import { useDecksFilter, useDecksPagination } from '@/feature/decks-list/model/hooks'
 import { GetDecks, useGetDecksQuery } from '@/feature/decks-list/services'
 import { DecksFilter } from '@/feature/decks-list/ui/decks-filter/decks-filter.tsx'
@@ -33,6 +34,7 @@ export const DecksList = () => {
   const {
     data: decksData,
     currentData,
+    isLoading,
     isFetching: getDecksIsFetching,
   } = useGetDecksQuery({
     authorId: tabValue,
@@ -54,6 +56,10 @@ export const DecksList = () => {
       setCurrentPage(1)
     }
   }, [pageSize, tabValue, debouncedValue, debouncedCardsCount])
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <div className={s.content}>

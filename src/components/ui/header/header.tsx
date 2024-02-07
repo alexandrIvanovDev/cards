@@ -17,20 +17,16 @@ import { Dropdown, DropDownItem, DropDownItemWithIcon } from '@/components/ui/dr
 import { LangSwitcher } from '@/components/ui/lang-switcher/lang-switcher.tsx'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
-import { useSignOutMutation } from '@/feature/auth/auth.service.ts'
+import { useSignOutMutation } from '@/feature/auth/serivices'
 
-type Props = {
-  data: ProfileInfoProps | null
-}
+type Props = { data: ProfileInfoProps | null }
 
 export const Header = ({ data }: Props) => {
-  const navigate = useNavigate()
-
   const [signOut] = useSignOutMutation()
 
-  const isLoading = useAppSelector(state =>
-    Object.values(state.baseApi.queries).some(query => query?.status === 'pending')
-  )
+  const isLoading = useAppSelector(state => state.loading.isLoading)
+
+  const navigate = useNavigate()
 
   const { t } = useTranslation()
 

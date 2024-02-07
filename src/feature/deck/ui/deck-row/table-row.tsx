@@ -11,19 +11,24 @@ import { Rating } from '@/components/ui/rating'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
-import { useGetCardsQuery } from '@/feature/deck/services/deck.service.ts'
-import { CardItem, DeleteCardArgs, UpdateCardType } from '@/feature/deck/services/deck.types.ts'
+import {
+  useDeleteCardMutation,
+  useGetCardsQuery,
+  useUpdateCardMutation,
+} from '@/feature/deck/services/deck.service.ts'
+import { CardItem } from '@/feature/deck/services/deck.types.ts'
 import { CardModal } from '@/feature/deck/ui/card-modal/card-modal.tsx'
 import { DeleteEntityModal } from '@/feature/decks-list/ui/delete-entity-modal/delete-entity-modal.tsx'
 
 type Props = {
   isMyDeck: boolean
   card: CardItem
-  deleteCard: (data: DeleteCardArgs) => void
-  updateCard: ({ id, data }: UpdateCardType) => void
 }
 
-export const TableRow = ({ card, isMyDeck, deleteCard, updateCard }: Props) => {
+export const TableRow = ({ card, isMyDeck }: Props) => {
+  const [deleteCard] = useDeleteCardMutation()
+  const [updateCard] = useUpdateCardMutation()
+
   const [deleteCardIsOpen, setDeleteCardIsOpen] = useState(false)
   const [updateCardIsOpen, setUpdateCardIsOpen] = useState(false)
 

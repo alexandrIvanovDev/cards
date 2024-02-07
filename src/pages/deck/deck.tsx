@@ -10,24 +10,17 @@ import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
-import { ProgressBar } from '@/components/ui/progress-bar'
 import { Sort } from '@/components/ui/table-head'
 import { Typography } from '@/components/ui/typography'
-import { useMeQuery } from '@/feature/auth/auth.service.ts'
-import { useDeck } from '@/feature/deck/model/hooks/use-deck.ts'
-import {
-  useCreateCardMutation,
-  useDeleteCardMutation,
-  useGetCardsQuery,
-  useUpdateCardMutation,
-} from '@/feature/deck/services/deck.service.ts'
+import { useMeQuery } from '@/feature/auth/serivices'
+import { useDeck } from '@/feature/deck/model/hooks'
+import { useCreateCardMutation, useGetCardsQuery } from '@/feature/deck/services'
 import { GetCards } from '@/feature/deck/services/deck.types.ts'
 import { CardModal } from '@/feature/deck/ui/card-modal'
 import { DeckTable } from '@/feature/deck/ui/deck-table'
 import { DeckTitle } from '@/feature/deck/ui/deck-title'
 import { SearchCard } from '@/feature/deck/ui/search'
-import { Deck as DeckType } from '@/feature/decks-list/services'
-import { useGetDeckByIdQuery } from '@/feature/decks-list/services/decks-list.service.ts'
+import { Deck as DeckType, useGetDeckByIdQuery } from '@/feature/decks-list/services'
 
 export const Deck = () => {
   const { currentPage, pageSize, searchTerm, deckId, setCurrentPage, setPageSize, setSearchTerm } =
@@ -50,9 +43,7 @@ export const Deck = () => {
   })
   const { data: userData } = useMeQuery()
 
-  const [createCard, { isLoading: createCardIsLoading }] = useCreateCardMutation()
-  const [deleteCard, { isLoading: deleteCardIsLoading }] = useDeleteCardMutation()
-  const [updateCard, { isLoading: updateCardIsLoading }] = useUpdateCardMutation()
+  const [createCard] = useCreateCardMutation()
 
   const [addCardModal, setAddCardModal] = useState(false)
 
@@ -69,16 +60,12 @@ export const Deck = () => {
   const totalItems = cardsData?.pagination.totalItems ?? 5
   const totalPages = cardsData?.pagination.totalPages ?? 1
 
-  const isLoading = createCardIsLoading || deleteCardIsLoading || updateCardIsLoading
-
   if (getDeckIsLoading) {
     return <Loader />
   }
 
   return (
     <div className={s.content}>
-      {isLoading && <ProgressBar />}
-
       <BackButton />
 
       <div>
@@ -94,14 +81,7 @@ export const Deck = () => {
 
         {cardsData?.items.length ? (
           <>
-            <DeckTable
-              isMyDeck={isMyDeck}
-              cardsData={cardsData}
-              deleteCard={deleteCard}
-              updateCard={updateCard}
-              sort={sort}
-              setSort={setSort}
-            />
+            <DeckTable isMyDeck={isMyDeck} cardsData={cardsData} sort={sort} setSort={setSort} />
           </>
         ) : (
           <div className={s.notification}>

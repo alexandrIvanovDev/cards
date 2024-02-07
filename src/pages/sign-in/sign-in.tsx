@@ -5,24 +5,33 @@ import { toast } from 'react-toastify'
 import s from './sign-in.module.scss'
 
 import { routePaths } from '@/app/providers/router'
+import { useAppDispatch } from '@/common/hooks/use-app-dispatch.ts'
 import { requestHandler } from '@/common/utils/requestHandler.ts'
 import { SignInForm } from '@/components/forms/sign-in'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
-import { useMeQuery, useSignInMutation } from '@/feature/auth/auth.service.ts'
-import { LoginArgs } from '@/feature/auth/auth.types.ts'
+import { setToken } from '@/feature/auth/model/slice'
+import { useMeQuery, useSignInMutation } from '@/feature/auth/serivices'
+import { LoginArgs } from '@/feature/auth/serivices/auth.types.ts'
 
 export const SignIn = () => {
-  const [signIn, { isLoading }] = useSignInMutation()
+  const [signIn] = useSignInMutation()
+
   const { data } = useMeQuery()
+
+  const dispatch = useAppDispatch()
 
   const { t } = useTranslation()
 
   const handleLogin = async (data: LoginArgs) => {
     await requestHandler(async () => {
-      await signIn(data).unwrap()
+      const res = await signIn(data).unwrap()
+
+      if (res.accessToken) {
+        dispatch(setToken(res.accessToken))
+      }
+
       toast.success(t('You have successfully authorized'))
     })
   }
@@ -33,7 +42,6 @@ export const SignIn = () => {
 
   return (
     <>
-      {isLoading && <ProgressBar />}
       <Card className={s.wrapper}>
         <Typography as="h2" variant="large">
           {t('Sign In')}

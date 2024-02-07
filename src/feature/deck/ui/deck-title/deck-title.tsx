@@ -15,7 +15,6 @@ import { DeckForm } from '@/components/forms/deck-form'
 import { Button } from '@/components/ui/button'
 import { Dropdown, DropDownItemWithIcon } from '@/components/ui/dropdown'
 import { Modal } from '@/components/ui/modal'
-import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
 import { GetCards } from '@/feature/deck/services/deck.types.ts'
 import { CardModal } from '@/feature/deck/ui/card-modal/card-modal.tsx'
@@ -76,7 +75,6 @@ export const DeckTitle = (props: Props) => {
   return (
     <>
       <div className={s.titleWrapper}>
-        {(isLoading || updateDeckIsLoading) && <ProgressBar />}
         <div className={s.title}>
           <Typography as="h2" variant="large">
             {deckData?.name ?? ''}
