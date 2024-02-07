@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { genericNameConstraint } from '@/common/data/validationFields.ts'
-import { DeckArgs } from '@/services/cards.types.ts'
+import { DeckArgs } from '@/feature/decks-list/services'
 
 const deckSchema = z.object({
   name: genericNameConstraint,

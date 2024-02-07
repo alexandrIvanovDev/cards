@@ -10,7 +10,7 @@ import { DeckFormType, useDeckForm } from '@/components/forms/deck-form/use-deck
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import { Uploader } from '@/components/ui/uploader/uploader.tsx'
-import { DeckArgs } from '@/services/cards.types.ts'
+import { DeckArgs } from '@/feature/decks-list/services'
 
 type Props = {
   onSubmit: (data: FormData) => void
