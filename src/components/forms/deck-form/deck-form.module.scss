@@ -3,6 +3,10 @@
 .modalContent {
   @include flex(column, center, normal, 1.5rem);
 
+  .btnWrapper {
+    @include flex(row, space-between, center, 1rem);
+  }
+
   .icon {
     width: 16px;
     height: 16px;

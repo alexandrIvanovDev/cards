@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
@@ -25,23 +25,34 @@ export const DeckForm = ({ onSubmit, setIsOpen, btnText, data, disabled }: Props
 
   const { t } = useTranslation()
 
-  const [file, setFile] = useState<File>()
+  const [url, setUrl] = useState<string | null>(data?.cover || null)
 
-  let url = file && URL.createObjectURL(file)
-
-  if (!url && data?.cover) {
-    url = data.cover
-  }
+  const [file, setFile] = useState<File | null>()
 
   const onSubmitData = (data: DeckFormType) => {
     const form = new FormData()
 
     form.append('name', data.name)
     form.append('isPrivate', `${data.isPrivate}`)
-    file && form.append('cover', file)
-
+    if (file === null) {
+      form.append('cover', '')
+    }
+    if (file) {
+      form.append('cover', file)
+    }
     onSubmit(form)
   }
+
+  const removeCover = () => {
+    setUrl(null)
+    setFile(null)
+  }
+
+  useEffect(() => {
+    if (file) {
+      setUrl(URL.createObjectURL(file))
+    }
+  }, [file])
 
   return (
     <form className={s.modalContent} onSubmit={handleSubmit(onSubmitData)}>
@@ -52,11 +63,20 @@ export const DeckForm = ({ onSubmit, setIsOpen, btnText, data, disabled }: Props
         error={errors.name?.message}
         autoFocus
       />
-      {(url || data?.cover) && <img src={url} alt={'cover'} className={s.cover} />}
-      <Uploader loadFile={setFile}>
-        <ImageIcon className={s.icon} />
-        <Typography variant={'subtitle2'}>{url ? t('Change cover') : t('Upload Image')}</Typography>
-      </Uploader>
+      {url && <img src={url as string} alt={'cover'} className={s.cover} />}
+      <div className={s.btnWrapper}>
+        {url && (
+          <Button variant={'secondary'} fullWidth onClick={removeCover} type={'button'}>
+            <Typography variant={'subtitle2'}>{t('Delete cover')}</Typography>
+          </Button>
+        )}
+        <Uploader loadFile={setFile}>
+          <ImageIcon className={s.icon} />
+          <Typography variant={'subtitle2'}>
+            {url ? t('Change cover') : t('Upload Image')}
+          </Typography>
+        </Uploader>
+      </div>
       <ControlledCheckbox control={control} name={'isPrivate'} label={t('Private pack')} />
       <div className={s.modalButtons}>
         <Button variant="secondary" type="button" onClick={() => setIsOpen(false)}>
