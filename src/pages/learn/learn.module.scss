@@ -1,14 +1,12 @@
 @import '@/app/styles/mixins';
 
 .content {
-  @include container(1240px);
+  @include container(var(--container-width));
 
   .card {
     @include container(420px);
     @include flex(column, center, normal, 0.5rem);
 
-    // overflow: auto;
-    // max-height: 700px;
     padding: 36px;
 
     .title {

@@ -1,5 +1,3 @@
-@import '@/app/styles/mixins';
-
-.content {
-  @include flex(row, space-between, center, 2rem);
+.text {
+  text-transform: capitalize;
 }

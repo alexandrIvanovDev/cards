@@ -14,7 +14,6 @@ import { requestHandler } from '@/common/utils/requestHandler.ts'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Dropdown, DropDownItem, DropDownItemWithIcon } from '@/components/ui/dropdown'
-import { LangSwitcher } from '@/components/ui/lang-switcher/lang-switcher.tsx'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { Typography } from '@/components/ui/typography'
 import { useSignOutMutation } from '@/feature/auth/serivices'
@@ -59,9 +58,6 @@ export const Header = ({ data }: Props) => {
               <div>
                 <DropDownItem>
                   <ProfileInfo name={data.name} email={data.email} avatar={data?.avatar} />
-                </DropDownItem>
-                <DropDownItem>
-                  <LangSwitcher />
                 </DropDownItem>
                 <DropDownItemWithIcon
                   icon={<ProfileIcon />}

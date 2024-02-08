@@ -15,30 +15,46 @@
     color: var(--dark-color-100);
     fill: var(--dark-color-100);
 
-    .searchIcon {
-      position: absolute;
-      top: 6px;
-      left: 10px;
-      fill: var(--dark-color-100);
-    }
+    .btn {
+      @include flex;
 
-    .showPasswordButton {
       cursor: pointer;
-
-      position: absolute;
-      top: 6px;
-      right: 6px;
-
       background: transparent;
       border: none;
       outline: none;
     }
 
-    .closeIcon {
-      cursor: pointer;
+    .searchIcon {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      transform: scale(0.75);
+
+      fill: var(--dark-color-100);
+    }
+
+    .showPasswordButton {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+
+      &:focus-visible {
+        fill: var(--light-color-700);
+      }
+
+      .passwordIcon {
+        transform: scale(0.75);
+      }
+    }
+
+    .closeIconButton {
       position: absolute;
       top: 6px;
       right: 5px;
+
+      .closeIcon {
+        transform: scale(0.75);
+      }
     }
 
     &:focus-within .searchIcon,

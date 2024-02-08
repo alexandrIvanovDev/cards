@@ -31,3 +31,11 @@
     }
   }
 }
+
+@media (width <= 1090px) {
+  .header {
+    .container {
+      width: 90%;
+    }
+  }
+}

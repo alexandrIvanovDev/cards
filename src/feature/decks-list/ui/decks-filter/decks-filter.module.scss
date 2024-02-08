@@ -1,8 +1,9 @@
 @import '@/app/styles/mixins';
 
 .settingsWrapper {
-  @include flex(row, space-between, center);
+  @include flex(row, space-between, center, 1.5rem);
 
+  flex-wrap: wrap;
   margin-bottom: 36px;
 
   .input {

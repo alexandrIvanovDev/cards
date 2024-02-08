@@ -33,7 +33,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       ),
       searchIcon: clsx(s.searchIcon, value && s.activeIcon),
       wrapper: clsx(s.wrapper, disabled && s.disabled, className),
-      showPasswordButton: clsx(s.showPasswordButton, disabled && s.disabledIcon),
+      closeIconButton: clsx(s.btn, s.closeIconButton),
+      showPasswordButton: clsx(s.btn, s.showPasswordButton, disabled && s.disabledIcon),
     }
 
     const togglePassword = () => {
@@ -61,7 +62,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             {...rest}
           />
           {finalType === 'search' && value && (
-            <CloseIcon className={s.closeIcon} onClick={clearValue} />
+            <button className={classes.closeIconButton}>
+              <CloseIcon className={s.closeIcon} onClick={clearValue} />
+            </button>
           )}
           {type === 'password' && (
             <button
@@ -70,7 +73,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               onClick={togglePassword}
               disabled={disabled}
             >
-              {showPassword ? <EyeOff /> : <Eye />}
+              {showPassword ? (
+                <EyeOff className={s.passwordIcon} />
+              ) : (
+                <Eye className={s.passwordIcon} />
+              )}
             </button>
           )}
           {!!error && (
