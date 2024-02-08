@@ -6,10 +6,22 @@ import {
 } from '@reduxjs/toolkit/query/react'
 import { Mutex } from 'async-mutex'
 
+import { RootState } from '@/app/providers/store/store.ts'
+
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.flashcards.andrii.es',
   credentials: 'include',
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).auth.token
+
+    if (token) {
+      headers.set('Auth', `Bearer=${token}`)
+      console.log(headers)
+    }
+
+    return headers
+  },
 })
 
 export const baseQueryWithReauth: BaseQueryFn<
