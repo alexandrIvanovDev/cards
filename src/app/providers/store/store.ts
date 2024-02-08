@@ -26,7 +26,8 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({ serializableCheck: false }).concat(baseApi.middleware),
 })
 
 export type AppDispatch = typeof store.dispatch

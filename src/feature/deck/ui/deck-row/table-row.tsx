@@ -6,6 +6,7 @@ import s from './table-row.module.scss'
 
 import { DeleteIcon } from '@/assets/icons/Delete.tsx'
 import { EditIcon } from '@/assets/icons/Edit.tsx'
+import { useAppSelector } from '@/common/hooks/use-app-selector.ts'
 import { Cover } from '@/components/ui/cover'
 import { Rating } from '@/components/ui/rating'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -13,7 +14,6 @@ import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
 import {
   useDeleteCardMutation,
-  useGetCardsQuery,
   useUpdateCardMutation,
 } from '@/feature/deck/services/deck.service.ts'
 import { CardItem } from '@/feature/deck/services/deck.types.ts'
@@ -26,6 +26,8 @@ type Props = {
 }
 
 export const TableRow = ({ card, isMyDeck }: Props) => {
+  const isLoading = useAppSelector(state => state.loading.isLoading)
+
   const [deleteCard] = useDeleteCardMutation()
   const [updateCard] = useUpdateCardMutation()
 
@@ -34,14 +36,10 @@ export const TableRow = ({ card, isMyDeck }: Props) => {
 
   const { t } = useTranslation()
 
-  const { isLoading: getCardsIsLoading, isFetching } = useGetCardsQuery({ id: card.deckId })
-
   const editCard = (data: FormData) => {
     updateCard({ id: card.id, data })
     setUpdateCardIsOpen(false)
   }
-
-  const isLoading = getCardsIsLoading || isFetching
 
   return (
     <>

@@ -8,6 +8,10 @@
     object-fit: cover;
   }
 
+  .btnWrapper {
+    @include flex(row, space-between, center, 1rem);
+  }
+
   .modalButtons {
     @include flex(row, space-between, center);
 

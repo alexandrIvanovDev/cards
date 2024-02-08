@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
@@ -31,27 +31,52 @@ export const CardForm = (props: Props) => {
   const [questionFile, setQuestionFile] = useState<File | null>(null)
   const [answerFile, setAnswerFile] = useState<File | null>(null)
 
-  let questionUrl = questionFile && URL.createObjectURL(questionFile)
-  let answerUrl = answerFile && URL.createObjectURL(answerFile)
+  const [questionUrl, setQuestionUrl] = useState<string | null>(questionImg || null)
+  const [answerUrl, setAnswerUrl] = useState<string | null>(answerImg || null)
 
-  if (!questionUrl && questionImg) {
-    questionUrl = questionImg
-  }
-
-  if (!answerUrl && answerImg) {
-    answerUrl = answerImg
-  }
+  console.log(`Question url - ${questionUrl}`)
+  console.log(`Answer url - ${answerUrl}`)
 
   const onSubmitData = (data: CreateCardFormType) => {
     const form = new FormData()
 
     form.append('question', data.question)
     form.append('answer', data.answer)
-    questionFile && form.append('questionImg', questionFile)
-    answerFile && form.append('answerImg', answerFile)
+
+    if (questionUrl === null) {
+      form.append('questionImg', '')
+    }
+    if (answerUrl === null) {
+      form.append('answerImg', '')
+    }
+    if (questionUrl && questionFile) {
+      form.append('questionImg', questionFile)
+    }
+    if (answerUrl && answerFile) {
+      form.append('answerImg', answerFile)
+    }
 
     onSubmit(form)
   }
+
+  const removeQuestionCover = () => {
+    setQuestionUrl(null)
+    setQuestionFile(null)
+  }
+
+  const removeAnswerCover = () => {
+    setAnswerUrl(null)
+    setQuestionFile(null)
+  }
+
+  useEffect(() => {
+    if (questionFile) {
+      setQuestionUrl(URL.createObjectURL(questionFile))
+    }
+    if (answerFile) {
+      setAnswerUrl(URL.createObjectURL(answerFile))
+    }
+  }, [questionFile, answerFile])
 
   return (
     <form className={s.modalContent} onSubmit={handleSubmit(onSubmitData)}>
@@ -61,26 +86,42 @@ export const CardForm = (props: Props) => {
         name={'question'}
         error={errors?.question?.message}
       />
-      {questionUrl && <img src={questionUrl} alt={'question cover'} className={s.cover} />}
-      <Uploader loadFile={setQuestionFile}>
-        <ImageIcon className={s.icon} />
-        <Typography variant={'subtitle2'}>
-          {questionUrl ? t('Change cover') : t('Upload Image')}
-        </Typography>
-      </Uploader>
+      {questionUrl && <img src={questionUrl as string} alt={'cover'} className={s.cover} />}
+      <div className={s.btnWrapper}>
+        {questionUrl && (
+          <Button variant={'secondary'} fullWidth onClick={removeQuestionCover} type={'button'}>
+            <Typography variant={'subtitle2'}>{t('Delete cover')}</Typography>
+          </Button>
+        )}
+        <Uploader loadFile={setQuestionFile}>
+          <ImageIcon className={s.icon} />
+          <Typography variant={'subtitle2'}>
+            {questionUrl ? t('Change cover') : t('Upload Image')}
+          </Typography>
+        </Uploader>
+      </div>
+
       <ControlledTextField
         label={t('Answer')}
         control={control}
         name={'answer'}
         error={errors?.answer?.message}
       />
-      {answerUrl && <img src={answerUrl} alt={'answer cover'} className={s.cover} />}
-      <Uploader loadFile={setAnswerFile}>
-        <ImageIcon className={s.icon} />
-        <Typography variant={'subtitle2'}>
-          {answerUrl ? t('Change cover') : t('Upload Image')}
-        </Typography>
-      </Uploader>
+      {answerUrl && <img src={answerUrl as string} alt={'cover'} className={s.cover} />}
+      <div className={s.btnWrapper}>
+        {answerUrl && (
+          <Button variant={'secondary'} fullWidth onClick={removeAnswerCover} type={'button'}>
+            <Typography variant={'subtitle2'}>{t('Delete cover')}</Typography>
+          </Button>
+        )}
+        <Uploader loadFile={setAnswerFile}>
+          <ImageIcon className={s.icon} />
+          <Typography variant={'subtitle2'}>
+            {answerUrl ? t('Change cover') : t('Upload Image')}
+          </Typography>
+        </Uploader>
+      </div>
+
       <div className={s.modalButtons}>
         <Button type="button" variant="secondary" onClick={closeModal}>
           <Typography variant={'subtitle2'} as={'span'}>

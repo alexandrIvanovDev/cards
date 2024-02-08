@@ -39,6 +39,9 @@ export const Slider: FC<Props> = props => {
     if (newValue < min) {
       return newValue === min
     }
+    if (newValue > value[1]) {
+      return newValue === newValue - 1
+    }
     if (newValue === value[1]) {
       return newValue === newValue - 1
     }
