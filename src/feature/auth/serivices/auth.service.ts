@@ -5,7 +5,7 @@ import {
   RecoverPasswordArgs,
   SignUpArgs,
   User,
-} from '@/feature/auth/auth.types.ts'
+} from '@/feature/auth/serivices/auth.types.ts'
 
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -33,7 +33,7 @@ export const authService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Me'],
     }),
-    signIn: builder.mutation<void, LoginArgs>({
+    signIn: builder.mutation<{ accessToken: string }, LoginArgs>({
       invalidatesTags: ['Me'],
       query: args => ({
         url: `v1/auth/login`,

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 import { notificationHandler } from '@/common/utils/notification-handler.ts'
 import { requestHandler } from '@/common/utils/requestHandler.ts'
-import { UpdateUserArgs, useSignOutMutation, useUpdateUserMutation } from '@/feature/auth'
+import { UpdateUserArgs, useSignOutMutation, useUpdateUserMutation } from '@/feature/auth/serivices'
 
 export const useProfile = () => {
   const [editMode, setEditMode] = useState(false)

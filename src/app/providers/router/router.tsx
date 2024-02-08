@@ -10,7 +10,7 @@ import { routePaths } from './routePaths.tsx'
 
 import { ErrorBoundary } from '@/app/providers/errorBoudary'
 import { Layout } from '@/components/ui/layout/layout.tsx'
-import { useMeQuery } from '@/feature/auth/auth.service.ts'
+import { useMeQuery } from '@/feature/auth/serivices'
 import {
   CheckEmail,
   CreateNewPassword,
@@ -69,9 +69,9 @@ export const privateRoutes: RouteObject[] = [
 const router = createBrowserRouter([
   {
     element: (
-      // <ErrorBoundary>
-      <Layout />
-      // </ErrorBoundary>
+      <ErrorBoundary>
+        <Layout />
+      </ErrorBoundary>
     ),
     children: [
       {
@@ -80,7 +80,7 @@ const router = createBrowserRouter([
       },
       ...publicRoutes,
     ],
-    errorElement: <ErrorBoundary />,
+    // errorElement: <ErrorBoundary />,
   },
 ])
 
