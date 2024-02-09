@@ -9,7 +9,7 @@ import {
 import { routePaths } from './routePaths.tsx'
 
 import { ErrorBoundary } from '@/app/providers/errorBoudary'
-import { Layout } from '@/components/ui/layout/layout.tsx'
+import { Layout } from '@/components/layout'
 import { useMeQuery } from '@/feature/auth/serivices'
 import {
   CheckEmail,
