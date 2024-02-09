@@ -33,7 +33,7 @@ export const authService = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Me'],
     }),
-    signIn: builder.mutation<{ accessToken: string }, LoginArgs>({
+    signIn: builder.mutation<void, LoginArgs>({
       invalidatesTags: ['Me'],
       query: args => ({
         url: `v1/auth/login`,

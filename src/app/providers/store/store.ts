@@ -3,7 +3,6 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import { baseApi } from '@/app/providers/store/base-api.ts'
-import { authSlice } from '@/feature/auth/model/slice'
 import { deckSlice } from '@/feature/deck/model/slice'
 import { decksSlice } from '@/feature/decks-list/model/slice'
 import { loadingSlice } from '@/feature/loading/model/slice'
@@ -13,7 +12,6 @@ const rootReducer = combineReducers({
   decksList: decksSlice.reducer,
   deck: deckSlice.reducer,
   loading: loadingSlice.reducer,
-  auth: authSlice.reducer,
 })
 
 const persistConfig = {
