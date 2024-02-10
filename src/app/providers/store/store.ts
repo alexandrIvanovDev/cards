@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'cards',
   storage,
-  blacklist: [baseApi.reducerPath, 'loading', 'auth'],
+  blacklist: [baseApi.reducerPath, 'loading', 'auth', 'deck'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -46,7 +46,7 @@ export const EditProfileForm = ({ onSubmit, name, toggleEditMode, avatar }: Prop
 
       {avatar && (
         <Button variant={'tertiary'} type={'button'} onClick={() => setPhotoWillBeDeleted(true)}>
-          <Typography variant={'subtitle2'}>{t('Delete a profile photo')}</Typography>
+          <Typography variant={'subtitle2'}>{t('Delete profile photo')}</Typography>
         </Button>
       )}
 

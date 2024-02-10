@@ -37,7 +37,7 @@ export const useProfile = () => {
 
     await requestHandler(async () => {
       await updateUser(formData).unwrap()
-      toast.success(t('Your name has been successfully changed'))
+      toast.success(t('Your data has been successfully changed'))
       toggleEditMode()
     })
   }
