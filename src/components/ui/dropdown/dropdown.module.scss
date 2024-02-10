@@ -9,7 +9,8 @@
   outline: none;
 
   .icon {
-    fill: transparent;
+    fill: var(--light-color-100);
+    stroke: var(--light-color-100);
     transition: 0.3s;
 
     &:hover {

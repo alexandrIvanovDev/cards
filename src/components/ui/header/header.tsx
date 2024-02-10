@@ -43,7 +43,7 @@ export const Header = ({ data }: Props) => {
       {isLoading && <ProgressBar />}
       <div className={s.container}>
         <Button as={Link} to={routePaths.packs} variant="link">
-          <Logo />
+          <Logo className={s.logo} />
         </Button>
         {data ? (
           <div className={s.data}>
