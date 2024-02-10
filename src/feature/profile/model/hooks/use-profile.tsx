@@ -26,10 +26,14 @@ export const useProfile = () => {
     })
   }
 
-  const changeUserName = async (data: UpdateUserArgs) => {
+  const changeUserData = async (data: UpdateUserArgs, isAvatarDeleted: boolean = false) => {
     const formData = new FormData()
 
     formData.append('name', data.name)
+
+    if (isAvatarDeleted) {
+      formData.append('avatar', '')
+    }
 
     await requestHandler(async () => {
       await updateUser(formData).unwrap()
@@ -46,10 +50,11 @@ export const useProfile = () => {
 
       await updateUser(formData).unwrap()
       toast.success(t('Your avatar has been successfully changed'))
+      toggleEditMode()
     } catch (e) {
       notificationHandler(e)
     }
   }
 
-  return { editMode, toggleEditMode, changeAvatar, changeUserName, logout }
+  return { editMode, toggleEditMode, changeAvatar, changeUserData, logout }
 }

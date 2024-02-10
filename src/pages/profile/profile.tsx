@@ -14,7 +14,7 @@ import { AvatarUploader } from '@/feature/profile/ui/avatar-uploader'
 import { ProfileInfo } from '@/feature/profile/ui/profile-info'
 
 export const Profile = () => {
-  const { editMode, toggleEditMode, logout, changeUserName, changeAvatar } = useProfile()
+  const { editMode, toggleEditMode, logout, changeAvatar, changeUserData } = useProfile()
 
   const { data } = useMeQuery()
 
@@ -25,6 +25,8 @@ export const Profile = () => {
 
     return <Navigate to={routePaths.signIn} />
   }
+
+  const avatar = data?.avatar as string
 
   const userData = {
     name: data?.name as string,
@@ -40,7 +42,7 @@ export const Profile = () => {
           {t('Personal Information')}
         </Typography>
         <AvatarUploader
-          img={data?.avatar as string}
+          img={avatar}
           userName={userData.name}
           className={s.avatar}
           editMode={editMode}
@@ -49,9 +51,10 @@ export const Profile = () => {
 
         {editMode ? (
           <EditProfileForm
-            onSubmit={changeUserName}
+            onSubmit={changeUserData}
             name={userData.name}
             toggleEditMode={toggleEditMode}
+            avatar={avatar}
           />
         ) : (
           <ProfileInfo user={userData} changeName={toggleEditMode} logout={signOut} />

@@ -85,5 +85,8 @@
   "Your avatar has been successfully changed": "Ваш аватар успешно изменен",
   "Your name has been successfully changed": "Ваше имя успешно изменено",
   "Language": "Язык",
-  "Delete cover": "Удалить обложку"
+  "Delete cover": "Удалить обложку",
+  "Delete a profile photo": "Удалить фото профиля",
+  "Your data has been successfully changed": "Ваши данные были успешно изменены",
+  "Click Save Changes and the photo will be deleted": "Нажмите сохранить изменения и фото будет удалено"
 }

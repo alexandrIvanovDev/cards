@@ -38,7 +38,6 @@
   "Learn Deck": "Learn Deck",
   "Delete Deck": "Delete Deck",
   "Save Changes": "Save Changes",
-  "Edit pack": "Edit pack",
   "Learn": "Learn",
   "Edit": "Edit",
   "Delete": "Delete",
@@ -67,7 +66,6 @@
   "Last Updated": "Last Updated",
   "Created by": "Created by",
   "Cards": "Cards",
-  "Upload file": "Upload file",
   "Edit Deck": "Edit Deck",
   "Delete Card": "Delete Card",
   "this card": "this card",
@@ -87,5 +85,8 @@
   "Your avatar has been successfully changed": "Your avatar has been successfully changed",
   "Your name has been successfully changed": "Your name has been successfully changed",
   "Language": "Language",
-  "Delete cover": "Delete cover"
+  "Delete cover": "Delete cover",
+  "Delete a profile photo": "Delete a profile photo",
+  "Your data has been successfully changed": "Your data has been successfully changed",
+  "Click Save Changes and the photo will be deleted": "Click Save Changes and the photo will be deleted"
 }
