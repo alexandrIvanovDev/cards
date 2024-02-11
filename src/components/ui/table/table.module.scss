@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .root {
   border-collapse: collapse;
   width: 100%;
@@ -16,7 +18,60 @@
 
 .cell {
   padding: 6px 24px;
+  word-break: break-word;
+}
 
-  // overflow-wrap: break-word;
-  word-break: break-all;
+@media (width <= 880px) {
+  .root {
+    .headCell {
+      text-align: center;
+    }
+  }
+}
+
+@media (width <= 700px) {
+  .root {
+    .headCell {
+      padding: 6px 12px;
+    }
+
+    .cell {
+      padding: 6px 12px;
+    }
+  }
+}
+
+@media (width <= 500px) {
+  .root {
+    min-width: 300px;
+
+    .headCell {
+      display: none;
+    }
+
+    .cell {
+      @include flex(row, space-between, center);
+
+      &::before {
+        content: attr(data-th);
+
+        display: inline-block;
+
+        width: 6.5em;
+
+        font-weight: bold;
+        text-align: left;
+      }
+    }
+
+    .cell:last-child {
+      @include flex(row, center, center);
+
+      padding: 0;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
 }

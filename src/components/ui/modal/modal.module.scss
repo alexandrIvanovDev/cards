@@ -14,7 +14,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 30vw;
+  width: 30%;
 
   .titleWrapper {
     @include flex(row, space-between, center);
@@ -43,5 +43,29 @@
 
   .childrenWrapper {
     padding: 16px 24px;
+  }
+}
+
+@media (width <= 1090px) {
+  .content {
+    width: 50%;
+  }
+}
+
+@media (width <= 850px) {
+  .content {
+    width: 60%;
+  }
+}
+
+@media (width <= 710px) {
+  .content {
+    width: 70%;
+  }
+}
+
+@media (width <= 610px) {
+  .content {
+    width: 80%;
   }
 }

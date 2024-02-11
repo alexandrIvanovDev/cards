@@ -64,6 +64,7 @@ export const DecksFilter = (props: Props) => {
         value={tabsValue}
         onValueChange={setTabValue}
         label={t('Show packs cards')}
+        className={s.tabs}
       />
       <Slider
         min={0}
@@ -71,8 +72,9 @@ export const DecksFilter = (props: Props) => {
         value={sliderValue}
         onValueChange={setCardsCount}
         label={t('Number of cards')}
+        className={s.slider}
       />
-      <Button variant="secondary" onClick={clearFilter}>
+      <Button variant="secondary" onClick={clearFilter} className={s.btn}>
         <DeleteIcon className={s.deleteIcon} />
         <Typography variant={'subtitle2'} as={'span'}>
           {t('Clear filter')}

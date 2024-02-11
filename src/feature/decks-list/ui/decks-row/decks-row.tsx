@@ -68,7 +68,7 @@ export const DecksRow = ({ deck, userId, getDecksIsFetching }: Props) => {
   return (
     <>
       <Table.Row className={s.row}>
-        <Table.Cell>
+        <Table.Cell className={s.nameCell} data-th={'Name'}>
           <Typography as={Link} to={`${routePaths.packs}/${deck.id}`} className={s.nameWrapper}>
             {isLoadingData ? <Skeleton className={s.skeleton} /> : <Cover cover={deck?.cover} />}
             <Typography className={s.name} variant={'body2'}>
@@ -77,33 +77,39 @@ export const DecksRow = ({ deck, userId, getDecksIsFetching }: Props) => {
           </Typography>
         </Table.Cell>
 
-        <Table.Cell className={s.count}>
+        <Table.Cell className={s.count} data-th={'Cards'}>
           <Typography variant={'body2'}>{deck?.cardsCount}</Typography>
         </Table.Cell>
 
-        <Table.Cell className={s.updated}>
+        <Table.Cell className={s.updated} data-th={'Last Updated'}>
           <Typography variant={'body2'}>{new Date(deck?.updated).toLocaleDateString()}</Typography>
         </Table.Cell>
 
-        <Table.Cell className={s.author}>
+        <Table.Cell className={s.author} data-th={'Created by'}>
           <Typography variant={'body2'}>{deck?.author?.name}</Typography>
         </Table.Cell>
 
         <Table.Cell className={s.controls}>
           <div className={s.icons}>
-            {isMyDeck && <EditIcon className={s.icon} onClick={() => setUpdateDeckIsOpen(true)} />}
-            <button className={s.buttonWrapper} disabled={disabledPlayIcon}>
-              <PlayIcon
-                className={clsx(s.icon, disabledPlayIcon && s.disabledIcon)}
-                onClick={() => navigate(`${routePaths.learn}/${deck.id}`)}
-              />
+            {isMyDeck && (
+              <button className={s.buttonWrapper} onClick={() => setUpdateDeckIsOpen(true)}>
+                <EditIcon className={s.icon} />
+              </button>
+            )}
+            <button
+              className={s.buttonWrapper}
+              disabled={disabledPlayIcon}
+              onClick={() => navigate(`${routePaths.learn}/${deck.id}`)}
+            >
+              <PlayIcon className={clsx(s.icon, disabledPlayIcon && s.disabledIcon)} />
             </button>
             {isMyDeck && (
-              <button className={s.buttonWrapper} disabled={deleteDeckIsLoading}>
-                <DeleteIcon
-                  className={clsx(s.icon, deleteDeckIsLoading && s.disabledIcon)}
-                  onClick={() => setDeleteDeckIsOpen(true)}
-                />
+              <button
+                className={s.buttonWrapper}
+                disabled={deleteDeckIsLoading}
+                onClick={() => setDeleteDeckIsOpen(true)}
+              >
+                <DeleteIcon className={clsx(s.icon, deleteDeckIsLoading && s.disabledIcon)} />
               </button>
             )}
           </div>

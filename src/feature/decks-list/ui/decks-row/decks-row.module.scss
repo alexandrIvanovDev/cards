@@ -72,3 +72,73 @@
     }
   }
 }
+
+@media (width <= 1000px) {
+  .row {
+    .count {
+      width: auto;
+    }
+
+    .updated {
+      width: auto;
+    }
+
+    .author {
+      width: auto;
+    }
+
+    .controls {
+      width: auto;
+    }
+  }
+}
+
+@media (width <= 780px) {
+  .row {
+    .nameCell {
+      text-align: center;
+
+      .nameWrapper {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+
+    .count {
+      text-align: center;
+    }
+
+    .updated {
+      text-align: center;
+    }
+
+    .author {
+      text-align: center;
+    }
+
+    .controls {
+      text-align: center;
+    }
+  }
+}
+
+@media (width <= 500px) {
+  .row {
+    .controls {
+      border-top: 1px solid var(--dark-color-500);
+
+      .icons {
+        gap: 0;
+        width: 100%;
+
+        .icon {
+          transform: scale(0.9);
+        }
+
+        .buttonWrapper {
+          margin: 8px auto;
+        }
+      }
+    }
+  }
+}

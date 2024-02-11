@@ -29,7 +29,7 @@ export const Tabs: FC<TabsProps> = ({ tabs, value, className, onValueChange, lab
           {label}
         </Typography>
       )}
-      <RadixTabs.List aria-label="tabs">
+      <RadixTabs.List aria-label="tabs" className={s.tabsList}>
         {tabs.map(tab => (
           <RadixTabs.Trigger
             value={tab.value}

@@ -27,3 +27,19 @@
 .notSortable {
   cursor: initial;
 }
+
+@media (width <= 880px) {
+  .headCell {
+    text-align: center;
+
+    .cell {
+      justify-content: center;
+    }
+  }
+}
+
+@media (width <= 500px) {
+  .tableHeader {
+    display: none;
+  }
+}

@@ -44,7 +44,7 @@ export const TableRow = ({ card, isMyDeck }: Props) => {
   return (
     <>
       <Table.Row className={s.row}>
-        <Table.Cell>
+        <Table.Cell className={s.questionCell}>
           <div className={s.questionWrapper}>
             {isLoading ? <Skeleton className={s.skeleton} /> : <Cover cover={card?.questionImg} />}
             <Typography variant={'body2'}>{card?.question}</Typography>

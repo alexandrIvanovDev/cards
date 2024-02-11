@@ -42,3 +42,51 @@
     height: 50px;
   }
 }
+
+@media (width <= 1090px) {
+  .row {
+    .answerCell {
+      width: auto;
+    }
+
+    .updatedCell {
+      width: auto;
+    }
+
+    .ratingCell {
+      width: auto;
+    }
+
+    .iconsCell {
+      width: auto;
+    }
+  }
+}
+
+@media (width <= 880px) {
+  .row {
+    .questionCell {
+      text-align: center;
+
+      .questionWrapper {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+
+    .answerCell {
+      text-align: center;
+
+      .answerWrapper {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+
+    .ratingCell {
+      .rating {
+        gap: 0.3rem;
+      }
+    }
+  }
+}

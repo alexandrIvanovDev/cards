@@ -50,7 +50,7 @@ export const Pagination = (props: Props) => {
     rightArrow: clsx(s.arrowIcon, rightArrowDisabled && s.disabled),
   }
 
-  if (pages.length === 0 || totalCount < 5) return null
+  if (pages.length === 0 || totalCount < 6) return null
 
   return (
     <div className={classes.wrapper}>

@@ -14,4 +14,32 @@
     transform: scale(0.75);
     fill: var(--light-color-100);
   }
+
+  @media (width <= 1024px) {
+    @include flex(row, space-between, center, 2rem);
+
+    .input {
+      width: 100%;
+    }
+  }
+
+  @media (width <= 840px) {
+    @include flex(row, flex-start, center, 2rem);
+  }
+}
+
+@media (width <= 500px) {
+  .settingsWrapper {
+    .tabs {
+      width: 100%;
+    }
+
+    .slider {
+      width: 100%;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
 }

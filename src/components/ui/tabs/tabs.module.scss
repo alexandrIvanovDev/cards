@@ -39,9 +39,6 @@
       outline: 2px solid var(--info-color-900);
     }
 
-    // &:active {
-    // }
-
     &[data-state='active'] {
       color: var(--light-color-100);
       background: var(--primary-color-500);
@@ -53,6 +50,17 @@
       color: var(--dark-color-300);
       background: var(--dark-color-700);
       border-color: var(--dark-color-300);
+    }
+  }
+}
+
+@media (width <= 500px) {
+  .tabsList {
+    display: flex;
+
+    .tab {
+      width: 100%;
+      text-align: center;
     }
   }
 }

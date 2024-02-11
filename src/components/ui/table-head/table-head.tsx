@@ -45,7 +45,7 @@ export const TableHead = ({ columns, sort, setSort }: Props) => {
   }
 
   return (
-    <Table.Head>
+    <Table.Head className={s.tableHeader}>
       <Table.Row>
         {columns.map(cell => {
           const classes = {
