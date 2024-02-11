@@ -9,10 +9,8 @@
     margin-top: 100px;
     color: var(--dark-color-100);
   }
-}
 
-@media (width <= 1090px) {
-  .content {
+  @media (width <= 1090px) {
     width: 90%;
   }
 }

@@ -1,9 +1,5 @@
 @import '@/app/styles/mixins';
 
-.container {
-  @include container(1240px);
-}
-
 .content {
   @include container(420px);
   @include flex(column, flex-start, center);
@@ -23,5 +19,9 @@
     margin-bottom: 55px;
     color: var(--dark-color-100);
     text-align: center;
+  }
+
+  @media (width <= 460px) {
+    width: 90%;
   }
 }

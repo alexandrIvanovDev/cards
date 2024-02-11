@@ -13,7 +13,7 @@ export const NotFound = () => {
 
   return (
     <div className={s.content}>
-      <NotFoundIcon />
+      <NotFoundIcon className={s.icon} />
       <Typography variant={'body1'}>{t('Sorry! Page not found!')}</Typography>
       <Button as={Link} to={routePaths.main}>
         <Typography variant={'subtitle2'}>{t('Back to home page')}</Typography>

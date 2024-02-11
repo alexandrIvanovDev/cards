@@ -31,7 +31,7 @@ export const EditProfileForm = ({ onSubmit, name, toggleEditMode, avatar }: Prop
 
   useEffect(() => {
     if (photoWillBeDeleted) {
-      toast.info(t('Click Save Changes and the photo will be deleted'))
+      toast.info(t('Click Save Changes and photo will be deleted'))
     }
   }, [photoWillBeDeleted])
 

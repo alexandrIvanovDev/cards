@@ -76,3 +76,10 @@
   fill: var(--light-color-100);
   transition: all 0.3s ease-in-out;
 }
+
+@media (width <= 530px) {
+  .wrapper {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

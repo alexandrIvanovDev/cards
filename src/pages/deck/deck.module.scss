@@ -12,4 +12,8 @@
       color: var(--dark-color-100);
     }
   }
+
+  @media (width <= 1090px) {
+    width: 90%;
+  }
 }

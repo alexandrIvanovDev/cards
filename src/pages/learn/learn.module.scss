@@ -60,3 +60,21 @@
     }
   }
 }
+
+@media (width <= 1090px) {
+  .content {
+    width: 90%;
+
+    .card {
+      margin-top: 1rem;
+    }
+  }
+}
+
+@media (width <= 460px) {
+  .content {
+    .card {
+      width: auto;
+    }
+  }
+}

@@ -14,4 +14,9 @@
   .btn {
     @include link-hover;
   }
+
+  @media (width <= 460px) {
+    width: 90%;
+    margin-bottom: 1rem;
+  }
 }
