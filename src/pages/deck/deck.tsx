@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
@@ -59,6 +59,10 @@ export const Deck = () => {
 
   const totalItems = cardsData?.pagination.totalItems ?? 5
   const totalPages = cardsData?.pagination.totalPages ?? 1
+
+  useEffect(() => {
+    window.scroll(0, 150)
+  }, [currentPage])
 
   if (getDeckIsLoading) {
     return <Loader />

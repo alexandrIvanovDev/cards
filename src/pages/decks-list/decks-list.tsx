@@ -59,6 +59,10 @@ export const DecksList = () => {
     }
   }, [pageSize, tabValue, debouncedValue, debouncedCardsCount[0], debouncedCardsCount[1]])
 
+  useEffect(() => {
+    window.scroll(0, 150)
+  }, [currentPage])
+
   if (isLoading) {
     return <Loader />
   }

@@ -61,7 +61,6 @@ export const DeckForm = ({ onSubmit, setIsOpen, btnText, data, disabled }: Props
         control={control}
         name={'name'}
         error={errors.name?.message}
-        autoFocus
       />
       {url && <img src={url as string} alt={'cover'} className={s.cover} />}
       <div className={s.btnWrapper}>

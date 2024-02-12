@@ -70,7 +70,11 @@ export const DecksRow = ({ deck, userId, getDecksIsFetching }: Props) => {
       <Table.Row className={s.row}>
         <Table.Cell className={s.nameCell} data-th={'Name'}>
           <Typography as={Link} to={`${routePaths.packs}/${deck.id}`} className={s.nameWrapper}>
-            {isLoadingData ? <Skeleton className={s.skeleton} /> : <Cover cover={deck?.cover} />}
+            {isLoadingData ? (
+              <Skeleton className={s.skeleton} />
+            ) : (
+              <Cover cover={deck?.cover} className={s.cover} />
+            )}
             <Typography className={s.name} variant={'body2'}>
               {deck?.name}
             </Typography>

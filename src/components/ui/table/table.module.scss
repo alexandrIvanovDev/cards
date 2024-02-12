@@ -29,26 +29,10 @@
   }
 }
 
-@media (width <= 700px) {
-  .root {
-    .headCell {
-      padding: 6px 12px;
-    }
-
-    .cell {
-      padding: 6px 12px;
-    }
-  }
-}
-
 @media (width <= 570px) {
   .root {
     margin-bottom: 20px;
     border: none;
-
-    // .tableRow:first-child {
-    //  // border-top: none;
-    // }
 
     .headCell {
       display: none;
@@ -57,21 +41,19 @@
     .cell {
       @include flex(row, space-between, center);
 
-      padding: 12px 24px;
-
       &::before {
-        content: attr(data-th);
+        content: attr(data-th) ': ';
 
         display: inline-block;
 
-        width: 12em;
+        width: 13em;
 
         font-weight: bold;
         text-align: left;
       }
     }
 
-    .cell:last-child {
+    .cell:nth-child(5) {
       @include flex(row, center, center);
     }
 

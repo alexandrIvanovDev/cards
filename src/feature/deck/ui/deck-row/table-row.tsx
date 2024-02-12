@@ -46,13 +46,21 @@ export const TableRow = ({ card, isMyDeck }: Props) => {
       <Table.Row className={s.row}>
         <Table.Cell className={s.questionCell} data-th={'Question'}>
           <div className={s.questionWrapper}>
-            {isLoading ? <Skeleton className={s.skeleton} /> : <Cover cover={card?.questionImg} />}
+            {isLoading ? (
+              <Skeleton className={s.skeleton} />
+            ) : (
+              <Cover cover={card?.questionImg} className={s.questionCover} />
+            )}
             <Typography variant={'body2'}>{card?.question}</Typography>
           </div>
         </Table.Cell>
         <Table.Cell className={s.answerCell} data-th={'Answer'}>
           <div className={s.answerWrapper}>
-            {isLoading ? <Skeleton className={s.skeleton} /> : <Cover cover={card?.answerImg} />}
+            {isLoading ? (
+              <Skeleton className={s.skeleton} />
+            ) : (
+              <Cover cover={card?.answerImg} className={s.answerCover} />
+            )}
             <Typography variant={'body2'}>{card?.answer}</Typography>
           </div>
         </Table.Cell>
