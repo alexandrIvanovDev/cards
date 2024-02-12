@@ -23,13 +23,12 @@ export type RadioGroupProps = {
   className?: string
 }
 
-//TODO fix sizes
-
 export const RadioGroup: FC<RadioGroupProps> = forwardRef<
   ElementRef<typeof Radio.Root>,
   RadioGroupProps
 >(({ radioButtons, defaultValue, disabled, className, onValueChange, value }, ref) => {
   const { t } = useTranslation()
+
   const classes = {
     root: clsx(s.root, className),
     label: clsx(s.label, disabled && s.disabled),
@@ -45,14 +44,12 @@ export const RadioGroup: FC<RadioGroupProps> = forwardRef<
       ref={ref}
     >
       {radioButtons.map(r => (
-        <div className={s.itemWrapper} key={r.value}>
+        <Typography as={'label'} className={classes.label} variant={'body2'} key={r.value}>
           <Radio.Item className={s.item} value={r.value} id={r.value} disabled={r.disabled}>
             <Radio.Indicator className={s.indicator} />
           </Radio.Item>
-          <label className={classes.label} htmlFor={r.value}>
-            <Typography variant={'body2'}>{t(r.label)}</Typography>
-          </label>
-        </div>
+          {t(r.label)}
+        </Typography>
       ))}
     </Radio.Root>
   )
