@@ -17,7 +17,7 @@ export const LangSwitcher = ({ className }: Props) => {
   return (
     <Button onClick={toggleLanguage} variant={'secondary'} className={className}>
       <Typography variant={'subtitle2'} as={'span'} className={s.text}>
-        {i18n.language}
+        {i18n.language === 'ru' ? 'En' : 'Ru'}
       </Typography>
     </Button>
   )

@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { useTranslation } from 'react-i18next'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -10,22 +12,26 @@ import { Logo } from '@/assets/icons/Logo.tsx'
 import { LogoutIcon } from '@/assets/icons/Logout.tsx'
 import { ProfileIcon } from '@/assets/icons/Profile.tsx'
 import { useAppSelector } from '@/common/hooks/use-app-selector.ts'
+import { useTheme } from '@/common/hooks/use-theme.ts'
 import { requestHandler } from '@/common/utils/requestHandler.ts'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Dropdown, DropDownItem, DropDownItemWithIcon } from '@/components/ui/dropdown'
 import { ProgressBar } from '@/components/ui/progress-bar'
+import { ThemeSwitcher } from '@/components/ui/theme-switcher'
 import { Typography } from '@/components/ui/typography'
 import { useSignOutMutation } from '@/feature/auth/serivices'
 
 type Props = { data: ProfileInfoProps | null }
 
 export const Header = ({ data }: Props) => {
-  const [signOut] = useSignOutMutation()
-
   const isLoading = useAppSelector(state => state.loading.isLoading)
 
+  const [signOut] = useSignOutMutation()
+
   const navigate = useNavigate()
+
+  const { theme } = useTheme()
 
   const { t } = useTranslation()
 
@@ -37,6 +43,10 @@ export const Header = ({ data }: Props) => {
       return <Navigate to={routePaths.signIn} />
     })
   }
+
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme)
+  }, [theme])
 
   return (
     <header className={s.header}>
@@ -64,6 +74,9 @@ export const Header = ({ data }: Props) => {
                   text={t('My profile')}
                   onSelect={() => navigate(routePaths.profile)}
                 />
+                <DropDownItem>
+                  <ThemeSwitcher />
+                </DropDownItem>
                 <DropDownItemWithIcon
                   icon={<LogoutIcon />}
                   text={t('Sign out')}

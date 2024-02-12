@@ -2,11 +2,9 @@
   position: fixed;
   right: -10px;
   border-radius: 15px 0 0 15px;
-}
 
-.themeSwitcher {
-  position: fixed;
-  top: 150px;
-  right: -15px;
-  border-radius: 13px 0 0 13px;
+  @media (width <= 1220px) {
+    position: absolute;
+    top: 62px;
+  }
 }

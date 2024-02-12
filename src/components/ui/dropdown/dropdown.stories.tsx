@@ -7,8 +7,8 @@ import { EditIcon } from '@/assets/icons/Edit.tsx'
 import { LogoutIcon } from '@/assets/icons/Logout.tsx'
 import { PlayIcon } from '@/assets/icons/Play.tsx'
 import { ProfileIcon } from '@/assets/icons/Profile.tsx'
+import { ProfileInfo } from '@/components/header/profile-info/profile-info.tsx'
 import { Avatar } from '@/components/ui/avatar'
-import { ProfileInfo } from '@/components/ui/header/profile-info/profile-info.tsx'
 
 const meta = {
   title: 'Components/DropDown',
