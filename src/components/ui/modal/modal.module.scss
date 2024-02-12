@@ -14,7 +14,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 30%;
+  width: 500px;
 
   .titleWrapper {
     @include flex(row, space-between, center);
@@ -38,6 +38,11 @@
       outline: none;
 
       fill: var(--light-color-100);
+
+      &:focus-visible {
+        border-radius: 50%;
+        outline: 1px solid var(--info-color-500);
+      }
     }
   }
 
@@ -64,7 +69,7 @@
   }
 }
 
-@media (width <= 610px) {
+@media (width <= 550px) {
   .content {
     width: 80%;
   }

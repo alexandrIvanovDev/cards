@@ -52,10 +52,12 @@ export const DecksList = () => {
   const totalCount = data?.pagination.totalItems
 
   useEffect(() => {
-    if (tabValue || (totalCount && totalCount / pageSize < currentPage)) {
+    const condition = totalCount && totalCount / pageSize < currentPage
+
+    if (tabValue || condition || condition === undefined) {
       setCurrentPage(1)
     }
-  }, [pageSize, tabValue, debouncedValue, debouncedCardsCount])
+  }, [pageSize, tabValue, debouncedValue, debouncedCardsCount[0], debouncedCardsCount[1]])
 
   if (isLoading) {
     return <Loader />

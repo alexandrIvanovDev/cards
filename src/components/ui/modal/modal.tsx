@@ -28,35 +28,36 @@ export const Modal = forwardRef<ElementRef<'div'>, ModalProps>(
           </Dialog.Trigger>
         )}
         <Dialog.Portal>
-          <Dialog.Overlay className={s.overlay} />
-          <div ref={ref}>
-            <AnimatePresence>
-              {open && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
-                >
-                  <Dialog.Content forceMount asChild ref={ref}>
-                    <Card className={s.content}>
-                      {title && (
-                        <div className={s.titleWrapper}>
-                          <Typography as="h3" variant="h3" className={s.title}>
-                            {title}
-                          </Typography>
-                          <Dialog.Close className={s.close}>
-                            <CloseIcon />
-                          </Dialog.Close>
-                        </div>
-                      )}
-                      <div className={s.childrenWrapper}>{children}</div>
-                    </Card>
-                  </Dialog.Content>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          <Dialog.Overlay className={s.overlay}>
+            <div ref={ref}>
+              <AnimatePresence>
+                {open && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                  >
+                    <Dialog.Content forceMount asChild ref={ref}>
+                      <Card className={s.content}>
+                        {title && (
+                          <div className={s.titleWrapper}>
+                            <Typography as="h3" variant="h3" className={s.title}>
+                              {title}
+                            </Typography>
+                            <Dialog.Close className={s.close}>
+                              <CloseIcon />
+                            </Dialog.Close>
+                          </div>
+                        )}
+                        <div className={s.childrenWrapper}>{children}</div>
+                      </Card>
+                    </Dialog.Content>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </Dialog.Overlay>
         </Dialog.Portal>
       </Dialog.Root>
     )
