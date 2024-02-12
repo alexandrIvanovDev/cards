@@ -31,8 +31,12 @@
     .iconWrapper {
       @include flex(row, center, center, 0.5rem);
 
-      .icon {
-        @include icon;
+      .btnIcon {
+        @include flex;
+
+        .icon {
+          @include icon;
+        }
       }
     }
   }
@@ -86,6 +90,34 @@
     .ratingCell {
       .rating {
         gap: 0.3rem;
+      }
+    }
+  }
+}
+
+@media (width <= 570px) {
+  .row {
+    .iconsCell {
+      padding: 0;
+
+      .iconWrapper {
+        gap: 0;
+        width: 100%;
+        border-top: 1px solid var(--dark-color-500);
+
+        .btnIcon {
+          width: 100%;
+          padding: 8px 0;
+          border-right: 1px solid var(--dark-color-500);
+
+          &:nth-child(5) {
+            border-right: none;
+          }
+
+          .icon {
+            transform: scale(0.9);
+          }
+        }
       }
     }
   }

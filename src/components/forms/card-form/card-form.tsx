@@ -34,9 +34,6 @@ export const CardForm = (props: Props) => {
   const [questionUrl, setQuestionUrl] = useState<string | null>(questionImg || null)
   const [answerUrl, setAnswerUrl] = useState<string | null>(answerImg || null)
 
-  console.log(`Question url - ${questionUrl}`)
-  console.log(`Answer url - ${answerUrl}`)
-
   const onSubmitData = (data: CreateCardFormType) => {
     const form = new FormData()
 
@@ -89,7 +86,12 @@ export const CardForm = (props: Props) => {
       {questionUrl && <img src={questionUrl as string} alt={'cover'} className={s.cover} />}
       <div className={s.btnWrapper}>
         {questionUrl && (
-          <Button variant={'secondary'} fullWidth onClick={removeQuestionCover} type={'button'}>
+          <Button
+            variant={'secondary'}
+            onClick={removeQuestionCover}
+            type={'button'}
+            className={s.btn}
+          >
             <Typography variant={'subtitle2'}>{t('Delete cover')}</Typography>
           </Button>
         )}
@@ -110,7 +112,12 @@ export const CardForm = (props: Props) => {
       {answerUrl && <img src={answerUrl as string} alt={'cover'} className={s.cover} />}
       <div className={s.btnWrapper}>
         {answerUrl && (
-          <Button variant={'secondary'} fullWidth onClick={removeAnswerCover} type={'button'}>
+          <Button
+            variant={'secondary'}
+            onClick={removeAnswerCover}
+            type={'button'}
+            className={s.btn}
+          >
             <Typography variant={'subtitle2'}>{t('Delete cover')}</Typography>
           </Button>
         )}

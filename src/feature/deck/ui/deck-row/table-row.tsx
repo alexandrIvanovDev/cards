@@ -44,30 +44,34 @@ export const TableRow = ({ card, isMyDeck }: Props) => {
   return (
     <>
       <Table.Row className={s.row}>
-        <Table.Cell className={s.questionCell}>
+        <Table.Cell className={s.questionCell} data-th={'Question'}>
           <div className={s.questionWrapper}>
             {isLoading ? <Skeleton className={s.skeleton} /> : <Cover cover={card?.questionImg} />}
             <Typography variant={'body2'}>{card?.question}</Typography>
           </div>
         </Table.Cell>
-        <Table.Cell className={s.answerCell}>
+        <Table.Cell className={s.answerCell} data-th={'Answer'}>
           <div className={s.answerWrapper}>
             {isLoading ? <Skeleton className={s.skeleton} /> : <Cover cover={card?.answerImg} />}
             <Typography variant={'body2'}>{card?.answer}</Typography>
           </div>
         </Table.Cell>
-        <Table.Cell className={s.updatedCell}>
+        <Table.Cell className={s.updatedCell} data-th={'Last Updated'}>
           {new Date(card?.updated as string).toLocaleDateString()}
         </Table.Cell>
-        <Table.Cell className={s.ratingCell}>
+        <Table.Cell className={s.ratingCell} data-th={'Grade'}>
           <Rating rating={card.grade} className={s.rating} />
         </Table.Cell>
 
         {isMyDeck && (
           <Table.Cell className={s.iconsCell}>
             <div className={s.iconWrapper}>
-              <EditIcon onClick={() => setUpdateCardIsOpen(true)} className={s.icon} />
-              <DeleteIcon onClick={() => setDeleteCardIsOpen(true)} className={s.icon} />
+              <button className={s.btnIcon} onClick={() => setUpdateCardIsOpen(true)}>
+                <EditIcon className={s.icon} />
+              </button>
+              <button className={s.btnIcon} onClick={() => setDeleteCardIsOpen(true)}>
+                <DeleteIcon className={s.icon} />
+              </button>
             </div>
           </Table.Cell>
         )}

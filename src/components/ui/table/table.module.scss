@@ -41,9 +41,9 @@
   }
 }
 
-@media (width <= 500px) {
+@media (width <= 570px) {
   .root {
-    min-width: 300px;
+    margin-bottom: 20px;
 
     .headCell {
       display: none;
@@ -52,12 +52,14 @@
     .cell {
       @include flex(row, space-between, center);
 
+      padding: 12px 24px;
+
       &::before {
         content: attr(data-th);
 
         display: inline-block;
 
-        width: 6.5em;
+        width: 12em;
 
         font-weight: bold;
         text-align: left;
@@ -66,11 +68,12 @@
 
     .cell:last-child {
       @include flex(row, center, center);
+    }
 
-      padding: 0;
-
+    .cell:nth-child(5) {
       &::before {
         display: none;
+        padding: 0;
       }
     }
   }

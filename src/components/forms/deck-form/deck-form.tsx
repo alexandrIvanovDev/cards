@@ -66,7 +66,7 @@ export const DeckForm = ({ onSubmit, setIsOpen, btnText, data, disabled }: Props
       {url && <img src={url as string} alt={'cover'} className={s.cover} />}
       <div className={s.btnWrapper}>
         {url && (
-          <Button variant={'secondary'} fullWidth onClick={removeCover} type={'button'}>
+          <Button variant={'secondary'} onClick={removeCover} type={'button'} className={s.btn}>
             <Typography variant={'subtitle2'}>{t('Delete cover')}</Typography>
           </Button>
         )}

@@ -10,6 +10,10 @@
 
   .btnWrapper {
     @include flex(row, space-between, center, 1rem);
+
+    .btn {
+      width: 100%;
+    }
   }
 
   .modalButtons {
@@ -22,5 +26,27 @@
     width: 16px;
     height: 16px;
     fill: var(--light-color-100);
+  }
+}
+
+@media (width <= 550px) {
+  .modalContent {
+    overflow: auto;
+
+    .btnWrapper {
+      flex-direction: column-reverse;
+      gap: 0.5rem;
+      align-items: stretch;
+
+      .btn {
+        width: auto;
+      }
+    }
+
+    .modalButtons {
+      flex-direction: column-reverse;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
   }
 }

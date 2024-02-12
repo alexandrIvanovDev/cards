@@ -48,11 +48,8 @@
 
       .buttonWrapper {
         @include flex;
-      }
 
-      .icon {
         cursor: pointer;
-        transform: scale(0.75);
         fill: var(--light-color-100);
         transition: all 0.3s ease-in-out;
 
@@ -63,6 +60,10 @@
         &:active:not(.disabledIcon) {
           fill: var(--primary-color-700);
         }
+      }
+
+      .icon {
+        transform: scale(0.75);
       }
 
       .disabledIcon {
@@ -122,9 +123,10 @@
   }
 }
 
-@media (width <= 500px) {
+@media (width <= 570px) {
   .row {
     .controls {
+      padding: 0;
       border-top: 1px solid var(--dark-color-500);
 
       .icons {
@@ -136,7 +138,13 @@
         }
 
         .buttonWrapper {
-          margin: 8px auto;
+          width: 100%;
+          padding: 8px 0;
+          border-right: 1px solid var(--dark-color-500);
+
+          &:last-child {
+            border-right: none;
+          }
         }
       }
     }

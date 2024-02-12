@@ -4,4 +4,15 @@
   @include flex(row, space-between, center);
 
   margin-bottom: 36px;
+
+  @media (width <= 450px) {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+    margin-bottom: 50px;
+
+    .title {
+      text-align: center;
+    }
+  }
 }

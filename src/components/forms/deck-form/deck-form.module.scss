@@ -5,6 +5,10 @@
 
   .btnWrapper {
     @include flex(row, space-between, center, 1rem);
+
+    .btn {
+      width: 100%;
+    }
   }
 
   .icon {
@@ -20,5 +24,25 @@
 
   .modalButtons {
     @include flex(row, space-between, center);
+  }
+}
+
+@media (width <= 610px) {
+  .modalContent {
+    .btnWrapper {
+      flex-direction: column-reverse;
+      gap: 0.5rem;
+      align-items: stretch;
+
+      .btn {
+        width: auto;
+      }
+    }
+
+    .modalButtons {
+      flex-direction: column-reverse;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
   }
 }

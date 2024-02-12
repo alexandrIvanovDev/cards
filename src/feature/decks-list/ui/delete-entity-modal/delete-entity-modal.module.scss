@@ -5,5 +5,11 @@
 
   .btns {
     @include flex(row, space-between, center);
+
+    @media (width <= 450px) {
+      flex-direction: column-reverse;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
   }
 }
