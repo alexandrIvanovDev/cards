@@ -1,4 +1,4 @@
-import { ElementRef, forwardRef, ReactNode } from 'react'
+import { ElementRef, forwardRef, ReactNode, useState } from 'react'
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
@@ -17,8 +17,9 @@ type Props = {
 }
 
 const ulVariants = {
-  visible: { opacity: 1 },
   hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  closed: { opacity: 0 },
 }
 const liVariants = {
   visible: { opacity: 1, x: 0 },
@@ -27,8 +28,10 @@ const liVariants = {
 
 export const Dropdown = forwardRef<ElementRef<'div'>, Props>(
   ({ children, trigger, align = 'end', className }, ref) => {
+    const [open, setOpen] = useState(false)
+
     return (
-      <DropdownMenu.Root>
+      <DropdownMenu.Root open={open} onOpenChange={setOpen}>
         <DropdownMenu.Trigger asChild className={s.trigger}>
           {trigger ?? (
             <button>
@@ -37,23 +40,25 @@ export const Dropdown = forwardRef<ElementRef<'div'>, Props>(
           )}
         </DropdownMenu.Trigger>
 
-        <DropdownMenu.Portal>
-          <div ref={ref}>
-            <AnimatePresence>
-              <motion.ul
-                initial={'hidden'}
-                animate={'visible'}
-                exit={{ opacity: 0 }}
-                variants={ulVariants}
-              >
-                <DropdownMenu.Content className={`${s.content} ${className}`} align={align}>
-                  {children}
-                  <DropdownMenu.Arrow className={s.arrow} />
-                </DropdownMenu.Content>
-              </motion.ul>
-            </AnimatePresence>
-          </div>
-        </DropdownMenu.Portal>
+        <AnimatePresence>
+          {open && (
+            <DropdownMenu.Portal forceMount>
+              <div ref={ref}>
+                <motion.ul
+                  initial={'hidden'}
+                  animate={'visible'}
+                  exit={'closed'}
+                  variants={ulVariants}
+                >
+                  <DropdownMenu.Content className={`${s.content} ${className}`} align={align}>
+                    {children}
+                    <DropdownMenu.Arrow className={s.arrow} />
+                  </DropdownMenu.Content>
+                </motion.ul>
+              </div>
+            </DropdownMenu.Portal>
+          )}
+        </AnimatePresence>
       </DropdownMenu.Root>
     )
   }
