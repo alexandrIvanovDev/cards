@@ -1,6 +1,9 @@
 .cover {
+  flex-shrink: 0;
+
   width: 80px;
   height: 50px;
+
   object-fit: cover;
   border-radius: 2px;
 }

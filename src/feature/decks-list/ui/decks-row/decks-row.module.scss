@@ -1,30 +1,34 @@
 @import '@/app/styles/mixins';
 
 .row {
-  .nameWrapper {
-    display: inline-flex;
-    gap: 1rem;
-    align-items: center;
-    justify-content: flex-start;
+  .nameCell {
+    @include flex(row, flex-start, center);
 
-    color: var(--light-color-100);
-    text-decoration: none;
+    .nameWrapper {
+      display: inline-flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: flex-start;
 
-    .name {
-      transition: 0.3s ease-in-out;
-    }
+      color: var(--light-color-100);
+      text-decoration: none;
 
-    &:hover .name {
-      color: var(--primary-color-500);
-    }
+      .name {
+        transition: 0.3s ease-in-out;
+      }
 
-    &:active .name {
-      color: var(--primary-color-700);
-    }
+      &:hover .name {
+        color: var(--primary-color-500);
+      }
 
-    .skeleton {
-      width: 80px;
-      height: 50px;
+      &:active .name {
+        color: var(--primary-color-700);
+      }
+
+      .skeleton {
+        width: 80px;
+        height: 50px;
+      }
     }
   }
 
@@ -125,6 +129,13 @@
 
 @media (width <= 570px) {
   .row {
+    border: 1px solid var(--dark-color-500);
+    border-radius: var(--border-radius);
+
+    .nameCell {
+      justify-content: space-between;
+    }
+
     .controls {
       padding: 0;
       border-top: 1px solid var(--dark-color-500);

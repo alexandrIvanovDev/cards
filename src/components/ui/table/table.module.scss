@@ -12,7 +12,7 @@
   }
 }
 
-.row {
+.tableRow {
   border-bottom: 1px solid var(--dark-color-500);
 }
 
@@ -44,6 +44,11 @@
 @media (width <= 570px) {
   .root {
     margin-bottom: 20px;
+    border: none;
+
+    // .tableRow:first-child {
+    //  // border-top: none;
+    // }
 
     .headCell {
       display: none;

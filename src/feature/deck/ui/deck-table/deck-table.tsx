@@ -1,3 +1,5 @@
+import s from './deck-table.module.scss'
+
 import { deckTableHeader } from '@/common/data/deck-table-header.ts'
 import { Table } from '@/components/ui/table'
 import { Sort, TableHead } from '@/components/ui/table-head'
@@ -21,7 +23,7 @@ export const DeckTable = (props: Props) => {
       <Table.Root>
         <TableHead columns={columns} sort={sort} setSort={setSort} />
 
-        <Table.Body>
+        <Table.Body className={s.tableBody}>
           {cardsData?.items.map(card => <TableRow key={card.id} isMyDeck={isMyDeck} card={card} />)}
         </Table.Body>
       </Table.Root>

@@ -1,3 +1,5 @@
+import s from './decks-table.module.scss'
+
 import { decksListTableHeader } from '@/common/data/decks-list-table-header.ts'
 import { Table } from '@/components/ui/table'
 import { Sort, TableHead } from '@/components/ui/table-head/table-head.tsx'
@@ -18,7 +20,7 @@ export const DecksTable = ({ data, userId, sort, setSort, getDecksIsFetching }: 
       <Table.Root>
         <TableHead columns={decksListTableHeader} sort={sort} setSort={setSort} />
 
-        <Table.Body>
+        <Table.Body className={s.tableBody}>
           {data?.items?.map(deck => (
             <DecksRow
               key={deck.id}

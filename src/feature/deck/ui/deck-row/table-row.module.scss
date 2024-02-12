@@ -97,6 +97,9 @@
 
 @media (width <= 570px) {
   .row {
+    border: 1px solid var(--dark-color-500);
+    border-radius: var(--border-radius);
+
     .iconsCell {
       padding: 0;
 
@@ -110,7 +113,7 @@
           padding: 8px 0;
           border-right: 1px solid var(--dark-color-500);
 
-          &:nth-child(5) {
+          &:last-child {
             border-right: none;
           }
 

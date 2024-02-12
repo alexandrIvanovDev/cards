@@ -25,7 +25,7 @@ const HeadCell: FC<ComponentPropsWithoutRef<'th'>> = ({ className, ...rest }) =>
 }
 
 const Row: FC<ComponentPropsWithoutRef<'tr'>> = ({ className, ...rest }) => {
-  const mainClass = clsx(s.row, className)
+  const mainClass = clsx(s.tableRow, className)
 
   return <tr className={mainClass} {...rest} />
 }

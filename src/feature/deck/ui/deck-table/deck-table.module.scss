@@ -1,0 +1,7 @@
+@import '@/app/styles/mixins';
+
+.tableBody {
+  @media (width <= 570px) {
+    @include flex(column, center, normal, 2rem);
+  }
+}
