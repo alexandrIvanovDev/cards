@@ -19,7 +19,7 @@ export const ThemeSwitcher = ({ className }: Props) => {
     <div className={clsx(s.root, className)}>
       {theme === Theme.DARK ? <SunIcon className={s.icon} /> : <MoonIcon className={s.icon} />}
       <Typography variant={'body2'}>{t('Change theme')}</Typography>
-      <Switch.Root className={s.switchRoot} onClick={toggleTheme}>
+      <Switch.Root className={s.switchRoot} onClick={toggleTheme} checked={theme === 'dark'}>
         <Switch.Thumb className={s.switchThumb} />
       </Switch.Root>
     </div>
