@@ -33,8 +33,9 @@
 
       position: relative;
 
-      width: 16px;
-      height: 16px;
+      box-sizing: border-box;
+      width: 18px;
+      height: 18px;
 
       background: transparent;
       border: 2px solid var(--light-color-900);
@@ -56,8 +57,8 @@
         }
 
         .icon {
-          width: 20px;
-          height: 20px;
+          width: 18px;
+          height: 18px;
           border-radius: 2px;
         }
       }

@@ -102,7 +102,7 @@ export const DeckTitle = (props: Props) => {
             </Dropdown>
           )}
         </div>
-        {isMyDeck ? (
+        {isMyDeck && deckData?.cardsCount > 0 ? (
           <>
             <CardModal
               open={openModal}
