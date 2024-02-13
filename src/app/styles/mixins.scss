@@ -26,11 +26,12 @@
   }
 }
 
-@mixin icon() {
+@mixin icon-wrapper() {
+  @include flex;
+
   cursor: pointer;
-  transform: scale(0.75);
   fill: var(--light-color-100);
-  transition: all 0.3s ease-in-out;
+  transition: fill 0.3s ease-in-out;
 
   &:hover {
     fill: var(--primary-color-300);
@@ -38,5 +39,15 @@
 
   &:active {
     fill: var(--primary-color-700);
+  }
+
+  &:focus-visible {
+    // border-radius: 50%;
+    // outline: 1px solid var(--primary-color-500);
+    fill: var(--primary-color-500);
+  }
+
+  &:disabled {
+    cursor: initial;
   }
 }

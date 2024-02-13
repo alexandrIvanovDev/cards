@@ -50,12 +50,8 @@
     .icons {
       @include flex(row, center, center, 6px);
 
-      .buttonWrapper {
-        @include flex;
-
-        cursor: pointer;
-        fill: var(--light-color-100);
-        transition: all 0.3s ease-in-out;
+      .btn {
+        @include icon-wrapper;
 
         &:hover:not(.disabledIcon) {
           fill: var(--primary-color-300);
@@ -160,7 +156,7 @@
           transform: scale(0.9);
         }
 
-        .buttonWrapper {
+        .btn {
           width: 100%;
           padding: 8px 0;
           border-right: 1px solid var(--dark-color-500);

@@ -31,11 +31,11 @@
     .iconWrapper {
       @include flex(row, center, center, 0.5rem);
 
-      .btnIcon {
-        @include flex;
+      .btn {
+        @include icon-wrapper;
 
         .icon {
-          @include icon;
+          transform: scale(0.75);
         }
       }
     }
@@ -124,7 +124,7 @@
         width: 100%;
         border-top: 1px solid var(--dark-color-500);
 
-        .btnIcon {
+        .btn {
           width: 100%;
           padding: 8px 0;
           border-right: 1px solid var(--dark-color-500);

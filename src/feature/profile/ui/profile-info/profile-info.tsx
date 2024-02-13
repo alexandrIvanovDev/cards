@@ -20,7 +20,10 @@ export const ProfileInfo = ({ changeName, user, logout }: ProfileInfoProps) => {
   return (
     <div className={s.information}>
       <Typography variant="h1" as="h3" className={s.name}>
-        {user.name} <EditIcon className={s.editIcon} onClick={changeName} />
+        {user.name}
+        <button className={s.btn} onClick={changeName}>
+          <EditIcon className={s.editIcon} />
+        </button>
       </Typography>
       <Typography variant="body2" className={s.email}>
         {user.email}

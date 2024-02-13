@@ -73,14 +73,16 @@ export const Deck = () => {
   }, [currentPage])
 
   useEffect(() => {
-    setDefaultState()
-
     const condition = totalItems && totalItems / pageSize < currentPage
 
     if (condition || condition === undefined) {
       setCurrentPage(1)
     }
   }, [pageSize])
+
+  useEffect(() => {
+    setDefaultState()
+  }, [])
 
   if (getDeckIsLoading) {
     return <Loader />

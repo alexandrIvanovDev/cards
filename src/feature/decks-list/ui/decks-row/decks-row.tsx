@@ -96,12 +96,12 @@ export const DecksRow = ({ deck, userId, getDecksIsFetching }: Props) => {
         <Table.Cell className={s.controls}>
           <div className={s.icons}>
             {isMyDeck && (
-              <button className={s.buttonWrapper} onClick={() => setUpdateDeckIsOpen(true)}>
+              <button className={s.btn} onClick={() => setUpdateDeckIsOpen(true)}>
                 <EditIcon className={s.icon} />
               </button>
             )}
             <button
-              className={s.buttonWrapper}
+              className={s.btn}
               disabled={disabledPlayIcon}
               onClick={() => navigate(`${routePaths.learn}/${deck.id}`)}
             >
@@ -109,7 +109,7 @@ export const DecksRow = ({ deck, userId, getDecksIsFetching }: Props) => {
             </button>
             {isMyDeck && (
               <button
-                className={s.buttonWrapper}
+                className={s.btn}
                 disabled={deleteDeckIsLoading}
                 onClick={() => setDeleteDeckIsOpen(true)}
               >

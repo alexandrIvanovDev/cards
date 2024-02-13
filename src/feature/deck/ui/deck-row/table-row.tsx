@@ -74,10 +74,10 @@ export const TableRow = ({ card, isMyDeck }: Props) => {
         {isMyDeck && (
           <Table.Cell className={s.iconsCell}>
             <div className={s.iconWrapper}>
-              <button className={s.btnIcon} onClick={() => setUpdateCardIsOpen(true)}>
+              <button className={s.btn} onClick={() => setUpdateCardIsOpen(true)}>
                 <EditIcon className={s.icon} />
               </button>
-              <button className={s.btnIcon} onClick={() => setDeleteCardIsOpen(true)}>
+              <button className={s.btn} onClick={() => setDeleteCardIsOpen(true)}>
                 <DeleteIcon className={s.icon} />
               </button>
             </div>
