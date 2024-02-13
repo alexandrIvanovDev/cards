@@ -18,6 +18,18 @@ export type ModalProps = {
   className?: string
 }
 
+const modal = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: 'easeOut',
+    },
+  },
+  closed: { opacity: 0 },
+}
+
 export const Modal = forwardRef<ElementRef<'div'>, ModalProps>(
   ({ open, onOpenChange, title, children, trigger, className }, ref) => {
     return (
@@ -27,18 +39,34 @@ export const Modal = forwardRef<ElementRef<'div'>, ModalProps>(
             {trigger}
           </Dialog.Trigger>
         )}
-        <Dialog.Portal>
-          <Dialog.Overlay className={s.overlay}>
-            <div ref={ref}>
-              <AnimatePresence>
-                {open && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5, ease: 'easeOut' }}
-                  >
-                    <Dialog.Content forceMount asChild ref={ref}>
+        <AnimatePresence>
+          {open && (
+            <Dialog.Portal>
+              <Dialog.Overlay asChild>
+                <motion.div
+                  animate={{ opacity: 1 }}
+                  className={s.overlay}
+                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                >
+                  {/*</Dialog.Overlay>*/}
+
+                  {/*<Dialog.Overlay>*/}
+                  {/*  /!*<div ref={ref}>*!/*/}
+                  {/*  <motion.div*/}
+                  {/*    initial={{ opacity: 0 }}*/}
+                  {/*    animate={{ opacity: 1 }}*/}
+                  {/*    exit={{ opacity: 0 }}*/}
+                  {/*    className={s.overlay}*/}
+                  {/*  />*/}
+                  {/*</Dialog.Overlay>*/}
+                  <Dialog.Content forceMount asChild ref={ref}>
+                    <motion.div
+                      animate={'visible'}
+                      exit={'closed'}
+                      initial={'hidden'}
+                      variants={modal}
+                    >
                       <Card className={s.content}>
                         {title && (
                           <div className={s.titleWrapper}>
@@ -52,13 +80,14 @@ export const Modal = forwardRef<ElementRef<'div'>, ModalProps>(
                         )}
                         <div className={s.childrenWrapper}>{children}</div>
                       </Card>
-                    </Dialog.Content>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </Dialog.Overlay>
-        </Dialog.Portal>
+                    </motion.div>
+                  </Dialog.Content>
+                </motion.div>
+                {/*</div>*/}
+              </Dialog.Overlay>
+            </Dialog.Portal>
+          )}
+        </AnimatePresence>
       </Dialog.Root>
     )
   }
