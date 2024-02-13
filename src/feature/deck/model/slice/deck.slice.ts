@@ -28,7 +28,13 @@ export const deckSlice = createSlice({
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.pagination.currentPage = action.payload
     },
+    setDefaultState: state => {
+      state.searchTerm = ''
+      state.pagination.currentPage = 1
+      state.pagination.pageSize = 5
+    },
   },
 })
 
-export const { setCardsSearchTerm, setPageSize, setCurrentPage } = deckSlice.actions
+export const { setCardsSearchTerm, setPageSize, setCurrentPage, setDefaultState } =
+  deckSlice.actions

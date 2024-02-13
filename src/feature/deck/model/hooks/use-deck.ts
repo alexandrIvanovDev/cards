@@ -6,6 +6,7 @@ import {
   setCurrentPage as onPageChange,
   setPageSize as onChangePageSize,
   setCardsSearchTerm,
+  setDefaultState as setDefaultDeckState,
 } from '@/feature/deck/model/slice/deck.slice.ts'
 
 export const useDeck = () => {
@@ -29,5 +30,18 @@ export const useDeck = () => {
     dispatch(setCardsSearchTerm(value))
   }
 
-  return { currentPage, pageSize, searchTerm, deckId, setCurrentPage, setPageSize, setSearchTerm }
+  const setDefaultState = () => {
+    dispatch(setDefaultDeckState())
+  }
+
+  return {
+    currentPage,
+    pageSize,
+    searchTerm,
+    deckId,
+    setCurrentPage,
+    setPageSize,
+    setSearchTerm,
+    setDefaultState,
+  }
 }

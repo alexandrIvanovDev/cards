@@ -62,10 +62,19 @@ export const Slider: FC<Props> = props => {
     onValueChange([value[0], newValue])
   }
 
-  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+  const onKeyMaxValuePressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'Backspace') {
       e.preventDefault()
       onValueChange([value[0], value[0] + 1])
+    }
+    if (e.code === 'Comma') {
+      e.preventDefault()
+    }
+  }
+
+  const onKeyMinValuePressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === 'Comma') {
+      e.preventDefault()
     }
   }
 
@@ -76,7 +85,13 @@ export const Slider: FC<Props> = props => {
           {label}
         </Typography>
       )}
-      <TextField type={'number'} className={s.count} value={value[0]} onChange={onChangeMinValue} />
+      <TextField
+        type={'number'}
+        className={s.count}
+        value={value[0]}
+        onChange={onChangeMinValue}
+        onKeyDown={onKeyMinValuePressHandler}
+      />
       <RadixSlider.Root
         defaultValue={defaultValue}
         onValueChange={onValueChange}
@@ -98,7 +113,7 @@ export const Slider: FC<Props> = props => {
         className={s.count}
         value={value[1]}
         onChange={onChangeMaxValue}
-        onKeyDown={onKeyPressHandler}
+        onKeyDown={onKeyMaxValuePressHandler}
       />
     </div>
   )

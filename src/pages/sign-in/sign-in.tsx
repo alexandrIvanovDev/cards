@@ -33,19 +33,17 @@ export const SignIn = () => {
   }
 
   return (
-    <>
-      <Card className={s.wrapper}>
-        <Typography as="h2" variant="large">
-          {t('Sign In')}
-        </Typography>
-        <SignInForm onSubmit={handleLogin} />
-        <Typography variant="body2" className={s.notification}>
-          {t("Don't have an account?")}
-        </Typography>
-        <Button variant="link" className={s.signUp} as={Link} to={routePaths.signUp}>
-          {t('Sign Up')}
-        </Button>
-      </Card>
-    </>
+    <Card className={s.wrapper}>
+      <Typography as="h2" variant="large">
+        {t('Sign In')}
+      </Typography>
+      <SignInForm onSubmit={handleLogin} />
+      <Typography variant="body2" className={s.notification}>
+        {t("Don't have an account?")}
+      </Typography>
+      <Button variant="link" className={s.signUp} as={Link} to={routePaths.signUp}>
+        {t('Sign Up')}
+      </Button>
+    </Card>
   )
 }

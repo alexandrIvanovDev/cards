@@ -23,8 +23,16 @@ import { SearchCard } from '@/feature/deck/ui/search'
 import { Deck as DeckType, useGetDeckByIdQuery } from '@/feature/decks-list/services'
 
 export const Deck = () => {
-  const { currentPage, pageSize, searchTerm, deckId, setCurrentPage, setPageSize, setSearchTerm } =
-    useDeck()
+  const {
+    currentPage,
+    pageSize,
+    searchTerm,
+    deckId,
+    setCurrentPage,
+    setPageSize,
+    setSearchTerm,
+    setDefaultState,
+  } = useDeck()
 
   const { t } = useTranslation()
 
@@ -63,6 +71,16 @@ export const Deck = () => {
   useEffect(() => {
     window.scroll(0, 150)
   }, [currentPage])
+
+  useEffect(() => {
+    setDefaultState()
+
+    const condition = totalItems && totalItems / pageSize < currentPage
+
+    if (condition || condition === undefined) {
+      setCurrentPage(1)
+    }
+  }, [pageSize])
 
   if (getDeckIsLoading) {
     return <Loader />
