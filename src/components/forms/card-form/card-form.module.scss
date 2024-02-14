@@ -33,6 +33,10 @@
   .modalContent {
     overflow: auto;
 
+    .cover {
+      height: 90px;
+    }
+
     .btnWrapper {
       flex-direction: column-reverse;
       gap: 0.5rem;
