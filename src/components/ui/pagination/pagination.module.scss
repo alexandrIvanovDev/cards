@@ -1,7 +1,7 @@
 @import '@/app/styles/mixins';
 
 .wrapper {
-  @include flex(row, center, center, 0.5rem);
+  @include flex(row, flex-start, center, 0.5rem);
 
   margin: 25px 0;
 
@@ -75,6 +75,12 @@
   transform: scale(0.75);
   fill: var(--light-color-100);
   transition: all 0.3s ease-in-out;
+}
+
+@media (width <= 570px) {
+  .wrapper {
+    justify-content: center;
+  }
 }
 
 @media (width <= 530px) {

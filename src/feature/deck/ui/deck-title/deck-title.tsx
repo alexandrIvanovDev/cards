@@ -42,6 +42,8 @@ export const DeckTitle = (props: Props) => {
   const [deleteDeckIsOpen, setDeleteDeckIsOpen] = useState(false)
   const [updateDeckIsOpen, setUpdateDeckIsOpen] = useState(false)
 
+  const [openDropDown, setOpenDropDown] = useState(false)
+
   const navigate = useNavigate()
 
   const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
@@ -80,7 +82,7 @@ export const DeckTitle = (props: Props) => {
             {deckData?.name ?? ''}
           </Typography>
           {isMyDeck && (
-            <Dropdown>
+            <Dropdown open={openDropDown} setOpen={setOpenDropDown}>
               <div>
                 <DropDownItemWithIcon
                   icon={<PlayIcon />}

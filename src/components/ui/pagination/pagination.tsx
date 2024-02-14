@@ -18,6 +18,7 @@ type Props = {
   changePageSize: (value: number) => void
   totalCount?: number
   className?: string
+  handleScroll?: () => void
 }
 
 export const Pagination = (props: Props) => {
@@ -29,6 +30,7 @@ export const Pagination = (props: Props) => {
     itemsPerPage,
     totalCount = 5,
     className,
+    handleScroll,
   } = props
 
   const { t } = useTranslation()
@@ -37,6 +39,39 @@ export const Pagination = (props: Props) => {
 
   const leftArrowDisabled = currentPage === 1
   const rightArrowDisabled = currentPage === totalPages
+
+  const onDecrPage = () => {
+    changePage(currentPage - 1)
+
+    if (handleScroll) {
+      handleScroll()
+    }
+  }
+
+  const onPageChange = (page: number) => {
+    changePage(page)
+
+    if (handleScroll) {
+      handleScroll()
+    }
+  }
+
+  const onIncrPage = () => {
+    changePage(currentPage + 1)
+
+    if (handleScroll) {
+      handleScroll()
+    }
+  }
+
+  const onChangePageSize = (newPageSize: number) => {
+    changePageSize(newPageSize)
+    const currentTotalPages = Math.ceil(totalCount / newPageSize)
+
+    if (currentTotalPages < currentPage) {
+      changePage(currentTotalPages)
+    }
+  }
 
   const classes = {
     wrapper: clsx(s.wrapper, className),
@@ -50,10 +85,7 @@ export const Pagination = (props: Props) => {
     <div className={classes.wrapper}>
       <div className={s.pages}>
         <button className={s.arrowBtn} disabled={leftArrowDisabled}>
-          <ArrowPageBackIcon
-            className={classes.leftArrow}
-            onClick={() => changePage(currentPage - 1)}
-          />
+          <ArrowPageBackIcon className={classes.leftArrow} onClick={onDecrPage} />
         </button>
 
         {pages.map((page: string | number, i: number) => {
@@ -61,7 +93,7 @@ export const Pagination = (props: Props) => {
             <div
               key={i}
               className={clsx(s.page, currentPage === page && s.activePage)}
-              onClick={() => changePage(page)}
+              onClick={() => onPageChange(page)}
             >
               <Typography as={'p'} variant={'body2'}>
                 {page}
@@ -75,10 +107,7 @@ export const Pagination = (props: Props) => {
         })}
 
         <button className={s.arrowBtn} disabled={rightArrowDisabled}>
-          <ArrowPageForwardIcon
-            className={classes.rightArrow}
-            onClick={() => changePage(currentPage + 1)}
-          />
+          <ArrowPageForwardIcon className={classes.rightArrow} onClick={onIncrPage} />
         </button>
       </div>
 
@@ -90,7 +119,7 @@ export const Pagination = (props: Props) => {
           options={paginationSelectOptions}
           value={String(itemsPerPage)}
           smallSize
-          onChange={e => changePageSize(+e)}
+          onChange={e => onChangePageSize(+e)}
         />
         <Typography as={'p'} variant={'body2'}>
           {t('on the page')}

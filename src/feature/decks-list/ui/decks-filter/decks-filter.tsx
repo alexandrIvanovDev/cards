@@ -45,15 +45,15 @@ export const DecksFilter = (props: Props) => {
   }
 
   const tabs: Array<TabType> = [
-    { value: userId, text: t('My Cards') },
-    { value: '', text: t('All Cards') },
+    { value: userId, text: t('My') },
+    { value: '', text: t('All') },
   ]
 
   return (
     <div className={s.settingsWrapper}>
       <TextField
         type="search"
-        placeholder={t('Input search')}
+        placeholder={t('Search')}
         className={s.input}
         value={search}
         onChange={e => setSearchTerm(e.currentTarget.value)}
@@ -63,7 +63,7 @@ export const DecksFilter = (props: Props) => {
         tabs={tabs}
         value={tabsValue}
         onValueChange={setTabValue}
-        label={t('Show packs cards')}
+        label={t('Show decks cards')}
         className={s.tabs}
       />
       <Slider

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
@@ -48,20 +48,9 @@ export const DecksList = () => {
 
   const data = currentData ?? decksData
 
-  const totalPages = data?.pagination.totalPages as number
-  const totalCount = data?.pagination.totalItems
-
-  useEffect(() => {
-    const condition = totalCount && totalCount / pageSize < currentPage
-
-    if (tabValue || condition || condition === undefined) {
-      setCurrentPage(1)
-    }
-  }, [pageSize, tabValue, debouncedValue, debouncedCardsCount[0], debouncedCardsCount[1]])
-
-  useEffect(() => {
+  const handleScroll = () => {
     window.scroll(0, 150)
-  }, [currentPage])
+  }
 
   if (isLoading) {
     return <Loader />
@@ -95,11 +84,12 @@ export const DecksList = () => {
       )}
       <Pagination
         currentPage={currentPage}
-        totalPages={totalPages}
+        totalPages={data?.pagination.totalPages as number}
         itemsPerPage={pageSize}
-        totalCount={totalCount}
+        totalCount={data?.pagination.totalItems}
         changePage={setCurrentPage}
         changePageSize={setPageSize}
+        handleScroll={handleScroll}
       />
     </main>
   )

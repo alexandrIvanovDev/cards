@@ -1,4 +1,4 @@
-import { ElementRef, forwardRef, ReactNode, useState } from 'react'
+import { ElementRef, forwardRef, ReactNode } from 'react'
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
@@ -10,6 +10,8 @@ import { MoreIcon } from '@/assets/icons/More.tsx'
 import { Typography } from '@/components/ui/typography'
 
 type Props = {
+  open: boolean
+  setOpen: (value: boolean) => void
   children: ReactNode
   trigger?: ReactNode
   align?: 'end' | 'center' | 'start'
@@ -27,9 +29,7 @@ const liVariants = {
 }
 
 export const Dropdown = forwardRef<ElementRef<'div'>, Props>(
-  ({ children, trigger, align = 'end', className }, ref) => {
-    const [open, setOpen] = useState(false)
-
+  ({ children, trigger, align = 'end', className, open, setOpen }, ref) => {
     return (
       <DropdownMenu.Root open={open} onOpenChange={setOpen}>
         <DropdownMenu.Trigger asChild className={s.trigger}>

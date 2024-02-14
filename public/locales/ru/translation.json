@@ -45,12 +45,7 @@
   "Show": "Показывать",
   "on the page": "на странице",
   "No data available": "Нет доступных данных",
-  "Packs List": "Список колод",
   "Add New Deck": "Добавить новую колоду",
-  "Input search": "Поиск",
-  "My Cards": "Мои",
-  "All Cards": "Все",
-  "Show packs cards": "Показывать колоды",
   "Number of cards": "Количество карточек",
   "Clear filter": "Очистить фильтр",
   "Number of attempts": "Количество попыток",
@@ -63,7 +58,7 @@
   "My profile": "Мой профиль",
   "Sign out": "Выход",
   "Grade": "Оценка",
-  "Last Updated": "Последнее обновление",
+  "Last Updated": "Обновлено",
   "Created by": "Создано",
   "Cards": "Карточек",
   "Edit Deck": "Редактировать колоду",
@@ -89,5 +84,10 @@
   "Delete profile photo": "Удалить фото профиля",
   "Your data has been successfully changed": "Ваши данные были успешно изменены",
   "Click Save Changes and photo will be deleted": "Нажмите сохранить изменения и фото будет удалено",
-  "Change theme": "Сменить тему"
+  "Change theme": "Сменить тему",
+  "Decks List": "Список колод",
+  "Search": "Поиск",
+  "My": "Мои",
+  "All": "Все",
+  "Show decks cards": "Показывать колоды"
 }

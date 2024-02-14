@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
@@ -35,6 +35,8 @@ export const Header = ({ data }: Props) => {
 
   const { t } = useTranslation()
 
+  const [openMenu, setOpenMenu] = useState(false)
+
   const logout = async () => {
     await requestHandler(async () => {
       await signOut().unwrap()
@@ -57,13 +59,17 @@ export const Header = ({ data }: Props) => {
         </Button>
         {data ? (
           <div className={s.data}>
-            <span className={s.name}>{data?.name}</span>
+            <Typography className={s.name} variant={'subtitle1'} onClick={() => setOpenMenu(true)}>
+              {data?.name}
+            </Typography>
             <Dropdown
               trigger={
                 <button>
                   <Avatar userName={data.name} img={data?.avatar ?? ''} className={s.avatar} />
                 </button>
               }
+              open={openMenu}
+              setOpen={setOpenMenu}
             >
               <div>
                 <DropDownItem>
@@ -75,7 +81,7 @@ export const Header = ({ data }: Props) => {
                   onSelect={() => navigate(routePaths.profile)}
                 />
                 <DropDownItem>
-                  <ThemeSwitcher />
+                  <ThemeSwitcher className={s.themeSwitcher} />
                 </DropDownItem>
                 <DropDownItemWithIcon
                   icon={<LogoutIcon />}

@@ -68,17 +68,9 @@ export const Deck = () => {
   const totalItems = cardsData?.pagination.totalItems ?? 5
   const totalPages = cardsData?.pagination.totalPages ?? 1
 
-  useEffect(() => {
+  const handleScroll = () => {
     window.scroll(0, 150)
-  }, [currentPage])
-
-  useEffect(() => {
-    const condition = totalItems && totalItems / pageSize < currentPage
-
-    if (condition || condition === undefined) {
-      setCurrentPage(1)
-    }
-  }, [pageSize])
+  }
 
   useEffect(() => {
     setDefaultState()
@@ -143,6 +135,7 @@ export const Deck = () => {
         totalCount={totalItems}
         changePage={setCurrentPage}
         changePageSize={setPageSize}
+        handleScroll={handleScroll}
       />
     </div>
   )

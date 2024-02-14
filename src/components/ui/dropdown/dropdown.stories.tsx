@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Dropdown, DropDownItem, DropDownItemWithIcon } from './'
@@ -19,33 +21,44 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+// @ts-ignore
 export const Default: Story = {
-  args: {
-    children: (
-      <div>
+  render: () => {
+    const [open, setOpen] = useState(false)
+
+    return (
+      <Dropdown open={open} setOpen={setOpen}>
         <DropDownItemWithIcon icon={<PlayIcon />} text={'Learn'} />
         <DropDownItemWithIcon icon={<EditIcon />} text={'Edit'} />
         <DropDownItemWithIcon icon={<DeleteIcon />} text={'Delete'} />
-      </div>
-    ),
+      </Dropdown>
+    )
   },
 }
 
+// @ts-ignore
 export const WithProfile: Story = {
-  args: {
-    trigger: (
-      <button>
-        <Avatar userName={'Alex'} />
-      </button>
-    ),
-    children: (
-      <div>
-        <DropDownItem>
-          <ProfileInfo name={'Alex'} email={'alexandr.1996@list.ru'} avatar={'hello'} />
-        </DropDownItem>
-        <DropDownItemWithIcon icon={<ProfileIcon />} text={'My profile'} />
-        <DropDownItemWithIcon icon={<LogoutIcon />} text={'Sign out'} />
-      </div>
-    ),
+  render: () => {
+    const [open, setOpen] = useState(false)
+
+    return (
+      <Dropdown
+        open={open}
+        setOpen={setOpen}
+        trigger={
+          <button>
+            <Avatar userName={'Alex'} />
+          </button>
+        }
+      >
+        <div>
+          <DropDownItem>
+            <ProfileInfo name={'Alex'} email={'alexandr.1996@list.ru'} avatar={'hello'} />
+          </DropDownItem>
+          <DropDownItemWithIcon icon={<ProfileIcon />} text={'My profile'} />
+          <DropDownItemWithIcon icon={<LogoutIcon />} text={'Sign out'} />
+        </div>
+      </Dropdown>
+    )
   },
 }

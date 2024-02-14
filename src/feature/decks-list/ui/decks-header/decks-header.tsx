@@ -27,7 +27,7 @@ export const DecksHeader = ({ disabled }: Props) => {
   return (
     <div className={s.titleWrapper}>
       <Typography variant="large" as="h2" className={s.title}>
-        {t('Packs List')}
+        {t('Decks List')}
       </Typography>
       <Modal title={t('Add New Deck')} open={isOpen} onOpenChange={setIsOpen}>
         <DeckForm onSubmit={addNewCard} setIsOpen={setIsOpen} btnText={t('Add New Deck')} />

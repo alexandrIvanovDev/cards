@@ -45,12 +45,7 @@
   "Show": "Show",
   "on the page": "on the page",
   "No data available": "No data available",
-  "Packs List": "Packs List",
   "Add New Deck": "Add New Deck",
-  "Input search": "Input search",
-  "My Cards": "My Cards",
-  "All Cards": "All Cards",
-  "Show packs cards": "Show packs cards",
   "Number of cards": "Number of cards",
   "Clear filter": "Clear filter",
   "Number of attempts": "Number of attempts",
@@ -89,5 +84,10 @@
   "Delete profile photo": "Delete profile photo",
   "Your data has been successfully changed": "Your data has been successfully changed",
   "Click Save Changes and photo will be deleted": "Click Save Changes and photo will be deleted",
-  "Change theme": "Change theme"
+  "Change theme": "Change theme",
+  "Decks List": "Decks List",
+  "Search": "Search",
+  "My": "My",
+  "All": "All",
+  "Show decks cards": "Show decks cards"
 }
