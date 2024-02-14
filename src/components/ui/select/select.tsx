@@ -9,7 +9,7 @@ import s from './select.module.scss'
 
 import { Typography } from '@/components/ui/typography'
 
-type Option = {
+export type Option = {
   value: string
   label: string
 }

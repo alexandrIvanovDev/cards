@@ -4,7 +4,7 @@ function getConstraint(field: string) {
   return z
     .string()
     .trim()
-    .min(3, { message: `${field} must be longer than or equal to 3 characters` })
+    .min(3, { message: `${field} must be longer than 2 characters` })
 }
 
 export const genericNameConstraint = getConstraint('Name')

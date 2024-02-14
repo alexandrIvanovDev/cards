@@ -5,6 +5,7 @@ import s from './pagination.module.scss'
 
 import { ArrowPageBackIcon } from '@/assets/icons/ArrowPageBack.tsx'
 import { ArrowPageForwardIcon } from '@/assets/icons/ArrowPageForward.tsx'
+import { paginationSelectOptions } from '@/common/data/pagination-select-options.ts'
 import { returnPaginationRange } from '@/common/utils/returnPaginationRange.ts'
 import { Select } from '@/components/ui/select'
 import { Typography } from '@/components/ui/typography'
@@ -33,13 +34,6 @@ export const Pagination = (props: Props) => {
   const { t } = useTranslation()
 
   const pages = returnPaginationRange(totalPages, currentPage, 1)
-
-  const selectOptions = [
-    { value: '5', label: '5' },
-    { value: '7', label: '7' },
-    { value: '10', label: '10' },
-    { value: '15', label: '15' },
-  ]
 
   const leftArrowDisabled = currentPage === 1
   const rightArrowDisabled = currentPage === totalPages
@@ -93,7 +87,7 @@ export const Pagination = (props: Props) => {
           {t('Show')}
         </Typography>
         <Select
-          options={selectOptions}
+          options={paginationSelectOptions}
           value={String(itemsPerPage)}
           smallSize
           onChange={e => changePageSize(+e)}

@@ -68,7 +68,7 @@ export const DecksList = () => {
   }
 
   return (
-    <div className={s.content}>
+    <main className={s.content}>
       <DecksHeader disabled={getDecksIsFetching} />
       <DecksFilter
         userId={userData?.id ?? ''}
@@ -101,6 +101,6 @@ export const DecksList = () => {
         changePage={setCurrentPage}
         changePageSize={setPageSize}
       />
-    </div>
+    </main>
   )
 }
