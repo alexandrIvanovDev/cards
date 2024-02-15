@@ -40,24 +40,8 @@ export const Pagination = (props: Props) => {
   const leftArrowDisabled = currentPage === 1
   const rightArrowDisabled = currentPage === totalPages
 
-  const onDecrPage = () => {
-    changePage(currentPage - 1)
-
-    if (handleScroll) {
-      handleScroll()
-    }
-  }
-
   const onPageChange = (page: number) => {
     changePage(page)
-
-    if (handleScroll) {
-      handleScroll()
-    }
-  }
-
-  const onIncrPage = () => {
-    changePage(currentPage + 1)
 
     if (handleScroll) {
       handleScroll()
@@ -85,7 +69,10 @@ export const Pagination = (props: Props) => {
     <div className={classes.wrapper}>
       <div className={s.pages}>
         <button className={s.arrowBtn} disabled={leftArrowDisabled}>
-          <ArrowPageBackIcon className={classes.leftArrow} onClick={onDecrPage} />
+          <ArrowPageBackIcon
+            className={classes.leftArrow}
+            onClick={() => onPageChange(currentPage - 1)}
+          />
         </button>
 
         {pages.map((page: string | number, i: number) => {
@@ -107,7 +94,10 @@ export const Pagination = (props: Props) => {
         })}
 
         <button className={s.arrowBtn} disabled={rightArrowDisabled}>
-          <ArrowPageForwardIcon className={classes.rightArrow} onClick={onIncrPage} />
+          <ArrowPageForwardIcon
+            className={classes.rightArrow}
+            onClick={() => onPageChange(currentPage + 1)}
+          />
         </button>
       </div>
 
