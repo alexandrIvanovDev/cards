@@ -68,7 +68,9 @@ export const Deck = () => {
   const totalItems = cardsData?.pagination.totalItems ?? 5
   const totalPages = cardsData?.pagination.totalPages ?? 1
 
-  const handleScroll = () => {
+  const onPageChange = (page: number) => {
+    setCurrentPage(page)
+
     window.scroll({ top: 150, behavior: 'smooth' })
   }
 
@@ -137,9 +139,8 @@ export const Deck = () => {
         itemsPerPage={pageSize}
         totalPages={totalPages}
         totalCount={totalItems}
-        changePage={setCurrentPage}
+        onPageChange={onPageChange}
         changePageSize={setPageSize}
-        handleScroll={handleScroll}
       />
     </div>
   )

@@ -21,7 +21,7 @@ export const Default = {
       <Pagination
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
-        changePage={setCurrentPage}
+        onPageChange={setCurrentPage}
         changePageSize={setItemsPerPage}
         totalPages={10}
       />

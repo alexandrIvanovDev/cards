@@ -14,23 +14,21 @@ type Props = {
   currentPage: number
   totalPages: number
   itemsPerPage: number
-  changePage: (value: number) => void
+  onPageChange: (value: number) => void
   changePageSize: (value: number) => void
   totalCount?: number
   className?: string
-  handleScroll?: () => void
 }
 
 export const Pagination = (props: Props) => {
   const {
     currentPage,
     totalPages,
-    changePage,
+    onPageChange,
     changePageSize,
     itemsPerPage,
     totalCount = 5,
     className,
-    handleScroll,
   } = props
 
   const { t } = useTranslation()
@@ -40,20 +38,13 @@ export const Pagination = (props: Props) => {
   const leftArrowDisabled = currentPage === 1
   const rightArrowDisabled = currentPage === totalPages
 
-  const onPageChange = (page: number) => {
-    changePage(page)
-
-    if (handleScroll) {
-      handleScroll()
-    }
-  }
-
   const onChangePageSize = (newPageSize: number) => {
     changePageSize(newPageSize)
     const currentTotalPages = Math.ceil(totalCount / newPageSize)
 
     if (currentTotalPages < currentPage) {
-      changePage(currentTotalPages)
+      onPageChange(1)
+      // onPageChange(currentTotalPages)
     }
   }
 

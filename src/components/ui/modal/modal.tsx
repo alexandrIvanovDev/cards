@@ -42,24 +42,13 @@ export const Modal = forwardRef<ElementRef<'div'>, ModalProps>(
         <AnimatePresence>
           {open && (
             <Dialog.Portal>
-              <Dialog.Overlay asChild>
+              <Dialog.Overlay asChild className={s.overlay}>
                 <motion.div
                   animate={{ opacity: 1 }}
                   className={s.overlay}
                   exit={{ opacity: 0 }}
                   initial={{ opacity: 0 }}
                 >
-                  {/*</Dialog.Overlay>*/}
-
-                  {/*<Dialog.Overlay>*/}
-                  {/*  /!*<div ref={ref}>*!/*/}
-                  {/*  <motion.div*/}
-                  {/*    initial={{ opacity: 0 }}*/}
-                  {/*    animate={{ opacity: 1 }}*/}
-                  {/*    exit={{ opacity: 0 }}*/}
-                  {/*    className={s.overlay}*/}
-                  {/*  />*/}
-                  {/*</Dialog.Overlay>*/}
                   <Dialog.Content forceMount asChild ref={ref}>
                     <motion.div
                       animate={'visible'}
@@ -83,7 +72,6 @@ export const Modal = forwardRef<ElementRef<'div'>, ModalProps>(
                     </motion.div>
                   </Dialog.Content>
                 </motion.div>
-                {/*</div>*/}
               </Dialog.Overlay>
             </Dialog.Portal>
           )}
