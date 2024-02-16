@@ -65,7 +65,9 @@ export const TableRow = ({ card, isMyDeck }: Props) => {
           </div>
         </Table.Cell>
         <Table.Cell className={s.updatedCell} data-th={'Last Updated'}>
-          {new Date(card?.updated as string).toLocaleDateString()}
+          <Typography variant={'body2'}>
+            {new Date(card?.updated as string).toLocaleDateString()}
+          </Typography>
         </Table.Cell>
         <Table.Cell className={s.ratingCell} data-th={'Grade'}>
           <Rating rating={card.grade} className={s.rating} />

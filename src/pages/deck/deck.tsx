@@ -76,6 +76,10 @@ export const Deck = () => {
     setDefaultState()
   }, [])
 
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [debouncedValue])
+
   if (getDeckIsLoading) {
     return <Loader />
   }

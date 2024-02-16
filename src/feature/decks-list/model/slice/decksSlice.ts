@@ -23,7 +23,7 @@ export const decksSlice = createSlice({
     filter: {
       searchTerm: '',
       tabValue: '',
-      cardsCount: [0, 30],
+      cardsCount: [0, undefined],
     },
   } as InitialState,
   reducers: {

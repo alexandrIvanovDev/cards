@@ -69,7 +69,7 @@ export const DecksFilter = (props: Props) => {
       <Slider
         min={0}
         max={maxCardsCount}
-        value={sliderValue}
+        value={[sliderValue[0], sliderValue[1] ?? maxCardsCount]}
         onValueChange={setCardsCount}
         label={t('Number of cards')}
         className={s.slider}

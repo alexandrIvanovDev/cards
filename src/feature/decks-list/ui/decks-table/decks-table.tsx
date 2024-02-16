@@ -12,9 +12,12 @@ type Props = {
   sort: Sort
   setSort: (sort: Sort) => void
   getDecksIsFetching: boolean
+  getDecksIsLoading: boolean
 }
 
-export const DecksTable = ({ data, userId, sort, setSort, getDecksIsFetching }: Props) => {
+export const DecksTable = (props: Props) => {
+  const { data, userId, sort, setSort, getDecksIsFetching, getDecksIsLoading } = props
+
   return (
     <>
       <Table.Root>
@@ -27,6 +30,7 @@ export const DecksTable = ({ data, userId, sort, setSort, getDecksIsFetching }: 
               deck={deck}
               userId={userId}
               getDecksIsFetching={getDecksIsFetching}
+              getDecksIsLoading={getDecksIsLoading}
             />
           ))}
         </Table.Body>

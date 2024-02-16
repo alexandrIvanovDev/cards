@@ -80,13 +80,14 @@ export const DecksList = () => {
           sort={sort}
           setSort={setSort}
           getDecksIsFetching={getDecksIsFetching}
+          getDecksIsLoading={isLoading}
         />
       )}
       <Pagination
         currentPage={currentPage}
         totalPages={data?.pagination.totalPages as number}
         itemsPerPage={pageSize}
-        totalCount={data?.pagination.totalItems}
+        totalCount={data?.pagination.totalItems as number}
         changePage={setCurrentPage}
         changePageSize={setPageSize}
         handleScroll={handleScroll}

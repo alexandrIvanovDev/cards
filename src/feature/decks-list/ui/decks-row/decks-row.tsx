@@ -16,29 +16,28 @@ import { Modal } from '@/components/ui/modal'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
-import { Deck, DeckArgs } from '@/feature/decks-list/services'
 import {
+  Deck,
+  DeckArgs,
   useDeleteDeckMutation,
-  useGetDecksQuery,
   useUpdateDeckMutation,
-} from '@/feature/decks-list/services/decks-list.service.ts'
+} from '@/feature/decks-list/services'
 import { DeleteEntityModal } from '@/feature/decks-list/ui/delete-entity-modal/delete-entity-modal.tsx'
 
 type Props = {
   deck: Deck
   userId: string
   getDecksIsFetching: boolean
+  getDecksIsLoading: boolean
 }
 
-export const DecksRow = ({ deck, userId, getDecksIsFetching }: Props) => {
+export const DecksRow = ({ deck, userId, getDecksIsFetching, getDecksIsLoading }: Props) => {
   const isMyDeck = userId === deck.userId
 
   const { t } = useTranslation()
 
   const [deleteDeck, { isLoading: deleteDeckIsLoading }] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
-
-  const { isLoading } = useGetDecksQuery()
 
   const [deleteDeckIsOpen, setDeleteDeckIsOpen] = useState(false)
   const [updateDeckIsOpen, setUpdateDeckIsOpen] = useState(false)
@@ -63,7 +62,7 @@ export const DecksRow = ({ deck, userId, getDecksIsFetching }: Props) => {
 
   const disabledPlayIcon = deck.cardsCount === 0
 
-  const isLoadingData = isLoading || getDecksIsFetching
+  const isLoadingData = getDecksIsLoading || getDecksIsFetching
 
   return (
     <>
