@@ -69,7 +69,7 @@ export const Deck = () => {
   const totalPages = cardsData?.pagination.totalPages ?? 1
 
   const handleScroll = () => {
-    window.scroll(0, 150)
+    window.scroll({ top: 150, behavior: 'smooth' })
   }
 
   useEffect(() => {

@@ -2,9 +2,9 @@ import { useAppDispatch } from '@/common/hooks/use-app-dispatch.ts'
 import { useAppSelector } from '@/common/hooks/use-app-selector.ts'
 import {
   setCardsCount as onChangeCardsCount,
-  setTabValue as onChangeTabValue,
-  setSearchTerm as onChangeSearchTerm,
   setCurrentPage,
+  setSearchTerm as onChangeSearchTerm,
+  setTabValue as onChangeTabValue,
 } from '@/feature/decks-list/model/slice'
 
 export const useDecksFilter = () => {
@@ -19,14 +19,10 @@ export const useDecksFilter = () => {
 
   const setCardsCount = (value: Array<number>) => {
     dispatch(onChangeCardsCount(value))
-    // TODO fix
-    dispatch(setCurrentPage(1))
   }
 
   const setSearchTerm = (value: string) => {
     dispatch(onChangeSearchTerm(value))
-    // TODO fix
-    dispatch(setCurrentPage(1))
   }
 
   return { searchTerm, cardsCount, tabValue, setSearchTerm, setCardsCount, setTabValue }

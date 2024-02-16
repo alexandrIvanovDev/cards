@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
@@ -49,8 +49,12 @@ export const DecksList = () => {
   const data = currentData ?? decksData
 
   const handleScroll = () => {
-    window.scroll(0, 150)
+    window.scroll({ top: 150, behavior: 'smooth' })
   }
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [debouncedValue, debouncedCardsCount])
 
   if (isLoading) {
     return <Loader />
