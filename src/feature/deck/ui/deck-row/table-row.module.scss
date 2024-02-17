@@ -10,6 +10,14 @@
 
     .answerWrapper {
       @include flex(row, flex-start, center, 1rem);
+
+      filter: blur(2px);
+      transition: 0.3s;
+
+      &:active,
+      &:hover {
+        filter: none;
+      }
     }
   }
 
